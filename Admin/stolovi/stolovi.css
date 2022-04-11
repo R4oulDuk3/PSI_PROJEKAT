@@ -63,3 +63,8 @@ thead td{
     overflow: auto;
 
 }
+.button{
+    padding-top: 0.5rem;
+    display: flex;
+    align-items: center;
+}
