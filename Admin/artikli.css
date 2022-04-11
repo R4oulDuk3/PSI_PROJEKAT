@@ -1,0 +1,73 @@
+.porudzbenice-meni{
+    display: flex;
+}
+.porudzbenice-meni span{
+padding-right: 1rem;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+    padding: 2rem;
+    margin-top: 1rem;
+}
+.card-single{
+    background: #fff;
+    padding-bottom: 1rem;
+    border-radius: 2px;
+}
+.card-single h1{
+    text-align: center;
+    font-size: 50px;
+}
+.card-single table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding-bottom: 1rem;
+}
+.card-single table td{
+    font-weight: 1000;
+    font-size: smaller;
+}
+.card-single table td:nth-child(even){
+    text-align: right;
+}
+.card-single table td:nth-child(odd){
+    text-align: left;
+}
+.card-single div:last-child span{
+    font-size: 3rem;
+    color: var(--main-color);
+}
+.button{
+    display: none;
+    align-items: center;
+}
+.button a{
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 0.5em 1.25em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+}
+
+.card-single div:first-child span {
+    color: gray
+}
+.card-single:hover{
+    background: var(--main-color);
+    color: #fff;
+}
+.card-single div span:hover {
+    color: #fff
+}
+.card-body table{
+
+}
+

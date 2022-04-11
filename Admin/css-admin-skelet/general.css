@@ -1,0 +1,16 @@
+
+:root{
+    --main-color: #B547C1;
+    --sidebar-width: 20%;
+    --main-width:80%;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: 'Poppins',sans-serif;
+}
