@@ -9,6 +9,7 @@ header{
     top:0;
     z-index: 100;
     background-color: #fff;
+    transition: left 300ms;
 }
 
 header label span{

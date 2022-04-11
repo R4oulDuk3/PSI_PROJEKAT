@@ -1,0 +1,65 @@
+.card-body table{
+    width: 100%;
+}
+.grid{
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+.card{
+    background: #fff;
+    border-radius: 5px;
+}
+.card-body{
+    padding: 1rem;
+}
+
+.card-header{
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+}
+.card-header button{
+    background: var(--main-color);
+    border-radius: 10px;
+    color: #fff;
+    font-size: .8rem;
+    padding: .5rem;
+    border: 1px solid var(--main-color);
+}
+table {
+    border-collapse: collapse;
+  }
+
+tr{
+    padding-bottom: 0.5rem;
+}
+
+thead tr{
+    border-bottom: 1px solid #f0f0f0;
+    background-color:#fff;
+}
+
+
+td{
+    padding: 0.5rem 1rem;
+    font-size: .9rem;
+    color: #222;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: large;
+    font-weight: 700;
+}
+thead td{
+    font-weight: 1000;
+    font-size: larger;
+
+}
+.table-responsive{
+    width: 100%;
+    overflow: auto;
+
+}
