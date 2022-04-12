@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100;300;400;500;700&display=swap');
+
+
+:root{
+    --main-color: darkmagenta;
+    --black: #13131a;
+    --bg: #010103;
+    --border:.1rem solid rgba(255,255,255,.3);
+}
+
+*{
+    font-family: 'Roboto Serif', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 9rem;
+    scroll-behavior: smooth;
+
+}
+
+html::-webkit-scrollbar{
+    width: .8rem;
+}
+html::-webkit-scrollbar-track{
+    background: transparent;
+}
+html::-webkit-scrollbar-thumb{
+    background: #fff;
+    border-radius: 5rem;
+}
+body{
+    background: var(--bg);
+}
+
+section{
+    padding: 2rem 7%
+}
+
+.heading{
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    padding-bottom: 3.5rem;
+    font-size: 4rem;
+}
+
+.heading span{
+    color: var(--main-color);
+    text-transform: uppercase;
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .7rem 3rem;
+    font-size: 1.7rem;
+    color: #fff;
+    background: var(--main-color);
+    cursor: pointer;
+}
+
+.btn:hover{
+    letter-spacing: .2rem;
+}
+
+.header{
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 7%;
+    border-bottom: var(--border);
+    position: fixed;
+    top: 0;left: 0;right: 0;
+    z-index: 1000;
+
+}
+
+.header .logo img{
+    height: 6rem;
+}
+
+.header .navbar a{
+    margin: 0 1rem;
+    font-size: 1.6rem;
+    color: #fff;
+}
+.header .navbar a:hover{
+    color: var(--main-color);
+    border-bottom: 1rem solid var(--main-color);
+    padding-bottom: .5rem;
+}
+
+.header .icons div{
+    color: white;
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin-left: 2rem;
+
+}
+
+.header .icons div:hover{
+    color: var(--main-color);
+}
+
+#loginpage{
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+#menu-btn{
+    display: none;
+}
+
+.main{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("../assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.main .row{
+    display: flex;
+    background:var(--black);
+    flex-wrap: wrap;
+    gap:1rem;
+}
+
+
+.main .row form{
+    flex:1 1 45rem;
+    padding:5rem 2rem;
+    text-align: center;
+}
+
+.main .row form h3{
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    color:#fff;
+}
+
+.main .row form .inputBox{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background:var(--bg);
+    border:var(--border);
+}
+
+.main .row form .inputBox span{
+    color:#fff;
+    font-size: 2rem;
+    padding-left: 2rem;
+}
+
+.main .row form .inputBox input{
+    width: 100%;
+    padding:2rem;
+    font-size: 1.7rem;
+    color:#fff;
+    text-transform: none;
+    background:none;
+}
+
+.main .row form div label{
+    font-size: 1.5rem;
+    color:#fff;
+}
+
+.footer{
+    background: var(--black);
+    text-align: center;
+}
+
+.footer .share{
+    padding: 1rem 0;
+}
+
+.footer .share a{
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+    color: #fff;
+    border: var(--border);
+    margin: .3rem;
+    border-radius: 50%;
+}
+
+.footer .share a:hover{
+
+    background-color: var(--main-color);
+
+}
+
+.footer .credit{
+    font-size: 2rem;
+    color: #fff;
+    font-weight: lighter;
+    padding: 1.5rem;
+
+}
+
+.footer .credit span{
+    color: var(--main-color);
+    font-weight: bold;
+}
+/* media reduce*/
+@media (max-width:911px){
+
+    html{
+        font-size: 55%;
+    }
+    .header{
+        padding:1.5rem 2rem ;
+    }
+    section{
+        padding: 2rem;
+    }
+
+}
+
+@media (max-width:768px){
+    #menu-btn{
+        display: inline-block;
+    }
+
+    .header .navbar{
+
+        position: absolute;
+        top: 100%; right: -100%;
+        background: white;
+        width: 30rem;
+        height: calc(100vh - 9.5rem);
+    }
+
+    .header .navbar.active{
+        right:0;
+
+    }
+
+    .header .navbar a{
+        color: var(--black);
+        display: block;
+        margin: 1.5rem;
+        padding: .5rem;
+        font-size: 2rem;
+    }
+
+    .main{
+        background-position: left;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .main .content h3{
+        font-size: 4.5rem;
+    }
+
+    .main .content p{
+        font-size: 1.5rem;
+    }
+
+}
+
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+    .header{
+        padding:1.5rem 2rem ;
+    }
+    
+
+}
