@@ -43,3 +43,27 @@ header label span{
     display: inline-block;
     color:gray
 }
+
+.header-right{
+    display: flex;
+}
+
+.h-button{
+    padding-top: 0.5rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.h-button a{
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 0.5em 1.25em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+    border-radius: 15px;
+}
