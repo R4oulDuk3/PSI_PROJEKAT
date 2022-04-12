@@ -4,7 +4,7 @@
 .grid{
     margin-top: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 2rem;
 }
 .card{
@@ -14,6 +14,7 @@
 
 .card-body{
     padding: 1rem;
+    border-top: 1px solid var(--main-color);
 }
 
 .card-header{
@@ -21,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--main-color);
+    
 }
 .sm-button{
     background: var(--main-color);
@@ -70,6 +71,7 @@ thead td{
     padding-top: 0.5rem;
     display: flex;
     align-items: center;
+    
 }
 
 tbody tr:hover{
@@ -85,10 +87,13 @@ td .sm-button{
     font-size: .8rem;
     padding: .5rem;
     border: 1px solid var(--main-color);
-    visibility: hidden;
+    visibility: visible;
 }
 tr:hover .sm-button{
     visibility: visible;
+    background: var(--main-color);
+    color: #fff;
+    border: 1px solid #fff;
 }
 .card-new{
     border-style: solid;
@@ -100,3 +105,39 @@ tr:hover .sm-button{
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.buttons >*{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+#kat-toggle{
+    display: none;
+}
+#kat-toggle:checked + .card-body{
+    display: none;
+}
+#kat-toggle1{
+    display: none;
+}
+#kat-toggle1:checked + .card-body{
+    display: none;
+}
+#kat-toggle2{
+    display: none;
+}
+#kat-toggle2:checked + .card-body{
+    display: none;
+}
+#kat-toggle3{
+    display: none;
+}
+#kat-toggle3:checked + .card-body{
+    display: none;
+}
+tbody>tr>td:last-child{
+    text-align: end;
+}
+
