@@ -9,10 +9,10 @@
 }
 .card{
     color: #fff;
-    background-image: url(../assets/beer.jpg);
-    background-size: cover;
-    padding-top: 7rem;
-    max-width: 35ch;
+    background-image: url(../assets/zurkeNajave.png);
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    padding-top: 350px;
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
@@ -33,7 +33,7 @@
     transform: translateY(60%);
     transition: transform 500ms ease;
 }
-.card-content p > *{
+.card-content > *{
     opacity: 0;
     transition: opacity 500ms linear;
 }
@@ -103,4 +103,31 @@ tr:hover .sm-button{
 .add-new-button{
     padding-top: 5rem;
     padding-bottom: 5rem;
+}
+@media only screen and (max-width: 1200px){
+    .grid{
+        margin-top: 3.5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+
+}
+@media only screen and (max-width: 768px){
+    .grid{
+        margin-top: 3.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+    }
+
+}
+@media only screen and (max-width: 500px){
+    .grid{
+        margin-top: 3.5rem;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 2rem;
+    }
+
 }
