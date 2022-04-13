@@ -99,5 +99,5 @@
         width: calc(100% - var(--sidebar-width-reduced));
         left: var(--sidebar-width-reduced);
     }
-    
+
 }
