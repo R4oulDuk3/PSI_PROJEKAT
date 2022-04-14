@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
+    <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/general.css">
+    <link rel="stylesheet" href="../css-admin-skelet/header.css">
+    <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
+    <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="novi-raspored.css">
+    <script src="drag.js" defer></script>
+    <title>Rasporedi</title>
+</head>
+<body>
+    <input type="checkbox" name="" id="nav-toggle">
+   
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="../inventar/inventar.html">
+                        <span class="las la-users"></span>
+                        <span>Inventar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../stolovi/stolovi.html">
+                        <span class="las la-users" ></span>
+                        <span>Stolovi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../konobari/konobari.html">
+                        <span  class="las la-users"></span>
+                        <span>Konobar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../meni/meni.html">
+                        <span  class="las la-users"></span>
+                        <span>Meni</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../dogadjaji/dogadjaji.html">
+                        <span class="las la-users"></span>
+                        <span>Dogadjaji</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../izvestaji/izvestaji.html">
+                        <span class="las la-users"></span>
+                        <span>Izvestaj</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Rasporedi
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Menadzer</small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div class="kategorija">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Datum pocetka</h2>
+                        <input type="date">
+                        <h2>Datum pocetka</h2>
+                        <input type="date">
+                    </div>
+                    <div class="card-konobari">
+                        <div class="konobari">
+                            <div class="draggable" draggable="true">Gavrilo Vojteski</div>
+                            <div class="draggable" draggable="true">Gavrilo Vojteski</div>
+                            <div class="draggable" draggable="true">Gavrilo Vojteski</div>
+                            <div class="draggable" draggable="true">Gavrilo Vojteski</div>
+                        </div>
+                        <input type="text" placeholder="Search.." class="search-bar">
+                    </div>
+                    <input type="checkbox" name="" id="kat-toggle">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>Smena</td>
+                                        <td>Ponedeljak</td>
+                                        <td>Utorak</td>
+                                        <td>Sreda</td>
+                                        <td>Cetvrtak</td>
+                                        <td>Petak</td>
+                                        <td>Subota</td>
+                                        <td>Nedelja</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="buttons">
+                                <div class="button">
+                                    <a href="">Dodaj stavku</a>
+                                </div>
+                                <div class="button">
+                                    <a href="">Azuriraj stranicu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+</body>
+</html>
