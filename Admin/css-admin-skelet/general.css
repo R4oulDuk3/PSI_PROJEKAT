@@ -5,6 +5,8 @@
     --main-width:80%;
     --sidebar-width-reduced:6%;
     --main-width-extended:94%;
+    --modal-duration: 1s;
+    --modal-color: #428bca;
 }
 
 
