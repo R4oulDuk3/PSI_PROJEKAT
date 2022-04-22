@@ -22,11 +22,29 @@ function change(){
     }
 }
 
+function displayForm(){
 
-function openForm() {
-    document.getElementById("popForm").style.display = "block";
-  }
+    var r = /\d+/
+    let s = event.target.parentNode.parentNode.id;
+    let niz = document.getElementsByClassName("form-popup");
+
+    let num = parseInt(s.match(r)); 
+
+    niz[num-1].style.display = "block";
+
+
+}
+
+
   
   function closeForm() {
-    document.getElementById("popForm").style.display = "none";
+    var r = /\d+/
+    let s = event.target.parentNode.parentNode.parentNode.parentNode.id;
+    let niz = document.getElementsByClassName("form-popup");
+
+    let num = parseInt(s.match(r)); 
+
+    niz[num-1].style.display = "none";
+
+
   }

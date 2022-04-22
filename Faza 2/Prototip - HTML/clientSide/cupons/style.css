@@ -223,6 +223,11 @@ hr{
     display: grid; 
 }
 
+#cuppage{
+    color: var(--main-color);
+    font-weight: bold;
+}
+
 .form-popup {
     display: none;  
     position:absolute;
