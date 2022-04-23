@@ -79,7 +79,7 @@
                 <input type="search" name="" id="">
             </div>
             <div class="header-right">
-                <button id="modal-btn" class="button-m">Kreiraj Dogadjaj</button>
+                <button class="button-m modal-btn">Kreiraj Dogadjaj</button>
                 <div class="user-wrapper">
                     <div>
                         <h4>Jhon Doe</h4>
@@ -100,6 +100,7 @@
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                                 Eaque cupiditate perspiciatis quia
                             </p>
+                            <a href="#" class="button-card modal-btn-del">Obrisi dogadjaj</a>
                         </div>
                     </div>
                 </div>
@@ -114,64 +115,93 @@
             <h2>Kreiranje Dogadjaja</h2>
           </div>
           <div class="modal-body">
-            <div class="picture-space">
-                <div>
-                    <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
-                <div id="display_image">
-
+            <div class="modal-form-create">
+                <div class="picture-space">
+                    <div>
+                        <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
+                    <div id="display_image">
+    
+                    </div>
+                    <script src="modal-image.js"></script>
+                    </div>
                 </div>
-                <script src="modal-image.js"></script>
-                </div>
-            </div>
-            <div class="input-div">
-                <table class="input-table">
-                    <thead>
-                        <tr>
-                            <td>Nalov dogajdaja</td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tip dogadjaja</td>
-                            <td><div class="radio-div">
-                                <div class="radio">
-                                    <input type="radio" name="" id="">Zurka
-                                </div>
-                                <div class="radio">
-                                    <input type="radio" name="" id="">Takmicenje
-                                </div>
-                            </div></td>
-                        </tr>
-                        <tr>
-                            <td>Opis dogadjaja</td>
-                            <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Datum Dogadjaja</td>
-                            <td><input type="date" name="" id=""></td>
-                        </tr>
-                        <tr>
-                            <td><label for="postavke">Izbor postavke:</label></td>
-                            <td>
-                                <select name="postavke" id="postavke">
-                                    <option value="Postavka1">Postavka1</option>
-                                    <option value="Postavka2">Postavka2</option>
-                                    <option value="Postavka3">Postavka3</option>
-                                    <option value="Postavka4">Postavka4</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="button-div">
-                    <div class="button">
-                        <a href="">Sacuvaj</a>
+                <div class="input-div">
+                    <table class="input-table">
+                        <thead>
+                            <tr>
+                                <td>Nalov dogajdaja</td>
+                                <td><input type="text"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tip dogadjaja</td>
+                                <td><div class="radio-div">
+                                    <div class="radio">
+                                        <input type="radio" name="" id="">Zurka
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="" id="">Takmicenje
+                                    </div>
+                                </div></td>
+                            </tr>
+                            <tr>
+                                <td>Opis dogadjaja</td>
+                                <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Datum Dogadjaja</td>
+                                <td><input type="date" name="" id=""></td>
+                            </tr>
+                            <tr>
+                                <td><label for="postavke">Izbor postavke:</label></td>
+                                <td>
+                                    <select name="postavke" id="postavke">
+                                        <option value="Postavka1">Postavka1</option>
+                                        <option value="Postavka2">Postavka2</option>
+                                        <option value="Postavka3">Postavka3</option>
+                                        <option value="Postavka4">Postavka4</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="button-div">
+                        <div class="button">
+                            <a href="">Sacuvaj</a>
+                        </div>
                     </div>
                 </div>
             </div>
           </div>
           <div class="modal-footer">
+            <h3>Modal Footer</h3>
+          </div>
+        </div>
+    </div>
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close close-del">&times;</span>
+            <h2>Brisanje artikla</h2>
+          </div>
+            <div class="modal-body">
+                <div class="modal-form-del">
+                    <div class="modal-del-title">
+                        <h1>Da li ste sigurni da zelite da obrisete ovaj dogadjaj?</h1>
+                    </div>
+                    <div class="modal-del-info">
+                        <h2>Upisite naziv dogadjaja da bi potvrdili akciju brisanja</h2>
+                        <input type="text" placeholder="Zurka 1">
+                    </div>
+                    <div class="button-div">
+                        <div class="button">
+                            <a href="">Potvrdi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
             <h3>Modal Footer</h3>
           </div>
         </div>

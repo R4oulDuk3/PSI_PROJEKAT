@@ -115,8 +115,17 @@ tr:hover .sm-button{
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
-.button{
-    
+.button-card{
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: var(--main-color);
+    padding: 0.5em 1.25em;
+}
+.button-card:hover,
+.button-card:focus{
+    background-color: violet;
 }
 
 .button-m {

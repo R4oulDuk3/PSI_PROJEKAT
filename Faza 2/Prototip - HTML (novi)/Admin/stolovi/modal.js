@@ -43,8 +43,12 @@ function openModal1() {
 
 // Close
 function closeModal() {
-  modal.style.display = 'none';
-  modal_del.style.display = 'none';
+  if(modal!=null){
+    modal.style.display = 'none';
+  }
+  if(modal_del!=null){
+    modal_del.style.display = 'none';
+  }
 }
 // Close If Outside Click
 function outsideClick(e) {

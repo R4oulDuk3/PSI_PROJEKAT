@@ -36,9 +36,6 @@
   .modal-body {
     padding: 10px 20px;
     background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     font-weight: 800;
     font-size: larger;
   }
@@ -118,4 +115,37 @@
     display: flex;
     justify-content: flex-end;
     background: #fff;
+}
+.modal-form-create{
+  padding: 10px 20px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 800;
+  font-size: large;
+}
+.modal-form-del{
+  padding: 10px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 800;
+  font-size: larger;
+}
+.modal-del-title{
+    text-align: center;
+    font-size: medium;
+    border-bottom: 1px solid var(--main-color);
+}
+.modal-del-info{
+  padding: 1rem;
+  text-align: center;
+  font-size: small;   
+}
+.modal-del-info > input{
+  margin-top: 0.5rem;
+  font-size: 25px;   
 }

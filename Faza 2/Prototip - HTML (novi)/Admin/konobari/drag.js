@@ -1,15 +1,18 @@
 const draggables = document.querySelectorAll('.draggable')
 const containers = document.querySelectorAll('.container')
+console.log('check')
 dragged_copy=null
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
     dragged_copy=draggable.cloneNode(true)
-    draggable.classList.add('dragging')
+  dragged_copy.addEventListener('dragstart',drag_start)
+  draggable.classList.add('dragging')
 
   })
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
+    dragged_copy.querySelector('.sm-button').style.display='block'
     dragged_copy=null
   })
 })
@@ -40,4 +43,14 @@ function getDragAfterElement(container, y) {
       return closest
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
+}
+
+function drag_start(){
+  dragged_copy=draggable.cloneNode(true)
+  dragged_copy.addEventListener('dragstart',drag_start)
+  draggable.classList.add('dragging')
+}
+
+function delete_elem(){
+
 }

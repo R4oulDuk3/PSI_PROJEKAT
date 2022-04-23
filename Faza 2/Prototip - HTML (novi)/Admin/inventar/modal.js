@@ -33,7 +33,7 @@ function openModal() {
 
 // Events
 //modalBtn.addEventListener('click', openModal);
-closeBtn_del.addEventListener('click', closeModal1);
+closeBtn_del.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 
 // Open

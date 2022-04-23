@@ -31,6 +31,10 @@
     font-size: .8rem;
     padding: .5rem;
     border: 1px solid var(--main-color);
+    cursor: pointer;
+}
+.sm-button >*{
+    cursor: pointer;
 }
 table {
     border-collapse: collapse;
@@ -88,6 +92,7 @@ td .sm-button{
     padding: .5rem;
     border: 1px solid var(--main-color);
     visibility: visible;
+    cursor: pointer;
 }
 tr:hover .sm-button{
     visibility: visible;
