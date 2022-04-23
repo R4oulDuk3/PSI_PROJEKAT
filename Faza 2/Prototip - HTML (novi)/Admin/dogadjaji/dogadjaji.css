@@ -2,14 +2,14 @@
     width: 100%;
 }
 .grid{
-    margin-top: 3.5rem;
+    
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
 }
 .card{
     color: #fff;
-    background-image: url(../assets/zurkeNajave.png);
+    /* background-image: url(../assets/zurkeNajave.png); */
     background-size: 100% 100%;
     background-repeat:no-repeat;
     padding-top: 350px;

@@ -1,20 +1,37 @@
 
-var data = [
+var artikliUNedostatku = [
     {
-        name: 'Zurka 1',
-        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
+        name: 'Amstel',
+        kolicina : '10',
+
+        sifraProizvoda: '2123232323232',
+        nabavnaCena: '140',
+        sifraDobavljaca: '1231231232131'
+
     },
+]
+var artikli =[
     {
-        name: 'Zurka 1',
-        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
-    }
+        name: 'Amstel',
+        kolicina : '10',
+
+        sifraProizvoda: '2123232323232',
+        nabavnaCena: '140',
+        sifraDobavljaca: '1231231232131'
+
+    },
 ]
 
 
 $(document).ready(function (){
-    let grid = $('.grid').first();
+    let grid1 = $('#porudzbenice-grid')
+    let grid2 = $('#artikli-grid')
+    
+    function popuni(grid,podaci){
+        podaci.forEach((artikal)=>{
+            
+        })
+    }
     data.forEach((zurka)=>{
         let karta = $('<div></div>').addClass('card');
         let dogadjaj = $("<div></div>").addClass('card-content');
