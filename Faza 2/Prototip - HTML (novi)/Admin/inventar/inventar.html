@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="artikli.css">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="ucitaj_artikle.js"></script>
     <title>Inventar</title>
 </head>
 <body>
@@ -94,7 +95,7 @@
                     <span><h1>Artikli u nedostatku</h1></span>
                 </div>
                 <div id ="porudzbenice-grid" class="cards">
-                    <div class="card-single">
+                    <!-- <div class="card-single">
                             <div class="naslov">
                                 <h1>Amstel</h1>
                                 <div class="buttons">
@@ -104,8 +105,6 @@
                                     <button class="sm-button modal-btn-del">
                                         <span class="las la-times"></span>
                                     </button>
-                                    
-                                    
                                 </div>
                             </div>
                             
@@ -127,11 +126,9 @@
                                     <td>123123123</td>
                                 </tr>
                             </table>
-                            <div class="card-btn">
-                                <button id="" class="button-m modal-btn"><p>Kreiraj Porudzbenicu</p></button>
-                            </div>
                             
-                    </div>
+                            
+                    </div> -->
                     
                 </div>
             </div>
@@ -139,121 +136,9 @@
                 <div class="artikli-meni">
                     <span><h1>Artikli</h1></span>
                 </div>
-                <div class="cards artikli-grid">
-                    <div class="card-single">
-                            <div class="naslov">
-                                <h1>Amstel</h1>
-                                <div class="buttons">
-                                    <button class="sm-button modal-btn">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                    
-                                    
-                                </div>
-                            </div>
-                            
-                            <table>
-                                <tr>
-                                    <td>Količina</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>Sifra</td>
-                                    <td>2123213123</td>
-                                </tr>
-                                <tr>
-                                    <td>Nabavna cena</td>
-                                    <td>120 RSD</td>
-                                </tr>
-                                <tr>
-                                    <td>Sifra dobaljaca</td>
-                                    <td>123123123</td>
-                                </tr>
-                            </table>
-                            <div class="card-btn">
-                                <button id="" class="button-m modal-btn"><p>Kreiraj Porudzbenicu</p></button>
-                            </div>
-                            
-                    </div>
-                    <div class="card-single">
-                            <div class="naslov">
-                                <h1>Amstel</h1>
-                                <div class="buttons">
-                                    <button class="sm-button modal-btn">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                    
-                                    
-                                </div>
-                            </div>
-                            
-                            <table>
-                                <tr>
-                                    <td>Količina</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>Sifra</td>
-                                    <td>2123213123</td>
-                                </tr>
-                                <tr>
-                                    <td>Nabavna cena</td>
-                                    <td>120 RSD</td>
-                                </tr>
-                                <tr>
-                                    <td>Sifra dobaljaca</td>
-                                    <td>123123123</td>
-                                </tr>
-                            </table>
-                            <div class="card-btn">
-                                <button id="" class="button-m modal-btn"><p>Kreiraj Porudzbenicu</p></button>
-                            </div>
-                            
-                    </div>
-                    <div class="card-single">
-                        <div class="naslov">
-                            <h1>Amstel</h1>
-                            <div class="buttons">
-                                <button class="sm-button modal-btn">
-                                    <span class="las la-exchange-alt"></span>
-                                </button>
-                                <button class="sm-button">
-                                    <span class="las la-times"></span>
-                                </button>
-                                
-                                
-                            </div>
-                        </div>
-                        
-                        <table>
-                            <tr>
-                                <td>Količina</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>Sifra</td>
-                                <td>2123213123</td>
-                            </tr>
-                            <tr>
-                                <td>Nabavna cena</td>
-                                <td>120 RSD</td>
-                            </tr>
-                            <tr>
-                                <td>Sifra dobaljaca</td>
-                                <td>123123123</td>
-                            </tr>
-                        </table>
-                        <div class="card-btn">
-                            <button id="" class="button-m modal-btn"><p>Kreiraj Porudzbenicu</p></button>
-                        </div>
-                        
-                </div>
+                <div id="artikli-grid" class="cards">
+                    
+                   
                     
                 </div>
                     
@@ -323,7 +208,7 @@
             </div>
             
             <div id="delete-modal" class="modal">
-                <div class="modal-content">
+                <div id="delete-modal-content" class="modal-content">
                   <div class="modal-header">
                     <span class="close close-del">&times;</span>
                     <h2>Brisanje artikla</h2>
@@ -335,7 +220,7 @@
                             </div>
                             <div class="modal-del-info">
                                 <h2>Upisite naziv artikla da bi potvrdili akciju brisanja</h2>
-                                <input type="text" placeholder="Amstel">
+                                <input type="text" id= "modal-del-input" placeholder="Amstel">
                             </div>
                             <div class="button-div">
                                 <div class="button">
@@ -349,7 +234,7 @@
                   </div>
                 </div>
             </div>
-            <script src="modal.js"></script>
+            <!-- <script src="modal.js"></script> -->
             <!-- <script src="delete-modal.js"></script> -->
         </main>
             <div class="header-title"></div>
