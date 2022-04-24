@@ -1,0 +1,27 @@
+.card-body table{
+    width: 100%;
+}
+.grid{
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+.card{
+    background: #fff;
+    border-radius: 15px;
+}
+
+.card-body{
+    padding: 1rem;
+}
+
+.card-header{
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+}
+
+

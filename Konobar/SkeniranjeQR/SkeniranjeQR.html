@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
+    <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/general.css">
+    <link rel="stylesheet" href="../css-admin-skelet/header.css">
+    <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
+    <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="SkeniranjeQR.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <title>Unos Rezervacije</title>
+</head>
+<body>
+    <input type="checkbox" name="" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="../inventar/inventar.html">
+                        <span class="las la-users"></span>
+                        <span>Biranje Smene</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-users" ></span>
+                        <span>Unos Rezervacije</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span  class="las la-users"></span>
+                        <span>Konobar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span  class="las la-users"></span>
+                        <span>Meni</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-users"></span>
+                        <span>Dogadjaji</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-users"></span>
+                        <span>Skeniranje QR</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Skeniranje QR
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Konobar</small>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="h-button">
+                <a href="">Dodaj postavku</a>
+            </div> -->
+        </header>
+        <main>
+            <!-- <img src="https://www.gallaslabel.com/assets/1/7/Wine_Bottle_-_QR_Code.jpg" />
+            <div class="element">
+            </div -->
+            <div id="qr-reader" style="width: 100%"></div>
+            <script src="html5qrcode_1.js"></script>
+        </main>
+    </div>
+    
+</body>
+</html>
