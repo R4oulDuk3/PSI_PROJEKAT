@@ -2,17 +2,17 @@
     width: 100%;
 }
 .grid{
-    margin-top: 3.5rem;
+    
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
 }
 .card{
     color: #fff;
-    background-image: url(../assets/beer.jpg);
-    background-size: cover;
-    padding-top: 7rem;
-    max-width: 35ch;
+    /* background-image: url(../assets/zurkeNajave.png); */
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    padding-top: 350px;
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
@@ -33,10 +33,21 @@
     transform: translateY(60%);
     transition: transform 500ms ease;
 }
-.card-content p > *{
+.card-content > *{
     opacity: 0;
     transition: opacity 500ms linear;
 }
+.card-content p{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+    opacity: 0;
+    transition: opacity 500ms linear;
+}
+
 
 .card:hover .card-content{
     transform: translateY(0%);
@@ -80,6 +91,7 @@
     padding-top: 0.5rem;
     display: flex;
     align-items: center;
+    margin-right: 2rem;
 }
 
 td .sm-button{
@@ -103,4 +115,11 @@ tr:hover .sm-button{
 .add-new-button{
     padding-top: 5rem;
     padding-bottom: 5rem;
+}
+
+.buttons{
+    position:absolute;
+    top:0;
+    right:0;
+    margin: 0.5rem;
 }
