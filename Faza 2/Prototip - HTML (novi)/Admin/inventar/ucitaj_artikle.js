@@ -23,7 +23,8 @@ var artikli =[
 
     },
 ]
-var modalOpen = false
+var modalCreateOpen = false
+var modalDeleteOpen= false
 var ignoreDoc=false
 
 $(document).ready(function (){
@@ -32,40 +33,70 @@ $(document).ready(function (){
     let grid2 = $('#artikli-grid')
     popuni(grid1,artikliUNedostatku)
     popuni(grid2,artikli)
+
     $(document).click(function(event) { 
         console.log('close')
         if(ignoreDoc){
             ignoreDoc=false;
             return
         }
-        console.log(modalOpen)
         var $target = $(event.target);
-        if(modalOpen && !$target.closest('#delete-modal-content').length) {
+        if(modalCreateOpen && !$target.closest('#create-modal-content').length) {
+            console.log('closing')
+          $('#create-modal').css('display','none')
+            modalCreateOpen=false;
+        }
+        if(modalDeleteOpen && !$target.closest('#delete-modal-content').length) {
             console.log('closing')
           $('#delete-modal').css('display','none')
-            modalOpen=false;
-        }        
+            modalDeleteOpen=false;
+        }         
       });
-
-
-    const modal_del = document.querySelector('#delete-modal');
-    document.querySelectorAll('.modal-btn-del').forEach(item => {
-        item.addEventListener('click', ()=>{
-
-        });
-    });
+    $("#close-del").on('click',closeModal)
+    $("#close-create").on('click',closeModal)
+    $("#modal-create-btn").on('click',()=>{openCreateModal(null)})
 })
-function openModal(placeholder){
-    modalOpen=true
+function openDeleteModal(placeholder){
+    modalDeleteOpen=true
     ignoreDoc=true
     console.log(placeholder)
-    $('#delete-modal').css('display','block')
+    $('#delete-modal').css('display','flex')
     $('#modal-del-input').attr('placeholder',placeholder)
 }
+function openCreateModal(info){
+    fillCreateModal(info)
+    modalCreateOpen=true
+    ignoreDoc=true
+    $('#create-modal').css('display','block')
+}
+function fillCreateModal(info){
+    console.log(info)
+    if(info==null){
+        $('#naslov-modala').text("Kreiranje artikla")
+        info={
+               name: '',
+                kolicina : '',
+                sifraProizvoda: '',
+                nabavnaCena: '',
+                sifraDobavljaca: ''
+        }
+    }else{
+        $('#naslov-modala').text("Izmena artikla")
+    }
+    $('#naziv-input').attr('value',info.name);
+    $('#sifra-artikla-input').attr('value',info.sifraProizvoda);
+    $('#sifra-dobavljaca-input').attr('value',info.sifraDobavljaca);
+    $('#tren-kolicina-input').attr('value',info.kolicina);
+    $('#nabavna-cena-input').attr('value',info.nabavnaCena);
+}
+//TODO: regulisi sirinu
 function closeModal(){
-    $('modal').each(()=>{
-        this.css('display','none')
-    })
+    console.log("close modal")
+    ignoreDoc=false
+    modalCreateOpen=false
+    modalDeleteOpen=false
+    $('#delete-modal').css('display','none')
+    $('#create-modal').css('display','none')
 }
 
 // dodati da se na window klik svi modali zatvore
@@ -78,7 +109,8 @@ function popuni(grid,podaci){
         let buttonsDiv = $('<div></div>').addClass('buttons')
         let buttonChange = $('<button class="sm-button modal-btn"><span class="las la-exchange-alt"></span></button>')
         let buttonDelete = $('<button class="sm-button modal-btn-del"><span class="las la-times"></span></button>')
-        buttonDelete.on('click',()=>{openModal(artikal.name)})
+        buttonDelete.on('click',()=>{openDeleteModal(artikal.name)})
+        buttonChange.on('click',()=>{openCreateModal(artikal)})
         buttonsDiv.append(buttonChange)
         buttonsDiv.append(buttonDelete)
         naslovniDiv.append(naslov)

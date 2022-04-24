@@ -39,13 +39,10 @@ padding-right: 1rem;
     text-align: left;
 }
 
-.button{
 
-    align-items: center;
-}
 .button{
-
     align-items: center;
+    margin: 1rem;
 }
 .button a{
     text-align: center;

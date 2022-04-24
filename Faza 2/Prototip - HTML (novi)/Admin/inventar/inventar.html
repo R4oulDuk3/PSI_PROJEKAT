@@ -79,8 +79,9 @@
                 <input type="search" name="" id="">
             </div>
             <div class="header-right">
-                
-                     
+                <div id="modal-create-btn" class="button">
+                    <a href="#">Dodaj artikal</a>
+                </div>
                 <div class="user-wrapper">
                     <div>
                         <h4>Jhon Doe</h4>
@@ -145,11 +146,11 @@
                 </div>
 
             </div>
-            <div id="my-modal" class="modal">
-                <div class="modal-content">
+            <div id="create-modal" class="modal">
+                <div id= "create-modal-content">
                   <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Kreiranje Dogadjaja</h2>
+                    <span id="close-create" class="close">&times;</span>
+                    <h2 id="naslov-modala">Kreiranje Dogadjajaa</h2>
                   </div>
                   <div class="modal-body">
                     <div class="modal-form-create">
@@ -167,25 +168,25 @@
                                 <thead>
                                     <tr>
                                         <td>Naziv artikla</td>
-                                        <td><input type="text"></td>
+                                        <td><input id="naziv-input" type="text"></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Sifra artikla</td>
-                                        <td><input type="text"></td>
+                                        <td><input id="#sifra-artikla-input" type="text"></td>
                                     </tr>
                                     <tr>
                                         <td>Sifra dobavljaca</td>
-                                        <td><input type="text"></td>
+                                        <td><input id="#sifra-dobavljaca-input" type="text"></td>
                                     </tr>
                                     <tr>
                                         <td>Trenutna kolicina</td>
-                                        <td><input type="text"></td>
+                                        <td><input id="#tren-kolicina-input" type="text"></td>
                                     </tr>
                                     <tr>
                                         <td>Nabavna cena</td>
-                                        <td><input type="text"></td>
+                                        <td><input id="#nabavna-cena-input" type="text"></td>
                                     </tr>
                                     <tr>
                                         <td>Kolicina za koju se pojavljuje upozorenje o manjku</td>
@@ -207,39 +208,39 @@
                 </div>
             </div>
             
-            <div id="delete-modal" class="modal">
-                <div id="delete-modal-content" class="modal-content">
-                  <div class="modal-header">
-                    <span class="close close-del">&times;</span>
-                    <h2>Brisanje artikla</h2>
-                  </div>
-                    <div class="modal-body">
-                        <div class="modal-form-del">
-                            <div class="modal-del-title">
-                                <h1>Da li ste sigurni da zelite da obrisete ovaj artikal?</h1>
-                            </div>
-                            <div class="modal-del-info">
-                                <h2>Upisite naziv artikla da bi potvrdili akciju brisanja</h2>
-                                <input type="text" id= "modal-del-input" placeholder="Amstel">
-                            </div>
-                            <div class="button-div">
-                                <div class="button">
-                                    <a href="">Potvrdi</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                  </div>
-                </div>
-            </div>
+            
             <!-- <script src="modal.js"></script> -->
             <!-- <script src="delete-modal.js"></script> -->
         </main>
             <div class="header-title"></div>
         </div>
-
+        <div id="delete-modal" class="modal">
+            <div id="delete-modal-content" class="modal-content">
+              <div class="modal-header">
+                <span id = "close-del" class="close">&times;</span>
+                <h2>Brisanje artikla</h2>
+              </div>
+                <div class="modal-body">
+                    <div class="modal-form-del">
+                        <div class="modal-del-title">
+                            <h1>Da li ste sigurni da zelite da obrisete ovaj artikal?</h1>
+                        </div>
+                        <div class="modal-del-info">
+                            <h2>Upisite naziv artikla da bi potvrdili akciju brisanja</h2>
+                            <input type="text" id= "modal-del-input" placeholder="Amstel">
+                        </div>
+                        <div class="button-div">
+                            <div class="button">
+                                <a href="">Potvrdi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <h3>Modal Footer</h3>
+              </div>
+            </div>
+        </div>
         
 
 </body>
