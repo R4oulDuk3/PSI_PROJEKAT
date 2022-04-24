@@ -1,6 +1,7 @@
 .porudzbenice-meni{
     
     display: flex;
+    align-items: center;
 }
 .porudzbenice-meni span{
 padding-right: 1rem;
@@ -37,6 +38,9 @@ padding-right: 1rem;
 }
 .card-single table td:nth-child(odd){
     text-align: left;
+}
+.nav-button{
+    cursor: pointer;
 }
 
 
@@ -132,7 +136,32 @@ padding-right: 1rem;
   .card-single:hover .button-m >*{
     color: var(--main-color);
   }
+  #tabela-artikala td{
+    
+    padding: 0.5rem 1rem;
+    
+    color: #222;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: large;
+    font-weight: 700;
 
- 
+}
+#tabela-artikala thead td{
+    font-size: x-large;
+}
+#tabela-artikala thead tr{
+    border-bottom: 1px solid black;
+}
+
+
+
+
+ #potvrda-porudzbenica{
+     display: flex;
+     align-content: center;
+     justify-content: center;
+     border-top: 1px solid #f0f0f0;
+ }
 
 

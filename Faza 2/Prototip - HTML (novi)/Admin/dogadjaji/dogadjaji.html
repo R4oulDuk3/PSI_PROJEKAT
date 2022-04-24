@@ -59,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../kuponi/kuponi.html">
+                        <span class="las la-users"></span>
+                        <span>Kuponi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../izvestaji/izvestaji.html">
                         <span class="las la-users"></span>
                         <span>Izvestaj</span>
@@ -81,7 +87,7 @@
                 <input type="search" name="" id="">
             </div>
             <div class="header-right">
-                <button class="button-m modal-btn">Kreiraj Dogadjaj</button>
+                <button id="modal-create-btn" class="button-m">Kreiraj Dogadjaj</button>
                 <div class="user-wrapper">
                     <div>
                         <h4>Jhon Doe</h4>
@@ -94,30 +100,20 @@
         <main>
             <div class="dogadjaji">
                 <div class="grid">
-                    <!-- <div class="card">
-                        <div class="card-content">
-                            <h2 class="card-title">Zurka 1
-                            </h2>
-                            <p class="card-body">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Eaque cupiditate perspiciatis quia
-                            </p>
-                            <a href="#" class="button-card modal-btn-del">Obrisi dogadjaj</a>
-                        </div>
-                    </div> -->
+                  
                 </div>
             </div>
             
         </main>
     </div>
-    <div id="my-modal" class="modal">
+    <div id="create-modal" class="modal">
         <div class="modal-content">
           <div class="modal-header">
-            <span class="close">&times;</span>
+            <span id="close-create" class="close">&times;</span>
             <h2>Kreiranje Dogadjaja</h2>
           </div>
           <div class="modal-body">
-            <div class="modal-form-create">
+            <div id="create-modal-content" class="modal-form-create">
                 <div class="picture-space">
                     <div>
                         <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
@@ -182,9 +178,9 @@
         </div>
     </div>
     <div id="delete-modal" class="modal">
-        <div class="modal-content">
+        <div id="delete-modal-content" class="modal-content">
           <div class="modal-header">
-            <span class="close close-del">&times;</span>
+            <span id="close-del" class="close">&times;</span>
             <h2>Brisanje artikla</h2>
           </div>
             <div class="modal-body">
@@ -208,6 +204,5 @@
           </div>
         </div>
     </div>
-    <script src="modal.js"></script>
 </body>
 </html>

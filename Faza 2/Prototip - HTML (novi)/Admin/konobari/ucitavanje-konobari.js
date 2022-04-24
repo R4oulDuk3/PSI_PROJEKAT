@@ -1,24 +1,25 @@
-
-var data = [
+let konobari = [
     {
-        name: 'Zurka 1',
-        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
+        ime: "Marko Savic",
+        telefon: '+38162626262',
+        email: 'marko-savic@gmail.com',
+        korisnickoIme: 'mareSavke',
+        imagePath:'../assets/konobar.jpg'
     },
     {
-        name: 'Zurka 1',
-        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
+        ime: "Nevenka Nevenkic",
+        telefon: '+38162626262',
+        email: 'nevenkaNevenkic@gmail.com',
+        korisnickoIme: 'nenaNena',
+        imagePath:'../assets/konobarka.webp'
     }
 ]
-
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
-
 $(document).ready(function (){
     let grid = $('.grid').first();
-    popuni(grid,data)
+    popuni(grid,konobari)
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -44,6 +45,28 @@ $(document).ready(function (){
     
 
 })
+
+function popuni(grid,data){
+    data.forEach((konobar)=>{
+        card = $('<div class="card"></div>')
+        card.css('background-image','url('+konobar.imagePath+')')
+        content = $('<div class="card-content"></div>')
+        buttonsDiv = $('<div class="buttons"></div>')
+        delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
+        naslov = $('<h2 class="card-title"></h2>').text(konobar.ime)
+        tekst = $('<p class="card-body">Telefon: '+konobar.telefon+"<br>email: "+ konobar.email +'</p>')
+        delButton.on('click',()=>{
+            openDeleteModal(konobar.ime)
+        })
+        buttonsDiv.append(delButton)
+        content.append(buttonsDiv)
+        content.append(naslov)
+        content.append(tekst)
+        card.append(content)
+        grid.append(card)
+    })
+}
+
 function openDeleteModal(placeholder){
     modalDeleteOpen=true
     ignoreDoc=true
@@ -55,6 +78,7 @@ function openCreateModal(){
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
+    
 }
 function closeModal(){
     console.log("close modal")
@@ -64,32 +88,3 @@ function closeModal(){
     $('#delete-modal').css('display','none')
     $('#create-modal').css('display','none')
 }
-
-
-function popuni(grid,data){
-    data.forEach((zurka)=>{
-        let karta = $('<div></div>').addClass('card');
-        let dogadjaj = $("<div></div>").addClass('card-content');
-        let naslov = $("<h2></h2>").addClass('card-title').append(zurka.name);
-        let opis = $("<p></p>").addClass('card-body').append(zurka.desc);
-        let dugme = $("<a></a>").attr('href','#').addClass('button-card').addClass('modal-btn-del').append('Obrisi dogadjaj');
-        dugme.on('click',()=>{
-            openDeleteModal(zurka.name)
-        })
-        dogadjaj.append(naslov);
-        dogadjaj.append(opis);
-        dogadjaj.append(dugme);
-        karta.append(dogadjaj);
-        karta.css('background-image',"url("+zurka.imgName+")");
-        var img = new Image;
-        img.src = zurka.imgName
-        var height = img.height;
-        console.log(height)
-        //karta.css('padding-top', height+"px");
-        grid.append(karta)
-        //grid.append($('<div></div>')); 
-    })
-}
-
-
-

@@ -2,7 +2,7 @@
     width: 100%;
 }
 .grid{
-    margin-top: 3.5rem;
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
@@ -16,6 +16,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
+    position: relative;
 }
 .card:hover{
     transform: scale(1.05);
@@ -67,11 +68,30 @@
 }
 .sm-button{
     background: var(--main-color);
-    border-radius: 10px;
+    cursor: pointer;
     color: #fff;
-    font-size: .8rem;
-    padding: .5rem;
+    padding: 0.5rem;
     border: 1px solid var(--main-color);
+}
+.sm-button>*{
+
+    color: #fff;
+    font-size: 0.8rem;
+    
+}
+.buttons button:first-child{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.buttons button:last-child{
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.buttons{
+    position:absolute;
+    top:0;
+    right:0;
+    margin: 0.5rem;
 }
 
 .button{
@@ -80,21 +100,7 @@
     align-items: center;
 }
 
-td .sm-button{
-    background: #fff;
-    border-radius: 10px;
-    color: var(--main-color);
-    font-size: .8rem;
-    padding: .5rem;
-    border: 1px solid var(--main-color);
-    visibility: hidden;
-}
-.sm-button{
-    margin-right: 1rem;
-}
-.sm-button span{
-    font-weight: 500;
-}
+
 .card-new{
     border-style: solid;
     border-width: 3px;

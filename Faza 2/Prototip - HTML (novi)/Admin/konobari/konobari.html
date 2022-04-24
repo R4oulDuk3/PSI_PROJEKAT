@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="konobari.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="ucitavanje-konobari.js"></script>
     <title>Konobari</title>
 </head>
 <body>
@@ -57,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../kuponi/kuponi.html">
+                        <span class="las la-users"></span>
+                        <span>Kuponi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../izvestaji/izvestaji.html">
                         <span class="las la-users"></span>
                         <span>Izvestaj</span>
@@ -80,7 +88,7 @@
             </div>
             <div class="header-right">
                 
-                <div class="button modal-btn">
+                <div id="modal-create-btn" class="button">
                     <a href="#">Dodaj konobara</a>
                 </div>
                 <div class="button">
@@ -96,34 +104,16 @@
             
         </header>
         <main>
-            <div class="kuponi">
+            <div class="konobari">
                 <div class="grid">
-                    <div class="card" style="background-image:url(../assets/konobar.jpg);">
-                        <div class="card-content">
-                            <h2 class="card-title">Marko Savic</h2>
-                            <p class="card-body">
-                                Telefon: +38162626262 <br>
-                                email: marko-savic@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card" style="background-image:url(../assets/konobarka.webp);">
-                        <div class="card-content">
-                            <h2 class="card-title">Nevenka Nevenkic</h2>
-                            <p class="card-body">
-                                Telefon: +38162626262 <br>
-                                email: nevenkaNevenkic@gmail.com
-                            </p>
-                        </div>
-                    </div>
                     
                 </div>
             </div>
-            <div id="my-modal" class="modal">
-                <div class="modal-content">
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content" class="modal-content">
                   <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Kreiranje Dogadjaja</h2>
+                    <span id="close-create" class="close">&times;</span>
+                    <h2>Kreiranje Konobara</h2>
                   </div>
                   <div class="modal-body">
                     <div class="modal-form-create">
@@ -183,19 +173,19 @@
             </div>
             
             <div id="delete-modal" class="modal">
-                <div class="modal-content">
+                <div id="delete-modal-content" class="modal-content">
                   <div class="modal-header">
-                    <span class="close close-del">&times;</span>
-                    <h2>Brisanje artikla</h2>
+                    <span id="close-del" class="close close-del">&times;</span>
+                    <h2>Brisanje konobara</h2>
                   </div>
                     <div class="modal-body">
                         <div class="modal-form-del">
                             <div class="modal-del-title">
-                                <h1>Da li ste sigurni da zelite da obrisete ovaj artikal?</h1>
+                                <h1>Da li ste sigurni da zelite da obrisete ovog konobara?</h1>
                             </div>
                             <div class="modal-del-info">
-                                <h2>Upisite naziv artikla da bi potvrdili akciju brisanja</h2>
-                                <input type="text" placeholder="Amstel">
+                                <h2>Upisite naziv konobara da bi potvrdili akciju brisanja</h2>
+                                <input id="modal-del-input" type="text" placeholder="Amstel">
                             </div>
                             <div class="button-div">
                                 <div class="button">
@@ -209,7 +199,7 @@
                   </div>
                 </div>
             </div>
-            <script src="modal.js"></script>
+            <!-- <script src="modal.js"></script> -->
         </main>
     </div>
     
