@@ -20,9 +20,12 @@
 .card-header{
     padding: 1.5rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     
+}
+.card-header > *{
+    margin-right: 1rem;
 }
 .sm-button{
     background: var(--main-color);
@@ -31,11 +34,6 @@
     font-size: .8rem;
     padding: .5rem;
     border: 1px solid var(--main-color);
-    cursor: pointer;
-    margin-right: 0.5rem;
-}
-.sm-button >*{
-    cursor: pointer;
 }
 table {
     border-collapse: collapse;
@@ -59,6 +57,7 @@ td{
     padding-bottom: 0.5rem;
     font-size: large;
     font-weight: 700;
+    text-align: center;
 }
 thead td{
     font-weight: 1000;
@@ -78,28 +77,11 @@ thead td{
     align-items: center;
     
 }
+td{
+    border:1px solid var(--main-color) ;
+}
 
-tbody tr:hover{
-    background: var(--main-color);
-}
-tbody tr:hover td{
-    color: #fff;
-}
-td .sm-button{
-    background: #fff;
-    border-radius: 10px;
-    color: var(--main-color);
-    font-size: .8rem;
-    padding: .5rem;
-    border: 1px solid var(--main-color);
-    visibility: visible;
-}
-tr:hover .sm-button{
-    visibility: visible;
-    background: var(--main-color);
-    color: #fff;
-    border: 1px solid #fff;
-}
+
 .card-new{
     border-style: solid;
     border-width: 3px;
@@ -118,8 +100,71 @@ tr:hover .sm-button{
     margin-left: 1rem;
     margin-right: 1rem;
 }
-
-tbody>tr>td:last-child{
-    text-align: end;
+#kat-toggle{
+    display: none;
+}
+#kat-toggle:checked + .card-body{
+    display: none;
+}
+#kat-toggle1{
+    display: none;
+}
+#kat-toggle1:checked + .card-body{
+    display: none;
+}
+#kat-toggle2{
+    display: none;
+}
+#kat-toggle2:checked + .card-body{
+    display: none;
+}
+#kat-toggle3{
+    display: none;
+}
+#kat-toggle3:checked + .card-body{
+    display: none;
+}
+.td-mul-div{
+    border-bottom: 1px solid #f0f0f0;
+}
+.add-bar{
+    justify-content: center;
+}
+.search-bar {
+    justify-self: flex-end;
+    padding: 6px;
+    border:  2px solid var(--main-color);
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+.card-konobari{
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.konobari{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    cursor: move;
+}
+.konobar:hover{
+    opacity: 0.5;
 }
 
+.draggable{
+    margin:0.5rem;
+    padding: 0.5rem;
+    color: #fff;
+    background: gray;
+    border-radius: 15px;
+
+}
+
+.container{
+    
+}
+.draggable.dragging {
+    opacity: .5;
+  }

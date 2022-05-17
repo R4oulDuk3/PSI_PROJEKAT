@@ -31,6 +31,7 @@
     padding: .5rem;
     border: 1px solid var(--main-color);
     cursor: pointer;
+    margin-right: 0.5rem;
 }
 .sm-button>*{
     cursor: pointer;
@@ -57,6 +58,9 @@ td{
     padding-bottom: 0.5rem;
     font-size: large;
     font-weight: 700;
+}
+td >*{
+    padding-left: 0.5rem;
 }
 thead td{
     font-weight: 1000;

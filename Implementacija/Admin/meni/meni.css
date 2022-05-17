@@ -31,11 +31,6 @@
     font-size: .8rem;
     padding: .5rem;
     border: 1px solid var(--main-color);
-    cursor: pointer;
-    margin-right: 0.5rem;
-}
-.sm-button >*{
-    cursor: pointer;
 }
 table {
     border-collapse: collapse;
@@ -118,7 +113,30 @@ tr:hover .sm-button{
     margin-left: 1rem;
     margin-right: 1rem;
 }
-
+#kat-toggle{
+    display: none;
+}
+#kat-toggle:checked + .card-body{
+    display: none;
+}
+#kat-toggle1{
+    display: none;
+}
+#kat-toggle1:checked + .card-body{
+    display: none;
+}
+#kat-toggle2{
+    display: none;
+}
+#kat-toggle2:checked + .card-body{
+    display: none;
+}
+#kat-toggle3{
+    display: none;
+}
+#kat-toggle3:checked + .card-body{
+    display: none;
+}
 tbody>tr>td:last-child{
     text-align: end;
 }
