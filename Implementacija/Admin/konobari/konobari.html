@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="../css-admin-skelet/header.css">
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="konobari.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="ucitavanje-konobari.js"></script>
     <title>Konobari</title>
 </head>
 <body>
@@ -56,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../kuponi/kuponi.html">
+                        <span class="las la-users"></span>
+                        <span>Kuponi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../izvestaji/izvestaji.html">
                         <span class="las la-users"></span>
                         <span>Izvestaj</span>
@@ -79,11 +88,11 @@
             </div>
             <div class="header-right">
                 
-                <div class="button">
-                    <a href="">Dodaj konobara</a>
+                <div id="modal-create-btn" class="button">
+                    <a href="#">Dodaj konobara</a>
                 </div>
                 <div class="button">
-                    <a href="">Pregled rasporeda</a>
+                    <a href="rasporedi.html">Pregled rasporeda</a>
                 </div>        
                 <div class="user-wrapper">
                     <div>
@@ -95,27 +104,102 @@
             
         </header>
         <main>
-            <div class="kuponi">
+            <div class="konobari">
                 <div class="grid">
-                    <div class="card" style="background-image:url(../assets/konobar.jpg);">
-                        <div class="card-content">
-                            <h2 class="card-title">Marko Savic</h2>
-                            <p class="card-body">
-                                
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card" style="background-image:url(../assets/konobarka.webp);">
-                        <div class="card-content">
-                            <h2 class="card-title">Nevenka Nevenkic</h2>
-                            <p class="card-body">
-                                
-                            </p>
-                        </div>
-                    </div>
                     
                 </div>
             </div>
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-create" class="close">&times;</span>
+                    <h2>Kreiranje Konobara</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-form-create">
+                        <div class="picture-space">
+                            <div>
+                                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
+                            <div id="display_image">
+            
+                            </div>
+                            <script src="modal-image.js"></script>
+                            </div>
+                        </div>
+                        <div class="input-div">
+                            <table class="input-table">
+                                <thead>
+                                    <tr>
+                                        <td>Naziv Konobara</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Korisnicnko ime</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-mail</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefon</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lozinka</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Potvrda lozinke</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Dodaj</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            
+            <div id="delete-modal" class="modal">
+                <div id="delete-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-del" class="close close-del">&times;</span>
+                    <h2>Brisanje konobara</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovog konobara?</h1>
+                            </div>
+                            <div class="modal-del-info">
+                                <h2>Upisite naziv konobara da bi potvrdili akciju brisanja</h2>
+                                <input id="modal-del-input" type="text" placeholder="Amstel">
+                            </div>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Potvrdi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            <!-- <script src="modal.js"></script> -->
         </main>
     </div>
     

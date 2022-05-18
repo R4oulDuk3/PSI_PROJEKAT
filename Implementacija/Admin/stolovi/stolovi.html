@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="../css-admin-skelet/header.css">
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="stolovi.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="ucitavanje_stolovi.js"></script>
     <title>Stolovi</title>
 </head>
 <body>
@@ -53,6 +56,12 @@
                     <a href="../dogadjaji/dogadjaji.html">
                         <span class="las la-users"></span>
                         <span>Dogadjaji</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../kuponi/kuponi.html">
+                        <span class="las la-users"></span>
+                        <span>Kuponi</span>
                     </a>
                 </li>
                 <li>
@@ -97,7 +106,7 @@
             </div>
             <div class="stolovi">
                 <div class="grid">
-                    <div class="projects">
+                    <!-- <div class="postavka">
                         <div class="card">
                             <div class="card-header">
                                 <h2>Postavka 1</h2>
@@ -105,7 +114,7 @@
                                     <button class="sm-button">
                                         <span class="las la-exchange-alt"></span>
                                     </button>
-                                    <button class="sm-button">
+                                    <button class="sm-button modal-btn-del">
                                         <span class="las la-times"></span>
                                     </button>
                                 </div>
@@ -157,283 +166,84 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="button">
-                                        <a href="">Dodaj sto</a>
+                                    <div class="button modal-btn">
+                                        <a href="#">Dodaj sto</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="projects">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Postavka 1</h2>
-                                <div class="buttons">
-                                    <button class="sm-button">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Naziv stolova</td>
-                                                <td colspan="2">Broj osoba</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="button">
-                                        <a href="">Dodaj sto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projects">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Postavka 1</h2>
-                                <div class="buttons">
-                                    <button class="sm-button">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Naziv stolova</td>
-                                                <td colspan="2">Broj osoba</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="button">
-                                        <a href="">Dodaj sto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projects">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Postavka 1</h2>
-                                <div class="buttons">
-                                    <button class="sm-button">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Naziv stolova</td>
-                                                <td colspan="2">Broj osoba</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="button">
-                                        <a href="">Dodaj sto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projects">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Postavka 1</h2>
-                                <div class="buttons">
-                                    <button class="sm-button">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Naziv stolova</td>
-                                                <td colspan="2">Broj osoba</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="button">
-                                        <a href="">Dodaj sto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
+                    
+                    
+                    
+                    
                 </div>
             </div>
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content'" class="modal-content">
+                  <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Kreiranje stolova</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-form-create">
+                        <div class="input-div">
+                            <table class="input-table">
+                                <thead>
+                                    <tr>
+                                        <td>Naziv stola</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Broj osoba</td>
+                                        <td><input type="number" min="1" max="15" id="myPercent"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Dodaj</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            
+            <div id="delete-modal" class="modal">
+                <div id="delete-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span class="close close-del">&times;</span>
+                    <h2>Brisanje artikla</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovu postavku?</h1>
+                            </div>
+                            <div  class="modal-del-info">
+                                <h2>Upisite naziv postavke da bi potvrdili akciju brisanja</h2>
+                                <input id="modal-del-input" type="text" placeholder="">
+                            </div>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Potvrdi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            <script src="modal.js"></script>
         </main>
     </div>
     

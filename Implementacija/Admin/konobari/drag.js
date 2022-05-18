@@ -1,15 +1,28 @@
-const draggables = document.querySelectorAll('.draggable')
+
+
+
+function initializeDrag(){
+  console.log("check")
+  const draggables = document.querySelectorAll('.draggable')
 const containers = document.querySelectorAll('.container')
+console.log('check')
 dragged_copy=null
 draggables.forEach(draggable => {
+  
   draggable.addEventListener('dragstart', () => {
-    dragged_copy=draggable.cloneNode(true)
+    let new_copy=draggable.cloneNode(true)
+    new_copy.querySelector('.sm-button').addEventListener('click',()=>{
+      new_copy.remove()
+    })
+    dragged_copy=new_copy
     draggable.classList.add('dragging')
-
   })
+
+  
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
+    dragged_copy.querySelector('.sm-button').style.display='block'
     dragged_copy=null
   })
 })
@@ -19,6 +32,14 @@ containers.forEach(container => {
     e.preventDefault()
     const afterElement = getDragAfterElement(container, e.clientY)
     const draggable = document.querySelector('.dragging')
+    let id=dragged_copy.getAttribute('id')
+    console.log("DRAGGED  "+id)
+    let alreadyHas=false;
+    container.childNodes.forEach(konobar=>{
+      const kId=konobar.getAttribute('id')
+      if(kId===id)alreadyHas=true
+    })
+    if(alreadyHas)return
     if (afterElement == null) {
       container.appendChild(dragged_copy)
     } else {
@@ -26,6 +47,9 @@ containers.forEach(container => {
     }
   })
 })
+
+}
+
 
 
 function getDragAfterElement(container, y) {
@@ -40,4 +64,9 @@ function getDragAfterElement(container, y) {
       return closest
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
+}
+
+
+function delete_elem(){
+
 }

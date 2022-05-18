@@ -6,6 +6,7 @@ header{
     position: fixed;
     left: var(--sidebar-width);
     width: var(--main-width);
+    
     top:0;
     z-index: 100;
     background-color: #fff;

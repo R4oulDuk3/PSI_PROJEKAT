@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css-admin-skelet/header.css">
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="rasporedi.css">
     <title>Rasporedi</title>
 </head>
@@ -91,26 +92,26 @@
         <main>
             <div class="add-bar">
                 <div class="h-button">
-                    <a href="">Dodaj raspored</a>
+                    <a href="novi-raspored.html">Dodaj raspored</a>
                 </div>
             </div>
-            <div class="kategorije">
-                <div class="grid">
-                    <div class="kategorija">
+            <div class="rasporedi">
+                <div class="grid" id="grid">
+                    <div class="raspored">
                         <div class="card">
                             <div class="card-header">
                                 <h2>Raspored 13/04/2022 - 20/04/2022</h2>
                                 <div class="buttons">
-                                    <button class="sm-button">
+                                    <!-- <button class="sm-button">
                                         <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button">
+                                    </button> -->
+                                    <!-- <button class="sm-button modal-btn-del">
                                         <span class="las la-times"></span>
-                                    </button>
+                                    </button> -->
                                     
                                     <button class="sm-button">
                                         <label for="kat-toggle">
-                                            <span class="las la-sort-down"></span>
+                                            <span class="las la-sort-down" "></span>
                                         </label>
                                     </button>
                                 </div>
@@ -118,7 +119,7 @@
                             <input type="checkbox" name="" id="kat-toggle">
                             <div class="card-body">
 
-                                <div class="table-responsive">
+                                <div class="table-responsive" >
                                     <table>
                                         <thead>
                                             <tr>
@@ -173,20 +174,41 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="buttons">
-                                        <div class="button">
-                                            <a href="">Dodaj stavku</a>
-                                        </div>
-                                        <div class="button">
-                                            <a href="">Azuriraj stranicu</a>
-                                        </div>
-                                    </div>
+    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="delete-modal" class="modal">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <span class="close close-del">&times;</span>
+                    <h2>Brisanje artikla</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovaj raspored?</h1>
+                            </div>
+                            <div class="modal-del-info">
+                                <h2>Upisite vremesnki period rasporeda da bi potvrdili akciju brisanja</h2>
+                                <input type="text" placeholder="13/04/2022 - 20/04/2022">
+                            </div>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Potvrdi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            <script src="modal.js"></script>
         </main>
     </div>
     

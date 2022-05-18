@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="../css-admin-skelet/header.css">
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="kuponi.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="ucitavanje_kuponi.js"></script>
     <title>Kuponi</title>
 </head>
 <body>
@@ -56,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../kuponi/kuponi.html">
+                        <span class="las la-users"></span>
+                        <span>Kuponi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../izvestaji/izvestaji.html">
                         <span class="las la-users"></span>
                         <span>Izvestaj</span>
@@ -78,6 +87,9 @@
                 <input type="search" name="" id="">
             </div>
             <div class="header-right">
+                <div id="modal-create-btn" class="button">
+                    <a href="#">Kreiraj kupon</a>
+                </div>
                 <div class="user-wrapper">
                     <div>
                         <h4>Jhon Doe</h4>
@@ -90,7 +102,7 @@
         <main>
             <div class="kuponi">
                 <div class="grid">
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-content">
                             <h2 class="card-title">Popust pivo</h2>
                             <p class="card-body">
@@ -98,8 +110,86 @@
                                 Eaque cupiditate perspiciatis quia
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                     
+                </div>
+            </div>
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-create" class="close">&times;</span>
+                    <h2>Kreiranje Konobara</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-form-create">
+                        <div class="picture-space">
+                            <div>
+                                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
+                            <div id="display_image">
+            
+                            </div>
+                            <script src="modal-image.js"></script>
+                            </div>
+                        </div>
+                        <div class="input-div">
+                            <table class="input-table">
+                                <thead>
+                                    <tr>
+                                        <td>Naziv Kupona</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Opis</td>
+                                        <td><textarea name="" id="" cols="20" rows="5"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cena</td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Kreiraj</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            
+            <div id="delete-modal" class="modal">
+                <div id="delete-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-del" class="close close-del">&times;</span>
+                    <h2>Brisanje konobara</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovog konobara?</h1>
+                            </div>
+                            <div class="modal-del-info">
+                                <h2>Upisite naziv konobara da bi potvrdili akciju brisanja</h2>
+                                <input id="modal-del-input" type="text" placeholder="Amstel">
+                            </div>
+                            <div class="button-div">
+                                <div class="button">
+                                    <a href="">Potvrdi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
                 </div>
             </div>
         </main>
