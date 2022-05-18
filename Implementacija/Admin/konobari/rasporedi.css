@@ -69,6 +69,7 @@ thead td{
 .table-responsive{
     width: 100%;
     overflow: auto;
+    padding: 1rem;
 
 }
 .button{
