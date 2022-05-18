@@ -3,8 +3,16 @@
     background: white;
     padding:1rem;
     border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 1.5rem;
 }
 .add-bar >*{
-    padding-right: 1rem;
-    padding-left: 1rem;
+    margin: 5px
+}
+@media only screen and (max-width: 1200px){
+    .add-bar{
+        flex-direction: column;
+    }
 }

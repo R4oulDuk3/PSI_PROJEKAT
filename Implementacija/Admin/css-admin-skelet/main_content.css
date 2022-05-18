@@ -7,7 +7,8 @@
 main {
     
     padding: 2rem 1.5rem;
-    background: #f1f5f9;
+    /* background: #f1f5f9; */
     min-height: calc(100vh - 90px);
     margin-top: 3.5rem;
 }
+html {background-color: #f1f5f9;}

@@ -36,6 +36,7 @@ header label span{
 .user-wrapper{
     display: flex;
     align-items: center;
+    margin-left: 1rem;
 }
 .user-wrapper img{
     border-radius: 50%;
@@ -68,4 +69,25 @@ header label span{
     margin-right: auto;
     font-size: large;
     border-radius: 15px;
+}
+#menu-btn{
+    display: inline;
+}
+
+
+@media only screen and (max-width: 1200px){
+    .search-wrapper{
+        display: none;
+        padding: .5rem;
+        border: none;
+        outline: none;
+    }
+    header{
+        display: flex;
+        justify-content: left;
+    }
+    #menu-btn{
+        display: none;
+    }
+
 }
