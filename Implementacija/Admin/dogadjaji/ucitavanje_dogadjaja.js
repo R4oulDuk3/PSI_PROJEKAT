@@ -1,14 +1,25 @@
 
+import {uploadImage} from '../index.js'
+console.log("checkkkkk")
 var data = [
-    {
+    {   id: "123##1231##12",
         name: 'Zurka 1',
         desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
+        imgPath: '../assets/zurkeNajave.png'
+    },
+    {   id: "123abc125d",
+        name: 'Zurka 1',
+        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
+        imgPath: '../assets/zurkeNajave.png'
+    }
+]
+
+var postavke = [
+    {
+        name:"postavka1"
     },
     {
-        name: 'Zurka 1',
-        desc: ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        imgName: '../assets/zurkeNajave.png'
+        name:"postavka2"
     }
 ]
 
@@ -41,21 +52,49 @@ $(document).ready(function (){
         }
                   
       });
-    
+      $('#modal-del-input').on('input',()=>{
+        console.log("check")
+        checkIfMathcing()
+    })
+    $('#create-zurka').on('click',createZurka)
+    $('#input-datum').attr('min',new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
+
 
 })
+
+function checkIfMathcing(){
+    if($('#modal-del-input').val()==$('#id').text()){
+        console.log("poklapa se")
+        $("#del-button-confirm").prop('disabled', false);
+    }else{
+        $("#del-button-confirm").prop('disabled', true);
+    }
+}
+
 function openDeleteModal(placeholder){
     modalDeleteOpen=true
     ignoreDoc=true
     console.log(placeholder)
     $('#delete-modal').css('display','inline-block')
     $('#modal-del-input').attr('placeholder',placeholder)
+    $('#id').text(placeholder)
+    $("#del-button-confirm").prop('disabled', true);
+    checkIfMathcing()
 }
 function openCreateModal(){
+    resetErrors()
+    //DOHVATI POSTAVKE
+    $('#postavke').empty()
+    for(let postavka of postavke){
+        $('#postavke').append($('<option value="'+postavka.name+'" style="font-size:large;font-weight:700">'+postavka.name+'</option>'))
+    }
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
+    
 }
+
+
 function closeModal(){
     console.log("close modal")
     ignoreDoc=false
@@ -64,9 +103,53 @@ function closeModal(){
     $('#delete-modal').css('display','none')
     $('#create-modal').css('display','none')
 }
+function deleteZurka(){
+    if( $('#id').text()== $('#modal-del-input').val()){
+        id = $('#id').text();
+        // TODO: SEND HTTP DELETE
+    }
+}
+function resetErrors(){
+    $('#err-naslov').text("")
+    $('#err-datum').text("")
+}
+function createZurka(){
+    console.log("check")
+    let naslov = $('#input-naslov').val()
+    let opis = $('#input-opis').val()
+    let datum = $('#input-datum').val()
+    let postavka = $('#postavke').val()
+    let image = uploaded_image
+    let errExist=false
+    console.log(naslov)
+    console.log(opis)
+    console.log(datum)
+    console.log(postavka)
+    console.log(uploaded_image)
+    console.log(typeof image)
+    uploadImage(uploaded_image_url,'images/png')
+    if(naslov==""){
+        $('#err-naslov').text("Nije unet naslov")
+    }
+    if(!datum){
+        $('#err-datum').text("Nije unet datum")
+    }
+    if(errExist) return
+    let zurka = { 
+        name: naslov,
+        desc: opis, 
+        imgPath: '../assets/zurkeNajave.png',
+        postavka: postavka,
+
+    }
+    
+}
+
 
 
 function popuni(grid,data){
+    // TODO: SEND HTTP GET ALL
+
     data.forEach((zurka)=>{
         let karta = $('<div></div>').addClass('card');
         let dogadjaj = $("<div></div>").addClass('card-content');
@@ -74,13 +157,13 @@ function popuni(grid,data){
         let opis = $("<p></p>").addClass('card-body').append(zurka.desc);
         let dugme = $("<a></a>").attr('href','#').addClass('button-card').addClass('modal-btn-del').append('Obrisi dogadjaj');
         dugme.on('click',()=>{
-            openDeleteModal(zurka.name)
+            openDeleteModal(zurka.id)
         })
         dogadjaj.append(naslov);
         dogadjaj.append(opis);
         dogadjaj.append(dugme);
         karta.append(dogadjaj);
-        karta.css('background-image',"url("+zurka.imgName+")");
+        karta.css('background-image',"url("+zurka.imgPath+")");
         var img = new Image;
         img.src = zurka.imgName
         var height = img.height;
@@ -89,7 +172,7 @@ function popuni(grid,data){
         grid.append(karta)
         //grid.append($('<div></div>')); 
     })
-}
+    }
 
 
 

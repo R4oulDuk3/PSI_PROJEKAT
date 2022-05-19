@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
     <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="dogadjaji.css">
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="ucitavanje_dogadjaja.js"></script>
+    <script type="module" src="ucitavanje_dogadjaja.js"></script>
     <title>Dogadjaji</title>
 </head>
 <body>
@@ -116,7 +117,7 @@
           </div>
           <div class="modal-body">
             <div id="create-modal-content" class="modal-form-create">
-                <div class="picture-space">
+                <div class="picture-space" id="pic-space">
                     <div>
                         <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
                     <div id="display_image">
@@ -130,11 +131,16 @@
                         <thead>
                             <tr>
                                 <td>Nalov dogajdaja</td>
-                                <td><input type="text"></td>
+                                <td><input type="text" id="input-naslov"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h4 id="err-naslov" class="error-msg"></h4>
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>Tip dogadjaja</td>
                                 <td><div class="radio-div">
                                     <div class="radio">
@@ -144,19 +150,24 @@
                                         <input type="radio" name="" id="">Takmicenje
                                     </div>
                                 </div></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>Opis dogadjaja</td>
-                                <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
+                                <td><textarea name="" cols="30" rows="3" id="input-opis"></textarea></td>
                             </tr>
                             <tr>
-                                <td>Datum Dogadjaja</td>
-                                <td><input type="date" name="" id=""></td>
+                                <td><div>Datum Dogadjaja</div></td>
+                                <td><input type="datetime-local" name="" id="input-datum"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h4 id="err-datum" class="error-msg"></h4>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label for="postavke">Izbor postavke:</label></td>
                                 <td>
-                                    <select name="postavke" id="postavke">
+                                    <select name="postavke" id="postavke" style="font-size:large;font-weight:700">
                                         <option value="Postavka1">Postavka1</option>
                                         <option value="Postavka2">Postavka2</option>
                                         <option value="Postavka3">Postavka3</option>
@@ -167,9 +178,9 @@
                         </tbody>
                     </table>
                     <div class="button-div">
-                        <div class="button">
-                            <a href="">Sacuvaj</a>
-                        </div>
+                        <button class="button" id="create-zurka">
+                            Sacuvaj
+                        </button>
                     </div>
                 </div>
             </div>
@@ -191,13 +202,15 @@
                         <h1>Da li ste sigurni da zelite da obrisete ovaj dogadjaj?</h1>
                     </div>
                     <div class="modal-del-info">
-                        <h2>Upisite naziv dogadjaja da bi potvrdili akciju brisanja</h2>
-                        <input type="text" placeholder="Zurka 1">
+                        <h2>Upisite id dogadjaja da bi potvrdili akciju brisanja</h2>
+                        <h2 id="id"></h2>
+                        <input type="text" id="modal-del-input" >
+                        <h4 id="del-error"></h2>
                     </div>
                     <div class="button-div">
-                        <div class="button">
-                            <a href="">Potvrdi</a>
-                        </div>
+                        <button class="button" id="del-button-confirm">
+                            Potvrdi
+                        </button>
                     </div>
                 </div>
             </div>
