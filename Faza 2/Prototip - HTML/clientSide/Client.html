@@ -18,7 +18,7 @@
         <nav class="navbar">
             <a href="#pocetna">Pocetna</a>
             <a href="#dogadjaji">Dogadjaji</a>
-            <a href="#meni">Meni</a>
+            <a href="meniCl/meni.html">Meni</a>
             <a href="#kontakt">Kontakt</a>
             <a href="events/dogadjaji.html">Prijava za dogadjaj</a>
             <a href="cupons/kuponi.html">Moji Kuponi</a>
@@ -79,6 +79,8 @@
 
     </section>
 
+
+    <!--
     <section class="menu" id="meni">
         <h1 class="heading"> Specijalna <span>ponuda</span></h1>
 
@@ -148,7 +150,7 @@
 
 
     </section>
-
+-->
 <!-- Kraj Menija -->
 
 <section class="contact" id="kontakt">
@@ -164,13 +166,21 @@
             </div>
             <div class="item">
                 <span class="fas fa-phone"></span>
-                <label for="brojTel" class="label"> Broj telefona: </label><span class="tooltip"><button class="btn" onclick="copyText()" value="+381 64 3424520" onmouseout="outFunc()" id="brojTel"><span class="tooltiptext" id="myTooltip">kopiraj</span>
-                    +381 64 3424520</button></span>
+                <label for="brojTel" class="label"> Broj telefona: </label>
+                <span class="tooltip">
+                    <button class="btn" onclick="copyText(this.id)" value="+381 64 3424520" onmouseout="outFunc()" id="brojTel">
+                    <span class="tooltiptext" id="myTooltip">Kopiraj</span>
+                    +381 64 3424520</button>
+                </span>
             </div>
             <div class="item">
                 <span class="fas fa-envelope"></span>
-            <label for="mailAdr" class="label"> E-mail adresa: </label><span class="tooltip"><button class="btn" onclick="copyTextAdr()" onmouseout="outFunc()" value="filmCaffe69@yahoomail.com" id="mailAdr"><span class="tooltiptext" id="myTooltip">kopiraj</span>
-                filmCaffe69@yahoomail.com</button></span>
+                <label for="mailAdr" class="label"> E-mail adresa: </label>
+                <span class="tooltip">
+                    <button class="btn" onclick="copyText(this.id)" value="filmCaffe69@yahoomail.com" onmouseout="outFunc()" id="mailAdr">
+                    <span class="tooltiptext" id="myTooltip">Kopiraj</span>
+                    filmCaffe69@yahoomail.com</button>
+            </span>
             </div>
         </div>
     </div>

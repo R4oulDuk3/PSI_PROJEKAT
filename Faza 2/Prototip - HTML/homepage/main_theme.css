@@ -176,66 +176,6 @@ section{
 }
 
 
-.menu .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap: 1.5rem;
-}
-
-.menu .box-container .box{
-    text-align: center;
-    border: var(--border);
-    padding: 2rem;
-}
-
-.menu .box-container .box .image{
-    padding: 2.5rem  0;
-}
-
-.menu .box-container .box .image img{
-    height: 25rem;
-}
-
-.menu .box-container .box .content h3{
-    color: #fff;
-    font-size: 2.5rem;
-}
-
-.menu .box-container .box .content .stars{
-    padding: 1.5rem;
-}
-
-
-.menu .box-container .box .content .stars{
-    padding: 1.5rem;
-}
-
-.menu .box-container .box .content .stars{
-    padding: 1.7rem;
-    color: var(--main-color);
-}
-
-.menu .box-container .box .content .price{
-    color: #fff;
-    font-size: 2.5rem;
-}
-
-.menu .box-container .box .content .price span{
-    text-decoration: line-through;
-    font-weight: lighter;
-    font-size: 1.5rem;
-}
-
-.menu .index{
-    margin-top: 1rem;
-    padding: 2rem;
-    text-align: center;
-    border: var(--border);
-}
-.menu .index img{
-    height: 80rem;
-    width: 100%;
-}
 .contact .row{
       display: flex;
       background: var(--black);

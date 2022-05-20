@@ -8,33 +8,17 @@ window.onscroll=() =>{
     navbar.classList.remove('active');
 }
 
-function copyText() {
+function copyText(id) {
     /* Get the text field */
-    var copyText = document.getElementById("brojTel");
-  
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    let copyText = document.getElementById(id).value;
   
      /* Copy the text inside the text field */
-    navigator.clipboard.writeText(copyText.value);
-  
+    navigator.clipboard.writeText(copyText);
     /* Alert the copied text */
-    var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "Kopiran: " + copyText.value;
+    let tooltip = document.getElementById("myTooltip");
+    tooltip.textContent = "Kopiran";
   }
-
-  function copyTextAdr() {
-  var copyText = document.getElementById("mailAdr");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(copyText.value);
-  
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Kopiran: " + copyText.value;
-  }
-
   function outFunc() {
     var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "kopiraj";
+    tooltip.textContent = "Kopiraj";
   }

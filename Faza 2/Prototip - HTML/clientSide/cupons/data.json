@@ -1,0 +1,38 @@
+[
+    {
+        "idcupon": 1,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    },
+    {
+        "idcupon": 2,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    },
+    {
+        "idcupon": 3,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    },
+    {
+        "idcupon": 4,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    },
+    {
+        "idcupon": 5,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    },
+    {
+        "idcupon": 6,
+        "exparationdate": "2022-12-17T00:00:00Z",
+        "redeemed": 0,
+        "description": "this is a coupon"
+    }
+]

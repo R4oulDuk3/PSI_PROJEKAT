@@ -1,0 +1,27 @@
+[{"naziv": "gazirano","stavke": [
+        {"idmeni": 1,"meniproduct": "cocacola","price": "190.00","amount": "0.50","unit": "ml","akcija": "0%"},
+        {"idmeni": 2,"meniproduct": "fanta","price": "190.00","amount": "0.50","unit": "ml","akcija": "0%"},
+        {"idmeni": 3,"meniproduct": "sprite","price": "190.00","amount": "0.50","unit": "ml","akcija": "20%"}
+    ]
+},
+{
+    "naziv": "Piva",
+    "stavke": [
+        {
+            "idmeni": 4,
+            "meniproduct": "Amstel",
+            "price": "190.00",
+            "amount": "0.50",
+            "unit": "ml",
+            "akcija": "0%"
+        },
+        {
+            "idmeni": 5,
+            "meniproduct": "Lav",
+            "price": "190.00",
+            "amount": "0.50",
+            "unit": "ml",
+            "akcija": "0%"
+        }
+    ]
+}]
