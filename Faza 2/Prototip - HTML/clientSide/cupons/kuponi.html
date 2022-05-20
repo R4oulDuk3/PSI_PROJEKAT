@@ -10,6 +10,7 @@
     <title>
         Film Caffe - Moji Kuponi
     </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 </head>
 <body>
     <header class="header">
@@ -36,7 +37,8 @@
 
     <!-- Kraj headera-->
 
-    <section class="cups">
+
+    <section class="cups" id="kuponi">
         
         <div class="row">
             <div class="form">
@@ -47,133 +49,17 @@
             </div>
         </div>
 
-        <hr>
-        
-        <div class="grid">
-            <div class="card" id="kup1">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                </div>
-            </div>
+    <!--QR Kod-->
+    <div class="qrkod">
 
-
-            <div class="card" id="kup2">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                </div>
-            </div>
-
-            <div class="card" id="kup3">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                </div>
-            </div>
-
-            <div class="card" id="kup4">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                </div>
-            </div>
-            
-        </div>
-
-       <!-- <div class="grid-shop" id="purch-invis">
-            <div class="card" id="not1">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                   <button class="btn" onclick="displayForm()">Kupi kupon</button>
-                    <div class="form-popup" id="popForm">
-                        <form action="/action_page.php" class="form-container">
-                          <h2>Potvrda</h2>
-                          <label><b>Zelim da kupim izabrani kupon</b></label>
-                          <button type="submit" class="btn">Da</button>
-                          <button type="button" class="btn cancel" onclick="closeForm()">Ne</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="card" id="not2">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                    <button class="btn" onclick="displayForm()">Kupi kupon</button>
-                    <div class="form-popup" id="popForm">
-                        <form action="/action_page.php" class="form-container">
-                          <h2>Potvrda</h2>
-                          <label><b>Zelim da kupim izabrani kupon</b></label>
-                          <button type="submit" class="btn">Da</button>
-                          <button type="button" class="btn cancel" onclick="closeForm()">Ne</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" id="not3">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                    <button class="btn" onclick="displayForm()">Kupi kupon</button>
-                    <div class="form-popup" id="popForm">
-                        <form action="/action_page.php" class="form-container">
-                          <h2>Potvrda</h2>
-                          <label><b>Zelim da kupim izabrani kupon</b></label>
-                          <button type="submit" class="btn">Da</button>
-                          <button type="button" class="btn cancel" onclick="closeForm()">Ne</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" id="not4">
-                <div class="card-content">
-                    <h2 class="card-title">Popust pivo</h2>
-                    <p class="card-body">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Eaque cupiditate perspiciatis quia
-                    </p>
-                    <button class="btn" onclick="displayForm()">Kupi kupon</button>
-                    <div class="form-popup" id="popForm">
-                        <form action="/action_page.php" class="form-container">
-                          <h2>Potvrda</h2>
-                          <label><b>Zelim da kupim izabrani kupon</b></label>
-                          <button type="submit" class="btn">Da</button>
-                          <button type="button" class="btn cancel" onclick="closeForm()">Ne</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-        </div>-->
-
-    </section>
+        <img id="qrKodIMG" src="../../assets/qrTEMP.png" alt="kod">
+        <span class="verical-center">
+            <button class="btn" onclick="clearQR()">Ponisti</button>
+        </span>
+    </div>
+    <hr>
+    <!-- Qr kod end-->    
+</section>
 
 <section class="footer">
 

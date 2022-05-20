@@ -66,6 +66,28 @@
     background:none;
 }
 
+.cups .qrkod{
+
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative; 
+    display: none;
+
+}
+
+.cups .qrkod img{
+    height: 180px;
+    width: 180px;
+}
+
+.cups .qrkod .btn{
+    margin: 0 1rem;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
 .card-body table{
     width: 100%;
 
@@ -80,28 +102,17 @@ hr{
 .grid{
     
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 4fr));
     grid-gap: 1.5rem;
     align-items: center;
     justify-items: center;
    
 }
-/*
-.grid-shop{
-    
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    grid-gap: 1.5rem;
-    align-items: center;
-    justify-items: center;
-   
-}*/
 
 
 .card{
     color: #fff;
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/no_img.png);
-    background-size: cover;
+    
     padding-top: 7rem;
     max-width: 35ch;
     border-radius: 0.5rem;
@@ -113,24 +124,6 @@ hr{
     letter-spacing: 0;
 }
 /*dodavanje slika kuponima*/
-#kup1{
-    background-image:/*linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)),*/ url(../../assets/beer.jpg);
-    background-size: cover;
-}
-#kup2{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/no_img.png);
-    background-size: cover;
-}
-
-#kup3{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/beer.jpg);
-    background-size: cover;
-}
-#kup4{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/no_img.png);
-    background-size: cover;
-}
-
 
 .card:hover{
     transform: scale(1.05);
@@ -145,7 +138,7 @@ hr{
     --padding: 1.5rem;
     padding: var(--padding);
     background:  linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(25,25,25,1) 100%);
-    transform: translateY(60%);
+    transform: translateY(40%);
     transition: transform 500ms ease;
 }
 .card-content p > *{
@@ -182,93 +175,9 @@ hr{
     font-weight: 600;
     color: rgb(255,255,255/0.8);
 }
-/*
-.grid-shop .card{
-    max-height: 20rem;
-    padding-top: 7rem;
-}
 
-.grid-shop .card:hover{
-    padding-top: 4rem;
-}
-
-.grid-shop .card-body{
-    padding-top: 1rem;
-}
-
-.grid-shop .btn{
-    margin-top: 0.5;
-    margin-bottom: 0.5;
-}
-
-
-
-#purch-invis {
-    opacity: 0;
-    transition: visibility 0s 2s, opacity 2s linear; 
-    display: none; 
-}
-#purch-vis{
-    opacity: 1;
-    transition: opacity 6s linear;   
-    display: grid; 
-}
-
-#bought-invis {
-    opacity: 0;
-    transition: visibility 0s 2s, opacity 2s linear; 
-    display: none; 
-}
-#bought-vis{
-    opacity: 1;
-    transition: opacity 6s linear;   
-    display: grid; 
-}
-*/
 #cuppage{
     color: var(--main-color);
     font-weight: bold;
 }
 
-.form-popup {
-    display: none;  
-    position:absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-
-  }
-  .form-container {
-      
-    max-width: 35ch;
-    height: auto;
-    padding: 2rem;
-    background-color: var(--main-color);
-    color: var(--black);
-    margin-top: -4rem;
-  }
-  
-  .form-container b{
-      text-transform: none;
-  }
-  /* Set a style for the submit/login button */
-  .form-container .btn {
-    background-color: #04AA6D;
-    padding: 1.6rem 2rem;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.8;
-  }
-  
-  /* Add a red background color to the cancel button */
-  .form-container .cancel {
-    background-color: red;
-  }
-  
-  /* Add some hover effects to buttons */
-  .form-container .btn:hover, .open-button:hover {
-    opacity: 1;
-  }

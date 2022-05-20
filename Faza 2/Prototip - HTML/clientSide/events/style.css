@@ -3,6 +3,7 @@
     --black: #13131a;
     --bg: #010103;
     --border:.1rem solid rgba(255,255,255,.3);
+    --padding: 2rem;
 }
 
 
@@ -51,6 +52,7 @@
 
 .evs .row .form .items button{
     margin-left: 20%;
+    
     text-transform: capitalize;
     margin-top: 0;
     margin-right: 3rem;
@@ -75,10 +77,13 @@ hr{
     height: 5px;
 }
 
+#divisor{
+    display: none;
+}
 .grid{
-    
+    padding-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 3fr));
     grid-gap: 1.5rem;
     align-items: center;
     justify-items: center;
@@ -88,31 +93,12 @@ hr{
 
 .card{
     color: #fff;
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/no_img.png);
-    background-size: cover;
-    padding-top: 7rem;
-    max-width: 25ch;
+    
+    padding: 7rem 0rem;
+/*    max-width: 40ch;*/
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
-}
-/*dodavanje slika kuponima*/
-#kup1{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png);
-    background-size: cover;
-}
-#kup2{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png);
-    background-size: cover;
-}
-
-#kup3{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png);
-    background-size: cover;
-}
-#kup4{
-    background-image:linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png);
-    background-size: cover;
 }
 
 
@@ -121,24 +107,29 @@ hr{
 }
 
 .card-title{
-    position: relative;
+    position:relative;
     width: max-content;
+    padding: 0 2rem;
+    
 }
+
+
 
 .card-content{
-    --padding: 1.5rem;
-    padding: var(--padding);
+    
+    padding: 2rem;
+    margin: 0;
+    
     background:  linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(50,50,50,0.5) 100%);
-    transform: translateY(60%);
+    transform: translateY(220%);
     transition: transform 500ms ease;
-}
-.card-content p > *{
-    opacity: 0;
-    transition: opacity 500ms linear;
+    
+    
 }
 
+
 .card:hover .card-content{
-    transform: translateY(0%);
+    transform: translateY(125%);
 }
 .card:hover .card-content > *{
     opacity: 1;
@@ -167,10 +158,10 @@ hr{
     color: rgb(255,255,255/0.8);
 }
 
-.card .btn:hover{
+/*.card .btn:hover{
     letter-spacing: normal;
     width: auto;
-}
+}*/
 
 #dogpage{
     color: var(--main-color);
