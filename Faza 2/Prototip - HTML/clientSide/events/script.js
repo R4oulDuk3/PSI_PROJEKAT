@@ -8,11 +8,52 @@ window.onscroll=() =>{
     navbar.classList.remove('active');
 }
 
+var idEventa;
 
 function prijaviEvent(id){
+    idEventa = id;
+    $('.hover_bkgr_fricc').show();
+}
 
-    alert(id);
+function rezervisi(){
+    let ime = document.getElementById("imeIprez").value;
+    let broj = document.getElementById("brLjudi").value;
+    let tel = document.getElementById("telefon").value;
 
+    let msg = {name:ime, amount:broj, number:tel, evt:idEventa };
+    const msgJSON = JSON.stringify(msg);
+    //post(msgJSON);
+}
+
+
+let flag1 = 0;
+let flag2= 0;
+
+function validate(id){
+    errTrig = document.getElementById(id);
+    if (errTrig.id == "brLjudi") {
+        
+        if(isNaN(errTrig.value)){
+            document.getElementById("Error").textContent="GRESKA: Los broj ljudi";
+            flag1=0;
+        }
+        else{
+            document.getElementById("Error").textContent="";
+            flag1=1;
+        } 
+    }else{
+        if(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/.test(errTrig.value)==false){
+            document.getElementById("Error").textContent="GRESKA: Nije validan broj telefona";
+            flag2=0;
+        }
+        else{
+            document.getElementById("Error").textContent="";
+            flag2=1;
+        }
+    if(flag1 && flag2){
+        document.getElementById("dugmeRez").disabled = false;;
+    }
+    }
 }
 
 $(document).ready(function() {
@@ -20,8 +61,12 @@ $(document).ready(function() {
     //let ceo = document.getElementsByClassName("qrkod")[0];
     //ceo.style.display="none";
 
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+
     $.getJSON("data.json", function(json) {
-        console.log(json);
+
        popuniEvents(json);
     });
   
@@ -52,6 +97,7 @@ $(document).ready(function() {
             container.appendChild(kartica);
           }
         dogadjaji.appendChild(container);
+        
   
         }
     });

@@ -104,6 +104,41 @@
 
     </section>
 
+    <section class="rez">
+
+        <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">&times;</div>
+                <div class="popup-Container">    
+                    <form onsubmit=rezervisi()>
+                        <h3>Rezervacija</h3>
+                        <div class="inputBox">
+                            <span class="fas fa-user"></span>
+                            <input type="text" id="imeIprez" placeholder="Ime i Prezime">
+                        </div>
+                        
+                        <div class="inputBox" >
+                            <span class="fas fa-user-friends"></span>
+                            <input type="text" onchange=validate(this.id) id= "brLjudi" placeholder="Broj ljudi">
+                        </div>
+                        <div class="inputBox">
+                            <span class="fas fa-phone"></span>
+                            <input type="text" onchange=validate(this.id) id="telefon" placeholder="Broj telefona" >
+                        </div>
+                        <div>
+                            <div class="error" id="Error"></div>
+                            <input type="submit" id="dugmeRez" value="Rezervisi mesta" class="btn" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
 <section class="footer">
 
     <div class="share">
