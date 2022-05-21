@@ -13,6 +13,7 @@
     background-position: center;
     min-height: 100vh;
     align-items: center;
+    margin-bottom: 0;
 }
 
 .evs .row{
@@ -77,9 +78,6 @@ hr{
     height: 5px;
 }
 
-#divisor{
-    display: none;
-}
 .grid{
     padding-top: 2rem;
     display: grid;
@@ -87,9 +85,14 @@ hr{
     grid-gap: 1.5rem;
     align-items: center;
     justify-items: center;
+    
    
 }
 
+#going{
+
+    margin-bottom: 2rem;
+}
 
 .card{
     color: #fff;
@@ -225,9 +228,8 @@ hr{
 
 .rez{
     
-    display: flex;
+    display: none;
     align-items: center;
-    
     background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("../assets/background.jpg");
     background-size: cover;
     background-position: center;

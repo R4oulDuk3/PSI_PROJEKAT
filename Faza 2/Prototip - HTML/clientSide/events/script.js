@@ -11,8 +11,10 @@ window.onscroll=() =>{
 var idEventa;
 
 function prijaviEvent(id){
+    document.getElementsByClassName("rez")[0].style.display = "flex";
     idEventa = id;
     $('.hover_bkgr_fricc').show();
+    
 }
 
 function rezervisi(){
@@ -66,15 +68,28 @@ $(document).ready(function() {
     });
 
     $.getJSON("data.json", function(json) {
-
+        $('#divisor').hide();
+        $('#going').hide();
+        $('#mojiDog').hide();
        popuniEvents(json);
     });
   
+
+    $.getJSON("reserved.json", function(json) {
+       
+        popuniRez(json);
+     
+    });
+
+
+
+
     function popuniEvents(json) {
-        dogadjaji = document.getElementById("possible");
+        let dogadjaji = document.getElementById("possible");
         let container = document.createElement("div");
-        container.classList.add("grid");        
+        container.classList.add("grid");     
         for(let item of json){
+
             let kartica = document.createElement("div");
             kartica.classList.add("card");
             kartica.setAttribute("id","event"+item.idevents);
@@ -98,6 +113,50 @@ $(document).ready(function() {
           }
         dogadjaji.appendChild(container);
         
-  
         }
+
+
+
+        function popuniRez(json) {
+
+            if(!Object.keys(json).length){
+                $('#divisor').hide();
+                $('#mojiDog').hide();
+            }else{
+                
+            document.getElementById("divisor").style.display="block";
+            let dogadjaji = document.getElementById("going");
+            let container = document.createElement("div");
+            container.classList.add("grid");        
+            for(let item of json){
+                let kartica = document.createElement("div");
+                kartica.classList.add("card");
+                kartica.setAttribute("id","event"+item.idevents);
+                kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png)";
+                kartica.style.backgroundSize = "cover";
+                let cont = document.createElement("div");
+                cont.classList.add("card-content");
+                let titl = document.createElement("h2");
+                titl.classList.add("card-title");
+                titl.textContent = item.name; 
+               /* let desc = document.createElement("button");
+                desc.classList.add("btn");
+                desc.textContent = "Prijavi me";*/
+                kartica.addEventListener("click",function(){
+                    otkaziDog("event"+item.idevents)});
+      
+                cont.appendChild(titl);
+                //cont.appendChild(desc);
+                kartica.appendChild(cont);
+                container.appendChild(kartica);
+              }
+            dogadjaji.appendChild(container);
+    
+            $('#divisor').show();
+            $('#going').show();
+            $('#mojiDog').show();
+            }
+
+
+            }
     });
