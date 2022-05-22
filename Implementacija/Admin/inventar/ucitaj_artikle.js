@@ -1,6 +1,7 @@
 
 var artikliUNedostatku = [
     {
+        id:"123213",
         name: 'Amstel',
         kolicina : '10',
 
@@ -9,6 +10,7 @@ var artikliUNedostatku = [
         sifraDobavljaca: '1231231232131'
 
     },{
+        id:"123213",
         name: 'Amstel',
         kolicina : '10',
 
@@ -18,6 +20,7 @@ var artikliUNedostatku = [
 
     },
     {
+        id:"123213",
         name: 'Amstel',
         kolicina : '10',
 
@@ -30,7 +33,7 @@ var artikliUNedostatku = [
 
 
 var artikli =[
-    {
+    {id:"123213",
         name: 'Lasko',
         kolicina : '10',
 
@@ -81,16 +84,23 @@ $(document).ready(function (){
     $("#modal-create-btn").on('click',()=>{openCreateModal(null)})
     $("#close-porudzbenice").on('click',closeModal)
     $("#modal-porudzbenice-btn").on('click',openPorudzbeniceModal)
+    
 })
 function openDeleteModal(placeholder){
+    
     modalDeleteOpen=true
     ignoreDoc=true
     console.log(placeholder)
     $('#delete-modal').css('display','inline-block')
     $('#modal-del-input').attr('placeholder',placeholder)
+    $("#modal-del-input").on('input',checkIfMathcing)
+    $('#id').text(placeholder)
+    checkIfMathcing()
+
 }
 function openCreateModal(info){
     fillCreateModal(info)
+    resetErrors()
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
@@ -120,6 +130,18 @@ function fillCreateModal(info){
     $('#tren-kolicina-input').attr('value',info.kolicina);
     $('#nabavna-cena-input').attr('value',info.nabavnaCena);
 }
+
+function checkIfMathcing(){
+    if($('#modal-del-input').val()==$('#id').text()){
+        console.log("poklapa se")
+        $("#del-button-confirm").prop('disabled', false);
+    }else{
+        console.log("ne poklapa se")
+        $("#del-button-confirm").prop('disabled', true);
+    }
+    return $('#modal-del-input').val()==$('#id').text()
+}
+
 //TODO: regulisi sirinu
 function closeModal(){
     console.log("close modal")
@@ -132,6 +154,7 @@ function closeModal(){
     $('#porudzbenice-modal').css('display','none')
 }
 
+
 // dodati da se na window klik svi modali zatvore
 function popuni(grid,podaci){
     console.log("check")
@@ -142,7 +165,7 @@ function popuni(grid,podaci){
         let buttonsDiv = $('<div></div>').addClass('buttons')
         let buttonChange = $('<button class="sm-button modal-btn"><span class="las la-exchange-alt"></span></button>')
         let buttonDelete = $('<button class="sm-button modal-btn-del"><span class="las la-times"></span></button>')
-        buttonDelete.on('click',()=>{openDeleteModal(artikal.name)})
+        buttonDelete.on('click',()=>{openDeleteModal(artikal.id)})
         buttonChange.on('click',()=>{openCreateModal(artikal)})
         buttonsDiv.append(buttonChange)
         buttonsDiv.append(buttonDelete)
@@ -158,6 +181,33 @@ function popuni(grid,podaci){
         grid.append(karta)
     })
 
+}
+function resetErrors(){
+    $('naziv-err').text("")
+    $('tren-kolicina-err').text("")
+    $('manjak-kolicina-err').text("")
+}
+function sacuvajArtikal(){
+    let name = $('#naziv-input').val()
+    let sifA = $('#sifra-artikla-input').val()
+    let sifD = $('#sifra-dobavljaca-input').val()
+    let trenKolicina = $('#tren-kolicina-input').val()
+    let cena = $('#nabavna-cena-input').val()
+    let kolicinaManjak = $('#manjak-kolicina-input').val()
+    let errExist=false
+    if(name==""){
+        errExist=true
+        $('naziv-err').text("Mora se uneti naziv artikla")
+    }
+    if(trenKolicina==""){
+        errExist=true
+        $('tren-kolicina-err').text("Mora se uneti trenutna kolicina artikla")
+    }
+    if(kolicinaManjak==""){
+        errExist=true
+        $('manjak-kolicina-err').text("Mora se uneti kolicina ispod koje je artikal u manjku")
+    }
+    if(errExist)return
 }
 function popuniModalPorudzbenice(podaci){
     podaci.forEach((artikal)=>{

@@ -137,10 +137,10 @@ function createZurka(){
     if(errExist) return
     let zurka = { 
         name: naslov,
-        desc: opis, 
+        desc: opis,
+        date:datum, 
         imgPath: '../assets/zurkeNajave.png',
         postavka: postavka,
-
     }
     
 }

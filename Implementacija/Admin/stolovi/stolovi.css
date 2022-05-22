@@ -74,7 +74,7 @@ thead td{
     overflow: auto;
 
 }
-.button{
+.button-a{
     padding-top: 0.5rem;
     display: flex;
     align-items: center;
@@ -107,6 +107,9 @@ tr:hover .sm-button{
 .add-new-button{
     padding-top: 5rem;
     padding-bottom: 5rem;
+}
+.margin{
+    margin:1rem 4rem;
 }
 
 

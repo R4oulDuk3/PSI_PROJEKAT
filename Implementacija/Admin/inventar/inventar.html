@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/button-modal.css">
     <link rel="stylesheet" href="artikli.css">
     <link rel="stylesheet" href="../css-admin-skelet/responsive.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -143,15 +144,7 @@
               </div>
               <div class="modal-body">
                 <div class="modal-form-create">
-                    <div class="picture-space">
-                        <div>
-                            <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
-                        <div id="display_image">
-        
-                        </div>
-                        <script src="modal-image.js"></script>
-                        </div>
-                    </div>
+                    
                     <div class="input-div">
                         <table class="input-table">
                             <thead>
@@ -159,6 +152,7 @@
                                     <td>Naziv artikla</td>
                                     <td><input id="naziv-input" class="modal-create-input" type="text"></td>
                                 </tr>
+                                <tr><td colspan="2"> <h3 id="naziv-err"></h3></td></tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -171,16 +165,18 @@
                                 </tr>
                                 <tr>
                                     <td>Trenutna kolicina</td>
-                                    <td><input id="tren-kolicina-input" class="modal-create-input"type="text"></td>
+                                    <td><input id="tren-kolicina-input" class="modal-create-input"type="number" min="0" ></td>
                                 </tr>
+                                <tr><td colspan="2"> <h3 id="tren-kolicina-input"></h3></td></tr>
                                 <tr>
                                     <td>Nabavna cena</td>
-                                    <td><input id="nabavna-cena-input" class="modal-create-input"type="text"></td>
+                                    <td><input id="nabavna-cena-input" class="modal-create-input"type="number" min="0" ></td>
                                 </tr>
                                 <tr>
                                     <td>Kolicina za koju se pojavljuje upozorenje o manjku</td>
-                                    <td><input type="text"></td>
+                                    <td><input type="number" min="0" id="manjak-kolicina-input" ></td>
                                 </tr>
+                                <tr><td colspan="2"> <h3 id="manjak-kolicina-input"></h3></td></tr>
                             </tbody>
                         </table>
                         <div class="button-div">
@@ -208,13 +204,14 @@
                             <h1>Da li ste sigurni da zelite da obrisete ovaj artikal?</h1>
                         </div>
                         <div class="modal-del-info">
-                            <h2>Upisite naziv artikla da bi potvrdili akciju brisanja</h2>
+                            <h2>Upisite id artikla da bi potvrdili akciju brisanja:</h2>
+                            <h2 id="id"></h2>
                             <input type="text" id= "modal-del-input" placeholder="Amstel">
                         </div>
                         <div class="button-div">
-                            <div class="button">
-                                <a href="">Potvrdi</a>
-                            </div>
+                            <button class="button" id="del-button-confirm">
+                                Potvrdi
+                            </button>
                         </div>
                     </div>
                 </div>

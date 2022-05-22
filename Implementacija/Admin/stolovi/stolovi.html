@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <link rel="stylesheet" href="stolovi.css">
+    <link rel="stylesheet" href="../css-admin-skelet/button-modal.css">
     <link rel="stylesheet" href="../css-admin-skelet/responsive.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="ucitavanje_stolovi.js"></script>
@@ -106,82 +107,11 @@
                 </div>
             </div>
             <div class="stolovi">
-                <div class="grid">
-                    <!-- <div class="postavka">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>Postavka 1</h2>
-                                <div class="buttons">
-                                    <button class="sm-button">
-                                        <span class="las la-exchange-alt"></span>
-                                    </button>
-                                    <button class="sm-button modal-btn-del">
-                                        <span class="las la-times"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Naziv stolova</td>
-                                                <td colspan="2">Broj osoba</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Separe</td>
-                                                <td>8-10</td>
-                                                <td><button class="sm-button">
-                                                    <span class="las la-times"></span>
-                                                </button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="button modal-btn">
-                                        <a href="#">Dodaj sto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    
-                    
-                    
-                    
+                <div class="grid">       
                 </div>
             </div>
             <div id="create-modal" class="modal">
-                <div id="create-modal-content'" class="modal-content">
+                <div id="create-modal-content" class="modal-content">
                   <div class="modal-header">
                     <span class="close">&times;</span>
                     <h2>Kreiranje stolova</h2>
@@ -193,20 +123,20 @@
                                 <thead>
                                     <tr>
                                         <td>Naziv stola</td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="sto-naziv-input"></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Broj osoba</td>
-                                        <td><input type="number" min="1" max="15" id="myPercent"/></td>
+                                        <td><input type="number" min="1" max="15" value="1" id="broj-osoba-input"/></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="button-div">
-                                <div class="button">
-                                    <a href="">Dodaj</a>
-                                </div>
+                                <button class="button margin">
+                                    Dodaj
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -226,16 +156,17 @@
                     <div class="modal-body">
                         <div class="modal-form-del">
                             <div class="modal-del-title">
-                                <h1>Da li ste sigurni da zelite da obrisete ovu postavku?</h1>
+                                <h1>Da li ste sigurni da zelite da obrisete ovu postavku/sto?</h1>
                             </div>
                             <div  class="modal-del-info">
-                                <h2>Upisite naziv postavke da bi potvrdili akciju brisanja</h2>
+                                <h2>Upisite id postavke/stola da bi potvrdili akciju brisanja</h2>
+                                <h2 id="id"></h2>
                                 <input id="modal-del-input" type="text" placeholder="">
                             </div>
                             <div class="button-div">
-                                <div class="button">
-                                    <a href="">Potvrdi</a>
-                                </div>
+                                <button class="button" id="del-button-confirm">
+                                    Potvrdi
+                                </button>
                             </div>
                         </div>
                     </div>

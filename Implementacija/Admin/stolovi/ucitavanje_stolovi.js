@@ -1,28 +1,35 @@
 let postavke = [
     {
+        id:"123",
         naziv : "Postavka",
         stolovi:[
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
@@ -31,148 +38,35 @@ let postavke = [
     },
     {
         naziv : "Postavka",
+        id: "123",
         stolovi:[
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
             {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            
-        ]
-    },
-    {
-        naziv : "Postavka",
-        stolovi:[
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            
-        ]
-    },
-    {
-        naziv : "Postavka",
-        stolovi:[
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            
-        ]
-    },
-    {
-        naziv : "Postavka",
-        stolovi:[
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            
-        ]
-    },
-    {
-        naziv : "Postavka",
-        stolovi:[
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
+                id:"123",
                 naziv:"Separe",
                 brojOsoba: "8"
             },
@@ -180,6 +74,8 @@ let postavke = [
         ]
     },
 ]
+var deleteType=""
+var postavkaId=""
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var modalKategorijaChangeOpen=false
@@ -215,9 +111,19 @@ $(document).ready(function (){
         }
                   
       });
-    
-
+      $('del-button-confirm').on('click',deleteStolovi)
 })
+
+function checkIfMathcing(){
+    if($('#modal-del-input').val()==$('#id').text()){
+        console.log("poklapa se")
+        $("#del-button-confirm").prop('disabled', false);
+    }else{
+        console.log("ne poklapa se")
+        $("#del-button-confirm").prop('disabled', true);
+    }
+    return $('#modal-del-input').val()==$('#id').text()
+}
 
 function popuni(grid,data){
     data.forEach((postavka)=>{
@@ -242,16 +148,17 @@ function popuni(grid,data){
         table = $('<table></table>')
         table_head = $('<thead><tr><td>Naziv stola</td><td colspan="2">Broj osoba</td></tr></thead>')
         table_body= $('<tbody></tbody>')
-        postavka.stolovi.forEach((stavka)=>{
+        postavka.stolovi.forEach((sto)=>{
             red= $('<tr></tr>')
-            naziv = $('<td>'+stavka.naziv+'</td>')
-            brojOsoba = $('<td>'+stavka.brojOsoba+'</td>')
+            naziv = $('<td>'+sto.naziv+'</td>')
+            brojOsoba = $('<td>'+sto.brojOsoba+'</td>')
             let s_buttonsTd = $('<td></td>')
             let s_buttonsDiv = $('<div></div>')
             let s_delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
 
             s_delButton.on('click',()=>{
-                openDeleteModal(stavka.naziv)
+                openDeleteModal(sto.id)
+                deleteType ="sto"
             })
 
             s_buttonsDiv.append(s_delButton)
@@ -260,9 +167,12 @@ function popuni(grid,data){
             table_body.append(red)
         })
         bottomButtonsDiv = $('<div class="buttons"></div>')
-        buttonAdd = $('<div class="button modal-btn"><a href="#">Dodaj sto</a></div>')
+        buttonAdd = $('<div class="button modal-btn margin"><a href="#">Dodaj sto</a></div>')
         
-        buttonAdd.on('click',()=>{openCreateModal(null)})
+        buttonAdd.on('click',()=>{
+            postavkaId = postavka.id
+            openCreateModal(null)}
+            )
 
         bottomButtonsDiv.append(buttonAdd)
 
@@ -272,11 +182,35 @@ function popuni(grid,data){
         card.append(card_header).append(card_body) 
         kat_div.append(card)
         delButton.on('click',()=>{
-            openDeleteModal(kategorija.naziv)
+            openDeleteModal(postavka.id)
+            deleteType = "postavka"
         })
         
         grid.append(kat_div)
     })
+}
+function deleteStolovi(){
+    if(checkIfMathcing()){
+        let id =$('#id').text()
+        if(deleteType=="postavka"){
+
+        }else{
+
+        }
+    }
+}
+function createSto(){
+
+    if($('#sto-naziv-input').val()==""){
+        $('#naziv-err').text("Naziv mora biti popunjen")
+    }else{
+        let posId= postavkaId
+        let name = $('#sto-naziv-input').val()
+        let num = $('#broj-osoba-input').val()
+    }
+}
+function resetErrors(){
+    $('naziv-err').text("")
 }
 
 function openDeleteModal(placeholder){
@@ -285,12 +219,17 @@ function openDeleteModal(placeholder){
     console.log(placeholder)
     $('#delete-modal').css('display','inline-block')
     $('#modal-del-input').attr('placeholder',placeholder)
+    $('#id').text(placeholder)
+    checkIfMathcing()
+    $('#modal-del-input').on('input',checkIfMathcing)
+    
 }
 function openCreateModal(info){
     fillCreateModal(info)
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
+    resetErrors()
 }
 function openKategorijaChangeModal(naziv){
     

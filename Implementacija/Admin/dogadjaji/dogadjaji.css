@@ -87,30 +87,7 @@
     border: 1px solid var(--main-color);
 }
 
-.button{
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    background-color: var(--main-color);
-    font-size: x-large;
-    color: #fff;
-    border-radius: 10px;
-    border: 1px solid gray;
-    cursor: pointer;
 
-}
-.button:disabled{
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    background-color: gray;
-    font-size: x-large;
-    color: #fff;
-    border-radius: 10px;
-    border: 1px solid gray;
-    cursor: pointer;
-
-}
 
 td .sm-button{
     background: #fff;
