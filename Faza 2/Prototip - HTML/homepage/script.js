@@ -23,7 +23,28 @@ function outFunc(id) {
   tooltip.textContent = "Kopiraj";
 }
 
+
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: window.screen.width>660? 2:1,
+  spaceBetween: 30,
+  slidesPerGroup: window.screen.width>660? 2:1,
+  loop: true,
+  loopFillGroupWithBlank: false,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+
+
+
+
 $(document).ready(function() {
+
 
   $.getJSON("events.json", function(json) {
       popuniEvents(json);
@@ -33,29 +54,39 @@ $(document).ready(function() {
       dogadjaji = document.getElementById("dogadjaji");
       let i = 0;
       
-      let cvor = document.createElement("div");
-      cvor.classList.add("box-container");        
+      
       for(let item of json){
+        let cvor = document.createElement("div");
+        cvor.classList.add("swiper-slide");
+        cvor.classList.add("card");
           let kartica = document.createElement("div");
-          kartica.classList.add("box");
+          kartica.classList.add("card-content");
+          let img = document.createElement("div");
+          img.classList.add("image");
           let slika = document.createElement("img");
           slika.setAttribute("src","../assets/eventPNG.png"); // TODO Promeni path da bude sa servera
           slika.setAttribute("alt","Dogadjaj "+(++i));
-          let titl = document.createElement("h3");
-          titl.textContent = item.name;
-          let link = document.createElement("a");
-          link.setAttribute("href","#")
-          link.classList.add("btn");
-          link.textContent ="Saznaj vise";
+          img.appendChild(slika);
 
-          kartica.appendChild(slika);
-          kartica.appendChild(titl);
-          kartica.appendChild(link);
+          let namCon = document.createElement("div");
+          namCon.classList.add("eventName");
+          let ime = document.createElement("span");
+          ime.classList.add("name");
+          ime.textContent = item.name
+          namCon.appendChild(ime);
+      
+          kartica.appendChild(img);
+          kartica.appendChild(namCon);
           cvor.appendChild(kartica);
-          if(i==3)
+          dogadjaji.appendChild(cvor);
+          if(i==6)
             break;
         }
-       dogadjaji.appendChild(cvor);
+       
 
       }
   });
+
+  
+
+

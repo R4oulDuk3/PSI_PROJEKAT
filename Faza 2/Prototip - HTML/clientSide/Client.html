@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="Client.css"> 
     <title>
@@ -26,7 +27,7 @@
             <a href="../homepage/home.html">Odjavi me</a>
         </nav>
 
-        <span><label id="logged-user"> Jhon Doe </label></span>
+        <span><label id="logged-user" onclick=prikaziKod() > Jhon Doe </label></span>
 
         <div class="icons">
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -48,14 +49,30 @@
     </section>
 
     <!--Dogadjaji-->
-
-    <section class="events" id="dogadjaji">
+    <hr>
+    <section class="evs">
 
         <h1 class="heading">Aktuelni <span>dogadjaji</span></h1>
-       
+
+        <div class="evBody">
+
+            <div class="events">
+                <div class="swiper mySwiper container">
+                    <div class="swiper-wrapper content" id="dogadjaji">
+
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+
+                </div>
+
+            </div>
 
     </section>
-
+    <!-- KRAJ DOGADJAJA-->
+    <hr>
 <section class="contact" id="kontakt">
 
     <h1 class="heading"><span>Kontaktirajte</span> nas </h1>
@@ -89,6 +106,27 @@
     </div>
 </section>
 
+<section class="userQR">
+
+    <div class="hover_bkgr_friccQR">
+        <span class="helperQR"></span>
+        <div>
+            <div class="popupCloseButtonQR">&times;</div>
+            <div class="popup-ContainerQR">    
+                <div class="popupCode">
+                    <img src="../assets/qrTEMP.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+
 <!-- Kraj Kontakta-->
 
 <section class="footer">
@@ -104,6 +142,7 @@
     </div>
 
 </section>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
