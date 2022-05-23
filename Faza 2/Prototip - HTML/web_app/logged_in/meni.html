@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"  content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="css/Client.css"> 
+    <link rel="stylesheet" href="css/meni.css"> 
+    <title>Film Caffe - Meni</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+<!-- Header-->
+    <header class="header">
+
+        <a href="Client.html" class="logo"><img src="../assets/logo.png" alt="Film Caffe logo"></a>
+
+        <nav class="navbar">
+            <a href="Client.html#pocetna">Pocetna</a>
+            <a href="Client.html#dogadjaji">Dogadjaji</a>
+            <a class="current_page" href="meni.html">Meni</a>
+            <a href="Client.html#kontakt">Kontakt</a>
+            <a href="dogadjaji.html">Prijava za dogadjaj</a>
+            <a href="kuponi.html">Moji Kuponi</a>
+            <a href="home.html">Odjavi me</a>
+        </nav>
+
+        <span><label id="logged-user"  onclick=prikaziKod()> Jhon Doe </label></span>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+    </header>
+<!-- Kraj Headera-->
+
+<section class="menu" id="artikli">
+    
+</section>
+
+<section class="userQR">
+
+    <div class="hover_bkgr_friccQR">
+        <span class="helperQR"></span>
+        <div>
+            <div class="popupCloseButtonQR">&times;</div>
+            <div class="popup-ContainerQR">    
+                <div class="popupCode">
+                    <img src="../assets/qrTEMP.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Footer-->
+    <section class="footer">
+
+        <div class="share">
+            <a href="" class="fab fa-facebook-f"></a>
+            <a href="" class="fab fa-twitter"></a>
+            <a href="" class="fab fa-instagram"></a>
+        </div>
+    
+        <div class="credit">
+            Powered by <span> Lagani<sup><i class="fa fa-trademark" aria-hidden="true" ></i></sup> </span> | SMOG all rights reserved
+        </div>
+    
+    </section>
+
+    <!-- Kraj Footera-->
+    <script src="js/main_script.js"></script>
+    <script src="js/meni.js"></script>
+</body>
+</html>

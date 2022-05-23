@@ -1,0 +1,34 @@
+[
+    {
+        "idevents": 1,
+        "description": "this is an event",
+        "start": "2022-09-12T00:00:00Z",
+        "name": "the event",
+        "end": "2022-12-12T00:00:00Z",
+        "approved": 1
+    },
+    {
+        "idevents": 2,
+        "description": "this is an event",
+        "start": "2022-09-12T00:00:00Z",
+        "name": "the event",
+        "end": "2022-12-12T00:00:00Z",
+        "approved": 1
+    },
+    {
+        "idevents": 3,
+        "description": "this is an event",
+        "start": "2022-09-12T00:00:00Z",
+        "name": "the event",
+        "end": "2022-12-12T00:00:00Z",
+        "approved": 0
+    },
+    {
+        "idevents": 4,
+        "description": "this is an event",
+        "start": "2022-09-12T00:00:00Z",
+        "name": "the event",
+        "end": "2022-12-12T00:00:00Z",
+        "approved": 0
+    }
+]
