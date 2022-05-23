@@ -1,5 +1,5 @@
 .button{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     display: flex;
     align-items: center;
     background-color: var(--main-color);
@@ -11,7 +11,7 @@
 
 }
 .button:disabled{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     display: flex;
     align-items: center;
     background-color: gray;

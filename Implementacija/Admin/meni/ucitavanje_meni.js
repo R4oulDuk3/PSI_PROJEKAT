@@ -1,38 +1,21 @@
 let kategorije = [
-    {
+    {   id:"123",
         naziv : "Kategorija",
         stavke:[
             {
+                id:"123",
                 naziv:"Amstel",
                 cena:"180",
                 akcija: "60"
             },
             {
+                id:"125",
                 naziv:"Amstel",
                 cena:"180",
                 akcija: "60"
             },
             {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
+                id:"124",
                 naziv:"Amstel",
                 cena:"180",
                 akcija: "60"
@@ -40,43 +23,22 @@ let kategorije = [
         ]
     },
     {
+        id:"124",
         naziv : "Kategorija",
         stavke:[
             {
+                id:"126",
                 naziv:"Amstel",
                 cena:"180",
                 akcija: "60"
             },
             {
+                id:"127",
                 naziv:"Amstel",
                 cena:"180",
                 akcija: "60"
             },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
-            {
-                naziv:"Amstel",
-                cena:"180",
-                akcija: "60"
-            },
+
         ]
     },
 ]
@@ -84,6 +46,11 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var modalKategorijaChangeOpen=false
 var ignoreDoc=false
+var delType=""
+var kategorijaId=""
+var stavkaDel=null
+var delInputs = ["#modal-del-input"]
+var createStavkaInputs = ["#create-modal-naziv-input","#create-modal-cena-input","#create-modal-procenat-input"]
 $(document).ready(function (){
     let grid = $('.grid').first();
     popuni(grid,kategorije)
@@ -115,12 +82,21 @@ $(document).ready(function (){
         }
                   
       });
-    
+    for(let input of delInputs){
+        $(input).on('input',()=>{checkIfFilled(delInputs,$("#del-button"))})
+    }
+    for(let input of createStavkaInputs){
+        $(input).on('input',()=>{checkIfFilled(createStavkaInputs,$("#kreiraj-stavku"))})
+    }
+    $('#del-button').on('click',obrisi)
+    $('#kreiraj-stavku').on('click',createStavka)
 
 })
 
 function popuni(grid,data){
     let cnt=0;
+    grid.empty()
+    console.log("popunjavanje")
     data.forEach((kategorija)=>{
         kat_div = $('<div class="kategorija"></div>')
         card = $('<div class="card"></div>')
@@ -168,7 +144,11 @@ function popuni(grid,data){
                 openCreateModal(stavka)
             })
             s_delButton.on('click',()=>{
-                openDeleteModal(stavka.naziv)
+                delType="stavka"
+                kategorijaId = kategorija.id
+                stavkaDel = stavka
+                //openDeleteModal(stavka.id)
+                obrisi()
             })
 
             s_buttonsDiv.append(s_changeButton).append(s_delButton)
@@ -177,10 +157,13 @@ function popuni(grid,data){
             table_body.append(red)
         })
         bottomButtonsDiv = $('<div class="buttons"></div>')
-        buttonAdd = $('<div class="button modal-btn"><a href="#">Dodaj stavku</a></div>')
-        buttonAzuriraj = $('<div class="button"><a href="#">Azuriraj stranicu</a></div>')
+        buttonAdd = $('<div class="h-button modal-btn"><a href="#">Dodaj stavku</a></div>')
+        buttonAzuriraj = $('<div class="h-button"><a href="#">Azuriraj stranicu</a></div>')
         
-        buttonAdd.on('click',()=>{openCreateModal(null)})
+        buttonAdd.on('click',()=>{
+            kategorijaId=kategorija.id
+            openCreateModal(null)}
+            )
 
         bottomButtonsDiv.append(buttonAdd).append(buttonAzuriraj)
 
@@ -190,7 +173,9 @@ function popuni(grid,data){
         card.append(card_header).append(card_body) 
         kat_div.append(card)
         delButton.on('click',()=>{
-            openDeleteModal(kategorija.naziv)
+            delType="kategorija"
+            kategorijaId=kategorija.id
+            openDeleteModal(kategorija.id)
         })
         
         grid.append(kat_div)
@@ -203,12 +188,68 @@ function openDeleteModal(placeholder){
     console.log(placeholder)
     $('#delete-modal').css('display','inline-block')
     $('#modal-del-input').attr('placeholder',placeholder)
+    $('#id').text(placeholder)
+    checkIfFilled(delInputs,$("#del-button"))
+}
+
+function checkIfFilled(inputs,button){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $(input).val())
+        if($(input).val()=="" || $(input).val()==undefined){
+            button.prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    button.prop('disabled', false);
+    
+    return true
+}
+function kategorijaByID(){
+    for(let kategorija of kategorije){
+        if(kategorija.id==kategorijaId){
+            return kategorija
+        }
+    }
+}
+
+function obrisi(){
+    console.log("check")
+    if(delType=="stavka"){
+        let kat =kategorijaByID()
+        
+        for(stavka of kat.stavke){
+           // console.log( stavka.id +" "_ )
+            if(stavka.id ==stavkaDel.id ){
+                console.log("removed")
+                removeElemFromArray(stavka,kat.stavke)
+                break
+            }
+        }
+        console.log(kategorije)
+
+    }else{
+        let kat =kategorijaByID()
+        console.log(kat)
+        removeElemFromArray(kat,kategorije)
+    }
+    popuni($('.grid').first(),kategorije)
+    closeModal()
+}
+function removeElemFromArray(elem,array){
+    const index = array.indexOf(elem);
+    if (index > -1) {
+        console.log("removed")
+    array.splice(index, 1); // 2nd parameter means remove one item only
+}
 }
 function openCreateModal(info){
     fillCreateModal(info)
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
+    checkIfFilled(createStavkaInputs,$("#kreiraj-stavku"))
 }
 function openKategorijaChangeModal(naziv){
     
@@ -234,6 +275,23 @@ function fillCreateModal(info){
     $("#create-modal-procenat-input").attr('value',info.akcija)
 
     
+}
+function createStavka(){
+
+    let nazivS = $("#create-modal-naziv-input").val()
+    let cenaS = $("#create-modal-cena-input").val()
+    let procenatS = $("#create-modal-procenat-input").val()
+    kategorijaByID().stavke.push(
+        {
+            naziv:nazivS,
+            cena:cenaS,
+            akcija: procenatS
+        }
+    )
+    console.log(kategorije)
+    closeModal()
+    popuni($('.grid').first(),kategorije)
+
 }
 
 function closeModal(){

@@ -15,6 +15,8 @@ let kuponi = [
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
+var file=null
+var inputs = ["naziv-input","opis-input"]
 $(document).ready(function (){
     let grid = $('.grid').first();
     popuni(grid,kuponi)
@@ -41,7 +43,10 @@ $(document).ready(function (){
                   
       });
     
-
+      $('#image-input').on('change',chooseFile)
+      for(let input of inputs){
+        $("#"+input).on('change keyup paste',checkIfFilled)
+    }
 })
 
 function popuni(grid,data){
@@ -64,6 +69,26 @@ function popuni(grid,data){
         grid.append(card)
     })
 }
+function checkIfFilled(){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $("#"+input).val())
+        if($("#"+input).val()=="" || $("#"+input).val()==undefined){
+            $("#create-button").prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    $("#create-button").prop('disabled', false);
+    
+    return true
+}
+
+function kreiranjeKupona(){
+    let naziv = $('naziv-input').val()
+    let opis = $('opis-input').val()
+
+}
 
 function openDeleteModal(placeholder){
     modalDeleteOpen=true
@@ -76,6 +101,7 @@ function openCreateModal(){
     modalCreateOpen=true
     ignoreDoc=true
     $('#create-modal').css('display','inline-block')
+    checkIfFilled()
     
 }
 function closeModal(){
@@ -85,4 +111,9 @@ function closeModal(){
     modalDeleteOpen=false
     $('#delete-modal').css('display','none')
     $('#create-modal').css('display','none')
+}
+
+function chooseFile(e){
+    file=e.target.files[0]
+    console.log(file)
 }

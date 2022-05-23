@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
-    <link rel="stylesheet" href="rasporedi.css">
+    <link rel="stylesheet" href="smena.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="ucitaj_rasporedi.js"></script>
-    <title>Rasporedi</title>
+    <script src="smene.js"></script>
+    <title>Smene</title>
 </head>
 <body>
     <input type="checkbox" name="" id="nav-toggle">
@@ -92,50 +92,51 @@
             
         </header>
         <main>
-            <div class="add-bar">
-                <div class="h-button">
-                    <a href="novi-raspored.html">Dodaj raspored</a>
-                </div>
-                <div class="h-button">
-                    <a href="novi-raspored.html">Izmeni raspored</a>
-                </div>
-                <div class="h-button">
-                    <a href="smene.html">Postavi Smene</a>
-                </div>
-            </div>
-            <div class="rasporedi">
-                <div class="grid" id="grid">
+            <h2>
+                OPREZ: Dodavanje novih smena brise trenutni raspored i preference konobara
+              
+              </h2>
+           <div id="smene">
+               <div class="smena">
+                   <table>
+                       <thead>
+                           <tr>
+                               <td colspan="2">
+                                   Smena 1
+                               </td>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>Pocetak</td>
+                               <td><input type="time"  name="" id="time-poc-1" required></td>
+                           </tr>
+                           <tr>
+                               <td>Kraj</td>
+                               <td><input type="time"  name="" id="time-kraj-1" required></td>
+                           </tr>
+                       </tbody>
+                   </table>
                     
-                </div>
-            </div>
-            <div id="delete-modal" class="modal">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <span class="close close-del">&times;</span>
-                    <h2>Brisanje artikla</h2>
-                  </div>
-                    <div class="modal-body">
-                        <div class="modal-form-del">
-                            <div class="modal-del-title">
-                                <h1>Da li ste sigurni da zelite da obrisete ovaj raspored?</h1>
-                            </div>
-                            <div class="modal-del-info">
-                                <h2>Upisite vremesnki period rasporeda da bi potvrdili akciju brisanja</h2>
-                                <input type="text" placeholder="13/04/2022 - 20/04/2022">
-                            </div>
-                            <div class="button-div">
-                                <div class="button">
-                                    <a href="">Potvrdi</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                  </div>
-                </div>
-            </div>
-            <script src="modal.js"></script>
+
+               </div>
+               
+           </div>
+           <div class="add-bar">
+               
+               <div>
+                <button class="button" id="dodaj-smenu">
+                    Dodaj smenu
+                </button>
+                <button class="button" id="ukloni-smenu">
+                    Ukloni smenu
+                </button>
+                <button class="button">
+                    Sacuvaj smene
+                </button>
+               </div>
+            
+        </div>
         </main>
     </div>
     

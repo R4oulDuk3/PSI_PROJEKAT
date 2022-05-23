@@ -198,6 +198,7 @@ function initKonobari(){
 }
 function sendNoviRaspored(){
     let raspored = getTableData()
+    
     let info = {
         startDate: startDate,
         endDate: endDate,

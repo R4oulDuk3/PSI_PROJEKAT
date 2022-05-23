@@ -97,12 +97,13 @@ function createUserEmailPass(email,password){
     // ..
   });
 }
-async function uploadImage(url,type){
+async function uploadImage(file,type){
   const metadata = {
     contentType: type,
   };
-  let blob = await fetch(url).then(r => r.blob());
-  uploadBytes(beerRef, blob,metadata).then((snapshot) => {
+  let img_ref= ref(storage, 'zurka.jpg')
+  //let blob = await fetch(url).then(r => r.blob());
+  uploadBytes(img_ref, file,metadata).then((snapshot) => {
   console.log('Uploaded a blob or file!');
 
   });
@@ -113,6 +114,16 @@ async function downloadImage(path){
   let url = await getDownloadURL(ref(storage, path))
   return url
 }
+
+
+// $(document).ready( async ()=>{
+  
+//  var ret = await $.get( 'https://jsonplaceholder.typicode.com/posts')
+// console.log(ret)
+//  console.log("check2")
+
+  
+// })
 
 export { uploadImage,downloadImage};
 

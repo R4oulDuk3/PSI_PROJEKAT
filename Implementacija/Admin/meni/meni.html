@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css-admin-skelet/header.css">
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/button-modal.css">
     <link rel="stylesheet" href="meni.css">
     <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -119,15 +120,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="modal-form-create">
-                        <div class="picture-space">
-                            <div>
-                                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
-                            <div id="display_image">
-            
-                            </div>
-                            <script src="modal-image.js"></script>
-                            </div>
-                        </div>
+                      
                         <div class="input-div">
                             <table class="input-table">
                                 <thead>
@@ -139,7 +132,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Cena stavke</td>
-                                        <td><input id="create-modal-cena-input" type="text"></td>
+                                        <td><input id="create-modal-cena-input" type="number" min="0"></td>
                                     </tr>
                                     <tr>
                                         <td>Procenat akcije</td>
@@ -148,9 +141,9 @@
                                 </tbody>
                             </table>
                             <div class="button-div">
-                                <div class="button">
-                                    <a href="">Sacuvaj</a>
-                                </div>
+                                <button class="button" id="kreiraj-stavku">
+                                    Kreiraj
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -193,7 +186,7 @@
             </div>
             
             <div id="delete-modal" class="modal">
-                <div id="close-del" id="delete-modal-content" class="modal-content">
+                <div  id="delete-modal-content" class="modal-content">
                   <div class="modal-header">
                     <span  class="close close-del">&times;</span>
                     <h2>Brisanje artikla</h2>
@@ -201,16 +194,17 @@
                     <div class="modal-body">
                         <div class="modal-form-del">
                             <div class="modal-del-title">
-                                <h1>Da li ste sigurni da zelite da obrisete ovu kategoriju?</h1>
+                                <h1>Da li ste sigurni da zelite da obrisete ovu kategoriju/stavku?</h1>
                             </div>
                             <div class="modal-del-info">
-                                <h2>Upisite naziv kategorije da bi potvrdili akciju brisanja</h2>
+                                <h2>Upisite id kategorije/stavke da bi potvrdili akciju brisanja</h2>
+                                <h2 id="id"></h2>
                                 <input id="modal-del-input" type="text" placeholder="">
                             </div>
                             <div class="button-div">
-                                <div class="button">
-                                    <a href="">Potvrdi</a>
-                                </div>
+                                <button class="button" id="del-button">
+                                    Potvrdi
+                                </button>
                             </div>
                         </div>
                     </div>

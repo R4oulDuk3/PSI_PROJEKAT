@@ -78,21 +78,21 @@ function dateToString(date){
 function datediff(first, second) {
     return Math.round((second-first)/(1000*60*60*24));
 }
-
-$(document).ready(()=>{
+function popuni(grid,raspored){
     let startDate = new Date()
     while(startDate.getDay()!=1){
         startDate = new Date(startDate.getTime() - 86400000)
     }
-    let grid = $('#grid')
+    
     let date = new Date(startDate)
     let endDate = findLatestDate(startDate,raspored)
     let rasporediDatas=[]
+    let cnt=0
     while(date<endDate){
         let rasporedDatas=[]
         let tableRows=[]
         let raspored = $('<div class="raspored"></div>')
-        let card = $('<div class="card"><div class="card-header"><h2>Raspored '+dateToString(date)+" - "+dateToString(new Date(date.getTime()+86400000*7))+'</h2><div class="buttons"><button class="sm-button"><label for="kat-toggle"><span class="las la-sort-down" "></span></label></button></div></div><input type="checkbox" name="" id="kat-toggle"></div>')
+        let card = $('<div class="card"><div class="card-header"><h2>Raspored '+dateToString(date)+" - "+dateToString(new Date(date.getTime()+86400000*7))+'</h2><div class="buttons"><button class="sm-button"><span class="las la-sort-down" id="toggle-'+cnt+'"></span></button></div></div></div>')
         let cardBody = $('<div class="card-body"></div>')
         let tableResponsive = $('<div class="table-responsive"></div>')
         let table =$('<table><thead><tr><td>Smena</td><td>Ponedeljak</td><td>Utorak</td><td>Sreda</td><td>Cetvrtak</td><td>Petak</td><td>Subota</td><td>Nedelja</td></tr></thead></table>')
@@ -102,6 +102,12 @@ $(document).ready(()=>{
         cardBody.append(tableResponsive)
         tableResponsive.append(table)
         table.append(tbody)
+        let toggle = $('#toggle-'+cnt)
+        toggle.on('click',()=>{
+            console.log('check')
+            card.toggle()
+        })
+        cnt++;
         
         for(let i =0; i< smene.length;i++){
             rasporedRow=[]
@@ -126,7 +132,10 @@ $(document).ready(()=>{
         rasporediDatas[rasporedNum][info.idSmene][day].append($('<div>'+findKonobarById(info.konobarId).ime+'</div>'))
     }
 
-    
+}
+$(document).ready(()=>{
+    let grid = $('#grid')
+    popuni(grid,raspored)
     //Dohvati raspored
     
 })

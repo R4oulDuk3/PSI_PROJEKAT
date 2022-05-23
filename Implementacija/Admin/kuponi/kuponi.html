@@ -107,59 +107,40 @@
             </div>
             <div class="kuponi">
                 <div class="grid">
-                    <!-- <div class="card">
-                        <div class="card-content">
-                            <h2 class="card-title">Popust pivo</h2>
-                            <p class="card-body">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Eaque cupiditate perspiciatis quia
-                            </p>
-                        </div>
-                    </div> -->
-                    
+
                 </div>
             </div>
             <div id="create-modal" class="modal">
                 <div id="create-modal-content" class="modal-content">
                   <div class="modal-header">
                     <span id="close-create" class="close">&times;</span>
-                    <h2>Kreiranje Konobara</h2>
+                    <h2>Kreiranje Kupona</h2>
                   </div>
                   <div class="modal-body">
                     <div class="modal-form-create">
-                        <div class="picture-space">
-                            <div>
-                                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
-                            <div id="display_image">
-            
-                            </div>
-                            <script src="modal-image.js"></script>
-                            </div>
-                        </div>
                         <div class="input-div">
                             <table class="input-table">
                                 <thead>
                                     <tr>
                                         <td>Naziv Kupona</td>
-                                        <td><input type="text"></td>
+                                        <td><input type="text" id="naziv-input"></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Opis</td>
-                                        <td><textarea name="" id="" cols="20" rows="5"></textarea></td>
+                                        <td>Slika</td>
+                                        <td><input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg"></td>
                                     </tr>
                                     <tr>
-                                        <td>Cena</td>
-                                        <td><input type="text"></td>
-                                    </tr>
-                                    
+                                        <td>Opis</td>
+                                        <td><textarea name="" id="" cols="50" rows="5" id="opis-input"></textarea></td>
+                                    </tr>                               
                                 </tbody>
                             </table>
                             <div class="button-div">
-                                <div class="button">
-                                    <a href="">Kreiraj</a>
-                                </div>
+                                <button class="button" id="create-button">
+                                    Kreiraj
+                                </button>
                             </div>
                         </div>
                     </div>

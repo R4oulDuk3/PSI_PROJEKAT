@@ -41,5 +41,9 @@ input{
     color:red;
     font-size: medium;
 }
+textarea{
+    font-weight: 1000;
+    font-size: medium;
+}
 
 

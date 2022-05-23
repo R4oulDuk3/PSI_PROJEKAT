@@ -1,0 +1,25 @@
+#smene{
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem;
+}
+.smena td{
+    font-size: large;
+    font-weight: bolder;
+    padding: 0.5rem;
+}
+
+.smena thead td{
+    font-size: x-large;
+}
+
+.button{
+    padding: 0.5rem;
+    background-color: var(--main-color);
+    border-radius: 15px;
+    border: 1px solid white;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+}

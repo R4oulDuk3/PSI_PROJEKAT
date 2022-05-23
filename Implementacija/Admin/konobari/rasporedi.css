@@ -125,24 +125,7 @@ tr:hover .sm-button{
 #kat-toggle:checked + .card-body{
     display: none;
 }
-#kat-toggle1{
-    display: none;
-}
-#kat-toggle1:checked + .card-body{
-    display: none;
-}
-#kat-toggle2{
-    display: none;
-}
-#kat-toggle2:checked + .card-body{
-    display: none;
-}
-#kat-toggle3{
-    display: none;
-}
-#kat-toggle3:checked + .card-body{
-    display: none;
-}
+
 .td-mul-div{
     border-bottom: 1px solid #f0f0f0;
 }
