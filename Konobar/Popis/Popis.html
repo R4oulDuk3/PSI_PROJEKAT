@@ -7,8 +7,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">    <link rel="stylesheet" href="Popis.css">
-    <title>Konobar</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
+    <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/general.css">
+    <link rel="stylesheet" href="../css-admin-skelet/header.css">
+    <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
+    <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="Popis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="Popis.js"></script>
+    <title>Popis pica</title>
 </head>
 <body>
     
@@ -78,66 +87,86 @@
             </div>
         </header>
         <main>
-            <div class="porudzbenice">
-                <div class="cards">
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" value="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" value="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
-                
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" value="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
-                
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" value="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
-                
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" placeholder="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
-                
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Izvestaj</span><br>
-                            <b>Kolicina:</b><input type="number" value="12"></input>
-                            <span><button class="button"><b>Azuriraj</b></button></span>
-                        </div>
-                    </div>
+            <div class="add-bar">
+                <div class="h-button " id="sacuvaj-btn">
+                    <a href="#" class="trigger_popup_fricc" >Sacuvaj</a>
                 </div>
             </div>
+            <div class="input-div">
+                <div class="table-responsive">
+                    <table class="input-table" id="table">
+                        <thead>
+                            <tr>
+                                <td>Naziv Stavke</td>
+                                <td>Kolicina</td>
+                            </tr>
+                        </thead>
+                        <tbody id="body">
+                                <tr>
+                                    <td>Amstel</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Niksicko</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Jelen</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Zajecarsko</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Sok od jabuke</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Djus</td>
+                                    <td><input id="create-modal-cena-input" type="number"></td>
+                                 </tr>
+                        </tbody>
+                    </table>
+                </div>          
+            </div>
+            
+
+         
+            
         </main>
+        
             <div class="header-title"></div>
         </div>
         
-
+        <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton" >&times;</div>
+                <div class="makeSureTable" >
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Naziv Stavke</td>
+                                <td>Kolicina</td>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyPopUp">
+                                <tr>
+                                    <td>Amstel</td>
+                                    <td>5</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Niksicko</td>
+                                    <td>6</td>
+                                 </tr>
+                        </tbody>
+                    </table>
+                    <div class="h-button " id="potvrdi-btn" style="width:100% ;" >
+                        <a href="#" >Potvrdi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

@@ -1,0 +1,44 @@
+@media only screen and (max-width: 1200px){
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
+
+@media only screen and (max-width: 1600px){
+    .grid{
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+
+}
+@media only screen and (max-width: 1200px){
+    .grid{
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+    }
+
+}
+
+@media only screen and (max-width: 640px){
+    .grid{
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 2rem;
+    }
+    td{
+        font-size: medium;
+    }
+    .card-body{
+        padding: 0rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+}

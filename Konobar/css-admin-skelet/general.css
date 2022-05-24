@@ -3,8 +3,11 @@
     --main-color: #B547C1;
     --sidebar-width: 20%;
     --main-width:80%;
-    --sidebar-width-reduced:6%;
-    --main-width-extended:94%;
+    
+    --sidebar-width-reduced:5%;
+    --main-width-extended:95%;
+    --modal-duration: 1s;
+    --modal-color: #428bca;
 }
 
 
@@ -30,3 +33,13 @@
     font-size: large;
     border-radius: 15px;
 }
+input{
+    font-weight: 800;
+    font-size: large;
+}
+.error-msg{
+    color:red;
+    font-size: medium;
+}
+
+
