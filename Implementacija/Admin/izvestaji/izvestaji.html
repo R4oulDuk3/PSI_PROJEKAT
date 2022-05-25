@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="izvestaji.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="izvestaji.js"></script>  
+    
     <title>Izvestaj</title>
 </head>
 <body>
@@ -100,14 +104,14 @@
                 <div class="date-bar">
                     <div class="date-input">
                         <h1>Od</h1>
-                        <input type="date" name="" id="">
+                        <input type="date" name="" id="date-start">
                     </div>
                     <div class="date-input">
                         <h1>Do</h1>
-                        <input type="date" name="" id="">
+                        <input type="date" name="" id="date-end">
                     </div>
                 </div>
-                <div class="checkbox-bar">
+                <!-- <div class="checkbox-bar">
                     <div class="checkbox-input">
                         <input type="checkbox" name="" id="">Pregled radnih sati
                     </div>
@@ -115,18 +119,23 @@
                         <input type="checkbox" name="" id="">Pregled popularnosti artikala
                     </div>
                     <div class="checkbox-input">
-                        <input type="checkbox" name="" id="">Rangiranje dogadjaja
+                        <input type="checkbox" name="" id="">Pregled potrosnje musterija
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="kuponi">
-                <div class="dashboard-cards">
+                <div class="dashboard-cards" id="grid">
                     <div class="card" id="card-1">
                         <div class="chart-canvas">
-                            <canvas id="myChart"></canvas>
+                            <canvas id="myChart1"></canvas>
                         </div>
                     </div>
-                    <div class="card" id="card-1">
+                    <div class="card" id="card-2">
+                        <div class="chart-canvas">
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                    </div>
+                    <!-- <div class="card" id="card-1">
                         <div class="chart-canvas">
                             <canvas id="myChart2"></canvas>
                         </div>
@@ -140,12 +149,12 @@
                         <div class="chart-canvas">
                             <canvas id="myChart4"></canvas>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </main>
     </div>
-    <script type="text/javascript" src="script.js"></script>  
+
     
 </body>
 </html>

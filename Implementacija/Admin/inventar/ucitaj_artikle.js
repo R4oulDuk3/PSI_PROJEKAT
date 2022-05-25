@@ -47,7 +47,7 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var modalPorudzbeniceOpen= false
 var ignoreDoc=false
-
+var artikalCreateInputs = ["#naziv-input","#tren-kolicina-input","#nabavna-cena-input","#manjak-kolicina-input"]
 $(document).ready(function (){
         
     let grid1 = $('#porudzbenice-grid')
@@ -84,7 +84,11 @@ $(document).ready(function (){
     $("#modal-create-btn").on('click',()=>{openCreateModal(null)})
     $("#close-porudzbenice").on('click',closeModal)
     $("#modal-porudzbenice-btn").on('click',openPorudzbeniceModal)
-    
+    //save("test.txt","AAAAAAA")
+    checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
+    for(let input of artikalCreateInputs){
+        $(input).on('input',()=>{checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))})
+    }
 })
 function openDeleteModal(placeholder){
     
@@ -97,7 +101,23 @@ function openDeleteModal(placeholder){
     $('#id').text(placeholder)
     checkIfMathcing()
 
+
 }
+function checkIfFilled(inputs,button){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $(input).val())
+        if($(input).val()=="" || $(input).val()==undefined || $(input).val()==null){
+            button.prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    button.prop('disabled', false);
+    
+    return true
+}
+
 function openCreateModal(info){
     fillCreateModal(info)
     resetErrors()
@@ -209,6 +229,22 @@ function sacuvajArtikal(){
     }
     if(errExist)return
 }
+
+function save(filename, data) {
+    const blob = new Blob([data], {type: 'text/csv'});
+    if(window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else{
+        const elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;        
+        document.body.appendChild(elem);
+        elem.click();        
+        document.body.removeChild(elem);
+    }
+}
+
 function popuniModalPorudzbenice(podaci){
     podaci.forEach((artikal)=>{
         let red= $('<tr></tr>')

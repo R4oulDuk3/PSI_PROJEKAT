@@ -36,6 +36,9 @@
 input{
     font-weight: 800;
     font-size: large;
+    border-radius: 10px;
+    border: 0.5px solid gray;
+    padding: 0.4rem;
 }
 .error-msg{
     color:red;

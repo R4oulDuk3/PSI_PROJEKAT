@@ -1,5 +1,6 @@
 
 import {uploadImage} from '../index.js'
+
 console.log("checkkkkk")
 var data = [
     {   id: "123##1231##12",

@@ -58,9 +58,13 @@ function createSmenaDiv(grid,smena){
     td1_2.append(vremePocetak)
     vremePocetak.on('change',
     ()=>{
-        //changeStartTime(smena.rdBr,vremePocetak)
+        changeStartTime(smena.rdBr,vremePocetak)
     }
     )
+    vremeKraj.on('change',
+    ()=>{
+        changeEndTime(smena.rdBr,vremeKraj)
+    })
     td2_2.append(vremeKraj)
     grid.append(div)
 }
@@ -94,12 +98,21 @@ function changeStartTime(rdBr,input){
 
     //let input_poc =$('#vreme-poc-'+rdBr)
     let input_kraj_prev =$('#vreme-kraj-'+(rdBr-1))
-    let input_kraj =$('#vreme-kraj-'+rdBr)
+    //let input_kraj =$('#vreme-kraj-'+rdBr)
     input_kraj_prev.val(startTime)
-    input_kraj_prev.attr('max',startTime)
-    input_kraj.attr('min',startTime)
-    rdBr-=1
-    changeStartTime(rdBr,$())
+
+}
+
+function changeEndTime(rdBr,input){
+    if(rdBr==smene.length)return
+    console.log(rdBr)
+    let endTime = input.val() 
+
+    //let input_poc =$('#vreme-poc-'+rdBr)
+    let input_poc_next =$('#vreme-poc-'+(rdBr+1))
+    //let input_kraj =$('#vreme-kraj-'+rdBr)
+    input_poc_next.val(endTime)
+
 }
 
 

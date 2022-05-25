@@ -2,22 +2,22 @@ var raspored=[
     {
        idSmene: 1,
        konobarId: 1,
-       date : new Date(2022,4,17)
+       date : new Date(2022,4,25)
     },
     {
        idSmene: 1,
        konobarId: 1,
-       date : new Date(2022,4,18)
+       date : new Date(2022,4,26)
     },
     {
        idSmene: 1,
        konobarId: 1,
-       date : new Date(2022,4,19)
+       date : new Date(2022,4,27)
     },
     {
         idSmene: 1,
         konobarId: 2,
-        date : new Date(2022,4,19)
+        date : new Date(2022,4,27)
      }
 ]
 var smene = [

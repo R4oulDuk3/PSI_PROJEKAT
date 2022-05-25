@@ -116,14 +116,16 @@ async function downloadImage(path){
 }
 
 
-// $(document).ready( async ()=>{
+$(document).ready( async ()=>{
   
 //  var ret = await $.get( 'https://jsonplaceholder.typicode.com/posts')
 // console.log(ret)
 //  console.log("check2")
-
+const img = document.getElementById('myimg');
+//console.log(await downloadImage("beer.jpg"))
+img.setAttribute('src',await downloadImage("background.jpg"));
   
-// })
+})
 
 export { uploadImage,downloadImage};
 

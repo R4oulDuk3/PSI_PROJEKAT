@@ -48,9 +48,11 @@ var modalKategorijaChangeOpen=false
 var ignoreDoc=false
 var delType=""
 var kategorijaId=""
-var stavkaDel=null
+var stavkaAlt=null
+var createType=''
 var delInputs = ["#modal-del-input"]
 var createStavkaInputs = ["#create-modal-naziv-input","#create-modal-cena-input","#create-modal-procenat-input"]
+var createKategorijaInputs = ["#naziv-kategorije-input"]
 $(document).ready(function (){
     let grid = $('.grid').first();
     popuni(grid,kategorije)
@@ -88,8 +90,15 @@ $(document).ready(function (){
     for(let input of createStavkaInputs){
         $(input).on('input',()=>{checkIfFilled(createStavkaInputs,$("#kreiraj-stavku"))})
     }
+    checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
+    $("#naziv-kategorije-input").on('input',()=>{
+        checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
+        }
+    )
     $('#del-button').on('click',obrisi)
     $('#kreiraj-stavku').on('click',createStavka)
+    $('#dodaj-kategoriju').on('click',createKategorija)
+    $('#azuriraj').on('click',azuriraj)
 
 })
 
@@ -141,12 +150,14 @@ function popuni(grid,data){
             let s_delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
             
             s_changeButton.on('click',()=>{
+                createType='change'
+                stavkaAlt= stavka
                 openCreateModal(stavka)
             })
             s_delButton.on('click',()=>{
                 delType="stavka"
                 kategorijaId = kategorija.id
-                stavkaDel = stavka
+                stavkaAlt = stavka
                 //openDeleteModal(stavka.id)
                 obrisi()
             })
@@ -161,11 +172,12 @@ function popuni(grid,data){
         buttonAzuriraj = $('<div class="h-button"><a href="#">Azuriraj stranicu</a></div>')
         
         buttonAdd.on('click',()=>{
+            createType='create'
             kategorijaId=kategorija.id
             openCreateModal(null)}
             )
 
-        bottomButtonsDiv.append(buttonAdd).append(buttonAzuriraj)
+        bottomButtonsDiv.append(buttonAdd)//.append(buttonAzuriraj)
 
         table.append(table_head).append(table_body)
         table_div.append(table)
@@ -175,7 +187,7 @@ function popuni(grid,data){
         delButton.on('click',()=>{
             delType="kategorija"
             kategorijaId=kategorija.id
-            openDeleteModal(kategorija.id)
+            openDeleteModal(kategorija.naziv)
         })
         
         grid.append(kat_div)
@@ -206,6 +218,17 @@ function checkIfFilled(inputs,button){
     
     return true
 }
+function createKategorija(){
+    let nazivK = $('#naziv-kategorije-input').val()
+    kategorije.push(
+        {
+            naziv: nazivK,
+            stavke: []    
+        }
+    )
+    popuni($('.grid').first(),kategorije)
+
+}
 function kategorijaByID(){
     for(let kategorija of kategorije){
         if(kategorija.id==kategorijaId){
@@ -221,7 +244,7 @@ function obrisi(){
         
         for(stavka of kat.stavke){
            // console.log( stavka.id +" "_ )
-            if(stavka.id ==stavkaDel.id ){
+            if(stavka.id ==stavkaAlt.id ){
                 console.log("removed")
                 removeElemFromArray(stavka,kat.stavke)
                 break
@@ -276,11 +299,21 @@ function fillCreateModal(info){
 
     
 }
+
+function azuriraj(){
+    //TODO $.post(kategorije)
+}
+
 function createStavka(){
 
     let nazivS = $("#create-modal-naziv-input").val()
     let cenaS = $("#create-modal-cena-input").val()
     let procenatS = $("#create-modal-procenat-input").val()
+    if(createType=='change'){
+        stavkaAlt.naziv=nazivS
+        stavkaAlt.cena=cenaS
+        stavkaAlt.akcija=procenatS
+    }else{
     kategorijaByID().stavke.push(
         {
             naziv:nazivS,
@@ -288,6 +321,7 @@ function createStavka(){
             akcija: procenatS
         }
     )
+    }
     console.log(kategorije)
     closeModal()
     popuni($('.grid').first(),kategorije)
