@@ -97,15 +97,28 @@ function createUserEmailPass(email,password){
     // ..
   });
 }
-async function uploadImage(file,type){
+
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+
+async function uploadImage(file){
   const metadata = {
     contentType: type,
   };
-  let img_ref= ref(storage, 'zurka.jpg')
+  let id = makeid(30);
+  let img_ref= ref(storage, id)
   //let blob = await fetch(url).then(r => r.blob());
-  uploadBytes(img_ref, file,metadata).then((snapshot) => {
+  uploadBytes(img_ref, file).then((snapshot) => {
   console.log('Uploaded a blob or file!');
-
+    return id;
   });
   
 }
@@ -116,16 +129,16 @@ async function downloadImage(path){
 }
 
 
-$(document).ready( async ()=>{
+// $(document).ready( async ()=>{
   
-//  var ret = await $.get( 'https://jsonplaceholder.typicode.com/posts')
-// console.log(ret)
-//  console.log("check2")
-const img = document.getElementById('myimg');
-//console.log(await downloadImage("beer.jpg"))
-img.setAttribute('src',await downloadImage("background.jpg"));
+// //  var ret = await $.get( 'https://jsonplaceholder.typicode.com/posts')
+// // console.log(ret)
+// //  console.log("check2")
+// const img = document.getElementById('myimg');
+// //console.log(await downloadImage("beer.jpg"))
+// img.setAttribute('src',await downloadImage("background.jpg"));
   
-})
+// })
 
 export { uploadImage,downloadImage};
 

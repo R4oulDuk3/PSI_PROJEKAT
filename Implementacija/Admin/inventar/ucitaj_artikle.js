@@ -1,45 +1,45 @@
 
 var artikliUNedostatku = [
     {
-        id:"123213",
+        idproduct :"123213",
         name: 'Amstel',
-        kolicina : '10',
-
-        sifraProizvoda: '2123232323232',
-        nabavnaCena: '140',
-        sifraDobavljaca: '1231231232131'
+        amount  : '10',
+        minamount : '10',
+        productcode : '2123232323232',
+        marketprice : '140',
+        suppliercode : '1231231232131'
 
     },{
-        id:"123213",
+        idproduct :"123213",
         name: 'Amstel',
-        kolicina : '10',
-
-        sifraProizvoda: '2123232323232',
-        nabavnaCena: '140',
-        sifraDobavljaca: '1231231232131'
+        amount  : '10',
+        minamount : '10',
+        productcode : '2123232323232',
+        marketprice : '140',
+        suppliercode : '1231231232131'
 
     },
     {
-        id:"123213",
+        idproduct :"123213",
         name: 'Amstel',
-        kolicina : '10',
-
-        sifraProizvoda: '2123232323232',
-        nabavnaCena: '140',
-        sifraDobavljaca: '1231231232131'
+        amount  : '10',
+        minamount : '10',
+        productcode : '2123232323232',
+        marketprice : '140',
+        suppliercode : '1231231232131'
 
     },
 ]
 
 
 var artikli =[
-    {id:"123213",
+    {idproduct :"123213",
         name: 'Lasko',
-        kolicina : '10',
-
-        sifraProizvoda: '2123232323232',
-        nabavnaCena: '140',
-        sifraDobavljaca: '1231231232131'
+        amount  : '10',
+        minamount : '10',
+        productcode : '2123232323232',
+        marketprice : '140',
+        suppliercode : '1231231232131'
 
     },
 ]
@@ -48,13 +48,16 @@ var modalDeleteOpen= false
 var modalPorudzbeniceOpen= false
 var ignoreDoc=false
 var artikalCreateInputs = ["#naziv-input","#tren-kolicina-input","#nabavna-cena-input","#manjak-kolicina-input"]
-$(document).ready(function (){
-        
-    let grid1 = $('#porudzbenice-grid')
-    let grid2 = $('#artikli-grid')
-    popuni(grid1,artikliUNedostatku)
-    popuni(grid2,artikli)
-    popuniModalPorudzbenice(artikliUNedostatku)
+$(document).ready(async function (){
+    popuniSidebar("admin")
+    // artikliUNedostatku =  await $.get("apiDeficientProduct") //AJAX
+    // artikli = await $.get("apiProduct") //AJAX
+    // let grid1 = $('#porudzbenice-grid')
+    // let grid2 = $('#artikli-grid')
+    // popuni(grid1,artikliUNedostatku)
+    // popuni(grid2,artikli)
+    // popuniModalPorudzbenice(artikliUNedostatku)
+    refresh()
 
     $(document).click(function(event) { 
         console.log('close')
@@ -84,11 +87,14 @@ $(document).ready(function (){
     $("#modal-create-btn").on('click',()=>{openCreateModal(null)})
     $("#close-porudzbenice").on('click',closeModal)
     $("#modal-porudzbenice-btn").on('click',openPorudzbeniceModal)
-    //save("test.txt","AAAAAAA")
+    $("#kreiraj-porudzbenicu").on('click',createPorudzbenica)
+
     checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
     for(let input of artikalCreateInputs){
         $(input).on('input',()=>{checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))})
     }
+    $("#sacuvaj-artikal").on('click',sacuvajArtikal)
+    $("#del-button-confirm").on('click',obirsiArtikal)
 })
 function openDeleteModal(placeholder){
     
@@ -135,20 +141,24 @@ function fillCreateModal(info){
     if(info==null){
         $('#naslov-modala').text("Kreiranje artikla")
         info={
+            idproduct :"",
                name: '',
-                kolicina : '',
-                sifraProizvoda: '',
-                nabavnaCena: '',
-                sifraDobavljaca: ''
+               amount  : '',
+               productcode : '',
+                marketprice : '',
+                suppliercode : '',
+                minamount : '',
         }
     }else{
         $('#naslov-modala').text("Izmena artikla")
     }
+    $("#artikal-id-modal").text(info.idproduct);
     $('#naziv-input').attr('value',info.name);
-    $('#sifra-artikla-input').attr('value',info.sifraProizvoda);
-    $('#sifra-dobavljaca-input').attr('value',info.sifraDobavljaca);
-    $('#tren-kolicina-input').attr('value',info.kolicina);
-    $('#nabavna-cena-input').attr('value',info.nabavnaCena);
+    $('#sifra-artikla-input').attr('value',info.productcode );
+    $('#sifra-dobavljaca-input').attr('value',info.suppliercode );
+    $('#tren-kolicina-input').attr('value',info.amount );
+    $('#nabavna-cena-input').attr('value',info.marketprice );
+    $('#manjak-kolicina-input').attr('value',info.minamount );
 }
 
 function checkIfMathcing(){
@@ -177,6 +187,7 @@ function closeModal(){
 
 // dodati da se na window klik svi modali zatvore
 function popuni(grid,podaci){
+    grid.empty()
     console.log("check")
     podaci.forEach((artikal)=>{
         let karta = $('<div></div>').addClass('card-single');
@@ -185,17 +196,17 @@ function popuni(grid,podaci){
         let buttonsDiv = $('<div></div>').addClass('buttons')
         let buttonChange = $('<button class="sm-button modal-btn"><span class="las la-exchange-alt"></span></button>')
         let buttonDelete = $('<button class="sm-button modal-btn-del"><span class="las la-times"></span></button>')
-        buttonDelete.on('click',()=>{openDeleteModal(artikal.id)})
+        buttonDelete.on('click',()=>{openDeleteModal(artikal.idproduct )})
         buttonChange.on('click',()=>{openCreateModal(artikal)})
         buttonsDiv.append(buttonChange)
         buttonsDiv.append(buttonDelete)
         naslovniDiv.append(naslov)
         naslovniDiv.append(buttonsDiv)
         let table = $('<table></table>')
-        table.append($('<tr></tr>').append($('<td></td>').append('Kolicina')).append($('<td></td>').append(artikal.kolicina)))
-        table.append($('<tr></tr>').append($('<td></td>').append('Sifra')).append($('<td></td>').append(artikal.sifraProizvoda)))
-        table.append($('<tr></tr>').append($('<td></td>').append('Nabavna cena')).append($('<td></td>').append(artikal.nabavnaCena+" RSD")))
-        table.append($('<tr></tr>').append($('<td></td>').append('Sifra dobavljaca')).append($('<td></td>').append(artikal.sifraDobavljaca)))
+        table.append($('<tr></tr>').append($('<td></td>').append('Kolicina')).append($('<td></td>').append(artikal.amount )))
+        table.append($('<tr></tr>').append($('<td></td>').append('Sifra')).append($('<td></td>').append(artikal.productcode )))
+        table.append($('<tr></tr>').append($('<td></td>').append('Nabavna cena')).append($('<td></td>').append(artikal.marketprice +" RSD")))
+        table.append($('<tr></tr>').append($('<td></td>').append('Sifra dobavljaca')).append($('<td></td>').append(artikal.suppliercode )))
         karta.append(naslovniDiv)
         karta.append(table)
         grid.append(karta)
@@ -207,27 +218,39 @@ function resetErrors(){
     $('tren-kolicina-err').text("")
     $('manjak-kolicina-err').text("")
 }
-function sacuvajArtikal(){
-    let name = $('#naziv-input').val()
+async function sacuvajArtikal(){
+    let id = $("#artikal-id-modal").text()
+    if(id=="")id=-1;
+    let nameA = $('#naziv-input').val()
     let sifA = $('#sifra-artikla-input').val()
     let sifD = $('#sifra-dobavljaca-input').val()
     let trenKolicina = $('#tren-kolicina-input').val()
     let cena = $('#nabavna-cena-input').val()
     let kolicinaManjak = $('#manjak-kolicina-input').val()
-    let errExist=false
-    if(name==""){
-        errExist=true
-        $('naziv-err').text("Mora se uneti naziv artikla")
+
+    let noviArtikal = {
+            idproduct : parseInt(id),
+            name: nameA,
+            amount  : parseInt(trenKolicina),
+            minamount: parseInt(kolicinaManjak),
+            productcode : parseInt(sifA),
+            marketprice : parseInt(cena),
+            suppliercode : parseInt(sifD)
+    
     }
-    if(trenKolicina==""){
-        errExist=true
-        $('tren-kolicina-err').text("Mora se uneti trenutna kolicina artikla")
-    }
-    if(kolicinaManjak==""){
-        errExist=true
-        $('manjak-kolicina-err').text("Mora se uneti kolicina ispod koje je artikal u manjku")
-    }
-    if(errExist)return
+    console.log(noviArtikal)
+    setSpinner()
+    closeModal()
+    await postData("apiSetProduct", noviArtikal)
+    resetSpinner()
+    // $.post(host+"/apiSetProduct", noviArtikal) //AJAX
+}
+async function obirsiArtikal(){
+    let id = $("#id")
+    setSpinner()
+    closeModal()
+    await postData("apiSetProduct", {idproduct:id})
+    resetSpinner()
 }
 
 function save(filename, data) {
@@ -244,13 +267,49 @@ function save(filename, data) {
         document.body.removeChild(elem);
     }
 }
+var porudzbenica_inputs = []
+function refresh(){
+    
+    //artikliUNedostatku =  await $.get("apiDeficientProduct") //AJAX
+    //artikli = await $.get("apiProduct") //AJAX
+    let grid1 = $('#porudzbenice-grid')
+    let grid2 = $('#artikli-grid')
+    popuni(grid1,artikliUNedostatku)
+    popuni(grid2,artikli)
+    popuniModalPorudzbenice(artikliUNedostatku)
+}
+
+function createPorudzbenica(){
+    let tekst=""
+    for(let i =0; i < artikliUNedostatku.length;i++){
+        tekst+=artikliUNedostatku[i].name+" "+parseInt(porudzbenica_inputs[i].val())+"\n"
+    }
+    tekst+= "Ukupna cena porudzbine je " + pordzbenicaPrice()
+    closeModal()
+    save("porudzbenice.txt",tekst)
+}
+function pordzbenicaPrice(){
+    let price=0;
+    for(let i =0; i < artikliUNedostatku.length;i++){
+        console.log(parseInt(artikliUNedostatku[i].marketprice))
+        console.log(parseInt(porudzbenica_inputs[i].val()))
+        price+= parseInt(artikliUNedostatku[i].marketprice)*parseInt(porudzbenica_inputs[i].val())
+    }
+    return price;
+}
 
 function popuniModalPorudzbenice(podaci){
+    $('#telo-tabela-artikala').empty()
     podaci.forEach((artikal)=>{
         let red= $('<tr></tr>')
         red.append($('<td>'+artikal.name+'</td>'))
-        red.append($('<td>'+artikal.kolicina+'</td>'))
-        red.append($('<td><input type="text"></td>')) 
+        red.append($('<td>'+artikal.amount +'</td>'))
+        let input = $('<input type="number" min="0" value="0">')
+        porudzbenica_inputs.push(input)
+        input.on('input',()=>{
+            $('#ukupna-cena-porudzbenice').text(pordzbenicaPrice())
+        })
+        red.append($('<td></td>').append(input)) 
         $('#telo-tabela-artikala').append(red)
     })
 }

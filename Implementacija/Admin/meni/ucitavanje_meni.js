@@ -1,41 +1,41 @@
 let kategorije = [
-    {   id:"123",
+    {
         naziv : "Kategorija",
         stavke:[
             {
-                id:"123",
-                naziv:"Amstel",
-                cena:"180",
+                idmeni:"123",
+                meniproduct:"Amstel",
+                price:"180",
                 akcija: "60"
             },
             {
-                id:"125",
-                naziv:"Amstel",
-                cena:"180",
+                idmeni:"125",
+                meniproduct:"Amstel",
+                price:"180",
                 akcija: "60"
             },
             {
-                id:"124",
-                naziv:"Amstel",
-                cena:"180",
+                idmeni:"124",
+                meniproduct:"Amstel",
+                price:"180",
                 akcija: "60"
             },
         ]
     },
     {
-        id:"124",
+
         naziv : "Kategorija",
         stavke:[
             {
-                id:"126",
-                naziv:"Amstel",
-                cena:"180",
+                idmeni:"126",
+                meniproduct:"Amstel",
+                price:"180",
                 akcija: "60"
             },
             {
-                id:"127",
-                naziv:"Amstel",
-                cena:"180",
+                idmeni:"127",
+                meniproduct:"Amstel",
+                price:"180",
                 akcija: "60"
             },
 
@@ -53,9 +53,9 @@ var createType=''
 var delInputs = ["#modal-del-input"]
 var createStavkaInputs = ["#create-modal-naziv-input","#create-modal-cena-input","#create-modal-procenat-input"]
 var createKategorijaInputs = ["#naziv-kategorije-input"]
-$(document).ready(function (){
-    let grid = $('.grid').first();
-    popuni(grid,kategorije)
+$(document).ready(async function (){
+    popuniSidebar("admin")
+    refresh()
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -102,6 +102,12 @@ $(document).ready(function (){
 
 })
 
+function refresh(){
+    let grid = $('.grid').first();
+    kategorije = await $.get("apiMeni") //AJAX
+    popuni(grid,kategorije)
+}
+
 function popuni(grid,data){
     let cnt=0;
     grid.empty()
@@ -139,8 +145,8 @@ function popuni(grid,data){
         table_body= $('<tbody></tbody>')
         kategorija.stavke.forEach((stavka)=>{
             red= $('<tr></tr>')
-            naziv = $('<td>'+stavka.naziv+'</td>')
-            cena = $('<td>'+stavka.cena+' RSD</td>')
+            naziv = $('<td>'+stavka.meniproduct+'</td>')
+            cena = $('<td>'+stavka.price+' RSD</td>')
             akcija=null
             if(stavka.akcija==0)akcija = $('<td>Nema akcije</td>')
             else akcija = $('<td>'+stavka.akcija+' %</td>')
@@ -156,9 +162,9 @@ function popuni(grid,data){
             })
             s_delButton.on('click',()=>{
                 delType="stavka"
-                kategorijaId = kategorija.id
+                kategorijaId = kategorija.naziv
                 stavkaAlt = stavka
-                //openDeleteModal(stavka.id)
+
                 obrisi()
             })
 
@@ -173,7 +179,7 @@ function popuni(grid,data){
         
         buttonAdd.on('click',()=>{
             createType='create'
-            kategorijaId=kategorija.id
+            kategorijaId=kategorija.naziv
             openCreateModal(null)}
             )
 
@@ -186,7 +192,7 @@ function popuni(grid,data){
         kat_div.append(card)
         delButton.on('click',()=>{
             delType="kategorija"
-            kategorijaId=kategorija.id
+            kategorijaId=kategorija.naziv
             openDeleteModal(kategorija.naziv)
         })
         
@@ -231,7 +237,7 @@ function createKategorija(){
 }
 function kategorijaByID(){
     for(let kategorija of kategorije){
-        if(kategorija.id==kategorijaId){
+        if(kategorija.naziv==kategorijaId){
             return kategorija
         }
     }
@@ -243,8 +249,8 @@ function obrisi(){
         let kat =kategorijaByID()
         
         for(stavka of kat.stavke){
-           // console.log( stavka.id +" "_ )
-            if(stavka.id ==stavkaAlt.id ){
+
+            if(stavka.idmeni ==stavkaAlt.idmeni ){
                 console.log("removed")
                 removeElemFromArray(stavka,kat.stavke)
                 break
@@ -286,22 +292,29 @@ function fillCreateModal(info){
     if(info==null){
         $('#create-modal-naslov').text("Kreiranje stavke")
         info ={
-            naziv:"",
-            cena:"",
+            meniproduct:"",
+            price:"",
             akcija: ""
         }
     }else{
         $('#create-modal-naslov').text("Izmena stavke")
     }
-    $("#create-modal-naziv-input").attr('value',info.naziv)
-    $("#create-modal-cena-input").attr('value',info.cena)
+    $("#create-modal-naziv-input").attr('value',info.meniproduct)
+    $("#create-modal-cena-input").attr('value',info.price)
     $("#create-modal-procenat-input").attr('value',info.akcija)
 
     
 }
 
-function azuriraj(){
+async function azuriraj(){
+    console.log(kategorije)
     //TODO $.post(kategorije)
+    setSpinner()
+    closeModal()
+    await postData("createEvents") //AJAX POST
+    refresh()
+    resetSpinner()
+    
 }
 
 function createStavka(){
@@ -310,14 +323,14 @@ function createStavka(){
     let cenaS = $("#create-modal-cena-input").val()
     let procenatS = $("#create-modal-procenat-input").val()
     if(createType=='change'){
-        stavkaAlt.naziv=nazivS
-        stavkaAlt.cena=cenaS
+        stavkaAlt.meniproduct=nazivS
+        stavkaAlt.price=cenaS
         stavkaAlt.akcija=procenatS
     }else{
     kategorijaByID().stavke.push(
         {
-            naziv:nazivS,
-            cena:cenaS,
+            meniproduct:nazivS,
+            price:cenaS,
             akcija: procenatS
         }
     )

@@ -82,6 +82,7 @@ var modalKategorijaChangeOpen=false
 var ignoreDoc=false
 $(document).ready(function (){
     let grid = $('.grid').first();
+    popuniSidebar("admin")
     popuni(grid,postavke)
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)

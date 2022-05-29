@@ -87,21 +87,21 @@ const labels = [
 
   var customerExp = [
     {
-      idUser:1,
+      customer :1,
       userName:"ZarlaDebilana",
-      suma:2500
+      amount :2500
     },
-    {idUser:2,
+    {customer :2,
       userName:"CoaBandera",
-      suma:2500
+      amount :2500
     },
-    {idUser:3,
+    {customer :3,
       userName:"KaleDzedaj",
-      suma:2500
+      amount :2500
     },
-    {idUser:1,
+    {customer :1,
       userName:"ZarlaDebilana",
-      suma:2500
+      amount :2500
     }
   ]
   function kreirajChart(labelsC,dataC,num){
@@ -152,9 +152,9 @@ const labels = [
    korisniciPotrosnja = {}
    for(ce of customerExp){
     if(ce.userName in korisniciPotrosnja){
-      korisniciPotrosnja[ce.userName]+=artikal.kolicina
+      korisniciPotrosnja[ce.userName]+=ce.amount
     }else{
-      artikliPotrosnja[artikal.nazivArtikla]=artikal.kolicina
+      artikliPotrosnja[artikal.nazivArtikla]=ce.amount
     }
   }
   labels= []
@@ -183,6 +183,7 @@ const labels = [
 
   $(document).ready(
     ()=>{
+      popuniSidebar("admin")
       for(let i =1;i < 5;i++){
         $("#card-"+i).hide()
       }

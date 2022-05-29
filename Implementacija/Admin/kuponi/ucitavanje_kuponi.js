@@ -1,24 +1,27 @@
+import { uploadImage ,downloadImage} from "../index.js"
+
 let kuponi = [
     {
-        naziv: "Besplatno pivo",
-        opis: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        cena: '1000',
-        imagePath :'../assets/beer.jpg'
+        name: "Besplatno pivo",
+        description : 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
+
+        picture  :'assets/beer.jpg'
     },
     {
-        naziv: "Besplatna kibla",
-        opis: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
-        cena: '1000',
-        imagePath :'../assets/beer.jpg'
+        name: "Besplatna kibla",
+        description : 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
+
+        picture  :'assets/beer.jpg'
     },
 ]
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
 var file=null
-var inputs = ["naziv-input","opis-input"]
+var inputs = ["naziv-input",]
 $(document).ready(function (){
     let grid = $('.grid').first();
+    // kuponi = $.get() //AJAX
     popuni(grid,kuponi)
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
@@ -47,19 +50,20 @@ $(document).ready(function (){
       for(let input of inputs){
         $("#"+input).on('change keyup paste',checkIfFilled)
     }
+    $("#create-button").on('click',kreiranjeKupona)
 })
 
 function popuni(grid,data){
-    data.forEach((kupon)=>{
-        card = $('<div class="card"></div>')
-        card.css('background-image','url('+kupon.imagePath+')')
-        content = $('<div class="card-content"></div>')
-        buttonsDiv = $('<div class="buttons"></div>')
-        delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
-        naslov = $('<h2 class="card-title"></h2>').text(kupon.naziv)
-        tekst = $('<p class="card-body">Opis: '+kupon.opis+"<br>Cena: "+ kupon.cena +'</p>')
+    data.forEach(async (kupon)=>{
+        let card = $('<div class="card"></div>')
+        card.css('background-image','url('+(await downloadImage(kupon.picture) ) +')')
+        let content = $('<div class="card-content"></div>')
+        let buttonsDiv = $('<div class="buttons"></div>')
+        let delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
+        let naslov = $('<h2 class="card-title"></h2>').text(kupon.name)
+        let tekst = $('<p class="card-body">Opis: '+kupon.description +"<br>Cena: "+ kupon.cena +'</p>')
         delButton.on('click',()=>{
-            openDeleteModal(kupon.naziv)
+            openDeleteModal(kupon.name)
         })
         buttonsDiv.append(delButton)
         content.append(buttonsDiv)
@@ -85,9 +89,19 @@ function checkIfFilled(){
 }
 
 function kreiranjeKupona(){
-    let naziv = $('naziv-input').val()
-    let opis = $('opis-input').val()
-
+    if(!checkIfFilled())return
+    let name = $('naziv-input').val()
+    let descriptionK  = $('opis-input').val()
+    file = $("#image_input").prop('files')[0]
+    uploadImage(file,"assets/"+file.name,"image/jpeg")
+    let kupon = {
+        
+            name: name,
+            description : descriptionK,    
+            picture  :'../assets/beer.jpg'
+        
+    }
+    //$.post(host+"/apiCreateCoupon") //AJAX
 }
 
 function openDeleteModal(placeholder){

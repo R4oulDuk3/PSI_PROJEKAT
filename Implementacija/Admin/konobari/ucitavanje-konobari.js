@@ -1,16 +1,16 @@
 import {uploadImage,downloadImage} from "../index.js"
 let konobari = [
-    {   id:"1",
-        ime: "Marko Savic",
+    {   idusers :"1",
+        name : "Marko Savic",
         telefon: '+38162626262',
         email: 'marko-savic@gmail.com',
         korisnickoIme: 'mareSavke',
         imagePath:'../assets/konobar.jpg'
     },
-    {   id:"2",
-        ime: "Nevenka Nevenkic",
+    {   idusers :"2",
+        name : "Nevenka Nevenkic",
         telefon: '+38162626262',
-        email: 'nevenkaNevenkic@gmail.com',
+        email : 'nevenkaNevenkic@gmail.com',
         korisnickoIme: 'nenaNena',
         imagePath:'../assets/konobarka.webp'
     }
@@ -20,6 +20,7 @@ var modalDeleteOpen= false
 var ignoreDoc=false
 var file=null
 $(document).ready(function (){
+    popuniSidebar("admin")
     let grid = $('.grid').first();
     popuni(grid,konobari)
     
@@ -45,7 +46,8 @@ $(document).ready(function (){
         }    
       });
     $("#image_input").on('change',chooseFile)
-
+    $('#modal-del-input').on('input',checkIfMathcing)
+    $('#del-btn-potvrdi').on('click',deleteKonobar)
 })
 
 function popuni(grid,data){
@@ -56,10 +58,10 @@ function popuni(grid,data){
         let content = $('<div class="card-content"></div>')
         let buttonsDiv = $('<div class="buttons"></div>')
         let delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
-        let naslov = $('<h2 class="card-title"></h2>').text(konobar.ime)
+        let naslov = $('<h2 class="card-title"></h2>').text(konobar.name )
         let tekst = $('<p class="card-body">Telefon: '+konobar.telefon+"<br>email: "+ konobar.email +'</p>')
         delButton.on('click',()=>{
-            openDeleteModal(konobar.ime)
+            openDeleteModal(konobar.idusers )
         })
         buttonsDiv.append(delButton)
         content.append(buttonsDiv)
@@ -103,7 +105,8 @@ function chooseFile(e){
 }
 function deleteKonobar(){
     if(checkIfMathcing()){
-        let ime = $('#')
+        let idK = $('#id').val()
+        $.post(host+"/apiDeleteWaiters",{id:idK})
         //TO DO DELETE
     }
 }
@@ -111,10 +114,23 @@ function kreiranjeKonobara(){
     naziv = $('naziv-input').val()
     kime = $('kime-input').val()
     mail = $('mail-input').val()
-    telefon = $('mail-input').val()
+    telefonA = $('mail-input').val()
     lozinka = $('lozinka1-input').val()
     lozinka2 = $('lozinka2-input').val()
+    if(lozinka!=lozinka2){
+        alert("Lozinke se ne poklapaju")
+        return
+    }
     //TO DO SLANJE
+    let konobar =     {   
+        name : naziv,
+        telefon: telefon,
+        email : mail,
+        korisnickoIme: kime,
+        imagePath:'../assets/konobarka.webp',
+        password:lozinka
+    }
+    // $.post(host+"/apiCreateWaiter",konobar) //AJAX
 }
 function closeModal(){
     console.log("close modal")

@@ -134,7 +134,7 @@ function createZurka(){
     console.log(datum)
     console.log(postavka)
 
-    let img_url = uploadImage(image)
+    uploadImage(image,'images/png')
 
     let zurka =     {
         name: 'Zurka 1',

@@ -1,40 +1,40 @@
 var raspored=[
     {
-       idSmene: 1,
-       konobarId: 1,
-       date : new Date(2022,4,25)
+        shift : 1,
+       weighter : 1,
+       day  : new Date(2022,4,25)
     },
     {
        idSmene: 1,
-       konobarId: 1,
-       date : new Date(2022,4,26)
+       weighter: 1,
+       day  : new Date(2022,4,26)
     },
     {
        idSmene: 1,
-       konobarId: 1,
-       date : new Date(2022,4,27)
+       weighter: 1,
+       day  : new Date(2022,4,27)
     },
     {
         idSmene: 1,
-        konobarId: 2,
-        date : new Date(2022,4,27)
+        weighter: 2,
+        day  : new Date(2022,4,27)
      }
 ]
 var smene = [
     {
-        id:0,
-        pocetak: 8,
-        kraj: 12
+        idshift :0,
+        start : 8,
+        end : 12
     },
     {
-        id:1,
-        pocetak:12,
-        kraj:20,
+        idshift :1,
+        start:12,
+        end :20,
     },
     {
-        id:2,
-        pocetak:20,
-        kraj:4
+        idshift :2,
+        start:20,
+        end :4
     }
 ]
 var konobari = [
@@ -60,18 +60,18 @@ function findKonobarById(id){
     }
     return null
 }
-function findLatestDate(date,raspored){
+function findLatestDate(day ,raspored){
     for(info of raspored){
-        if(date<info.date){
-            date=info.date
+        if(day <info.day ){
+            day =info.day 
         }
     }
-    return date
+    return day 
 }
-function dateToString(date){
-    const yyyy = date.getFullYear();
-    let mm = date.getMonth() + 1; // Months start at 0!
-    let dd = date.getDate();
+function dateToString(day ){
+    const yyyy = day.getFullYear();
+    let mm = day.getMonth() + 1; // Months start at 0!
+    let dd = day.getDate();
     today = dd + '/' + mm + '/' + yyyy;
     return today
 }
@@ -125,15 +125,16 @@ function popuni(grid,raspored){
         grid.append(raspored)
     }
     for(info of raspored){
-        let rasporedNum =  Math.floor(datediff(startDate, info.date)/7)
-        let day = info.date.getDay()-1
-        console.log("day")
+        let rasporedNum =  Math.floor(datediff(startDate, info.day)/7)
+        let day = info.day.getDay()-1
+        console.log(day)
         if(day==-1)day=6
-        rasporediDatas[rasporedNum][info.idSmene][day].append($('<div>'+findKonobarById(info.konobarId).ime+'</div>'))
+        rasporediDatas[rasporedNum][info.idSmene][day].append($('<div>'+findKonobarById(info.weighter).ime+'</div>'))
     }
 
 }
 $(document).ready(()=>{
+    popuniSidebar("admin")
     let grid = $('#grid')
     popuni(grid,raspored)
     //Dohvati raspored

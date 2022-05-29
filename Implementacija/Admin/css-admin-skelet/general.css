@@ -1,11 +1,11 @@
 
 :root{
     --main-color: #B547C1;
-    --sidebar-width: 20%;
-    --main-width:80%;
+    --sidebar-width: 300px;
+    --main-width:  calc(100% - 300px);
     
-    --sidebar-width-reduced:5%;
-    --main-width-extended:95%;
+    --sidebar-width-reduced:70px;
+    --main-width-extended:calc(100% - 70px);
     --modal-duration: 1s;
     --modal-color: #428bca;
 }

@@ -213,6 +213,7 @@ $(document).ready(function (){
     //Dohvati prethodni raspored
     //Dohvati Konobare
     //Dohvati smene
+    popuniSidebar("admin")
     noviRaspored=structuredClone(prethodniRaspored);
     $("#save-btn").on('click',sendNoviRaspored)
     $("#table").hide()
