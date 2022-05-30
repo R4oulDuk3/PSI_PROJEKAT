@@ -58,21 +58,23 @@ function proveri(body,data){
                 body.append(tr)
                 $("#button"+smena.idSmene).on('click',()=>{
                      alert("Unos smene")
-                     posalji.push({
+                     let smena = {
                         idSmene:smena.idSmene,
                         vremePocetka:smena.pocetak,
                         RedniBrojSmene: smena.redniBrSmene
-                    })
+                    }
                     alert("Poslala sam podatke")
+                     //$.post(host+"??",smena)//AJAX
                  })
                  $("#buttonR"+smena.idSmene).on('click',()=>{
                     alert("Zavrsi smenu")
-                    posalji.push({
+                    let smena = {
                         idSmene:smena.idSmene,
                         vremeKraja:smena.kraj,
                         RedniBrojSmene: smena.redniBrSmene
-                    })
+                    }
                     alert("Poslala sam podatke")
+                     //$.post(host+"??",smena)//AJAX
                 })
 
             }else if(smena && smena.pocetak>trVr && trVr<=smena.kraj ) {

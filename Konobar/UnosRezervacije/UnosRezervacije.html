@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
     <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
     <link rel="stylesheet" href="UnosRezervacije.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="UnosRezervacije.js"></script>
     <title>Unos Rezervacije</title>
 </head>
 <body>
@@ -93,9 +95,16 @@
             <div class="sve">
                 <div class="add-bar">
                     <div class="add-div">
-                        <div class="deo1" id="deo1">
+                        <div class="deo1" >
                             <h2  >Dogadjaj</h2>
-                            <input type="text" name="" id="" placeholder="Vece Filma"  style="width: 30%; color: black;">
+                            <div class="dropdown" >
+                                <button class="dropbtn" id="dog">Dogadjaji</button>
+                                <div class="dropdown-content" id="deo1" >
+                                  <a href="#">1</a>
+                                  <a href="#">2</a>
+                                  <a href="#">3</a>
+                                </div>
+                              </div>
                         </div>
                         <div class="deo2">
                             <h2>Ime i Prezime</h2>
@@ -118,12 +127,12 @@
                 </div>
                
                 <div class="rightSide">
-                    <table>
+                    <table >
                         <thead>
                             <tr><th>Sto</th>
                             <th>Broj Ljudi</th></tr>
                         </thead>
-                        <tbody>
+                        <tbody id="mytable">
                             <tr>
                                 <td>Sto 1</td>
                                 <td>15</td>

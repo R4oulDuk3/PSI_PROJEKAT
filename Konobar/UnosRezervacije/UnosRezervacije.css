@@ -137,6 +137,8 @@ tr:hover .sm-button{
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    width:225px;
+    height: 50px;
   }
   
   /* Change color of dropdown links on hover */
@@ -148,6 +150,7 @@ tr:hover .sm-button{
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #B547C1;}
 
+  .selected{background-color: #B547C1;}
 .add-bar{
 
     display:flex;
@@ -163,24 +166,35 @@ tr:hover .sm-button{
 .deo1{
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2rem;
-
+    justify-items: stretch;
+    padding-bottom: 1rem;
+        font-weight: bolder;
+        color: #222;
+        text-align: center;
+        
 }
+.dropbtn{
+    width:225px;
+    height: 50px;
+}
+
+
 .deo2{
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
 }
 .deo3{
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 .deo4{
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2rem;
+
+    padding-bottom: 1rem;
 }
 
 .sve{
