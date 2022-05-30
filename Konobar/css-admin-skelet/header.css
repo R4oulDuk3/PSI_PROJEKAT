@@ -6,7 +6,6 @@ header{
     position: fixed;
     left: var(--sidebar-width);
     width: var(--main-width);
-    
     top:0;
     z-index: 100;
     background-color: #fff;
@@ -25,7 +24,6 @@ header label span{
     display: flex;
     align-items: center;
     overflow-x: hidden;
-    padding-right: 1rem;
 }
 .search-wrapper span{
     display: inline-block;
@@ -36,7 +34,6 @@ header label span{
 .user-wrapper{
     display: flex;
     align-items: center;
-    margin-left: 1rem;
 }
 .user-wrapper img{
     border-radius: 50%;
@@ -69,25 +66,4 @@ header label span{
     margin-right: auto;
     font-size: large;
     border-radius: 15px;
-}
-#menu-btn{
-    display: inline;
-}
-
-
-@media only screen and (max-width: 1200px){
-    .search-wrapper{
-        display: none;
-        padding: .5rem;
-        border: none;
-        outline: none;
-    }
-    header{
-        display: flex;
-        justify-content: left;
-    }
-    #menu-btn{
-        display: none;
-    }
-
 }
