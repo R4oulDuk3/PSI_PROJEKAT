@@ -114,15 +114,24 @@ function changeEndTime(rdBr,input){
     input_poc_next.val(endTime)
 
 }
-
+function sacuvajSmene(){
+    postDataWithSpinner("url",{smeneInfo: JSON.stringify(smene)})
+}
 
 $(document).ready(
     
     ()=>{
-        
+        popuniSidebar("admin")
         let grid = $('#smene')
         popuni(grid,smene)
         $('#dodaj-smenu').on('click',dodajSmenu)
         $('#ukloni-smenu').on('click',ukloniSmenu)
     }
 )
+async function postDataWithSpinner(url,data){
+    closeModal()
+    setSpinner()
+    await postData(url,data)
+    refresh()
+    resetSpinner()
+}

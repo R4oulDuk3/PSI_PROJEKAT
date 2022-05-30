@@ -28,7 +28,7 @@ var postavke = [
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
-
+var createZurkaInputs=["#input-naslov","#input-datum"]
 $(document).ready(function (){
     onLoadSpinner()
     popuniSidebar("admin")
@@ -65,8 +65,27 @@ $(document).ready(function (){
     $('#create-zurka').on('click',createZurka)
     $('#input-datum').attr('min',new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
 
-
+    checkIfFilled(createZurkaInputs,$('#create-zurka'))
+    for(let input of createZurkaInputs){
+        $(input).on('input',()=>{
+            checkIfFilled(createZurkaInputs,$('#create-zurka'))
+        })
+    }
 })
+function checkIfFilled(inputs,button){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $(input).val())
+        if($(input).val()=="" || $(input).val()==undefined || $(input).val()==null){
+            button.prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    button.prop('disabled', false);
+    
+    return true
+}
 
 function checkIfMathcing(){
     if($('#modal-del-input').val()==$('#id').text()){
@@ -121,7 +140,7 @@ function resetErrors(){
     $('#err-naslov').text("")
     $('#err-datum').text("")
 }
-function createZurka(){
+async function createZurka(){
     console.log("check")
     let naslov = $('#input-naslov').val()
     let opis = $('#input-opis').val()
@@ -133,8 +152,12 @@ function createZurka(){
     console.log(opis)
     console.log(datum)
     console.log(postavka)
-
-    let img_url = uploadImage(image)
+    let img_url = "default_event.png"
+    if(image != undefined){
+        img_url = await uploadImage(image)
+    }
+    console.log(img_url)
+    
 
     let zurka =     {
         name: 'Zurka 1',
@@ -142,13 +165,13 @@ function createZurka(){
         start: datum,
         picture : image.name
     }
-    //$.post(host+"/apiCreateEvent",zurka)//AJAX
+
     closeModal()
     setSpinner()
+    //await postData()
     refresh()
-    setTimeout(function () {
-        resetSpinner()
-    }, 2000);
+    resetSpinner()
+
 }
 
 

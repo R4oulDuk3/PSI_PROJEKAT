@@ -1,74 +1,35 @@
 let postavke = [
     {
-        id:"123",
-        naziv : "Postavka",
-        stolovi:[
+        idsetup:"123",
+        name : "Postavka",
+        tables:[
             {
                 id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
+                name:"Separe",
+                noofseats: "8"
             },
             {
                 id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
+                name:"Separe",
+                noofseats: "8"
             },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
+
             
         ]
     },
     {
-        naziv : "Postavka",
-        id: "123",
-        stolovi:[
+        name : "Postavka",
+        idsetup: "123",
+        tables:[
             {
                 id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
+                name:"Separe",
+                noofseats: "8"
             },
             {
                 id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
-            },
-            {
-                id:"123",
-                naziv:"Separe",
-                brojOsoba: "8"
+                name:"Separe",
+                noofseats: "8"
             },
             
         ]
@@ -81,9 +42,8 @@ var modalDeleteOpen= false
 var modalKategorijaChangeOpen=false
 var ignoreDoc=false
 $(document).ready(function (){
-    let grid = $('.grid').first();
     popuniSidebar("admin")
-    popuni(grid,postavke)
+    refresh()
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -112,8 +72,30 @@ $(document).ready(function (){
         }
                   
       });
-      $('del-button-confirm').on('click',deleteStolovi)
+      $('#del-button-confirm').on('click',deleteStolovi)
+      $("#kreiraj-sto").on('click',createSto)
+      $("#dodaj-postavku").on('click',createPostavka)
 })
+async function refresh(){
+    //postavke = await $.get("apiSetup")//AJAX
+    let grid = $('.grid').first();
+    popuni(grid,postavke)
+}
+
+function checkIfFilled(inputs,button){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $(input).val())
+        if($(input).val()=="" || $(input).val()==undefined){
+            button.prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    button.prop('disabled', false);
+    
+    return true
+}
 
 function checkIfMathcing(){
     if($('#modal-del-input').val()==$('#id').text()){
@@ -135,13 +117,13 @@ function popuni(grid,data){
         changeButton = $('<button class="sm-button modal-btn-del"><span class="las la-exchange-alt"></span></button>')
         delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
         
-        delButton.on('click',()=>{openDeleteModal(postavka.naziv)})
-        changeButton.on('click',()=>{openKategorijaChangeModal(postavka.naziv)})
+        delButton.on('click',()=>{openDeleteModal(postavka.name)})
+        changeButton.on('click',()=>{openKategorijaChangeModal(postavka.name)})
         
-        buttonsDiv.append(changeButton)
+        //buttonsDiv.append(changeButton) TODO ADD CHANGE
         buttonsDiv.append(delButton)
         
-        naslov = $('<h2></h2>').text(postavka.naziv)
+        naslov = $('<h2></h2>').text(postavka.name)
         card_header.append(naslov).append(buttonsDiv)
 
         card_body = $('<div class="card-body"></div>')
@@ -149,10 +131,10 @@ function popuni(grid,data){
         table = $('<table></table>')
         table_head = $('<thead><tr><td>Naziv stola</td><td colspan="2">Broj osoba</td></tr></thead>')
         table_body= $('<tbody></tbody>')
-        postavka.stolovi.forEach((sto)=>{
+        postavka.tables.forEach((sto)=>{
             red= $('<tr></tr>')
-            naziv = $('<td>'+sto.naziv+'</td>')
-            brojOsoba = $('<td>'+sto.brojOsoba+'</td>')
+            naziv = $('<td>'+sto.name+'</td>')
+            brojOsoba = $('<td>'+sto.noofseats+'</td>')
             let s_buttonsTd = $('<td></td>')
             let s_buttonsDiv = $('<div></div>')
             let s_delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
@@ -171,7 +153,7 @@ function popuni(grid,data){
         buttonAdd = $('<div class="button modal-btn margin"><a href="#">Dodaj sto</a></div>')
         
         buttonAdd.on('click',()=>{
-            postavkaId = postavka.id
+            postavkaId = postavka.idsetup
             openCreateModal(null)}
             )
 
@@ -183,32 +165,55 @@ function popuni(grid,data){
         card.append(card_header).append(card_body) 
         kat_div.append(card)
         delButton.on('click',()=>{
-            openDeleteModal(postavka.id)
+            openDeleteModal(postavka.idsetup)
             deleteType = "postavka"
         })
         
         grid.append(kat_div)
     })
 }
+async function postDataWithSpinner(url,data){
+    closeModal()
+    setSpinner()
+    await postData(url,data)
+    refresh()
+    resetSpinner()
+}
+
 function deleteStolovi(){
     if(checkIfMathcing()){
         let id =$('#id').text()
         if(deleteType=="postavka"){
-
+            console.log("Delete postavka")
+            postDataWithSpinner("apiDeleteSetup",{idsetup:id}) //AJAX
         }else{
-
+            console.log("Delete sto")
+            postDataWithSpinner("apiDeleteTable",{idtable:id}) //AJAX
         }
     }
 }
-function createSto(){
+async function createSto(){
 
     if($('#sto-naziv-input').val()==""){
         $('#naziv-err').text("Naziv mora biti popunjen")
     }else{
         let posId= postavkaId
-        let name = $('#sto-naziv-input').val()
+        let nameS = $('#sto-naziv-input').val()
         let num = $('#broj-osoba-input').val()
+        let sto = {
+            idsetup:posId,
+            name:nameS,
+            noofseats:num
+        }
+        postDataWithSpinner("url",sto)
     }
+}
+async function createPostavka(){
+    let naziv =$("#naziv-nove-postavke").val()
+    if(naziv=="")return 
+    console.log(naziv)
+    postDataWithSpinner("createPostavka",{nazivpostavke:naziv})//AJAX
+    
 }
 function resetErrors(){
     $('naziv-err').text("")

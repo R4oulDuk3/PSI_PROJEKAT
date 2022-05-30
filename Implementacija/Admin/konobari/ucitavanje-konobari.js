@@ -1,14 +1,16 @@
 import {uploadImage,downloadImage} from "../index.js"
 let konobari = [
     {   idusers :"1",
-        name : "Marko Savic",
+        name : "Marko",
+        surname : "Savic",
         telefon: '+38162626262',
         email: 'marko-savic@gmail.com',
         korisnickoIme: 'mareSavke',
         imagePath:'../assets/konobar.jpg'
     },
     {   idusers :"2",
-        name : "Nevenka Nevenkic",
+        name : "Nevenka",
+        surname : "Nevenkic",
         telefon: '+38162626262',
         email : 'nevenkaNevenkic@gmail.com',
         korisnickoIme: 'nenaNena',
@@ -19,11 +21,10 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
 var file=null
+var konobarInputs=["#ime-input","#prezime-input","#kime-input","#mail-input","#telefon-input","#lozinka1-input","#lozinka2-input"]
 $(document).ready(function (){
     popuniSidebar("admin")
-    let grid = $('.grid').first();
-    popuni(grid,konobari)
-    
+    refresh()
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -47,8 +48,34 @@ $(document).ready(function (){
       });
     $("#image_input").on('change',chooseFile)
     $('#modal-del-input').on('input',checkIfMathcing)
-    $('#del-btn-potvrdi').on('click',deleteKonobar)
+    $('#del-button-confirm').on('click',deleteKonobar)
+    $("#kreiraj-konobara").on('click',kreiranjeKonobara)
+    checkIfFilled(konobarInputs,$("#kreiraj-konobara"))
+    for(let input of konobarInputs){
+        $(input).on('input',()=>{
+            checkIfFilled(konobarInputs,$("#kreiraj-konobara"))
+        })
+    }
 })
+function refresh(){
+    // konobari = $.get(...) //AJAX
+    let grid = $('.grid').first();
+    popuni(grid,konobari)
+}
+function checkIfFilled(inputs,button){
+    console.log("check")
+    for(let input of inputs){
+        console.log(input+" val "+ $(input).val())
+        if($(input).val()=="" || $(input).val()==undefined || $(input).val()==null){
+            button.prop('disabled', true);
+            console.log("check1")
+            return false
+        }
+    }
+    button.prop('disabled', false);
+    
+    return true
+}
 
 function popuni(grid,data){
     grid.empty()
@@ -58,7 +85,7 @@ function popuni(grid,data){
         let content = $('<div class="card-content"></div>')
         let buttonsDiv = $('<div class="buttons"></div>')
         let delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
-        let naslov = $('<h2 class="card-title"></h2>').text(konobar.name )
+        let naslov = $('<h2 class="card-title"></h2>').text(konobar.name+" "+konobar.surname )
         let tekst = $('<p class="card-body">Telefon: '+konobar.telefon+"<br>email: "+ konobar.email +'</p>')
         delButton.on('click',()=>{
             openDeleteModal(konobar.idusers )
@@ -104,33 +131,49 @@ function chooseFile(e){
     console.log(file)
 }
 function deleteKonobar(){
-    if(checkIfMathcing()){
+    
         let idK = $('#id').val()
-        $.post(host+"/apiDeleteWaiters",{id:idK})
+        postDataWithSpinner("/apiDeleteWaiters",{id:idK})
         //TO DO DELETE
-    }
+    
 }
-function kreiranjeKonobara(){
-    naziv = $('naziv-input').val()
-    kime = $('kime-input').val()
-    mail = $('mail-input').val()
-    telefonA = $('mail-input').val()
-    lozinka = $('lozinka1-input').val()
-    lozinka2 = $('lozinka2-input').val()
+async function postDataWithSpinner(url,data){
+    closeModal()
+    setSpinner()
+    await postData(url,data)
+    refresh()
+    resetSpinner()
+}
+async function kreiranjeKonobara(){
+    let ime = $('#ime-input').val()
+    let prezime = $('#prezime-input').val()
+    let kime = $('#kime-input').val()
+    let mail = $('#mail-input').val()
+    let telefonA = $('#mail-input').val()
+    let lozinka = $('#lozinka1-input').val()
+    let lozinka2 = $('#lozinka2-input').val()
+    let image = $('#image_input').prop('files')[0]
+    let img_url="default_konobar.png"
+    setSpinner()
+    if(image != undefined){
+        img_url = await uploadImage(image)
+    }
+    console.log("IMG URL:"+img_url)
     if(lozinka!=lozinka2){
         alert("Lozinke se ne poklapaju")
         return
     }
     //TO DO SLANJE
     let konobar =     {   
-        name : naziv,
-        telefon: telefon,
+        name : ime,
+        surname : prezime,
+        telefon: telefonA,
         email : mail,
         korisnickoIme: kime,
-        imagePath:'../assets/konobarka.webp',
+        imagePath: img_url,
         password:lozinka
     }
-    // $.post(host+"/apiCreateWaiter",konobar) //AJAX
+    postDataWithSpinner("url",konobar)
 }
 function closeModal(){
     console.log("close modal")

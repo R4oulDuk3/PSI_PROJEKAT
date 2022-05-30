@@ -2,18 +2,37 @@
 var konobari = [
     {
         id: 1,
-        ime: "Marko Savic",
+        ime: "Marko",
+        prezime:"Savic",
         telefon: '+38162626262',
         email: 'marko-savic@gmail.com',
         korisnickoIme: 'mareSavke',
         imagePath:'../assets/konobar.jpg'
     },
     {   id: 2,
-        ime: "Nevenka Nevenkic",
+        ime: "Nevenka",
+        prezime:"Savic",
         telefon: '+38162626262',
         email: 'nevenkaNevenkic@gmail.com',
         korisnickoIme: 'nenaNena',
         imagePath:'../assets/konobarka.webp'
+    }
+]
+var preference = [
+    {
+        day:new Date(2022,4,19),
+        shift:1,
+        konobarId: 1
+    },
+    {
+        day:new Date(2022,4,19),
+        shift:1,
+        konobarId: 2
+    },
+    {
+        day:new Date(2022,4,19),
+        shift:1,
+        konobarId: 2
     }
 ]
 var prethodniRaspored=[
@@ -117,7 +136,7 @@ function fillTable(raspored){
         
        // if(j>=datediff(endDate,startDate))continue
         console.log("loc i: "+i+" j : "+j)
-        let elem=$('<div class="draggable" draggable="true" id="konobar_'+info.konobarId+'"><div>'+ findKonobarById(info.konobarId).ime+'</div></div>')
+        let elem=$('<div class="draggable" draggable="true" id="konobar_'+info.konobarId+'"><div>'+ findKonobarById(info.konobarId).ime +' '+findKonobarById(info.konobarId).prezime +'</div></div>')
         let button =$('<button class="sm-button"  style="display:block;"><span class="las la-times delete"></span></button>')
         button.on('click',()=>{
             elem.remove()
@@ -128,7 +147,25 @@ function fillTable(raspored){
 }
 
 const weekday = ["Nedelja","Ponedeljak","Utorak","Sreda","Cetvrtak","Petak","Subota"];
+function getKonobarsForDay(date, rdBrSmene){
+    let ret = "Konobari slobodni za ovaj dan su:\n"
+    let noKonobars = true;
+    console.log(date)
+    for(let preferenca of preference){
+        //console.log(date)
+        //console.log(preferenca.day)
+        //console.log(rdBrSmene)
+        //console.log(preferenca.shift)
+        if(preferenca.day.getTime()==date.getTime() && preferenca.shift==rdBrSmene){
 
+            let konobar= findKonobarById(preferenca.konobarId)
+            ret+= konobar.ime+" "+konobar.prezime+"\n"
+            noKonobars=false;
+        }
+    }
+    if(noKonobars)return "Nema konobara slobodnih za ovaj dan"
+    return ret
+}
 function initEmptyTable(){
     tableInfo=[]
     let date = new Date(startDate.getTime())
@@ -142,8 +179,18 @@ function initEmptyTable(){
     while(date.getTime()!=endDate.getTime()){
         console.log(date.getTime()+" "+endDate.getTime())
         theadtr.append($("<td>"+ weekday[date.getDay()]+ "</td>)"))
+        let thisDay =date;
         for(let i=0;i<smene.length;i++){
-            td = $("<td class='container'></td>");
+            let td = $("<td class='container tooltip'></td>");
+            // let span = $('<span class="tooltiptext"></span>')
+            // span.text(getKonobarsForDay(date,i+1))
+            td.hover(()=>{
+                td.css("background-color", "#cc0099");
+                changeInfoMsg(getKonobarsForDay(thisDay,i+1))
+            },()=>{
+                td.css("background-color", "#ffffff");
+            })
+            //td.append(span)
             infoRows[i].append(td)
             tableInfo[i].push(td)
         }
@@ -157,6 +204,10 @@ function initEmptyTable(){
     }
     $("#table").empty()
     $("#table").append(thead).append(tbody)
+}
+function changeInfoMsg(msg){
+
+    $("#infoMsg").text(msg)
 }
 function showTable(){
     startDate = $("#date-start").val()
@@ -179,6 +230,7 @@ function showTable(){
         $("#card-konobari").show()
         $("#save-btn").show()
         $("#table").show()
+        $(".infoMsg").first().css('display', 'flex')
     }
 }
 
@@ -226,5 +278,11 @@ $(document).ready(function (){
 
 })
 
-
+async function postDataWithSpinner(url,data){
+    closeModal()
+    setSpinner()
+    await postData(url,data)
+    refresh()
+    resetSpinner()
+}
 

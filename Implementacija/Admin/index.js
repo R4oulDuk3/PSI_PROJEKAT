@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import {getAuth, onAuthStateChanged,signInWithEmailAndPassword ,GoogleAuthProvider,signInWithPopup,signOut,createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import {getStorage,ref, uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -37,66 +36,7 @@ const actionCodeSettings = {
 
 // Initialize Firebase
 const app=initializeApp(firebaseConfig);
-const auth = getAuth(app)
 const storage = getStorage(app);
-const beerRef = ref(storage, 'beer.jpg');
-
-var currentUser=null
-
-onAuthStateChanged(auth, user=>{
-    if(user!=null){
-        console.log("logged in")
-        currentUser=user
-        console.log(user)
-    }else{
-        console.log('No user')
-        currentUser=null
-    }
-}
-)
-
-
-function googleLogin(){
-    var provider = new GoogleAuthProvider()
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-}
-function logout(){
-    signOut(auth).then(() => {
-        // Sign-out successful.
-      }).catch((error) => {
-        // An error happened.
-      });
-}
-function createUserEmailPass(email,password){
-    createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-}
 
 function makeid(length) {
   var result           = '';
@@ -110,17 +50,12 @@ charactersLength));
 }
 
 async function uploadImage(file){
-  const metadata = {
-    contentType: type,
-  };
   let id = makeid(30);
   let img_ref= ref(storage, id)
-  //let blob = await fetch(url).then(r => r.blob());
-  uploadBytes(img_ref, file).then((snapshot) => {
+  let res =await uploadBytes(img_ref, file)
+  console.log("RESSS"+res)
   console.log('Uploaded a blob or file!');
-    return id;
-  });
-  
+  return id;
 }
 
 async function downloadImage(path){

@@ -2,22 +2,22 @@ var raspored=[
     {
         shift : 1,
        weighter : 1,
-       day  : new Date(2022,4,25)
+       day  : new Date(2022,5,2)
     },
     {
-       idSmene: 1,
+        shift: 1,
        weighter: 1,
-       day  : new Date(2022,4,26)
+       day  : new Date(2022,5,2)
     },
     {
-       idSmene: 1,
+        shift: 1,
        weighter: 1,
-       day  : new Date(2022,4,27)
+       day  : new Date(2022,5,1)
     },
     {
-        idSmene: 1,
+        shift: 1,
         weighter: 2,
-        day  : new Date(2022,4,27)
+        day  : new Date(2022,5,1)
      }
 ]
 var smene = [
@@ -125,11 +125,15 @@ function popuni(grid,raspored){
         grid.append(raspored)
     }
     for(info of raspored){
+        console.log(startDate)
+        console.log(info.day)
         let rasporedNum =  Math.floor(datediff(startDate, info.day)/7)
         let day = info.day.getDay()-1
         console.log(day)
         if(day==-1)day=6
-        rasporediDatas[rasporedNum][info.idSmene][day].append($('<div>'+findKonobarById(info.weighter).ime+'</div>'))
+        console.log(rasporedNum)
+        console.log(info.shift)
+        rasporediDatas[rasporedNum][info.shift][day].append($('<div>'+findKonobarById(info.weighter).ime+'</div>'))
     }
 
 }
