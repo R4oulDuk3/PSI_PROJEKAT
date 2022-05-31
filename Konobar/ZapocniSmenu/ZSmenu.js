@@ -10,12 +10,12 @@ var smene=[
         idSmene: 2,
         redniBrSmene: 2,
         pocetak:"1600",
-        kraj:"2000" 
+        kraj:"2200" 
 
     },{
         idSmene: 7,
         redniBrSmene: 3,
-        pocetak:"0000",
+        pocetak:"2000",
         kraj:"0800" 
 
     }
@@ -45,29 +45,39 @@ function napraviVreme(tim){
     return H+':' + M 
 }
 
+var flagRano=false
+var flagKasno=false
+
 
 function proveri(body,data){
     let posalji=[]
     body.empty()
     let iCnt=0
-    for(smena of data){ //ako moze da zapocne smenu
-        if(smena.pocetak<=trVr && trVr<=smena.kraj && smena)  {
+    var imaSmena=0
+    for(var smena of data){ //ako moze da zapocne smenu
+        if(  smena)  {
+                imaSmena++;
                  let pS=napraviVreme(smena.pocetak)
                  let kS=napraviVreme(smena.kraj)
                 let tr=$('<div class="card-single"><div><h1>Smena '+smena.redniBrSmene + '</h1><br><h3 style="text-align: center;">'+pS+'-'+kS+ '</h3></div><div><button class="button" id="button'+smena.idSmene+'"><b>Zapocni smenu</b></button><button class="buttonR" id="buttonR'+smena.idSmene+'"><b>Zavrsi smenu</b></button></div></div>')
                 body.append(tr)
                 $("#button"+smena.idSmene).on('click',()=>{
                      alert("Unos smene")
-                     let smena = {
-                        idSmene:smena.idSmene,
-                        vremePocetka:smena.pocetak,
-                        RedniBrojSmene: smena.redniBrSmene
-                    }
-                    alert("Poslala sam podatke")
-                     //$.post(host+"??",smena)//AJAX
+                     if(trVr>=smena.pocetak){
+                        let smena = {
+                            idSmene:smena.idSmene,
+                            vremePocetka:smena.pocetak,
+                            RedniBrojSmene: smena.redniBrSmene
+                        }
+                        alert("Poslala sam podatke")
+                         //$.post(host+"??",smena)//AJAX
+                     }else{
+                         alert("Ne mozes da uneses smenu")
+                     }
                  })
                  $("#buttonR"+smena.idSmene).on('click',()=>{
                     alert("Zavrsi smenu")
+                    if(trvr>=smena.kraj){
                     let smena = {
                         idSmene:smena.idSmene,
                         vremeKraja:smena.kraj,
@@ -75,19 +85,27 @@ function proveri(body,data){
                     }
                     alert("Poslala sam podatke")
                      //$.post(host+"??",smena)//AJAX
+                }
                 })
 
-            }else if(smena && smena.pocetak>trVr && trVr<=smena.kraj ) {
-                
-                alert("Nije tvoje vreme za smenu dosao si prerano")
+            }else if(imaSmena==0 && smena && smena.pocetak>trVr && trVr<smena.kraj ) {
+                flagRano=true
+                //alert("Namestili flagRano")
             }
-            else if(smena && trVr>smena.kraj && smena.pocetak<=trVr){
-                alert("Nije tvoje vreme za smenu dosao si prekASNO")
+            else if(imaSmena==0 &&  smena && trVr>smena.kraj && smena.pocetak<=trVr){
+                flagRano=true
+                //alert("Namestili flagKasno")
             }
-            if(smena==0){
-                alert("Nema smena")
+            if(imaSmena==0){
+                //alert("Nema smena")
             }
     }
+    // if(flagRano && imaSmena==0){
+    //     alert("Dosao si prerano")
+    // }
+    // if(flagKasno && imaSmena==0){
+    //     alert("Dosao si prekasno")
+    // }
 }
 
 $(document).ready(
