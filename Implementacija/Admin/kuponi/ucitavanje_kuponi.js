@@ -119,8 +119,8 @@ function refresh(){
 
 async function kreiranjeKupona(){
     if(!checkIfFilled())return
-    let nameK = $('naziv-input').val()
-    let descriptionK  = $('opis-input').val()
+    let nameK = $('#naziv-input').val()
+    let descriptionK  = $('#opis-input').val()
     file = $("#image_input").prop('files')[0]
     let img_url= "default_coupon.png"
     setSpinner()
@@ -135,6 +135,7 @@ async function kreiranjeKupona(){
             description : descriptionK,    
             picture : img_url
     }
+    console.log(kupon)
     postDataWithSpinner("apiCreateCoupon",kupon)
 }
 async function brisanjeKupona(){

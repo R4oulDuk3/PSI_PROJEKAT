@@ -22,17 +22,17 @@ var raspored=[
 ]
 var smene = [
     {
-        idshift :0,
+        idshift :1,
         start : 8,
         end : 12
     },
     {
-        idshift :1,
+        idshift :2,
         start:12,
         end :20,
     },
     {
-        idshift :2,
+        idshift :3,
         start:20,
         end :4
     }
@@ -140,7 +140,17 @@ function popuni(grid,raspored){
 $(document).ready(()=>{
     popuniSidebar("admin")
     let grid = $('#grid')
+
+    // let date = new Date();
+    // date.setHours(0)
+    // date.setMinutes(0)
+    // date.setMilliseconds(0)
+    // raspored = $.get("RASPOREDURL",{day:date}) //AJAX
+    // smene = $.get("SMENEURL")// AJAX
+    // konobari =$.get("KONOBARIURL") //AJAX
     popuni(grid,raspored)
-    //Dohvati raspored
+    for(let sch of raspored){
+        sch.day = new Date(sch.day)
+    }
     
 })

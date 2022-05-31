@@ -1,7 +1,7 @@
 
 var konobari = [
     {
-        id: 1,
+        idusers: 1,
         ime: "Marko",
         prezime:"Savic",
         telefon: '+38162626262',
@@ -142,7 +142,8 @@ function fillTable(raspored){
             elem.remove()
         })
         elem.append(button)
-        tableInfo[i][j].append(elem)
+        console.log("i: "+i +" j: "+j)
+        if((i>=0 && j>=0) && (j<datediff(startDate,endDate)))tableInfo[i][j].append(elem)
     }
 }
 
@@ -152,10 +153,7 @@ function getKonobarsForDay(date, rdBrSmene){
     let noKonobars = true;
     console.log(date)
     for(let preferenca of preference){
-        //console.log(date)
-        //console.log(preferenca.day)
-        //console.log(rdBrSmene)
-        //console.log(preferenca.shift)
+
         if(preferenca.day.getTime()==date.getTime() && preferenca.shift==rdBrSmene){
 
             let konobar= findKonobarById(preferenca.konobarId)
@@ -248,6 +246,12 @@ function initKonobari(){
     }
     
 }
+async function postDataWithSpinner(url,data){
+    setSpinner()
+    await postData(url,data)
+    resetSpinner()
+}
+
 function sendNoviRaspored(){
     let raspored = getTableData()
     
@@ -257,6 +261,7 @@ function sendNoviRaspored(){
         raspored: raspored
     }
     console.log(JSON.stringify(info))
+    postDataWithSpinner("url",info) //AJAX
     //sendData
     //return to rasporedi
 }
@@ -265,7 +270,14 @@ $(document).ready(function (){
     //Dohvati prethodni raspored
     //Dohvati Konobare
     //Dohvati smene
+    //
     popuniSidebar("admin")
+    // for(let sch of raspored){
+    //     sch.day = new Date(sch.day)
+    // }
+    // for(let pref of preference){
+    //     pref.day = new Date(pref.day)
+    // }
     noviRaspored=structuredClone(prethodniRaspored);
     $("#save-btn").on('click',sendNoviRaspored)
     $("#table").hide()
@@ -278,11 +290,5 @@ $(document).ready(function (){
 
 })
 
-async function postDataWithSpinner(url,data){
-    closeModal()
-    setSpinner()
-    await postData(url,data)
-    refresh()
-    resetSpinner()
-}
+
 

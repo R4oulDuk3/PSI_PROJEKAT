@@ -6,15 +6,15 @@ let konobari = [
         telefon: '+38162626262',
         email: 'marko-savic@gmail.com',
         korisnickoIme: 'mareSavke',
-        imagePath:'../assets/konobar.jpg'
+        imagePath:'assets/konobar.jpg'
     },
     {   idusers :"2",
         name : "Nevenka",
         surname : "Nevenkic",
         telefon: '+38162626262',
         email : 'nevenkaNevenkic@gmail.com',
-        korisnickoIme: 'nenaNena',
-        imagePath:'../assets/konobarka.webp'
+        korisnikoIme: 'nenaNena',
+        imagePath:'assets/konobarka.webp'
     }
 ]
 var modalCreateOpen = false
@@ -79,9 +79,9 @@ function checkIfFilled(inputs,button){
 
 function popuni(grid,data){
     grid.empty()
-    data.forEach((konobar)=>{
+    data.forEach(async (konobar)=>{
         let card = $('<div class="card"></div>')
-        card.css('background-image','url('+konobar.imagePath+')')
+        card.css('background-image','url('+await downloadImage(konobar.imagePath)+')')
         let content = $('<div class="card-content"></div>')
         let buttonsDiv = $('<div class="buttons"></div>')
         let delButton = $('<button class="sm-button"><span class="las la-times"></span></button>')
@@ -132,7 +132,9 @@ function chooseFile(e){
 }
 function deleteKonobar(){
     
-        let idK = $('#id').val()
+        let idK = $('#id').text()
+        console.log("idkkkk")
+        console.log(idK)
         postDataWithSpinner("/apiDeleteWaiters",{id:idK})
         //TO DO DELETE
     
@@ -173,6 +175,7 @@ async function kreiranjeKonobara(){
         imagePath: img_url,
         password:lozinka
     }
+    console.log(konobar)
     postDataWithSpinner("url",konobar)
 }
 function closeModal(){

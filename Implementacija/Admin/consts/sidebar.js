@@ -39,14 +39,55 @@ const sidebar_links={
         ]
 
     },
-    konobar:[]
+    konobar:{
+        items:[
+            {
+                link:"",
+                name:"Biranje smene",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Stolovi",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Konobar",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Meni",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Dogadjaji",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Kuponi",
+                icon:"la-users"
+            },
+            {
+                link:"",
+                name:"Izvestaj",
+                icon:"la-users"
+            },
+        ]
+
+    }
 }
 
 
 function popuniSidebar(tip){
+    console.log(sidebar_links[tip].items)
     let sidebarMenu = $(".sidebar-menu").first()
     let ul =$("<ul></ul>")
     sidebarMenu.append(ul)
+
     for(let item of sidebar_links[tip].items){
         ul.append($('<li><a href="'+item.link+'"><span  class="las '+item.icon+'"></span><span>'+item.name+'</span></a></li>'))
     }

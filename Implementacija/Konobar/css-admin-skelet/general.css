@@ -1,10 +1,13 @@
 
 :root{
     --main-color: #B547C1;
-    --sidebar-width: 20%;
-    --main-width:80%;
-    --sidebar-width-reduced:6%;
-    --main-width-extended:94%;
+    --sidebar-width: 300px;
+    --main-width:  calc(100% - 300px);
+    
+    --sidebar-width-reduced:70px;
+    --main-width-extended:calc(100% - 70px);
+    --modal-duration: 1s;
+    --modal-color: #428bca;
 }
 
 
@@ -30,3 +33,20 @@
     font-size: large;
     border-radius: 15px;
 }
+input{
+    font-weight: 800;
+    font-size: large;
+    border-radius: 10px;
+    border: 0.5px solid gray;
+    padding: 0.4rem;
+}
+.error-msg{
+    color:red;
+    font-size: medium;
+}
+textarea{
+    font-weight: 1000;
+    font-size: medium;
+}
+
+
