@@ -108,32 +108,22 @@ function popuniDatum(body){
 }
 
 
+function posalji(tekst,id){
+    alert(tekst + " " +id)
+} 
+
 $(document).ready(
     ()=>{
         let datum=$('#naslov')
         //let bodyPopUp=$('#bodyPopUp')
         popuniDatum(datum)
-        // $('#smena tr').on('click',function() { 
-        //     let tr=$(this).closest()
-        //     let m= $(this).find("td").eq(1).html(); 
-        //     alert(tr)
-        // });
-
-        // $('#dan tr').on('click',function() { 
-        //     let tr=$(this)
-        //     let m= $(this).find("td").eq(1).html(); 
-        //     alert(m)
-        // });
-        $('#dan tr').each( function(){
-            $('td',this).on('click',function(){
-                 alert($(this).text())   
-           });
-       
-       });
-
         $('#smena tr').each( function(){
             $('td',this).on('click',function(){
-                 alert($(this).text())   
+                let f=$(this).attr("id")
+               // alert(f)
+               if($.isNumeric($(this).text())) posalji($(this).text() ,$(this).attr('id'))
+                // alert($(this).text())   
+                // alert($(this).attr('id'));
            });
        
        });
