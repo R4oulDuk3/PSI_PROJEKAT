@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/Client.css"> 
+    <link rel="stylesheet" href="css/kuponi.css">
+    <title>
+        Film Caffe - Moji Kuponi
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+    <header class="header">
+
+        <a href="Client.html" class="logo"><img src="" id="logo" alt="Film Caffe logo"></a>
+
+        <nav class="navbar">
+            <a href="Client.html#pocetna">Pocetna</a>
+            <a href="Client.html#dogadjaji">Dogadjaji</a>
+            <a href="meni.html">Meni</a>
+            <a href="Client.html#kontakt">Kontakt</a>
+            <a href="dogadjaji.html">Prijava za dogadjaj</a>
+            <a href="kuponi.html" class="current_page">Moji Kuponi</a>
+            <a href="../../homepage/home.html">Odjavi me</a>
+        </nav>
+
+        <span><label id="logged-user"> Jhon Doe </label></span>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+    </header>
+
+    <!-- Kraj headera-->
+
+
+    <section class="cups bg" >
+        
+        <div class="row">
+            <div class="form">
+                <div class="items">
+                    <span>Broj poena:<label> 69 </label></span>            
+                   </div>
+            </div>
+        </div>
+
+
+
+
+    <!--QR Kod-->
+    <div class="qrkod">
+
+        <img id="qrKodIMG" src="" alt="kod">
+        <span class="verical-center">
+            <button class="btn ponistiKup">Ponisti</button>
+        </span>
+    </div>
+    <hr>
+    <!-- Qr kod end-->    
+
+
+    <div class="cupBody">
+
+        <div class="cupons">
+            <div class="swiper mySwiper container">
+                <div class="swiper-wrapper content" id="kuponi">
+                
+                </div>
+
+                <div class="swiper-button-next ponistiKup"></div>
+                <div class="swiper-button-prev ponistiKup"></div>
+                <div class="swiper-pagination ponistiKup"></div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<section class="userQR">
+
+    <div class="hover_bkgr_friccQR">
+        <span class="helperQR"></span>
+        <div>
+            <div class="popupCloseButtonQR">&times;</div>
+            <div class="popup-ContainerQR">    
+                <div class="popupCode">
+                    <img id="usrQRCodeimg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+<section class="footer">
+
+    <div class="share">
+        <a href="" class="fab fa-facebook-f"></a>
+        <a href="" class="fab fa-twitter"></a>
+        <a href="" class="fab fa-instagram"></a>
+    </div>
+
+    <div class="credit">
+        Powered by <span> Lagani<sup><i class="fa fa-trademark" aria-hidden="true" ></i></sup> </span> | SMOG all rights reserved
+    </div>
+
+</section>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="module" src="js/main_script.js"></script>
+    <script type="module" src="js/kuponi.js"></script>
+</body>
+</html>

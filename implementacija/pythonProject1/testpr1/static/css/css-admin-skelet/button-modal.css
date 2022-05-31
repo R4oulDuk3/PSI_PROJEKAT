@@ -1,0 +1,24 @@
+.button{
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--main-color);
+    font-size: large;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+
+}
+.button:disabled{
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    font-size: large;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+
+}

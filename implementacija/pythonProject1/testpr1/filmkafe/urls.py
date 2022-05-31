@@ -1,0 +1,43 @@
+from django.urls import include, path
+from rest_framework.authtoken.views import obtain_auth_token
+
+from .views import *
+urlpatterns = [
+    path('', index, name="index"),
+    path('home', home, name="home"),
+    path('game', game, name="game"),
+    path('inventar', inventar, name="inventar"),
+    path('izvestaj', izvestaj, name="izvestaj"),
+    path('kuponi', kuponi, name="kuponi"),
+    path('korisnici', korisnici, name="korisnici"),
+    path('rasporedi.html', rasporedi, name="rasporedi"),
+    path('meni', meni, name="meni"),
+    path('dogadjaji', dogadjaji, name="dogadjaji"),
+    path('stolovi', stolovi, name="stolovi"),
+    path('izvestaji', stolovi, name="stolovi"),
+    path('apiMeni', apiMeni, name="apiMeni"),
+    path('apiMeniAdd', apiMeniAdd, name="apiMeniAdd"),
+    path('apiProduct', apiProduct, name="apiProduct"),
+    path('apiSetProduct', apiSetProduct, name="apiSetProduct"),
+    path('apiDeficientProduct', apiDeficientProduct, name="apiDeficientProduct"),
+    path('apiCoupons', apiCoupon, name="apiCoupon"),
+    path('apiCreateCoupon', apiCreateCoupon, name="apiCreateCoupon"),
+    path('apiEvents', apiEvents, name="apiEvents"),
+    path('apiCreateEvent', apiCreateEvent, name="apiCreateEvent"),
+    path('apiReservations', apiReservations, name="apiReservations"),
+    path('apiEventsForUser', apiEventsForUser, name="apiEventsForUser"),
+    path('apiCreateUser', apiCreateUser, name="apiCreateUser"),
+    path('apiLogIn', obtain_auth_token, name="apiLogIn"),
+    path('apiTables', apiTables, name="apiTables"),
+    path('apiSetup', apiSetup, name="apiSetup"),
+    path('apiCreateTables', apiCreateTables, name="apiCreateTables"),
+    path('apiDeleteTable', apiDeleteTables, name="apiDeleteTables"),
+    path('apiDeleteSetup', apiDeleteSetup, name="apiDeleteSetup"),
+    path('apiCreateSetup', apiCreateSetup, name="apiCreateSetup"),
+    path('apiWaiter', apiWaiters, name="apiWaiters"),
+    path('apiCreateWaiter', apiCreateWaiter, name="apiCreateWaiters"),
+    path('apiDeleteWaiters', apiDeleteWaiters, name="apiDeleteWaiters"),
+    path('apiSchedule', apiSchedule, name="apiSchedule"),
+    path('apiShift', apiShift, name="apiShift"),
+
+]

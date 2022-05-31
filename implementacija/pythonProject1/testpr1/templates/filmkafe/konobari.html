@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/main_content.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/modal-card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/add-bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/button-modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/spinner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/konobari.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
+    <script src="{% static 'js/consts/sidebar.js' %}"></script>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+    <script type="module" src="{% static 'js/ucitavanje-konobari.js' %}"></script>
+    <title>Konobari</title>
+</head>
+<body>
+    <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+    <input type="checkbox" name="" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle" id="menu-btn">
+                    <span class="las la-bars"></span>
+                </label>
+                Konobari
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                
+                    
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Menadzer</small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div class="add-bar">
+                <div id="modal-create-btn" class="button">
+                    <a href="#">Dodaj konobara</a>
+                </div>
+                <div class="button">
+                    <a href="rasporedi.html">Pregled rasporeda</a>
+                </div>    
+            </div>
+            <div class="konobari">
+                <div class="grid">
+                    
+                </div>
+            </div>
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-create" class="close">&times;</span>
+                    <h2>Kreiranje Konobara</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-form-create">
+                        <!-- <div class="picture-space">
+                            <div>
+                                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
+                            <div id="display_image">
+            
+                            </div>
+                            <script src="modal-image.js"></script>
+                            </div>
+                        </div> -->
+                        <div class="input-div">
+                            <table class="input-table">
+                                <thead>
+                                    <tr>
+                                        <td>Ime Konobara</td>
+                                        <td><input type="text" id="ime-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prezime Konobara</td>
+                                        <td><input type="text" id="prezime-input"></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Korisnicnko ime</td>
+                                        <td><input type="text" id="kime-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Slika</td>
+                                        <td><input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg" ></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>E-mail</td>
+                                        <td><input type="text" id="mail-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefon</td>
+                                        <td><input type="text" id="telefon-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lozinka</td>
+                                        <td><input type="text" id="lozinka1-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Potvrda lozinke</td>
+                                        <td><input type="text" id="lozinka2-input"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="button-div">
+                                <button class="button" id="kreiraj-konobara">
+                                    Dodaj
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            
+            <div id="delete-modal" class="modal">
+                <div id="delete-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span id="close-del" class="close close-del">&times;</span>
+                    <h2>Brisanje konobara</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovog konobara?</h1>
+                            </div>
+                            <div class="modal-del-info">
+                                <h2>Upisite naziv konobara da bi potvrdili akciju brisanja</h2>
+                                <h3 id="id"></h3>
+                                <input id="modal-del-input" type="text" placeholder="Amstel">
+                            </div>
+                            <div class="button-div">
+                                <button class="button" id="del-button-confirm">
+                                    Potvrdi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            <!-- <script src="modal.js"></script> -->
+        </main>
+    </div>
+    
+</body>
+</html>
