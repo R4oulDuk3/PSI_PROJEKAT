@@ -90,8 +90,6 @@ var word
 var word2
 function popuniDatum(body){
     body.empty()
-    alert(dajMesec(mesec))
-    
     var curr = new Date; // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var last = first + 6; // last day is the first day + 6
@@ -105,7 +103,6 @@ function popuniDatum(body){
      word2 = myArray2[1];
 
     //alert(firstday + " - " + lastday)
-    alert(word + " - " + word2)
     let tr = $('<h2>'+dajMesec(mesec)+'</h2><h2>'+word+' - ' +word2 + '</h2>')
     body.append(tr)
 }
@@ -116,7 +113,29 @@ $(document).ready(
         let datum=$('#naslov')
         //let bodyPopUp=$('#bodyPopUp')
         popuniDatum(datum)
-        
-        
+        // $('#smena tr').on('click',function() { 
+        //     let tr=$(this).closest()
+        //     let m= $(this).find("td").eq(1).html(); 
+        //     alert(tr)
+        // });
+
+        // $('#dan tr').on('click',function() { 
+        //     let tr=$(this)
+        //     let m= $(this).find("td").eq(1).html(); 
+        //     alert(m)
+        // });
+        $('#dan tr').each( function(){
+            $('td',this).on('click',function(){
+                 alert($(this).text())   
+           });
+       
+       });
+
+        $('#smena tr').each( function(){
+            $('td',this).on('click',function(){
+                 alert($(this).text())   
+           });
+       
+       });
     }
 );
