@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/Client.css"> 
+    <link rel="stylesheet" href="{% static 'css/client/Client.css' %}">
     <title>
         Film Caffe - Pocetna
     </title>
@@ -24,7 +25,7 @@
             <a href="#kontakt">Kontakt</a>
             <a href="dogadjaji.html">Prijava za dogadjaj</a>
             <a href="kuponi.html">Moji Kuponi</a>
-            <a href="../logged_out/home.html">Odjavi me</a>
+            <a href="home.html" id="logout">Odjavi me</a>
         </nav>
 
         <span><label id="logged-user"> Jhon Doe </label></span>
@@ -140,7 +141,7 @@
 
 </section>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script type="module" src="js/main_script.js"></script>
-    <script type="module" src="js/client.js"></script>
+    <script type="module" src="{% static 'js/client/main_scriptLI.js' %}"></script>
+    <script type="module" src="{% static 'js/client/client.js' %}"></script>
 </body>
 </html>

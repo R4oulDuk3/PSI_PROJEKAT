@@ -8,12 +8,14 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
-from .models import Meni, Product, Coupon, Events, EventReservation, Users, Shift, Schedule, Setup, Table, SetupTables
+from .models import Meni, Product, Coupon, Events, EventReservation, Users, Shift, Schedule, Setup, Table, SetupTables, \
+    Preference, Preferences
 from .serializers import MeniSerializer, ProductSerializer, CouponSerializer, EventsSerializer, \
     EventReservationSerializer, UsersSerializer, ShiftSerializer, ScheduleSerializer, MeniInsertSerializer, \
-    TableSerializer, SetupSerializer, SetupCreateSerializer, TableCreateSerializer, SetupTablesSerializer
+    TableSerializer, SetupSerializer, SetupCreateSerializer, TableCreateSerializer, SetupTablesSerializer, \
+    PreferenceSerializer
 
 
 def index(request):
@@ -22,10 +24,53 @@ def index(request):
 
 def home(request):
     puff=""
-    temp = loader.get_template('filmkafe/stefan/home.html')
+    if request.user.is_authenticated:
+        temp = loader.get_template('filmkafe/stefan/Client.html')
+    else:
+        temp = loader.get_template('filmkafe/stefan/home.html')
     context={'puf':puff}
     return HttpResponse(temp.render(context,request))
 # Create your views here.
+
+
+def meniUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/meniLO.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+def ClientUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/Client.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+
+def dogadjajiUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/dogadjaji.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+
+def kuponiUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/kuponi.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+def loginUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/login.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+
+def regUser(request):
+    puff=""
+    temp = loader.get_template('filmkafe/stefan/reg.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
 
 
 def game(request):
@@ -46,6 +91,9 @@ def meni(request):
     temp = loader.get_template('filmkafe/meni.html')
     context={'puf':puff}
     return HttpResponse(temp.render(context,request))
+
+
+
 
 def dogadjaji(request):
     puff=""
@@ -81,6 +129,20 @@ def izvestaj(request):
 def rasporedi(request):
     puff=""
     temp = loader.get_template('filmkafe/rasporedi.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+
+def newSchedule(request):
+    puff=""
+    temp = loader.get_template('filmkafe/novi-raspored.html')
+    context={'puf':puff}
+    return HttpResponse(temp.render(context,request))
+
+
+def biranjeSmene(request):
+    puff=""
+    temp = loader.get_template('filmkafe/BiranjeSmene.html')
     context={'puf':puff}
     return HttpResponse(temp.render(context,request))
 
@@ -166,13 +228,17 @@ def apiSetProduct(request):
 
 @api_view(['POST'])
 def apiCreateUser(request):
-    dat = request.data
-    mail = dat['email']
-    password = dat['password']
-    usr = Users.objects.create_user(mail,mail,password, role='User')
-    errcode = usr.save(usr)
+    try:
+        dat = request.data
+        mail = dat['email']
+        password = dat['password']
+        print(dat)
+        usr = Users.objects.create_user(mail,mail,password, role='User', name=dat['name'], surname = dat['surname'], phone = dat['phone'])
+        errcode = usr.save(usr)
+        print(errcode)
 
-    return Response(errcode)
+    finally:
+        return Response("No")
 
 
 @api_view(['POST'])
@@ -212,21 +278,26 @@ def apiCreateManager(request):
 @api_view(['POST'])
 def apiLogIn(request):
     dat = request.data
-    mail = dat['email']
+    mail = dat['username']
     password = dat['password']
     usr = authenticate(request,username=mail,password=password)
     print(usr)
     if usr is not None:
         login(request, usr)
-    print(request.user.iduser)
-    logout(request)
+        print("No")
+        return redirect('home')
     return Response()
 
 
+
+
+
 @api_view(['GET'])
-def apiLogIn(request):
+def apiOutUser(request):
     logout(request)
 
+    print(request.user.is_authenticated)
+    return redirect('home')
 
 
 @api_view(['POST'])
@@ -300,9 +371,12 @@ def apiMeniAdd(request):
             line['subtype']=each['naziv']
             line['idmeni'] = str(i)
             i+=1
+            line['amount']=0
             new = MeniInsertSerializer(data=line)
             if (new.is_valid()):
                 new.save()
+            print(new.errors)
+
     return Response("Success")
 
 
@@ -329,6 +403,17 @@ def apiSchedule(request):
 
 
 @api_view(['GET'])
+def apiChangeSchedule(request):
+    dat = request.data.copy()
+    sm = Schedule.objects.filter(day__gte = datetime.datetime.strptime(dat['startDate'], "%Y-%m-%d").date(), day__lte = datetime.datetime.strptime(dat['endDate'], "%Y-%m-%d").date()).delete()
+    new = ScheduleSerializer(dat['raspored'])
+    if (new.is_valid()):
+        new.save()
+    print(new.errors)
+    return Response("sadness")
+
+
+@api_view(['GET'])
 def apiSetup(request):
     st = Setup.objects.all()
     set = SetupSerializer(st, many=True)
@@ -348,7 +433,7 @@ def apiSetup(request):
 @api_view(['GET'])
 def apiTables(request):
     sp = Table.objects.all()
-    smene = ScheduleSerializer(sp, many=True)
+    smene = TableSerializer(sp, many=True)
     return Response(smene.data)
 
 @api_view(['POST'])
@@ -398,6 +483,31 @@ def apiDeleteTables(request):
     e = Table.objects.filter(idtable=request.data['idtable']).delete()
     return Response("Success")
 
+
+@api_view(['GET'])
+def apiPreference(request):
+    e = Preferences.objects.all()
+    res = PreferenceSerializer(e, many=True)
+    return Response(res.data)
+
+
+@api_view(['POST'])
+def apiSetPreference(request):
+    dat = request.data.copy()
+    print(dat)
+    shifts = json.loads(dat['svesmene'])
+    if(request.user.is_authenticated):
+        for each in shifts:
+            print("auth")
+            usr = Users.objects.filter(email = request.user).values('idusers')
+            each['day'] = each['day']+' 00:00:00'
+            each['waiter'] = usr[0]['idusers']
+            print(each)
+            ser = PreferenceSerializer(data = each)
+            if(ser.is_valid()):
+                ser.save()
+            print(ser.errors)
+    return Response("")
 
 
 

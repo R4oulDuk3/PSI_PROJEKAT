@@ -1,4 +1,4 @@
-import{downloadImage} from "../../index.js"
+import{downloadImage} from "./index.js"
 let navbar = document.querySelector('.navbar');
 
 document.querySelector('#menu-btn').onclick = () =>{
@@ -16,9 +16,13 @@ function prikaziKod(){
     
 }
 
+function logout(){
+  $.get('apiOutUser');
+}
+
 
 $(document).ready(function() {
-    
+  $("#logout").click(function(){logout();});
   $("#logged-user").click(function(){prikaziKod();});
 
     $('.popupCloseButtonQR').click(function(){

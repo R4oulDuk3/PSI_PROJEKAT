@@ -1,4 +1,4 @@
-import{downloadImage} from "../../index.js"
+import{downloadImage} from "./index.js"
 
 function copyText(id) {
     /* Get the text field */

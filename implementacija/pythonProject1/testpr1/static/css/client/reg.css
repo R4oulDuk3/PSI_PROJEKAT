@@ -57,6 +57,19 @@
     font-size: 1.5rem;
     color:#fff;
 }
+
+.dis{
+    opacity: 50%;
+}
+.dis:hover{
+    letter-spacing: 0;
+}
+.val{
+    opacity: 100%;
+}
+.val:hover{
+    letter-spacing: .2rem;
+}
 /* media reduce*/
 @media (max-width:911px){
 

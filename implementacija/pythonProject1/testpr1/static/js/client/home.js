@@ -31,12 +31,16 @@ function copyText(id) {
   
   
   
-  $(document).ready(function() {
+  $(document).ready(async function() {
+    $("#brojTel").click(function(){copyText("brojTel");});
+    $("#brojTel").mouseout(function(){outFunc("brojTel");});
+
+    $("#mailAdr").click(function(){ copyText("mailAdr");});
+    $("#mailAdr").mouseout(function(){ outFunc("mailAdr");});
   
-  
-    //$.getJSON("home_events_data.json",function(json) {
-     //   popuniEvents(json);
-    //});
+    await $.get('apiEvents',function(json){
+        popuniEvents(json);
+    });
   
 async function popuniEvents(json) {
         let dogadjaji = document.getElementById("dogadjaji");
@@ -52,7 +56,7 @@ async function popuniEvents(json) {
             let img = document.createElement("div");
             img.classList.add("image");
             let slika = document.createElement("img");
-            slika.setAttribute('src',await downloadImage("eventPNG.png"));
+            slika.setAttribute('src',await downloadImage(item.picture));
             slika.setAttribute("alt","Dogadjaj "+(++i));
             img.appendChild(slika);
             let namCon = document.createElement("div");

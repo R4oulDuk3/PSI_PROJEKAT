@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/main_theme.css">
-    <link rel="stylesheet" href="css/reg.css">
+    <link rel="stylesheet" href="{% static 'css/client/main_theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/reg.css' %}">
     <title>Film Caffe - Registracija</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
+
 </head>
 <body>
     <header class="header">
@@ -33,36 +37,40 @@
 
     <section class="main bg" id="pocetna">
         <div class="row">    
-            <form action="">
+            <form id="regForm">
                 <h3>Registracija</h3>
                 <div class="inputBox">
                     <span class="fas fa-user"></span>
-                    <input type="text" placeholder="Ime i Prezime">
+                    <input type="text"  placeholder="Ime" id="ime">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-user"></span>
+                    <input type="text" placeholder="Prezime" id="prez">
                 </div>
                 <div class="inputBox">
                     <span class="fas fa-envelope"></span>
-                    <input type="text" placeholder="E-mail adresa">
+                    <input type="text" placeholder="E-mail adresa" id="mail">
                 </div>
                 <div class="inputBox">
                     <span class="fas fa-lock"></span>
-                    <input type="password" placeholder="Lozinka">
+                    <input type="password"  placeholder="Lozinka" id="pass">
                 </div>
                 <div class="inputBox">
                     <span class="fas fa-lock"></span>
-                    <input type="password" placeholder="Potvrdi lozinku">
+                    <input type="password" placeholder="Potvrdi lozinku" id="cmf">
                 </div>
                 <div class="inputBox">
                     <span class="fas fa-phone"></span>
-                    <input type="text" placeholder="Broj telefona">
+                    <input type="text" placeholder="Broj telefona - Opciono" id="telNum">
                 </div>
                 <div>
                     <input type="checkbox" name="legal" id="legal"><label for="legal"> Prihvatam uslove koriscenja </label>
                 </div>
-                <div>
+                <!-- <div>
                     <input type="checkbox" name="promo" id="promo"><label for="promo"> Zelim da primam promotivne E-poruke </label>
-                </div>
+                </div> -->
                 <div>
-                    <input type="submit" value="Registuj me" class="btn">
+                    <input type="button" value="Registuj me" id= "regbut" class="btn dis" disabled>
                 </div>
             </form>
     
@@ -85,8 +93,8 @@
         </div>
     
     </section>
-    
-        <script type="module" src="js/main_script.js"></script>
-    
+
+        <script type="module" src="{% static 'js/client/main_script.js' %}"></script>
+        <script type="module" src="{% static 'js/client/reg.js' %}"></script>
 </body>
 </html>

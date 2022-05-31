@@ -4,7 +4,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import *
 urlpatterns = [
     path('', index, name="index"),
-    path('home', home, name="home"),
+    path('meni.html', meniUser, name="meni"),
+    path('Client.html', ClientUser, name="ClientUser"),
+    path('dogadjaji.html', dogadjajiUser, name="dogadjajiUser"),
+    path('kuponi.html', kuponiUser, name="kuponiUser"),
+    path('login.html', loginUser, name="loginUser"),
+    path('reg.html', regUser, name="regUser"),
+    path('home.html', home, name="home"),
+    path('biranjeSmene', biranjeSmene, name="biranjeSmene"),
     path('game', game, name="game"),
     path('inventar', inventar, name="inventar"),
     path('izvestaj', izvestaj, name="izvestaj"),
@@ -15,6 +22,7 @@ urlpatterns = [
     path('dogadjaji', dogadjaji, name="dogadjaji"),
     path('stolovi', stolovi, name="stolovi"),
     path('izvestaji', stolovi, name="stolovi"),
+    path('novi-raspored.html', newSchedule, name="newSchedule"),
     path('apiMeni', apiMeni, name="apiMeni"),
     path('apiMeniAdd', apiMeniAdd, name="apiMeniAdd"),
     path('apiProduct', apiProduct, name="apiProduct"),
@@ -27,7 +35,8 @@ urlpatterns = [
     path('apiReservations', apiReservations, name="apiReservations"),
     path('apiEventsForUser', apiEventsForUser, name="apiEventsForUser"),
     path('apiCreateUser', apiCreateUser, name="apiCreateUser"),
-    path('apiLogIn', obtain_auth_token, name="apiLogIn"),
+    path('apiLogIn', apiLogIn, name="apiLogIn"),
+    path('apiOutUser', apiOutUser, name="apiOutUser"),
     path('apiTables', apiTables, name="apiTables"),
     path('apiSetup', apiSetup, name="apiSetup"),
     path('apiCreateTables', apiCreateTables, name="apiCreateTables"),
@@ -39,5 +48,7 @@ urlpatterns = [
     path('apiDeleteWaiters', apiDeleteWaiters, name="apiDeleteWaiters"),
     path('apiSchedule', apiSchedule, name="apiSchedule"),
     path('apiShift', apiShift, name="apiShift"),
+    path('apiPreference', apiPreference, name="apiPreference"),
+    path('apiSetPreference', apiSetPreference, name="apiSetPreference"),
 
 ]

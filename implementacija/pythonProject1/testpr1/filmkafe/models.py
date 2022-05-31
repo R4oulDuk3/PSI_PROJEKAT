@@ -106,6 +106,15 @@ class Preference(models.Model):
         managed = True
         db_table = 'preference'
 
+class Preferences(models.Model):
+    day = models.DateTimeField(db_column='Day')  # Field name made lowercase.
+    preferedshift = models.ForeignKey('Shift', models.DO_NOTHING, db_column='PreferedShift')  # Field name made lowercase.
+    waiter = models.ForeignKey('Users', models.DO_NOTHING,  db_column='Waiter')
+    idpref = models.AutoField(db_column = 'idpreference', primary_key = True)
+
+    class Meta:
+        managed = True
+        db_table = 'preferences'
 
 class Product(models.Model):
     idproduct = models.AutoField(db_column='idProduct', primary_key=True)  # Field name made lowercase.

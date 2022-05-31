@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/main_theme.css"> 
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="{% static 'css/client/main_theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/login.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
     <title>Film Caffe - Login</title>
 </head>
 <body>
@@ -33,23 +36,23 @@
 
     <section class="main bg" id="pocetna">
         <div class="row">    
-            <form action="">
+            <form id="logForm">
                 <h3>Login</h3>
                 <div class="inputBox">
                     <span class="fas fa-user"></span>
-                    <input type="text" placeholder="E-mail Adresa">
+                    <input type="text" placeholder="E-mail Adresa" id="mail">
                 </div>
                 <div class="inputBox">
                     <span class="fas fa-lock"></span>
-                    <input type="password" placeholder="Lozinka">
+                    <input type="password" placeholder="Lozinka" id="pass">
                 </div>
                 <div>
                     <input type="checkbox" name="Zapamti me" id="remeberMe"><label for="remeberMe"> Zapamti me </label>
                 </div>
                 <div>
-                    <input type="submit" value="Login" class="btn">
+                    <input type="button" value="Login" class="btn" id="btn">
                 </div>
-                <input type="button" value="Zaboraviljena loznika" class="btn">
+                <input  type="button" value="Zaboraviljena loznika" class="btn">
             </form>
     
         </div>
@@ -71,8 +74,9 @@
         </div>
     
     </section>
-    
-        <script type="module" src="js/main_script.js"></script>
+        <script type="module" src="{% static 'js/client/main_script.js' %}"></script>
+        <script type="module" src="{% static 'js/client/login.js' %}"></script>
+
     
 </body>
 </html>

@@ -1,8 +1,9 @@
-import{downloadImage} from "../../index.js";
+import{downloadImage} from "./index.js";
 
-$(document).ready(function() {
+$(document).ready(async function() {
 
-    $.getJSON("meni_data.json", function(json) {
+    await $.get('apiMeni',function(json) {
+
         popuniMeni(json);
     });
 

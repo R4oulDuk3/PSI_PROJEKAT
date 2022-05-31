@@ -53,8 +53,8 @@ class MeniInsertSerializer(serializers.ModelSerializer):
 
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Preference
-        fields = '__all__'
+        model = Preferences
+        exclude = ['idpref']
 
 
 class SetupSerializer(serializers.ModelSerializer):
