@@ -8,6 +8,9 @@ var date=s.getDate() // koji je dan u mesecu
 var Od=0
 var Do =0
 
+var smene=[]
+var word
+var word2
 
 function dajMesec(m,s){
     switch (m) {
@@ -64,32 +67,9 @@ function dajMesec(m,s){
     }
 }
 
-function proveriDatumOd(m,dn,dm){
-    let s
-    let ss=dajMesec(m-1,s)
-    Od=s-dn
-}
-function proveriDatumDo(m,dn,dm){
-    let s
-    let ss=dajMesec(m,s)
-    let preostalih=ss-dm //u ovom mesecu imam jos ovoliko dana
-    //7-preostalih
-    Od=7-preostalih
-}
-
-function dajNedelju(danUnedelji,danUmesecu,mesec){
-        Od=danUmesecu-danUnedelji+1
-        if(Od<0)proveriDatumOd(mesec,danUnedelji,danUmesecu)
-        Do=danUmesecu+7-danUnedelji
-        let s
-        let ss=dajMesec(mesec,s)
-        if(Do>s)proveriDatumDo(mesec,danUmesecu,danUnedelji)
-}
-
-var word
-var word2
-function popuniDatum(body){
+function popuniDatum(body,head){
     body.empty()
+    head.empty()
     var curr = new Date; // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var last = first + 6; // last day is the first day + 6
@@ -105,27 +85,133 @@ function popuniDatum(body){
     //alert(firstday + " - " + lastday)
     let tr = $('<h2>'+dajMesec(mesec)+'</h2><h2>'+word+' - ' +word2 + '</h2>')
     body.append(tr)
+
+    for(var f=first;f<=last;f++){
+        let currr=new Date()
+        let fd = new Date(currr.setDate(f)).toUTCString();
+        const m = fd.split(" ");
+        let w = m[1];
+        let td=$('<td>'+w+'</td>')
+        head.append(td)
+    }
+}
+
+function nadjiDan(m){
+    switch (m) {
+        case "sun" :
+            return 0;
+            break;
+        case "mon":
+            return 1
+            break;
+        case "tue":
+            return 2
+            break;
+        case "wed":
+            return 3
+            break;
+        case "thr":
+            return 4
+            break;
+        case "fri":
+            return 5
+            break;
+        case "sat":
+            return 6
+            break;
+        default:
+            break;
+    }
 }
 
 
-function posalji(tekst,id){
-    alert(tekst + " " +id)
+
+function dajDatum(id){
+    //alert("usla u dajDatum")
+    var cur = new Date; // get current date
+    var firs = cur.getDate() - cur.getDay(); // First day is the day of the month - the day of the week
+    let d=nadjiDan(id)
+    var las= firs + d;
+    var lasday = new Date(cur.setDate(las)).toUTCString();
+    return lasday
+}
+
+function posalji(tekst,id,obj){
+    let datum=dajDatum(id)
+    let w1
+    let w2 
+    let w3 
+    let flag=false
+    const myA = datum.split(" ");
+    w1=myA[1];
+    w2=myA[2];
+    w3=myA[3];
+    let i=0
+    let br
+    //alert("Izabrana je smena " + tekst + " na datum " +datum)
+    for(let smena of smene){ //prolazim kroz smene i gledam da li sam je vec dodala i deselektuj
+        if(smena.RedniBrojSmene==tekst && smena.Dan==w1 && smena.Mesec==w2 && smena.Godina==w3){
+          // $(obj).addClass('deselected') //deselektuj
+            alert("Vec si dodala treba da je izbacis i odselektujes")
+            flag=true
+             br=i;
+             smene.splice(br,1)
+            //smena.pop()
+        }
+        i++;
+    }
+    
+    //smene.splice(br,1)
+    if(!flag){ //ako nije dodata dodaj i selectuj je
+        //$(obj).addClass('selected')
+        smene.push({
+        RedniBrojSmene:tekst,
+        Dan:w1,
+        Mesec:w2,
+        Godina:w3
+        })
+    }
+
+    alert("Sad su u nizu ")
+        for(let s of smene){
+            alert("Smena" + s.RedniBrojSmene + " " + s.Dan + " " + s.Mesec)
+        }
+    return flag
 } 
+
+
+function finalnoSlanje(){
+    //$.post(url,smene)   
+    
+}
 
 $(document).ready(
     ()=>{
         let datum=$('#naslov')
+        let head=$('#thead')
         //let bodyPopUp=$('#bodyPopUp')
-        popuniDatum(datum)
+        popuniDatum(datum,head)
         $('#smena tr').each( function(){
             $('td',this).on('click',function(){
                 let f=$(this).attr("id")
                // alert(f)
-               if($.isNumeric($(this).text())) posalji($(this).text() ,$(this).attr('id'))
+               let fl
+               if($.isNumeric($(this).text())) fl= posalji($(this).text() ,$(this).attr('id') ,this)
+               if(!fl){
+                   $(this).addClass('selected');
+                   $(this).removeClass('deselected')
+               }else{
+                   $(this).addClass('deselected');
+                   $(this).removeClass('selected')
+               }
                 // alert($(this).text())   
                 // alert($(this).attr('id'));
            });
        
        });
+
+       $('#sacuvaj').on('click',function() { 
+        finalnoSlanje()
+    });
     }
 );

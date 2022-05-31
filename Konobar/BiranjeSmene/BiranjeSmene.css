@@ -60,6 +60,8 @@ thead tr{
     border-bottom: 1px solid #f0f0f0;
     background-color:#fff;
 }
+.selected{background-color: #B547C1;}
+.deselected{background-color: white;}
 
 
 td{
