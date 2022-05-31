@@ -1,7 +1,7 @@
 
 var konobari = [
     {
-        idusers: 1,
+        id: 1,
         ime: "Marko",
         prezime:"Savic",
         telefon: '+38162626262',
@@ -136,6 +136,7 @@ function fillTable(raspored){
         
        // if(j>=datediff(endDate,startDate))continue
         console.log("loc i: "+i+" j : "+j)
+        console.log(info.konobarId)
         let elem=$('<div class="draggable" draggable="true" id="konobar_'+info.konobarId+'"><div>'+ findKonobarById(info.konobarId).ime +' '+findKonobarById(info.konobarId).prezime +'</div></div>')
         let button =$('<button class="sm-button"  style="display:block;"><span class="las la-times delete"></span></button>')
         button.on('click',()=>{
@@ -213,6 +214,7 @@ function showTable(){
     if(!startDate ||  !endDate){
         console.log(startDate+" "+endDate)
     }else{
+        if(startDate>endDate)return
         startDate = new Date(startDate)
         endDate = new Date(endDate)
         //dohvati raspored
@@ -249,6 +251,7 @@ function initKonobari(){
 async function postDataWithSpinner(url,data){
     setSpinner()
     await postData(url,data)
+    refresh()
     resetSpinner()
 }
 
@@ -265,19 +268,57 @@ function sendNoviRaspored(){
     //sendData
     //return to rasporedi
 }
+function convertKonobari(konobari){
+    let newKonobari = []
+    for(let konobar of konobari){
+        nKon = {   
+            id: konobar.idusers,
+            ime: konobar.name,
+            prezime: konobar.surname,
+            telefon: konobar.phone,
+            email: konobar.email,
+            korisnickoIme: konobari.username,
+        }
+        newKonobari.push(nKon)
+    }
+    return newKonobari
+}
+function convertSmene(smene){
+    let nSmene = []
+    for(let smena of smene){
+        nSmena = {
+            id: smena.idshift,
+            pocetak: smena.start,
+            kraj: smena.end
+        }
+        nSmene.push(nSmena)
+    }
+    return nSmene
+}
+function convertRaspored(rasporedi){
+    nRaspored= []
+    for(let raspored of rasporedi){
+        nRas = {
+            idSmene: raspored.shift,
+            konobarId: raspored.waiter,
+            date : new Date(raspored.day)
+        }
+        nRaspored.push(nRas)
+    }
+    return nRaspored
+}
+async function refresh(){
+    // prethodniRaspored = await $.get(...)//AJAX
+    // smene = await $.get(...) //AJAX
+    //
+}
 
 $(document).ready(function (){
     //Dohvati prethodni raspored
     //Dohvati Konobare
     //Dohvati smene
-    //
     popuniSidebar("admin")
-    // for(let sch of raspored){
-    //     sch.day = new Date(sch.day)
-    // }
-    // for(let pref of preference){
-    //     pref.day = new Date(pref.day)
-    // }
+
     noviRaspored=structuredClone(prethodniRaspored);
     $("#save-btn").on('click',sendNoviRaspored)
     $("#table").hide()
