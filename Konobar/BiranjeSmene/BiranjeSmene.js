@@ -125,6 +125,49 @@ function nadjiDan(m){
 }
 
 
+function promeni(m){
+    switch (m) {
+        case "January" :
+            return 1;
+            break;
+        case "February":
+            return 2
+            break;
+        case "March":
+            return 3
+            break;
+        case "April":
+            return 4
+            break;
+        case "May":
+            return 5
+            break;
+        case "June":
+            return 6
+            break;
+        case "July":
+            return 7
+            break;
+        case "August":
+            return 8
+            break;
+        case "September":
+            return 9
+            break;
+        case "October":
+            return 10
+            break;
+        case "November":
+            return 11
+            break;
+        case "December":
+            return 12
+            break;
+        default:
+            break;
+    }
+
+}
 
 function dajDatum(id){
     //alert("usla u dajDatum")
@@ -142,6 +185,7 @@ function posalji(tekst,id,obj){
     let w2 
     let w3 
     let flag=false
+    //alert("Ovo dobijas" +datum)
     const myA = datum.split(" ");
     w1=myA[1];
     w2=myA[2];
@@ -160,27 +204,30 @@ function posalji(tekst,id,obj){
         }
         i++;
     }
-    
+   // alert("Ovo je datum " + datum)
     //smene.splice(br,1)
+    alert("Dan: " + w1 + "Mesec" + w2 + "Godina" +  w3)
+    let mes=promeni(w2)
+    let posaljiDatum=w3+"/"+mes+"/"+w1
+    alert(posaljiDatum)
     if(!flag){ //ako nije dodata dodaj i selectuj je
         //$(obj).addClass('selected')
         smene.push({
         RedniBrojSmene:tekst,
-        Dan:w1,
-        Mesec:w2,
-        Godina:w3
+        Dan:posaljiDatum
         })
     }
 
-    alert("Sad su u nizu ")
-        for(let s of smene){
-            alert("Smena" + s.RedniBrojSmene + " " + s.Dan + " " + s.Mesec)
-        }
-    return flag
+    // alert("Sad su u nizu ")
+    //     for(let s of smene){
+    //         alert("Smena" + s.RedniBrojSmene + " " + s.Dan + " " + s.Mesec)
+    //     }
+    // return flag
 } 
 
 
 function finalnoSlanje(){
+    alert("pozvao")
     //$.post(url,smene)   
     
 }
@@ -212,6 +259,7 @@ $(document).ready(
 
        $('#sacuvaj').on('click',function() { 
         finalnoSlanje()
+        alert("uradio")
     });
     }
 );

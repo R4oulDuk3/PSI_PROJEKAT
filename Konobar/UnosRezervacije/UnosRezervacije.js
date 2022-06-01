@@ -16,6 +16,10 @@ var data = [
     }
 ]
 
+var stolovi =[
+    {}
+]
+
 var brojStola
 var brojLjudiNaStolu
 var rezervacija=[]

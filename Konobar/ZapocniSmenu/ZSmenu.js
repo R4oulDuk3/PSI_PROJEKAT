@@ -1,25 +1,45 @@
 
 var smene=[
     {
-        idSmene: 1,
-        redniBrSmene: 1,
-        pocetak:"1000",
-        kraj:"1600"
+        idShift: 1,
+        name: "Prva smena",
+        start:"10:00:00",
+        end:"16:00:00"
 
     },{
-        idSmene: 2,
-        redniBrSmene: 2,
-        pocetak:"1600",
-        kraj:"2200" 
+        idShift: 2,
+        name:"Druga smena",
+        start:"16:00:00",
+        end:"00:00:00" 
 
     },{
-        idSmene: 7,
-        redniBrSmene: 3,
-        pocetak:"2000",
-        kraj:"0800" 
+        idShift: 7,
+        name: "Treca smena",
+        start:"20:00:00",
+        end:"03:00:00" 
 
     }
 ]
+
+
+
+var d = new Date(); // for now
+var trVr = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+trVr = d.toTimeString().split(' ')[0]
+
+function pozovi(Sr){
+    let brojvreme=Sr.split(':')
+    let sati=brojvreme[0]
+    let minut=brojvreme[1]
+    let sss=sati+minut
+    return sss;
+}
+
+
+
+
+
+
 
 var s= new Date()
 
@@ -27,7 +47,7 @@ var s= new Date()
 var trHour = s.getHours()
 var trMin= s.getMinutes()
 
-var trVr= 100*trHour+trMin
+//var trVr= 100*trHour+trMin
 let VremeString
 function napraviVreme(tim){
     let H
@@ -47,58 +67,69 @@ function napraviVreme(tim){
 
 var flagRano=false
 var flagKasno=false
-
-
+var flagSmene=false
+var nema=false;
 function proveri(body,data){
     let posalji=[]
     body.empty()
     let iCnt=0
     var imaSmena=0
     for(var smena of data){ //ako moze da zapocne smenu
-        if(  smena)  {
+        let k=pozovi(smena.end)
+        let p=pozovi(smena.start)
+        let t=pozovi(trVr)
+        let tp=parseInt(t / 1000)
+        //lert("Kraj " +k + " Pocetak " + p + " Trenutno " + t  + " Prvi broj tr " + tp)
+        if((p<k && t>p && t<k) || (k<p && ((tp==0 && t<p && t<k) || (tp!=0 && t>p && t>k))))  {
                 imaSmena++;
-                 let pS=napraviVreme(smena.pocetak)
-                 let kS=napraviVreme(smena.kraj)
-                let tr=$('<div class="card-single"><div><h1>Smena '+smena.redniBrSmene + '</h1><br><h3 style="text-align: center;">'+pS+'-'+kS+ '</h3></div><div><button class="button" id="button'+smena.idSmene+'"><b>Zapocni smenu</b></button><button class="buttonR" id="buttonR'+smena.idSmene+'"><b>Zavrsi smenu</b></button></div></div>')
+                 let pS=napraviVreme(smena.start)
+                 let kS=napraviVreme(smena.end)
+                let tr=$('<div class="card-single"><div><h1> '+smena.name + '</h1><br><h3 style="text-align: center;">'+smena.start+'-'+smena.end+ '</h3></div><div><button class="button" id="button'+smena.idShift+'"><b>Zapocni smenu</b></button><button class="buttonR" id="buttonR'+smena.idShift+'"><b>Zavrsi smenu</b></button></div></div>')
                 body.append(tr)
-                $("#button"+smena.idSmene).on('click',()=>{
+                nema=true
+                $("#button"+smena.idShift).on('click',()=>{
+                    alert("Usla sam u button koji ima id" + $(this).attr('id'))
+                    $('.buttonR').prop('disabled', false)
+                    $('.button').prop('disabled', true)
+                    //boji
+                    // $('.button').removeClass('obojZeleno')
+                    // $('.buttonR').removeClass('obojSivo')
+                    // $('.button').addClass('obojSivo')
+                    // $('.buttonR').addClass('obojCrveno')
                      alert("Unos smene")
-                     if(trVr>=smena.pocetak){
-                        let smena = {
-                            idSmene:smena.idSmene,
-                            vremePocetka:smena.pocetak,
-                            RedniBrojSmene: smena.redniBrSmene
-                        }
-                        alert("Poslala sam podatke")
-                         //$.post(host+"??",smena)//AJAX
-                     }else{
-                         alert("Ne mozes da uneses smenu")
-                     }
-                 })
-                 $("#buttonR"+smena.idSmene).on('click',()=>{
-                    alert("Zavrsi smenu")
-                    if(trvr>=smena.kraj){
-                    let smena = {
-                        idSmene:smena.idSmene,
-                        vremeKraja:smena.kraj,
-                        RedniBrojSmene: smena.redniBrSmene
+                     $("#button"+smena.idShift).css("background-color","pink");
+                     alert("Ovo se obojilo")
+                     let smena = {
+                        idShift:smena.idShift,
+                        vremePocetka:smena.start,
                     }
                     alert("Poslala sam podatke")
                      //$.post(host+"??",smena)//AJAX
-                }
+                 })
+                 $("#buttonR"+smena.idShift).on('click',()=>{
+                    $('.buttonR').prop('disabled', true)
+                    $('.button').prop('disabled', false)
+                    // $('.button').removeClass('obojSivo')
+                    // $('.buttonR').removeClass('obojCrveno')
+                    // $('.button').addClass('obojZeleno')
+                    // $('.buttonR').addClass('obojSivo')
+                    alert("Zavrsi smenu")
+                    let smena = {
+                        idShift:smena.idShift,
+                        vremeKraja:smena.end,
+                    }
+                    alert("Poslala sam podatke")
+                     //$.post(host+"??",smena)//AJAX
                 })
 
-            }else if(imaSmena==0 && smena && smena.pocetak>trVr && trVr<smena.kraj ) {
+            }else  {
                 flagRano=true
-                //alert("Namestili flagRano")
+
+               
             }
-            else if(imaSmena==0 &&  smena && trVr>smena.kraj && smena.pocetak<=trVr){
-                flagRano=true
-                //alert("Namestili flagKasno")
             }
-            if(imaSmena==0){
-                //alert("Nema smena")
-            }
+            if(!nema){ let tr=$('<div class="card-single"><div><h1> '+ "Trenutno ne postoje smene" + '</h1><br></div></div>')
+                body.append(tr)
     }
     // if(flagRano && imaSmena==0){
     //     alert("Dosao si prerano")
@@ -108,12 +139,25 @@ function proveri(body,data){
     // }
 }
 
+
+function napraviBod(data){
+    alert("usla")
+    for(let s of data){
+        let k=pozovi(s.end)
+        let p=pozovi(s.start)
+        let t=pozovi(trVr)
+        let tp=parseInt(t / 1000)
+        alert("Kraj " +k + " Pocetak " + p + " Trenutno " + t  + " Prvi broj tr " + tp)
+    }
+}
+
+
 $(document).ready(
     ()=>{
         let body=$('#main')
  
         proveri(body,smene)
-        
+        //napraviBod(smene)
         
     }
 
