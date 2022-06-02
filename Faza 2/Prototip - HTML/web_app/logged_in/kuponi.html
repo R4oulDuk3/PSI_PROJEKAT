@@ -16,7 +16,7 @@
 <body>
     <header class="header">
 
-        <a href="Client.html" class="logo"><img src="../assets/logo.png" alt="Film Caffe logo"></a>
+        <a href="Client.html" class="logo"><img src="" id="logo" alt="Film Caffe logo"></a>
 
         <nav class="navbar">
             <a href="Client.html#pocetna">Pocetna</a>
@@ -28,7 +28,7 @@
             <a href="../../homepage/home.html">Odjavi me</a>
         </nav>
 
-        <span><label id="logged-user" onclick=prikaziKod()> Jhon Doe </label></span>
+        <span><label id="logged-user"> Jhon Doe </label></span>
 
         <div class="icons">
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -39,7 +39,7 @@
     <!-- Kraj headera-->
 
 
-    <section class="cups" >
+    <section class="cups bg" >
         
         <div class="row">
             <div class="form">
@@ -55,9 +55,9 @@
     <!--QR Kod-->
     <div class="qrkod">
 
-        <img id="qrKodIMG" src="../assets/qrTEMP.png" alt="kod">
+        <img id="qrKodIMG" src="" alt="kod">
         <span class="verical-center">
-            <button class="btn" onclick="clearQR()">Ponisti</button>
+            <button class="btn ponistiKup">Ponisti</button>
         </span>
     </div>
     <hr>
@@ -72,9 +72,9 @@
                 
                 </div>
 
-                <div class="swiper-button-next" onclick="clearQR()"></div>
-                <div class="swiper-button-prev" onclick="clearQR()"></div>
-                <div class="swiper-pagination" onclick="clearQR()"></div>
+                <div class="swiper-button-next ponistiKup"></div>
+                <div class="swiper-button-prev ponistiKup"></div>
+                <div class="swiper-pagination ponistiKup"></div>
 
         </div>
 
@@ -92,7 +92,7 @@
             <div class="popupCloseButtonQR">&times;</div>
             <div class="popup-ContainerQR">    
                 <div class="popupCode">
-                    <img src="../assets/qrTEMP.png" alt="">
+                    <img id="usrQRCodeimg" src="" alt="">
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
 
 </section>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/main_script.js"></script>
-    <script src="js/kuponi.js"></script>
+    <script type="module" src="js/main_script.js"></script>
+    <script type="module" src="js/kuponi.js"></script>
 </body>
 </html>

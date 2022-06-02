@@ -1,4 +1,4 @@
-
+import{downloadImage} from "../../index.js"
 function getQR(id) {
     let ceo = document.getElementsByClassName("qrkod")[0];
     //let kupon = document.getElementById(id);
@@ -39,7 +39,8 @@ var swiper = new Swiper(".mySwiper", {
   
 
 $(document).ready(function() {
-
+  
+  $(".ponistiKup").click(function(){clearQR();});
     let ceo = document.getElementsByClassName("qrkod")[0];
     ceo.style.display="none";
 
@@ -49,8 +50,8 @@ $(document).ready(function() {
       popuniKups(json);
 
 
-      function popuniKups(json) {
-        kuponi = document.getElementById("kuponi");
+     async function popuniKups(json) {
+        let kuponi = document.getElementById("kuponi");
         for(let item of json){
             let cvor = document.createElement("div");
             cvor.classList.add("swiper-slide");
@@ -62,7 +63,7 @@ $(document).ready(function() {
             let img = document.createElement("div");
             img.classList.add("image");
             let slika = document.createElement("img");
-            slika.setAttribute("src","../../assets/beer.jpg"); // TODO Promeni path da bude sa servera
+            slika.setAttribute('src',await downloadImage("no_img.png"));
             slika.setAttribute("alt","kupon "+item.idcupon);
             slika.addEventListener("click",function(){
                 getQR("kuponBr"+item.idcupon);
@@ -84,6 +85,23 @@ $(document).ready(function() {
 
     }
 
+    
 
     });
     });
+
+    document.addEventListener("DOMContentLoaded", async event=>{
+      const img = document.getElementById('qrKodIMG');
+        img.setAttribute('src', await downloadImage("qrTEMP.png"));  
+    })
+    document.addEventListener("DOMContentLoaded",async event=>{
+      
+      const img = document.getElementsByClassName('image');
+      for (const i of img) {
+      
+        i.setAttribute('src',await downloadImage("no_img.png"));
+      }
+      
+      
+      });
+    

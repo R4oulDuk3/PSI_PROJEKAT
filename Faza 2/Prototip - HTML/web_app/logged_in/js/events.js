@@ -1,4 +1,4 @@
-
+import{downloadImage} from "../../index.js"
 
 function prijaviEvent(id){
     document.getElementsByClassName("rez")[0].style.display = "flex";

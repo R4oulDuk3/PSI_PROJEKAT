@@ -15,7 +15,7 @@
 <body>
     <header class="header">
 
-        <a href="Client.html" class="logo"><img src="../assets/logo.png" alt="Film Caffe logo"></a>
+        <a href="Client.html" class="logo"><img id="logo" src="" alt="Film Caffe logo"></a>
 
         <nav class="navbar">
             <a href="#pocetna" class="current_page">Pocetna</a>
@@ -27,7 +27,7 @@
             <a href="../logged_out/home.html">Odjavi me</a>
         </nav>
 
-        <span><label id="logged-user" onclick=prikaziKod() > Jhon Doe </label></span>
+        <span><label id="logged-user"> Jhon Doe </label></span>
 
         <div class="icons">
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -37,7 +37,7 @@
 
     <!-- Kraj headera-->
 
-    <section class="home" id="pocetna">
+    <section class="home bg" id="pocetna">
 
             <div class="content">
                 <h3>Film Caffe - LaganiTM</h3>
@@ -118,7 +118,7 @@
             <div class="popupCloseButtonQR">&times;</div>
             <div class="popup-ContainerQR">    
                 <div class="popupCode">
-                    <img src="../assets/qrTEMP.png" alt="">
+                    <img id="usrQRCodeimg" src="" alt="userQR">
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@
 
 </section>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/main_script.js"></script>
-    <script src="js/client.js"></script>
+    <script type="module" src="js/main_script.js"></script>
+    <script type="module" src="js/client.js"></script>
 </body>
 </html>

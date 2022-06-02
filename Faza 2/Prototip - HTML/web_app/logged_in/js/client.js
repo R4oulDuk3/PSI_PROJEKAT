@@ -1,3 +1,5 @@
+import{downloadImage} from "../../index.js"
+
 function copyText(id) {
     /* Get the text field */
     let copyText = document.getElementById(id).value;
@@ -29,17 +31,14 @@ function copyText(id) {
     },
   });
   
-  
-  
-
 
   $(document).ready(function() {
     $.getJSON("client_event_data.json", function(json) {
         popuniEvents(json);
     });
 
-    function popuniEvents(json) {
-        dogadjaji = document.getElementById("dogadjaji");
+    async function popuniEvents(json) {
+        let dogadjaji = document.getElementById("dogadjaji");
         let i = 0;
         
         
@@ -52,7 +51,7 @@ function copyText(id) {
             let img = document.createElement("div");
             img.classList.add("image");
             let slika = document.createElement("img");
-            slika.setAttribute("src","../assets/eventPNG.png"); // TODO Promeni path da bude sa servera
+            slika.setAttribute('src',await downloadImage("eventPNG.png"));
             slika.setAttribute("alt","Dogadjaj "+(++i));
             img.appendChild(slika);
   
@@ -73,5 +72,7 @@ function copyText(id) {
          
   
         }
+
     });
 
+    

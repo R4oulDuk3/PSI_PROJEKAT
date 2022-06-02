@@ -4,7 +4,6 @@
     align-items: center;
     
     
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("../../assets/background.jpg");
     background-size: cover;
     background-position: center;
 }

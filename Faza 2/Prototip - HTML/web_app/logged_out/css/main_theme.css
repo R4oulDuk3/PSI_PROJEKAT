@@ -126,7 +126,6 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("../../assets/background.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -157,6 +156,7 @@ section{
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
+    color: #fff;
 }
 
 .events{

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css"
         integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg=="
@@ -15,12 +15,12 @@
         Film Caffe - Pocetna
     </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-</head>
+</head> 
 
 <body>
     <header class="header">
 
-        <a href="home.html" class="logo"><img src="../assets/logo.png" alt="Film Caffe logo"></a>
+        <a href="home.html" class="logo"><img src="" alt="Film Caffe logo" id="logo"></a>
 
         <nav class="navbar">
             <a href="#pocetna" class="current_page">Pocetna</a>
@@ -39,7 +39,7 @@
 
     <!-- Kraj headera-->
 
-    <section class="home" id="pocetna">
+    <section class="home bg" id="pocetna">
 
         <div class="content">
             <h3>Film Caffe - LaganiTM</h3>
@@ -132,8 +132,8 @@
     </section>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/main_script.js"></script>
-    <script src="js/home.js"></script>
+    <script type="module" src="js/main_script.js"></script>
+    <script type="module" src="js/home.js"></script>
 </body>
 
 </html>

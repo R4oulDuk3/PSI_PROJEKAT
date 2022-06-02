@@ -1,3 +1,5 @@
+import{downloadImage} from "../../index.js";
+
 $(document).ready(function() {
 
     $.getJSON("meni_data.json", function(json) {
@@ -5,7 +7,7 @@ $(document).ready(function() {
     });
 
     function popuniMeni(json) {
-        arti = document.getElementById("artikli");        
+        let arti = document.getElementById("artikli");        
         for(let item of json){
             
             let cvor = document.createElement("div");
@@ -46,3 +48,10 @@ $(document).ready(function() {
         }
         }
     });
+
+    document.addEventListener("DOMContentLoaded", async event=>{
+        const img = document.getElementById('artikli');
+          img.style.backgroundImage="linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)), url("+await downloadImage("menuBg.png")+")";
+          
+          
+      })
