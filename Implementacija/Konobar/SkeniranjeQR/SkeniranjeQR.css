@@ -11,6 +11,9 @@
     background: #fff;
     border-radius: 15px;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -42,12 +45,11 @@
 }
 #buy-coupon{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
 }
 .buttonqr{
-    margin-top: 1rem;
+    margin: 1rem;
     padding: 0.75rem;
     font-size: 18px;
     border-radius: 10px;
@@ -56,6 +58,7 @@
     background-color: var(--main-color);
     color: #fff;
     cursor: pointer;
+    
 }
 .buttonqr:disabled{
     margin-top: 1rem;

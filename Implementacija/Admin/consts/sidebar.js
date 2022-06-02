@@ -46,36 +46,6 @@ const sidebar_links={
                 name:"Biranje smene",
                 icon:"la-users"
             },
-            {
-                link:"",
-                name:"Stolovi",
-                icon:"la-users"
-            },
-            {
-                link:"",
-                name:"Konobar",
-                icon:"la-users"
-            },
-            {
-                link:"",
-                name:"Meni",
-                icon:"la-users"
-            },
-            {
-                link:"",
-                name:"Dogadjaji",
-                icon:"la-users"
-            },
-            {
-                link:"",
-                name:"Kuponi",
-                icon:"la-users"
-            },
-            {
-                link:"",
-                name:"Izvestaj",
-                icon:"la-users"
-            },
         ]
 
     }

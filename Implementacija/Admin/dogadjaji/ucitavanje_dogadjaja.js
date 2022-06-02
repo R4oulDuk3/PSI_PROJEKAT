@@ -4,12 +4,12 @@ import {downloadImage, uploadImage} from '../index.js'
 
 console.log("checkkkkk")
 var data = [
-    {   idevents : "123##1231##12",
+    {   idevents : "1",
         name: 'Zurka 1',
         description : ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
         picture : 'assets/zurkeNajave.png'
     },
-    {   idevents : "123abc125d",
+    {   idevents : "2",
         name: 'Zurka 1',
         description : ' Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
         picture : 'assets/zurkeNajave.png'
@@ -17,10 +17,10 @@ var data = [
 ]
 
 var postavke = [
-    {
+    {   id:"1",
         name:"postavka1"
     },
-    {
+    {   id:"2",
         name:"postavka2"
     }
 ]
@@ -63,6 +63,7 @@ $(document).ready(function (){
         checkIfMathcing()
     })
     $('#create-zurka').on('click',createZurka)
+    $('#del-button-confirm').on('click',deleteZurka)
     $('#input-datum').attr('min',new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
 
     checkIfFilled(createZurkaInputs,$('#create-zurka'))
@@ -111,7 +112,7 @@ function openCreateModal(){
     //DOHVATI POSTAVKE
     $('#postavke').empty()
     for(let postavka of postavke){
-        $('#postavke').append($('<option value="'+postavka.name+'" style="font-size:large;font-weight:700">'+postavka.name+'</option>'))
+        $('#postavke').append($('<option value="'+postavka.id+'" style="font-size:large;font-weight:700">'+postavka.name+'</option>'))
     }
     modalCreateOpen=true
     ignoreDoc=true
@@ -130,7 +131,7 @@ function closeModal(){
 }
 function deleteZurka(){
     if( $('#id').text()== $('#modal-del-input').val()){
-        id = $('#id').text();
+        let id = $('#id').text();
         // TODO: SEND HTTP DELETE
     }
 

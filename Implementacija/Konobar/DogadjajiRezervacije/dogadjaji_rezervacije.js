@@ -32,6 +32,7 @@ var reservationReqests = [
         noofseats:"8",
     },
 ]
+
 var approvedRequests = [
     {
         eventid:"1",
@@ -263,7 +264,8 @@ function acceptRequest(){
         idusers: selectedUserId,
         tables: selectedTables
     }
-    postDataWithSpinner("url",data)//AJAX
+    console.log(data)
+    //postDataWithSpinner("url",data)//AJAX
 }
 function rejectRequest(){
     let data = {

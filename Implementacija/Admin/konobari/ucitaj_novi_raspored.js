@@ -9,48 +9,69 @@ var konobari = [
         korisnickoIme: 'mareSavke',
         imagePath:'../assets/konobar.jpg'
     },
-    {   id: 2,
-        ime: "Nevenka",
-        prezime:"Savic",
-        telefon: '+38162626262',
-        email: 'nevenkaNevenkic@gmail.com',
-        korisnickoIme: 'nenaNena',
-        imagePath:'../assets/konobarka.webp'
-    }
 ]
 var preference = [
     {
-        day:new Date(2022,4,19),
+        day:new Date(2022,5,5),
         shift:1,
         konobarId: 1
     },
     {
-        day:new Date(2022,4,19),
+        day:new Date(2022,5,3),
         shift:1,
         konobarId: 2
     },
     {
-        day:new Date(2022,4,19),
+        day:new Date(2022,5,1),
         shift:1,
         konobarId: 2
     }
 ]
+
+function covertPrefrence(preference){
+    let nPref = []
+    for(let pref of preference){
+        nPref.push(
+            {   date: new Date(pref.day),
+                shift: pref.preferedshift,
+                konobarId: pref.waiter 
+            }
+        )
+    }
+    return nPref;
+}
+
 var prethodniRaspored=[
      {
         idSmene: 1,
         konobarId: 1,
-        date : new Date(2022,4,17)
+        date : new Date(2022,5,1)
      },
      {
         idSmene: 1,
         konobarId: 1,
-        date : new Date(2022,4,18)
+        date : new Date(2022,5,2)
      },
      {
         idSmene: 1,
         konobarId: 1,
-        date : new Date(2022,4,19)
-     }
+        date : new Date(2022,5,3)
+     },
+     {
+        idSmene: 1,
+        konobarId: 1,
+        date : new Date(2022,5,7)
+     },
+     {
+        idSmene: 1,
+        konobarId: 1,
+        date : new Date(2022,5,8)
+     },
+     {
+        idSmene: 1,
+        konobarId: 1,
+        date : new Date(2022,5,1,9)
+     },
     ]
     
 
@@ -257,10 +278,11 @@ async function postDataWithSpinner(url,data){
 
 function sendNoviRaspored(){
     let raspored = getTableData()
-    
+    let sdate = new Date(startDate).toISOString()
+    let edate = new Date(endDate).toISOString()
     let info = {
-        startDate: startDate,
-        endDate: endDate,
+        startDate: sdate,
+        endDate: edate,
         raspored: raspored
     }
     console.log(JSON.stringify(info))
@@ -307,6 +329,18 @@ function convertRaspored(rasporedi){
     }
     return nRaspored
 }
+function convertRasporedBack(rasporedi){
+    nRaspored= []
+    for(let raspored of rasporedi){
+        nRas = {
+            shift: raspored.idSmene,
+            waiter: raspored.konobarId,
+            day : raspored.date
+        }
+        nRaspored.push(nRas)
+    }
+    return nRaspored
+}
 async function refresh(){
     // prethodniRaspored = await $.get(...)//AJAX
     // smene = await $.get(...) //AJAX
@@ -324,8 +358,8 @@ $(document).ready(function (){
     $("#table").hide()
     $("#save-btn").hide()
     $("#card-konobari").hide()
-    $("#date-start").change(showTable)
-    $("#date-end").change(showTable)
+    $("#date-start").change(async ()=>{await showTable()})
+    $("#date-end").change(async ()=>{await showTable()})
     initializeDrag()
     initKonobari()
 

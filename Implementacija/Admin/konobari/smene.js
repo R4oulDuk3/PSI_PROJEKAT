@@ -22,6 +22,31 @@ var smene= [
 var noveSmene= [
 
 ]
+function convertSmene(smene){
+    let nSmene = []
+    for(let smena of smene){
+        nSmena = {
+            id: smena.idshift,
+            rdBr: smena.idshift,
+            startTime: smena.start,
+            endTime: smena.end
+        }
+        nSmene.push(nSmena)
+    }
+    return nSmene
+}
+function convertSmeneBack(smene){
+    let nSmene = []
+    for(let smena of smene){
+        let nSmena = {
+            idshift: smena.rdBr,
+            start : smena.startTime,
+            end : smena.endTime
+        }
+        nSmene.push(nSmena)
+    }
+    return nSmene
+}
 
 function createSmenaDiv(grid,smena){
     let div = $('<div class="smena"></div>')
@@ -32,10 +57,6 @@ function createSmenaDiv(grid,smena){
     td1_1 = $('<td>Pocetak</td>')
     td1_2 = $('<td></td>')
     let vremePocetak = $('<input type="time"  name="" id="vreme-poc-'+smena.rdBr+'">')
-    // if(smena.rdBr>1){
-    //     vremePocetak.attr('min',smene[smena.rdBr-2].endTime)
-    // }
-    // vremePocetak.attr('max',smene[smena.rdBr].startTime)
     vremePocetak.val(smena.startTime)
     tr2 = $('<tr></tr>')
     td2_1 = $('<td>Kraj</td>')
@@ -91,47 +112,75 @@ function ukloniSmenu(){
     let grid = $('#smene')
     popuni(grid,smene)
 }
+function findElemByKey(arr,key,id){
+    for(let elem of arr){
+        if(elem[key]==id)return elem;
+    }
+    return null
+}
 function changeStartTime(rdBr,input){
-    if(rdBr==0)return
+    //if(rdBr==0)return
     console.log(rdBr)
     let startTime = input.val() 
-
+    let smena = findElemByKey(smene,"rdBr",rdBr)
+    smena.startTime = startTime
     //let input_poc =$('#vreme-poc-'+rdBr)
     let input_kraj_prev =$('#vreme-kraj-'+(rdBr-1))
     //let input_kraj =$('#vreme-kraj-'+rdBr)
     input_kraj_prev.val(startTime)
+    let smenaPrev = findElemByKey(smene,"rdBr",rdBr+1)
+    if(smenaPrev!=null){
+        smenaPrev.endTime = startTime
+
+    }
 
 }
 
 function changeEndTime(rdBr,input){
-    if(rdBr==smene.length)return
+    //if(rdBr==smene.length)return
     console.log(rdBr)
     let endTime = input.val() 
-
+    let smena = findElemByKey(smene,"rdBr",rdBr)
+    smena.endTime = endTime
     //let input_poc =$('#vreme-poc-'+rdBr)
     let input_poc_next =$('#vreme-poc-'+(rdBr+1))
     //let input_kraj =$('#vreme-kraj-'+rdBr)
     input_poc_next.val(endTime)
+    let smenaNext = findElemByKey(smene,"rdBr",rdBr+1)
+    if(smenaNext!=null){
+        smenaNext.startTime = endTime
+
+    }
+    
 
 }
 function sacuvajSmene(){
-    postDataWithSpinner("url",{smeneInfo: JSON.stringify(smene)})
+    let smenePost = convertSmeneBack(smene)
+    console.log(smenePost)
+    //postDataWithSpinner("url",{smeneInfo: JSON.stringify(smenePost)})
 }
 
 $(document).ready(
     
-    ()=>{
+    async ()=>{
         popuniSidebar("admin")
         let grid = $('#smene')
+        //await refresh()
         popuni(grid,smene)
         $('#dodaj-smenu').on('click',dodajSmenu)
         $('#ukloni-smenu').on('click',ukloniSmenu)
+        $('#sacuvaj-smene').on('click',sacuvajSmene)
     }
 )
+async function refresh(){
+    //smene = await $.get(...)
+    smene = convertSmene(smene)
+}
+
 async function postDataWithSpinner(url,data){
-    closeModal()
+
     setSpinner()
     await postData(url,data)
-    refresh()
+    //refresh()
     resetSpinner()
 }
