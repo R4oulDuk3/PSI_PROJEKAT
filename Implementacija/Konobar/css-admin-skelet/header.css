@@ -14,11 +14,12 @@ header{
 }
 
 header label span{
-    font-size:1.7 rem;
+    font-size: 1.7rem;
     padding-right: 1rem;
 }
 
 .search-wrapper{
+    display: none !important;
     border: 1px solid #ccc;
     border-radius: 30px;
     height: 50px;

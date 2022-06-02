@@ -20,7 +20,7 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
 var file=null
-var inputs = ["naziv-input",]
+var inputs = ["naziv-input","cena-input"]
 $(document).ready(function (){
     popuniSidebar("admin")
     refresh()
@@ -121,6 +121,7 @@ async function kreiranjeKupona(){
     if(!checkIfFilled())return
     let nameK = $('#naziv-input').val()
     let descriptionK  = $('#opis-input').val()
+    let suma = $("#suma-input").val()
     file = $("#image_input").prop('files')[0]
     let img_url= "default_coupon.png"
     setSpinner()
@@ -133,7 +134,8 @@ async function kreiranjeKupona(){
     let kupon = {
             name: nameK,
             description : descriptionK,    
-            picture : img_url
+            picture : img_url,
+            points : suma
     }
     console.log(kupon)
     postDataWithSpinner("apiCreateCoupon",kupon)

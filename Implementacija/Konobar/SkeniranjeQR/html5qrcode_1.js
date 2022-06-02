@@ -1,4 +1,11 @@
 var html5QrcodeScanner=null
+var couponExample = {
+
+    idcoupon:1,
+    name: "Besplatno pivo",
+    description : 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Eaque cupiditate perspiciatis quia',
+    picture  :'assets/beer.jpg'
+}
 
 $(document).ready(
     ()=>{
@@ -51,8 +58,10 @@ function returnToScan(){
 async function tryCouponBuy(request){
     idUser = request.iduser
     idCoupon = request.idcoupon
-    let res =await postData("apiBuyCoupon",{idusers:idUser,idcoupon:idCoupon})
-    //res = "Nije uspesna kupovina kupona"
+    setSpinner()
+    //let res =await postData("apiBuyCoupon",{idusers:idUser,idcoupon:idCoupon})
+    resetSpinner()
+    res = couponExample
     return res
 }
 
@@ -70,7 +79,8 @@ async function onScanSuccess(decodedText, decodedResult) {
         $('#new-expendature').show()
     }else{
         let response = await tryCouponBuy(request)
-        $("#ret-msg").text(response)
+        $("#ret-msg-naslov").text(response.name)
+        $("#ret-msg-desc").text(response.description)
         $('#buy-coupon').show()
 
     } 

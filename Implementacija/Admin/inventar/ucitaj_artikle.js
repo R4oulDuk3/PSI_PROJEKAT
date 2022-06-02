@@ -246,9 +246,12 @@ async function sacuvajArtikal(){
     // $.post(host+"/apiSetProduct", noviArtikal) //AJAX
 }
 async function obirsiArtikal(){
-    let id = $("#id")
+    let id = $("#id").text()
     setSpinner()
     closeModal()
+    console.log(id)
+    let data = {idproduct:id}
+    console.log(data)
     await postData("apiSetProduct", {idproduct:id})
     resetSpinner()
 }

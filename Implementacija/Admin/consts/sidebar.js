@@ -61,5 +61,21 @@ function popuniSidebar(tip){
     for(let item of sidebar_links[tip].items){
         ul.append($('<li><a href="'+item.link+'"><span  class="las '+item.icon+'"></span><span>'+item.name+'</span></a></li>'))
     }
+    let logout=$('<li><a href="'+"#"+'"><span  class="las '+"la-users"+'"></span><span>'+"Odjavljivanje"+'</span></a></li>')
+    logout.on('click',async ()=>{
+
+        //await postData("apiOutUser",{})
+        window.location.href = 'home.html'
+    })
+    //let user =await $.get("apiCheckLogInUser")
+    let user = {
+        name:"Gavrilo",
+        surname:"Vojteski"
+    }
+    let user_name= $(".user-wrapper div h4").text(user.name+" "+user.surname)
+    let user_type= $(".user-wrapper div small").text(tip)
+
+    ul.append(logout)
 }
+//apiOutUser
 
