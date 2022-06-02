@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="{% static 'css/client/Client.css' %}">
     <link rel="stylesheet" href="{% static 'css/client/meni.css' %}">
+    <script  src="{% static 'js/client/qrcode.min.js' %}"></script>
     <title>Film Caffe - Meni</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 </head>
@@ -48,8 +49,7 @@
         <div>
             <div class="popupCloseButtonQR">&times;</div>
             <div class="popup-ContainerQR">    
-                <div class="popupCode">
-                    <img id="usrQRCodeimg" src="" alt="">
+                <div class="popupCode" id="usrQRCodeimg">
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
     </section>
 
     <!-- Kraj Footera-->
-    <script type="module" src="{% static 'js/client/main_script.js' %}"></script>
+    <script type="module" src="{% static 'js/client/main_scriptLI.js' %}"></script>
     <script type="module" src="{% static 'js/client/meniLI.js' %}"></script>
 </body>
 </html>

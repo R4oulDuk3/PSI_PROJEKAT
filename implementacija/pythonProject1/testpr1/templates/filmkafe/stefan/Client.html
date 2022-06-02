@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/client/Client.css' %}">
+    <script src="{% static 'js/client/qrcode.min.js' %}"></script>
     <title>
         Film Caffe - Pocetna
     </title>
@@ -25,7 +26,7 @@
             <a href="#kontakt">Kontakt</a>
             <a href="dogadjaji.html">Prijava za dogadjaj</a>
             <a href="kuponi.html">Moji Kuponi</a>
-            <a href="home.html" id="logout">Odjavi me</a>
+            <a href="#" id="logout">Odjavi me</a>
         </nav>
 
         <span><label id="logged-user"> Jhon Doe </label></span>
@@ -118,8 +119,7 @@
         <div>
             <div class="popupCloseButtonQR">&times;</div>
             <div class="popup-ContainerQR">    
-                <div class="popupCode">
-                    <img id="usrQRCodeimg" src="" alt="userQR">
+                <div class="popupCode" id="usrQRCodeimg">
                 </div>
             </div>
         </div>

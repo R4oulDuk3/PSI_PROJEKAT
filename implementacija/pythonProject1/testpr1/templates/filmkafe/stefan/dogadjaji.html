@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/client/Client.css' %}">
     <link rel="stylesheet" href="{% static 'css/client/events.css' %}">
+    <script src="{% static 'js/client/qrcode.min.js' %}"></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
     <title>
         Film Caffe - Dogadjaji
     </title>
@@ -25,7 +27,7 @@
             <a href="Client.html#kontakt">Kontakt</a>
             <a href="dogadjaji.html" class="current_page">Prijava za dogadjaj</a>
             <a href="kuponi.html">Moji Kuponi</a>
-            <a href="../logged_out/home.html">Odjavi me</a>
+            <a href="home.html">Odjavi me</a>
         </nav>
 
         <span><label id="logged-user"> Jhon Doe </label></span>
@@ -38,7 +40,7 @@
 
     <!-- Kraj headera-->
 
-    <section class="evs">
+    <section class="evs bg">
         
         <div class="row" id="mojiDog">
             <div class="form">
@@ -79,24 +81,19 @@
             <div>
                 <div class="popupCloseButton">&times;</div>
                 <div class="popup-Container">    
-                    <form onsubmit=rezervisi()>
+                    <form id="formaRez">
                         <h3>Rezervacija</h3>
-                        <div class="inputBox">
-                            <span class="fas fa-user"></span>
-                            <input type="text" id="imeIprez" placeholder="Ime i Prezime">
-                        </div>
-                        
                         <div class="inputBox" >
                             <span class="fas fa-user-friends"></span>
-                            <input type="text" onchange=validate(this.id) id= "brLjudi" placeholder="Broj ljudi">
+                            <input type="text" id= "brLjudi" placeholder="Broj ljudi">
                         </div>
                         <div class="inputBox">
                             <span class="fas fa-phone"></span>
-                            <input type="text" onchange=validate(this.id) id="telefon" placeholder="Broj telefona" >
+                            <input type="text" id="telefon" placeholder="Broj telefona" >
                         </div>
                         <div>
                             <div class="error" id="Error"></div>
-                            <input type="submit" id="dugmeRez" value="Rezervisi mesta" class="btn" disabled>
+                            <input type="button" id="dugmeRez" value="Rezervisi mesta" class="btn" disabled>
                         </div>
                     </form>
                 </div>
@@ -112,8 +109,7 @@
             <div>
                 <div class="popupCloseButtonQR">&times;</div>
                 <div class="popup-ContainerQR">    
-                    <div class="popupCode">
-                        <img id="usrQRCodeimg" src="" alt="userQR">
+                    <div class="popupCode" id="usrQRCodeimg">
                     </div>
                 </div>
             </div>
@@ -135,7 +131,7 @@
     </div>
 
 </section>
-    <script type="module" src="{% static 'js/client/main_script.js' %}"></script>
+    <script type="module" src="{% static 'js/client/main_scriptLI.js' %}"></script>
     <script type="module" src="{% static 'js/client/events.js' %}"></script>
 </body>
 </html>

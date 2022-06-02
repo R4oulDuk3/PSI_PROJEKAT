@@ -250,7 +250,7 @@ async function obirsiArtikal(){
     let id = $("#id")
     setSpinner()
     closeModal()
-    await postData("apiSetProduct", {idproduct:id})
+    await postData("apiDeleteProduct", {idproduct:id})
     resetSpinner()
 }
 

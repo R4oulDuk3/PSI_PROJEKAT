@@ -62,7 +62,6 @@
 }
 
 .cups .qrkod{
-
     text-align: center;
     margin-bottom: 1rem;
     position: relative; 
@@ -71,16 +70,25 @@
 }
 
 .cups .qrkod img{
+    
     height: 180px;
     width: 180px;
+    z-index: 20;
 }
 
+#kupon_qr>img{
+  display: inline !important;
+  border: #FFF solid;
+}
+
+
+
+
+
 .cups .qrkod .btn{
-    margin: 0 1rem;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    margin: 0;
+    margin-top: 1rem;
+  
 }
 
 .card-body table{
@@ -90,6 +98,7 @@
 
 hr{
     background:  var(--main-color);
+    margin-top:  3rem;
     margin-bottom: 10rem;
     height: 5px;
 }
@@ -190,8 +199,11 @@ hr{
 
 @media (max-width:500px) {
 
+
+
     .swiper-pagination{
         transform: translateY(-350%);
       }
     
 }
+

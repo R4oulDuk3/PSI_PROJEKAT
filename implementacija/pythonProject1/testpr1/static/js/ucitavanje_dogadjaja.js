@@ -29,12 +29,12 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var ignoreDoc=false
 var createZurkaInputs=["#input-naslov","#input-datum"]
-$(document).ready(function (){
+$(document).ready(async function (){
     popuniSidebar("admin")
     // // data = await $.get(host+"/apiEvents")  //AJAX
     // let grid = $('.grid').first();
     // popuni(grid,data)
-    refresh()
+    await refresh()
     $('#modal-create-btn').on('click',(openCreateModal))
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -62,6 +62,7 @@ $(document).ready(function (){
         checkIfMathcing()
     })
     $('#create-zurka').on('click',createZurka)
+    $('#del-button-confirm').on('click',deleteZurka)
     $('#input-datum').attr('min',new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
 
     checkIfFilled(createZurkaInputs,$('#create-zurka'))
@@ -110,7 +111,7 @@ function openCreateModal(){
     //DOHVATI POSTAVKE
     $('#postavke').empty()
     for(let postavka of postavke){
-        $('#postavke').append($('<option value="'+postavka.name+'" style="font-size:large;font-weight:700">'+postavka.name+'</option>'))
+        $('#postavke').append($('<option value="'+postavka.idsetup+'" style="font-size:large;font-weight:700">'+postavka.name+'</option>'))
     }
     modalCreateOpen=true
     ignoreDoc=true
@@ -127,10 +128,14 @@ function closeModal(){
     $('#delete-modal').css('display','none')
     $('#create-modal').css('display','none')
 }
-function deleteZurka(){
+async function deleteZurka(){
     if( $('#id').text()== $('#modal-del-input').val()){
-        id = $('#id').text();
-        // TODO: SEND HTTP DELETE
+        let id = $('#id').text();closeModal()
+        setSpinner()
+        await postData('apiDeleteEvent', {idEvent:id})
+        await refresh()
+        resetSpinner()
+
     }
 
     closeModal()
@@ -161,13 +166,15 @@ async function createZurka(){
         name: naslov,
         description : opis,
         start: datum,
-        picture : img_url
+        picture : img_url,
+        setup : postavka
     }
+    console.log(postavka)
 
     closeModal()
     setSpinner()
     await postData('apiCreateEvent',zurka)
-    refresh()
+    await refresh()
     resetSpinner()
 
 }
@@ -175,6 +182,8 @@ async function createZurka(){
 
 async function refresh(){
     data = await $.get("apiEvents")  //AJAX
+    postavke = await $.get("apiSetup")//AJAX
+    console.log(postavke)
     let grid = $('.grid').first();
     popuni(grid,data)
 }

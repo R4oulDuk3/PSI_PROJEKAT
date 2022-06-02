@@ -1,16 +1,20 @@
 $(document).ready(function(){
 
-    $("#btn").click(function(){
-      loguj();
+    $("#btn").click(async function(){
+      await loguj();
     })
   
   })
 
-  function loguj() {
+  async function loguj() {
     
     let json = new Object();
     json.username = $("#mail").val();
     json.password = $("#pass").val();
-    postData("apiLogIn",json);
-      
+    let link = await postData("apiLogIn",json);
+
+    console.log(link);
+
+    window.location.replace(link);
+    console.log("posle");
   }

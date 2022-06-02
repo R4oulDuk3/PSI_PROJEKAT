@@ -1,3 +1,16 @@
+function convertRasporedBack(rasporedi){
+    nRaspored= []
+    for(let raspored of rasporedi){
+        nRas = {
+            shift: raspored.idSmene,
+            waiter: raspored.konobarId,
+            day : raspored.date
+        }
+        nRaspored.push(nRas)
+    }
+    return nRaspored
+}
+
 
 var konobari = [
     {
@@ -91,7 +104,7 @@ function datediff(first, second) {
 
 function findKonobarById(id){
     for(konobar of konobari){
-        if (konobar.idusers==id)return konobar
+        if (konobar.id==id)return konobar
     }
 }
 function getTableData(){
@@ -119,9 +132,9 @@ function getTableData(){
                     let id = parseInt(idString.split('_')[1])
                     console.log("id: "+id)
                     data.push({
-                        idSmene: i,
+                        idSmene: i+1,
                         konobarId: id,
-                        date : new Date(startDate.getTime() + 86400000*j)
+                        date : new Date(startDate.getTime() + 86400000*(j+1))
                     })
             }
         }
@@ -131,17 +144,19 @@ function getTableData(){
 
 function fillTable(raspored){
     for(info of raspored){
-        let i = info.shift
-        let j = datediff(startDate,info.day)
+        let i = info.idSmene-1
+        let j = datediff(startDate,info.date)-1
         
        // if(j>=datediff(endDate,startDate))continue
         console.log("loc i: "+i+" j : "+j)
-        let elem=$('<div class="draggable" draggable="true" id="konobar_'+info.waiter+'"><div>'+ findKonobarById(info.waiter).name +' '+findKonobarById(info.waiter).surname +'</div></div>')
+        console.log(info.konobarId)
+        let elem=$('<div class="draggable" draggable="true" id="konobar_'+info.konobarId+'"><div>'+ findKonobarById(info.konobarId).ime +' '+findKonobarById(info.konobarId).prezime +'</div></div>')
         let button =$('<button class="sm-button"  style="display:block;"><span class="las la-times delete"></span></button>')
         button.on('click',()=>{
             elem.remove()
         })
         elem.append(button)
+        console.log("i: "+i +" j: "+j)
         if((i>=0 && j>=0) && (j<datediff(startDate,endDate)))tableInfo[i][j].append(elem)
     }
 }
@@ -152,14 +167,11 @@ function getKonobarsForDay(date, rdBrSmene){
     let noKonobars = true;
     console.log(date)
     for(let preferenca of preference){
-        //console.log(date)
-        //console.log(preferenca.day)
-        //console.log(rdBrSmene)
-        //console.log(preferenca.shift)
-        if(preferenca.day.getTime()==date.getTime() && preferenca.preferedshift==rdBrSmene){
 
-            let konobar= findKonobarById(preferenca.waiter)
-            ret+= konobar.name+" "+konobar.surname+"\n"
+        if(preferenca.date.getTime()==date.getTime() && preferenca.shift==rdBrSmene){
+
+            let konobar= findKonobarById(preferenca.konobarId)
+            ret+= konobar.ime+" "+konobar.prezime+"\n"
             noKonobars=false;
         }
     }
@@ -209,14 +221,16 @@ function changeInfoMsg(msg){
 
     $("#infoMsg").text(msg)
 }
-function showTable(){
+async function showTable(){
     startDate = $("#date-start").val()
     endDate = $("#date-end").val()
     if(!startDate ||  !endDate){
         console.log(startDate+" "+endDate)
     }else{
+        if(startDate>endDate)return
         startDate = new Date(startDate)
         endDate = new Date(endDate)
+        await refresh()
         //dohvati raspored
         console.log("show")
         startDate.setHours(0,0,0,0)
@@ -236,14 +250,29 @@ function showTable(){
 
 var konobariDivs=[]
 
+function covertPrefrence(preference){
+    let nPref = []
+    for(let pref of preference){
+        nPref.push(
+            {date: new Date(pref.day),
+                shift: pref.preferedshift,
+                konobarId: pref.waiter
+            }
+        )
+    }
+    return nPref;
+}
+
+
 function initKonobari(){
     for(let k of konobari){
         
-        let konobarDiv = $('<div class="draggable" draggable="true" id="konobar_'+k.idusers+'"><div>'+k.name+'</div><button class="sm-button"><span class="las la-times delete"></span></button></div>')
+        let konobarDiv = $('<div class="draggable" draggable="true" id="konobar_'+k.id+'"><div>'+k.ime+'</div><button class="sm-button"><span class="las la-times delete"></span></button></div>')
         konobariDivs.push({
             konobar : k,
             div : konobarDiv
         })
+        console.log(k)
         $('#konobari').append(konobarDiv)
     }
     
@@ -251,49 +280,94 @@ function initKonobari(){
 async function postDataWithSpinner(url,data){
     setSpinner()
     await postData(url,data)
+    refresh()
     resetSpinner()
 }
 
 function sendNoviRaspored(){
     let raspored = getTableData()
-    
+    raspored = convertRasporedBack(raspored)
+    let sdate = new Date(startDate).toISOString()
+    let edate = new Date(endDate).toISOString()
     let info = {
-        startDate: startDate,
-        endDate: endDate,
-        raspored: raspored
+        startDate: sdate,
+        endDate: edate,
+        raspored: JSON.stringify(raspored)
     }
-    console.log(JSON.stringify(info))
-    postDataWithSpinner("url",info) //AJAX
+    console.log(info)
+    postDataWithSpinner("apiChangeSchedule",info) //AJAX
     //sendData
     //return to rasporedi
 }
+function convertKonobari(konobari){
+    let newKonobari = []
+    for(let konobar of konobari){
+        nKon = {   
+            id: konobar.idusers,
+            ime: konobar.name,
+            prezime: konobar.surname,
+            telefon: konobar.phone,
+            email: konobar.email,
+            korisnickoIme: konobari.username,
+        }
+        newKonobari.push(nKon)
+    }
+    return newKonobari
+}
+function convertSmene(smene){
+    let nSmene = []
+    for(let smena of smene){
+        nSmena = {
+            id: smena.idshift,
+            pocetak: smena.start,
+            kraj: smena.end
+        }
+        nSmene.push(nSmena)
+    }
+    return nSmene
+}
+function convertRaspored(rasporedi){
+    nRaspored= []
+    for(let raspored of rasporedi){
+        nRas = {
+            idSmene: raspored.shift,
+            konobarId: raspored.waiter,
+            date : new Date(raspored.day)
+        }
+        nRaspored.push(nRas)
+    }
+    return nRaspored
+}
+async function refresh(){
+    // prethodniRaspored = await $.get(...)//AJAX
+    // smene = await $.get(...) //AJAX
+    //
+    prethodniRaspored = await $.get("apiSchedule") //AJAX
+    smene = await $.get("apiShift")// AJAX
+    konobari = await $.get("apiWaiter") //AJAX
+    preference = await $.get("apiPreference")
+    console.log(preference)
+    prethodniRaspored = convertRaspored(prethodniRaspored)
+    smene = convertSmene(smene)
+    konobari = convertKonobari(konobari)
+    preference = covertPrefrence(preference)
+    console.log(konobari)
+}
 
 $(document).ready(async function (){
+
     //Dohvati prethodni raspored
     //Dohvati Konobare
     //Dohvati smene
     popuniSidebar("admin")
-    prethodniRaspored = await $.get("apiSchedule") //AJAX
-    smene = await $.get("apiShift")// AJAX
-    konobari = await $.get("apiWaiter") //AJAX
-    for(let sch of prethodniRaspored){
-        sch.day = new Date(sch.day)
-    }
-    for(let pref of preference){
-        pref.day = new Date(pref.day)
-    }
-    console.log(prethodniRaspored)
-    console.log(smene)
-    console.log(konobari)
-    preference = await $.get("apiPreference")
-    console.log(preference)
+    await refresh()
     noviRaspored=structuredClone(prethodniRaspored);
     $("#save-btn").on('click',sendNoviRaspored)
     $("#table").hide()
     $("#save-btn").hide()
     $("#card-konobari").hide()
-    $("#date-start").change(showTable)
-    $("#date-end").change(showTable)
+    $("#date-start").change(async ()=>{await showTable()})
+    $("#date-end").change(async ()=>{await showTable()})
     initializeDrag()
     initKonobari()
 

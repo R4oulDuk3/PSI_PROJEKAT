@@ -219,6 +219,8 @@ section{
   }
   
   .events .card .image img{
+    max-height: 400px;
+    max-width: 275px;
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -429,8 +431,9 @@ section{
     vertical-align:middle;
 }
 .hover_bkgr_friccQR > div {
-    background-color: var(--black);
-    box-shadow: 10px 10px 60px #555;
+    background-color: #fff;
+    border: #fff solid;
+   
     display: inline-block;
     height: auto;
     max-width: fit-content;

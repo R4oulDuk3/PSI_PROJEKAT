@@ -1,0 +1,78 @@
+.card-body table{
+    width: 100%;
+}
+.grid{
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+.card{
+    background: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.card-body{
+    padding: 1rem;
+}
+.text{
+    font-size: 32px;
+}
+#trosak{
+    width: 300px;
+}
+.buttons-div{
+   display: flex;
+   justify-content: space-around; 
+}
+.card-header{
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+}
+#new-expendature{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#buy-coupon{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+.buttonqr{
+    margin: 1rem;
+    padding: 0.75rem;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 0px solid black;
+    font-weight: 900;
+    background-color: var(--main-color);
+    color: #fff;
+    cursor: pointer;
+    
+}
+.buttonqr:disabled{
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 0px solid black;
+    font-weight: 900;
+    background-color: lightgray;
+    color: #fff;
+    cursor: pointer;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+

@@ -22,8 +22,9 @@ class CustomerExpenditureSerializer(serializers.ModelSerializer):
 
 class EventReservationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EventReservation
-        fields = '__all__'
+        model = EventReservations
+        #fields = '__all__'
+        exclude = ('phone',)
 
 
 class EventTableSerializer(serializers.ModelSerializer):
@@ -35,8 +36,8 @@ class EventTableSerializer(serializers.ModelSerializer):
 class EventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
-        #fields = '__all__'
-        exclude = ('setup',)
+        fields = '__all__'
+        #exclude = ('setup',)
 
 
 class MeniSerializer(serializers.ModelSerializer):
@@ -85,7 +86,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ReservedTablesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ReservedTables
+        model = ReservedTablesNew
         fields = '__all__'
 
 
@@ -122,6 +123,11 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ['idusers' ,'name', 'surname', 'email', 'phone', 'role', 'username', 'imagepath', 'password']
+
+class EndUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ['idusers' ,'name', 'surname', 'salary']
 
 
 class UsersCouponsSerializer(serializers.ModelSerializer):

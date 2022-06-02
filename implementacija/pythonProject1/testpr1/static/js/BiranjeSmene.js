@@ -234,6 +234,7 @@ function finalnoSlanje(){
 
 $(document).ready(
     ()=>{
+        popuniSidebar("konobar")
         let datum=$('#naslov')
         let head=$('#thead')
         //let bodyPopUp=$('#bodyPopUp')

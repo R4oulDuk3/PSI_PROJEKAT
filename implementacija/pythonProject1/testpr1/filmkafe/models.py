@@ -16,6 +16,7 @@ class Coupon(models.Model):
     description = models.CharField(db_column='Description', max_length=100, blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=100, null = False, default="Ime")
     picture = models.CharField(db_column='image', max_length=100)
+    points = models.IntegerField(db_column='points', default=100)
 
     class Meta:
         managed = True
@@ -45,16 +46,39 @@ class CustomerExpenditure(models.Model):
         db_table = 'customer_expenditure'
 
 
+class FreeTables(models.Model):
+    table = models.ForeignKey('Table', db_column='Table', on_delete=models.CASCADE)
+    event = models.ForeignKey('Events', db_column='Event', on_delete=models.CASCADE)
+    class Meta:
+        managed = True
+        db_table = 'free_tables'
 
 
-class EventReservation(models.Model):
-    event = models.OneToOneField('Events', db_column='Event', primary_key=True, on_delete=models.CASCADE)  # Field name made lowercase.
+
+class EventReservations(models.Model):
+    event = models.ForeignKey('Events', db_column='Event', on_delete=models.CASCADE)  # Field name made lowercase.
     user = models.ForeignKey('Users', models.DO_NOTHING, db_column='User')  # Field name made lowercase.
     approved = models.IntegerField(db_column='Approved')  # Field name made lowercase.
+    noofseats = models.IntegerField(db_column='Noofseats', default=0)
+    id = models.AutoField(db_column = 'ID', primary_key = True)
+    phone = models.CharField(db_column='Phone', max_length=15)
 
     class Meta:
         managed = True
         db_table = 'event_reservation'
+        unique_together = (('event', 'user'),)
+
+
+class EventReservation(models.Model):
+    event = models.ForeignKey('Events', db_column='Event', on_delete=models.CASCADE)  # Field name made lowercase.
+    user = models.ForeignKey('Users', models.DO_NOTHING, db_column='User')  # Field name made lowercase.
+    approved = models.IntegerField(db_column='Approved')  # Field name made lowercase.
+    noofseats = models.IntegerField(db_column='Noofseats', default=0)
+    id = models.AutoField(db_column = 'ID', primary_key = True)
+
+    class Meta:
+        managed = True
+        db_table = 'event_reservations'
         unique_together = (('event', 'user'),)
 
 
@@ -65,7 +89,6 @@ class EventTable(models.Model):
     class Meta:
         managed = True
         db_table = 'event_table'
-        unique_together = (('event', 'table'),)
 
 
 class Events(models.Model):
@@ -108,8 +131,8 @@ class Preference(models.Model):
 
 class Preferences(models.Model):
     day = models.DateTimeField(db_column='Day')  # Field name made lowercase.
-    preferedshift = models.ForeignKey('Shift', models.DO_NOTHING, db_column='PreferedShift')  # Field name made lowercase.
-    waiter = models.ForeignKey('Users', models.DO_NOTHING,  db_column='Waiter')
+    preferedshift = models.ForeignKey('Shift', models.CASCADE, db_column='PreferedShift')  # Field name made lowercase.
+    waiter = models.ForeignKey('Users', models.CASCADE,  db_column='Waiter')
     idpref = models.AutoField(db_column = 'idpreference', primary_key = True)
 
     class Meta:
@@ -149,12 +172,24 @@ class Setup(models.Model):
         db_table = 'setup'
 
 class ReservedTables(models.Model):
-    reservation = models.OneToOneField(EventReservation, models.DO_NOTHING, db_column='Reservation', primary_key=True)  # Field name made lowercase.
+    reservation = models.OneToOneField(EventReservations, models.DO_NOTHING, db_column='Reservation')  # Field name made lowercase.
     reservedtables = models.ForeignKey('Table', models.CASCADE, db_column='ReservedTables')  # Field name made lowercase.
 
     class Meta:
         managed = True
         db_table = 'reserved_tables'
+        unique_together = (('reservation', 'reservedtables'),)
+
+
+
+
+class ReservedTablesNew(models.Model):
+    reservation = models.ForeignKey('EventReservations', models.CASCADE,db_column='Reservation')  # Field name made lowercase.
+    reservedtables = models.ForeignKey('Table', models.CASCADE,db_column='ReservedTables')  # Field name made lowercase.
+    id = models.AutoField(db_column='id', primary_key=True)
+    class Meta:
+        managed = True
+        db_table = 'reserved_tables_new'
         unique_together = (('reservation', 'reservedtables'),)
 
 
@@ -171,8 +206,8 @@ class Sale(models.Model):
 
 
 class Schedule(models.Model):
-    waiter = models.ForeignKey('Users', models.DO_NOTHING, db_column='Weighter')  # Field name made lowercase.
-    shift = models.ForeignKey('Shift', models.DO_NOTHING, db_column='shift')
+    waiter = models.ForeignKey('Users', models.CASCADE, db_column='Weighter')  # Field name made lowercase.
+    shift = models.ForeignKey('Shift', models.CASCADE, db_column='shift')
     day = models.DateTimeField(db_column='Day')  # Field name made lowercase.
     idschedule = models.AutoField(db_column='idSchedule', primary_key=True)  # Field name made lowercase.
     started = models.DateTimeField(db_column='Started', blank=True, null=True)  # Field name made lowercase.
@@ -219,8 +254,9 @@ class Users(AbstractUser):
     imagepath = models.CharField(db_column='image', max_length=100)
     salary = models.DecimalField(db_column='Salary', max_digits=12, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     valute = models.CharField(db_column='Valute', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    totalexp = models.IntegerField(db_column='TotalExp', default=0)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     class Meta:
         managed = True

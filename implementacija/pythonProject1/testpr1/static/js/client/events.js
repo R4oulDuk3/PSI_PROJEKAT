@@ -1,5 +1,5 @@
-import{downloadImage} from "../../index.js"
-
+import{downloadImage} from "./index.js"
+var idEventa;
 function prijaviEvent(id){
     document.getElementsByClassName("rez")[0].style.display = "flex";
     idEventa = id;
@@ -7,27 +7,29 @@ function prijaviEvent(id){
     
 }
 
-function otkaziDog(event){
-    alert(event + " otkazan");
+async function otkaziDog(event){
+    let msg={"event":event};
+    await postData("apiDeleteReserve",msg);
+    alert("Dogadjaj "+event + " je otkazan");
 }
 
-function rezervisi(){
-    let ime = document.getElementById("imeIprez").value;
+async function reservisi(){
+    console.log("USO")
     let broj = document.getElementById("brLjudi").value;
     let tel = document.getElementById("telefon").value;
 
-    let msg = {name:ime, amount:broj, number:tel, evt:idEventa };
-    const msgJSON = JSON.stringify(msg);
-    //post(msgJSON);
+    let msg = {"noofseats":broj, "phone":tel, "id":idEventa };
+
+    await postData("apiReserve",msg);
 }
 
 
-let flag1 = 0;
-let flag2= 0;
+let flag1 = 1;
+let flag2= 1;
 
 function validate(id){
-    errTrig = document.getElementById(id);
-    if (errTrig.id == "brLjudi") {
+    let errTrig = document.getElementById(id);
+    /*if (errTrig.id == "brLjudi") {
         
         if(isNaN(errTrig.value)){
             document.getElementById("Error").textContent="GRESKA: Los broj ljudi";
@@ -45,39 +47,53 @@ function validate(id){
         else{
             document.getElementById("Error").textContent="";
             flag2=1;
-        }
+        }*/
     if(flag1 && flag2){
         document.getElementById("dugmeRez").disabled = false;;
     }
     }
-}
-
-$(document).ready(function() {
 
 
+$(document).ready(async function() {
 
     $('.popupCloseButton').click(function(){
         $('.rez').hide();
     });
 
-    $.getJSON("events_data.json", function(json) {
+    $("#brLjudi").change(function(){
+        validate("brLjudi");
+    });
+
+    $("#telefon").change(function(){
+        validate("telefon");
+    });
+    $("#dugmeRez").click(async function(){
+
+        await reservisi();
+        $("#formaRez").submit();
+    });
+
+
+
+    await $.get("apiEvents",async function(json) {
+
         $('#divisor').hide();
         $('#going').hide();
         $('#mojiDog').hide();
-       popuniEvents(json);
+       await popuniEvents(json);
     });
   
 
-    $.getJSON("events_reserved_data.json", function(json) {
-       
-        popuniRez(json);
+    await $.get("apiEventReservations", async function(json) {
+       console.log(json)
+       await popuniRez(json);
      
     });
 
 
 
 
-    function popuniEvents(json) {
+    async function popuniEvents(json) {
         let dogadjaji = document.getElementById("possible");
         let container = document.createElement("div");
         container.classList.add("grid");     
@@ -86,7 +102,7 @@ $(document).ready(function() {
             let kartica = document.createElement("div");
             kartica.classList.add("card");
             kartica.setAttribute("id","event"+item.idevents);
-            kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png)";
+            kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(" + await downloadImage(item.picture)+")";
             kartica.style.backgroundSize = "cover";
             let cont = document.createElement("div");
             cont.classList.add("card-content");
@@ -97,7 +113,7 @@ $(document).ready(function() {
             desc.classList.add("btn");
             desc.textContent = "Prijavi me";*/
             kartica.addEventListener("click",function(){
-                prijaviEvent("event"+item.idevents)});
+                prijaviEvent(item.idevents)});
   
             cont.appendChild(titl);
             //cont.appendChild(desc);
@@ -110,7 +126,7 @@ $(document).ready(function() {
 
 
 
-        function popuniRez(json) {
+       async function popuniRez(json) {
 
             if(!Object.keys(json).length){
                 $('#divisor').hide();
@@ -125,7 +141,7 @@ $(document).ready(function() {
                 let kartica = document.createElement("div");
                 kartica.classList.add("card");
                 kartica.setAttribute("id","event"+item.idevents);
-                kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(../../assets/eventPNG.png)";
+                kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(" + await downloadImage(item.picture)+")";
                 kartica.style.backgroundSize = "cover";
                 let cont = document.createElement("div");
                 cont.classList.add("card-content");
@@ -136,15 +152,11 @@ $(document).ready(function() {
                 status.classList.add("fa-solid");
                 status.classList.add(item.approved? "fa-check" : "fa-clock");
                 titl.appendChild(status);
-
-               /* let desc = document.createElement("button");
-                desc.classList.add("btn");
-                desc.textContent = "Prijavi me";*/
                 kartica.addEventListener("click",function(){
-                    otkaziDog("event"+item.idevents)});
+                    otkaziDog(item.idevents)});
       
                 cont.appendChild(titl);
-                //cont.appendChild(desc);
+
                 kartica.appendChild(cont);
                 container.appendChild(kartica);
               }

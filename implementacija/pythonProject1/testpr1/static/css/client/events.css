@@ -8,7 +8,6 @@
 
 
 .evs{
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("../../assets/background.jpg");
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -98,7 +97,8 @@ hr{
     color: #fff;
     
     padding: 7rem 0rem;
-/*    max-width: 40ch;*/
+    max-width: 300px;
+    width: 100%;
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
@@ -112,7 +112,8 @@ hr{
 .card-title{
     position:relative;
     width: max-content;
-    padding: 0 2rem;
+    padding: 1 2rem;
+
     
 }
 
@@ -132,7 +133,8 @@ hr{
 
 
 .card:hover .card-content{
-    transform: translateY(125%);
+    transform: translateY(100%);
+
 }
 .card:hover .card-content > *{
     opacity: 1;
