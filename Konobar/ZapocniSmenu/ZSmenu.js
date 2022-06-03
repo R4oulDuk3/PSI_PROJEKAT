@@ -10,13 +10,13 @@ var smene=[
         idShift: 2,
         name:"Druga smena",
         start:"16:00:00",
-        end:"00:00:00" 
+        end:"01:00:00" 
 
     },{
         idShift: 7,
         name: "Treca smena",
         start:"20:00:00",
-        end:"03:00:00" 
+        end:"01:00:00" 
 
     }
 ]
@@ -74,7 +74,7 @@ function proveri(body,data){
     body.empty()
     let iCnt=0
     var imaSmena=0
-    for(var smena of data){ //ako moze da zapocne smenu
+    for(let smena of data){ //ako moze da zapocne smenu
         let k=pozovi(smena.end)
         let p=pozovi(smena.start)
         let t=pozovi(trVr)
@@ -84,11 +84,10 @@ function proveri(body,data){
                 imaSmena++;
                  let pS=napraviVreme(smena.start)
                  let kS=napraviVreme(smena.end)
-                let tr=$('<div class="card-single"><div><h1> '+smena.name + '</h1><br><h3 style="text-align: center;">'+smena.start+'-'+smena.end+ '</h3></div><div><button class="button" id="button'+smena.idShift+'"><b>Zapocni smenu</b></button><button class="buttonR" id="buttonR'+smena.idShift+'"><b>Zavrsi smenu</b></button></div></div>')
+                let tr=$('<div class="card-single" id='+smena.idShift+'><div><h1> '+smena.name + '</h1><br><h3 style="text-align: center;">'+smena.start+'-'+smena.end+ '</h3></div><div><button class="button" id="button'+smena.idShift+'"><b>Zapocni smenu</b></button><button class="buttonR" id="buttonR'+smena.idShift+'"><b>Zavrsi smenu</b></button></div></div>')
                 body.append(tr)
                 nema=true
                 $("#button"+smena.idShift).on('click',()=>{
-                    alert("Usla sam u button koji ima id" + $(this).attr('id'))
                     $('.buttonR').prop('disabled', false)
                     $('.button').prop('disabled', true)
                     //boji
@@ -96,30 +95,36 @@ function proveri(body,data){
                     // $('.buttonR').removeClass('obojSivo')
                     // $('.button').addClass('obojSivo')
                     // $('.buttonR').addClass('obojCrveno')
-                     alert("Unos smene")
-                     $("#button"+smena.idShift).css("background-color","pink");
-                     alert("Ovo se obojilo")
-                     let smena = {
+                    //  alert("Unos smene")
+                    $("#button"+smena.idShift).css("background-color","gray");
+                    $("#buttonR"+smena.idShift).css("background-color","red");
+
+                      //console.log("#button"+smena.idShift)
+                    //  alert("Ovo se obojilo")
+                     let s = {
                         idShift:smena.idShift,
                         vremePocetka:smena.start,
                     }
-                    alert("Poslala sam podatke")
+                   // alert("Poslala sam podatke")
                      //$.post(host+"??",smena)//AJAX
                  })
                  $("#buttonR"+smena.idShift).on('click',()=>{
                     $('.buttonR').prop('disabled', true)
                     $('.button').prop('disabled', false)
+                    $("#buttonR"+smena.idShift).css("background-color","gray");
+                    $("#button"+smena.idShift).css("background-color","yellowgreen");
                     // $('.button').removeClass('obojSivo')
                     // $('.buttonR').removeClass('obojCrveno')
                     // $('.button').addClass('obojZeleno')
                     // $('.buttonR').addClass('obojSivo')
-                    alert("Zavrsi smenu")
-                    let smena = {
+                    let s = {
                         idShift:smena.idShift,
                         vremeKraja:smena.end,
                     }
-                    alert("Poslala sam podatke")
+
                      //$.post(host+"??",smena)//AJAX
+                    body.empty()
+                    proveri(body,data)
                 })
 
             }else  {
