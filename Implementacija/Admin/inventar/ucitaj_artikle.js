@@ -153,7 +153,8 @@ function fillCreateModal(info){
         $('#naslov-modala').text("Izmena artikla")
     }
     $("#artikal-id-modal").text(info.idproduct);
-    $('#naziv-input').attr('value',info.name);
+    // $('#naziv-input').attr('value',info.name);
+    $('#naziv-input').val(info.name)
     $('#sifra-artikla-input').attr('value',info.productcode );
     $('#sifra-dobavljaca-input').attr('value',info.suppliercode );
     $('#tren-kolicina-input').attr('value',info.amount );

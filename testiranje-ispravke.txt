@@ -1,0 +1,113 @@
+Legenda:
+-- osoba  <= osoba kojoj je namenjeno
+num.* <= stavka nije krucijalna
+
+1. Imao je @login_required a potreban je i kad korisnik nije ulogovan --Ognjen
+
+@login_required --uklonio
+@api_view(['GET'])
+def apiEvents(request):
+    e = Events.objects.all()
+    print(e)
+    res = EventsSerializer(e, many = True)
+    return Response(res.data)
+
+2. Registracija treba da te loginuje --Stefan
+	U registraciji iz nekog razloga dva puta cuvas korisnika i to baca gresku
+	Odradio sam da nakon registracije odma pokusa da se loguje korisnik
+	Takodje vraca se greska ako registracija nije uspesna
+	*Ono sto je potrebno da se doda je da se ispise da vec postoji korisnik sa tim mejlom, ako
+	neko pokusa da pravi profil sa istim mejlom
+
+3. U slucaju neuspesne registracije treba da se ispise poruka greske --Stefan
+
+4. class ReservedTables(models.Model): --Ognjen
+    reservation = models.OneToOneField(EventReservations, models.DO_NOTHING, db_column='Reservation')  # Field name made lowercase.
+    reservedtables = models.ForeignKey('Table', models.CASCADE, db_column='ReservedTables')  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        db_table = 'reserved_tables'
+        unique_together = (('reservation', 'reservedtables'),)
+uklonio iz reservedTables models.CASCADE posto pravi problem jer ne postoji ta tabela
+zahtevalo je malo cimanja, morao sam da pobrisem sve migracije da bih migrirao opet
+
+5. Na meniju, svi artikli imaju akcije cak i ako je akcija 0% --Stefan
+
+6. na prijavi za dogadjaje popapp i prozor koji ga okruzuje su imaju padding 
+pa nisu u centru --Stefan
+
+7. Na musterijinim stranicama, moguce je da se izloguje samo ako si na pocetnoj --Stefan
+
+8.* Za kupone, bilo bi dobro ako bi na neki nacin mogao da se prikaze opis, al nije krucijalno --Stefan
+
+9.* Znam da je nitpick ali ne bi trebalo da bude bas filmcaffe69@yahoo --Stefan
+
+10. * Dugme saznaj vise ne radi nista konkretno --Stefan
+
+11. * Na meni stranici, bilo bi kul da footer bude zakacen za dno --Stefan
+
+12. Kreirao sam novog konobara, i mogao sam da zapocnem i zavrsim smenu,
+ iako za mog konobara nije postojao raspored --Marina --Ognjen
+
+13.Izmnenjen create event api --Ognjen
+Nije hteo da funkcionise ako ne postoji nijedan dogadjaj kreiran
+@login_required
+@api_view(['POST'])
+def apiCreateEvent(request):
+    if(request.user.role=='Manager'):
+        ind = Events.objects.all().values('idevents')
+        if(len(ind)>0):
+            ind = int(ind[len(ind) - 1]['idevents']) + 1
+        else:
+            ind =1
+        p = request.data.copy()
+        p['idevents']=ind
+        p['end']=p['start']
+        #p['setup']=int(p['setup'])
+        res = EventsSerializer(data=p)
+
+        if (res.is_valid()):
+            res.save()
+        idevents = res.data["idevents"]
+        tabs = SetupTables.objects.filter(setup = p['setup']).values('table')
+        #print(tabs)
+        for each in tabs:
+            FreeTables.objects.create(table = Table.objects.get(idtable = each['table']), event = Events.objects.get(idevents =  idevents))
+        print(res.errors)
+        return Response(res.data)
+14. Dodat api za Brisanje kupona u URLS --Ognjen
+15. Ispravljen API za brisanje Kupona --Ognjen
+def apiDeleteCoupon(request):
+    if(request.user.role=='Manager'):
+        id = request.data['idcupon']
+        event = Coupon.objects.filter(idcupon=id).delete()
+        return Response()
+
+16. Izmenjen api change shift da brise rasporede od danjasneg dana pa nadalje svaki put kad je broj starih i novih smena razlicit
+@login_required
+@api_view(['POST'])
+def apiChangeShift(request):
+    if(request.user.role=='Manager'):
+        data = json.loads(request.data.copy()['smeneInfo'])
+        i = 0
+        if (len(data) != len(Shift.objects.all())):
+            Schedule.objects.filter(day__gt=datetime.datetime.today()).delete()
+        for each in data:
+            sh = Shift.objects.filter(idshift= each['idshift'])
+            if(len(sh)>0):
+                sh.update(start = each['start'])
+                sh.update(end = each['end'])
+                i+=1
+            else:
+                i+=1
+                each['name']='shift'+str(i)
+                shift = ShiftSerializer(data = each)
+                if(shift.is_valid()):
+                    shift.save()
+                print(shift.errors)
+        print(len(data))
+        print(len(Shift.objects.all()))
+        
+        shifts = Shift.objects.filter(idshift__gt = i).delete()
+        return Response('yes')
