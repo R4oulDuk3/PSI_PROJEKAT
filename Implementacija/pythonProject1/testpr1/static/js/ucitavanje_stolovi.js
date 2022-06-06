@@ -278,6 +278,7 @@ function openCreateModal(info){
     fillCreateModal(info)
     modalCreateOpen=true
     ignoreDoc=true
+    $('#create-modal input').val("")
     $('#create-modal').css('display','inline-block')
     resetErrors()
 }

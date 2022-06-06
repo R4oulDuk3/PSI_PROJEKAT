@@ -104,7 +104,7 @@ function kreirajWaiterHoursChart(){
    });
     console.log(labels)
     console.log(data)
-   kreirajChart("Radno vreme radnika",labels,data,3)
+   kreirajChart("Radno vreme radnika (po satu)",labels,data,3)
 }
 function kreirajPotrosnjaChart(){
    let  korisniciPotrosnja = {}
@@ -127,7 +127,41 @@ function kreirajPotrosnjaChart(){
     console.log(data)
  kreirajChart("Potrosnja korisnika",labels,data,2)
 }
+function kreirajPotrosnjaPoDanuChart(){
+   let  korisniciPotrosnja = {}
+   for(let ce of customerExp){
+       let date = new Date(ce.day)
+       console.log(date)
+       let date_str=dateToString(date)
+       console.log(date_str)
+    if(date_str in korisniciPotrosnja){
+      korisniciPotrosnja[date_str]+=parseInt(ce.amount)
+    }else{
+      korisniciPotrosnja[date_str]=parseInt(ce.amount)
+    }
+  }
+   console.log(korisniciPotrosnja)
+  let labels= []
+  let data =[]
+  Object.entries(korisniciPotrosnja).forEach(([key, value]) => {
+    console.log(key, value);
+    labels.push(key)
+    data.push(value)
+ });
+   console.log(labels)
+    console.log(data)
+ kreirajChart("Potrosnja po danu",labels,data,4)
+}
+function dateToString(date){
+      const yyyy = date.getFullYear();
+    let mm = date.getMonth() + 1; // Months start at 0!
+    let dd = date.getDate();
 
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    return dd + '/' + mm + '/' + yyyy;
+}
   function popuni(grid){
       grid.empty()
       grid.append('<div class="card" id="card-1">' +
@@ -145,10 +179,16 @@ function kreirajPotrosnjaChart(){
           '<canvas id="myChart3"></canvas>' +
           '</div>' +
           '</div>')
+      grid.append('<div class="card" id="card-1">' +
+          '<div class="chart-canvas">' +
+          '<canvas id="myChart4"></canvas>' +
+          '</div>' +
+          '</div>')
 
     kreirajArtikalChart()
     kreirajPotrosnjaChart()
       kreirajWaiterHoursChart()
+      kreirajPotrosnjaPoDanuChart()
   }
 
 

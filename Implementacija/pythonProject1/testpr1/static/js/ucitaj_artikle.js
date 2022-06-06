@@ -293,6 +293,7 @@ function createPorudzbenica(){
 function pordzbenicaPrice(){
     let price=0;
     for(let i =0; i < artikliUNedostatku.length;i++){
+
         console.log(parseInt(artikliUNedostatku[i].marketprice))
         console.log(parseInt(porudzbenica_inputs[i].val()))
         price+= parseInt(artikliUNedostatku[i].marketprice)*parseInt(porudzbenica_inputs[i].val())
@@ -306,7 +307,7 @@ function popuniModalPorudzbenice(podaci){
         let red= $('<tr></tr>')
         red.append($('<td>'+artikal.name+'</td>'))
         red.append($('<td>'+artikal.amount +'</td>'))
-        let input = $('<input type="number" min="0" value="0">')
+        let input = $('<input type="number" min="0" value="0" oninput="this.value = Math.abs(this.value)">')
         porudzbenica_inputs.push(input)
         input.on('input',()=>{
             $('#ukupna-cena-porudzbenice').text(pordzbenicaPrice())
