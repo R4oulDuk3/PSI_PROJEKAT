@@ -76,14 +76,14 @@ function dateToString(day ){
     return today
 }
 function datediff(first, second) {
-    return Math.round((second-first)/(1000*60*60*24));
+    return Math.round((second-first)/(1000*60*60*24))+1;
 }
 function popuni(grid,raspored){
     let startDate = new Date()
     while(startDate.getDay()!=1){
         startDate = new Date(startDate.getTime() - 86400000)
     }
-    
+
     let date = new Date(startDate)
     let endDate = findLatestDate(startDate,raspored)
     let rasporediDatas=[]
@@ -92,21 +92,20 @@ function popuni(grid,raspored){
         let rasporedDatas=[]
         let tableRows=[]
         let raspored = $('<div class="raspored"></div>')
-        let card = $('<div class="card"><div class="card-header"><h2>Raspored '+dateToString(date)+" - "+dateToString(new Date(date.getTime()+86400000*7))+'</h2><div class="buttons"><button class="sm-button"><span class="las la-sort-down" id="toggle-'+cnt+'"></span></button></div></div></div>')
+        let card = $('<div class="card"></div>')
+        let card_header = $('<div class="card-header"><h2>Raspored '+dateToString(date)+" - "+dateToString(new Date(date.getTime()+86400000*7))+'</h2></div>')
+        let buttons = $('<div class="buttons"><button class="sm-button"><span class="las la-sort-down" id="toggle-'+cnt+'"></span></button></div>')
+        card_header.append(buttons)
         let cardBody = $('<div class="card-body"></div>')
         let tableResponsive = $('<div class="table-responsive"></div>')
         let table =$('<table><thead><tr><td>Smena</td><td>Ponedeljak</td><td>Utorak</td><td>Sreda</td><td>Cetvrtak</td><td>Petak</td><td>Subota</td><td>Nedelja</td></tr></thead></table>')
         let tbody = $('<tbody></tbody>')
         raspored.append(card)
-        card.append(cardBody)
+        card.append(card_header).append(cardBody)
         cardBody.append(tableResponsive)
         tableResponsive.append(table)
         table.append(tbody)
-        let toggle = $('#toggle-'+cnt)
-        toggle.on('click',()=>{
-            console.log('check')
-            card.toggle()
-        })
+        buttons.on('click',()=>{cardBody.toggle(300)})
         cnt++;
         
         for(let i =0; i< smene.length;i++){
@@ -124,6 +123,7 @@ function popuni(grid,raspored){
         date = new Date(date.getTime() + 7*86400000)
         grid.append(raspored)
     }
+    console.log(rasporediDatas)
     for(info of raspored){
         console.log(startDate)
         console.log(info.day)
@@ -137,19 +137,22 @@ function popuni(grid,raspored){
     }
 
 }
+
 $(document).ready(async()=>{
-    popuniSidebar("admin")
+    let role = await $.get("apiGetRole")
+    popuniSidebar(role)
     let grid = $('#grid')
-    let date = new Date();
-    date.setHours(0)
-    date.setMinutes(0)
-    date.setMilliseconds(0)
     raspored = await $.get("apiSchedule") //AJAX
     smene = await $.get("apiShift")// AJAX
     konobari = await $.get("apiWaiter") //AJAX
-    for(let sch of raspored){
-        sch.day = new Date(sch.day)
+
+    console.log(raspored)
+    let copy = JSON.parse(JSON.stringify(raspored))
+    console.log(copy)
+    for(let i=0; i<raspored.length;i++){
+        raspored[i].day =new Date( new Date(copy[i].day))
     }
+    console.log(raspored)
     popuni(grid,raspored)
     
 })

@@ -3,6 +3,20 @@
     border-radius: 15px;
     padding: 1rem;
     margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (max-width: 1200px){
+    #smene{
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
 }
 .smena td{
     font-size: large;
@@ -22,4 +36,10 @@
     color: white;
     font-size: large;
     cursor: pointer;
+}
+.error-div{
+    padding: 1rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
 }

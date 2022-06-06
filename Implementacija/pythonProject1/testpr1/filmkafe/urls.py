@@ -23,6 +23,7 @@ urlpatterns = [
     path('stolovi', stolovi, name="stolovi"),
     path('izvestaji', stolovi, name="stolovi"),
     path('QRkod', skeniranjeQRKoda, name="skeniranjeQRKoda"),
+    path('rasporedi_konobar', rasporedi_konobar, name="rasporedi_konobar"),
     path('novi-raspored.html', newSchedule, name="newSchedule"),
     path('popis.html', popis, name="popis"),
     path('ZapocniSmenu.html', zapocniSmenu, name="zapocniSmenu"),
@@ -74,6 +75,17 @@ urlpatterns = [
     path('apiApproveReservation', apiApproveReservation, name="apiApproveReservation"),
     path('apiDenyReservation', apiDenyReservation, name="apiDenyReservation"),
     path('apiBuyCoupon', apiBuyCupon, name="apiBuyCupon"),
-
+    path('apiDeleteCoupon', apiDeleteCoupon, name="apiDeleteCoupon"),
+    path('apiGetRole', apiGetRole, name="apiGetRole"),
+    path('apiMyPreference', apiMyPreference, name="apiMyPreference"),
+    path('apiGetId', apiGetId, name="apiGetId"),
+    path('apiGetCustomerExpeneture', apiGetCustomerExpeneture, name="apiGetCustomerExpeneture"),
+    path('apiGetProductSold', apiGetProductSold, name="apiGetProductSold"),
+    path('apiMySchedule', apiMySchedule, name="apiMySchedule"),
+    path('apiPostWaiterWorkHours', apiPostWaiterWorkHours, name="apiPostWaiterWorkHours"),
+    path('apiPostWaiterPermit', apiPostWaiterPermit, name="apiPostWaiterPermit"),
+    path('apiGetWaiterPermit', apiGetWaiterPermit, name="apiGetWaiterPermit"),
+    path('apiStartSchedule', apiStartSchedule, name="apiStartSchedule"),
+    path('apiGetWaiterWorkHours', apiGetWaiterWorkHours, name="apiGetWaiterWorkHours"),
 
 ]

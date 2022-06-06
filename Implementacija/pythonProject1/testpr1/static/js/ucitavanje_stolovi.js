@@ -41,6 +41,7 @@ var modalCreateOpen = false
 var modalDeleteOpen= false
 var modalKategorijaChangeOpen=false
 var ignoreDoc=false
+var inputs=["#sto-naziv-input","#broj-osoba-input"]
 $(document).ready(function (){
     popuniSidebar("admin")
     refresh()
@@ -75,11 +76,54 @@ $(document).ready(function (){
       $('#del-button-confirm').on('click',deleteStolovi)
       $("#kreiraj-sto").on('click',createSto)
       $("#dodaj-postavku").on('click',createPostavka)
+        $(".close-del").on('click',closeModal)
+    $("#errMsg").hide()
+    $(".close").on('click',closeModal)
+    $("#dodaj-postavku").prop('disabled', true);
+    $("#naziv-nove-postavke").on('input',()=>{
+        console.log("input")
+        if($("#naziv-nove-postavke").val()==""){
+            $("#dodaj-postavku").prop('disabled', true);
+            return;
+        }
+        let postavka = findElementByKey(postavke,"name",$("#naziv-nove-postavke").val())
+        if(postavka==null){
+            $("#dodaj-postavku").prop('disabled', false);
+        }else{
+            $("#dodaj-postavku").prop('disabled', true);
+        }
+    })
+
+    checkIfFilled(inputs,$("#kreiraj-sto"))
+    $("#sto-naziv-input").on('input',()=>{
+        $("#errMsg").hide()
+        if($("#sto-naziv-input").val()==""){
+            $("#kreiraj-sto").prop('disabled', true);
+            return
+        }
+        let postavka = findElementByKey(postavke,"idsetup",postavkaId)
+        let sto = findElementByKey(postavka.tables,"name",$("#sto-naziv-input").val())
+        if(sto==null){
+            $("#kreiraj-sto").prop('disabled', false);
+        }else{
+
+            $("#kreiraj-sto").prop('disabled', true);
+            $("#errMsg").show()
+        }
+
+    })
+
 })
 async function refresh(){
     postavke = await $.get("apiSetup")//AJAX
     let grid = $('.grid').first();
     popuni(grid,postavke)
+}
+function findElementByKey(arr,key,id){
+    for(let elem of arr){
+        if(elem[key]==id)return elem;
+    }
+    return null;
 }
 
 function checkIfFilled(inputs,button){

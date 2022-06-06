@@ -153,12 +153,12 @@ function fillCreateModal(info){
         $('#naslov-modala').text("Izmena artikla")
     }
     $("#artikal-id-modal").text(info.idproduct);
-    $('#naziv-input').attr('value',info.name);
-    $('#sifra-artikla-input').attr('value',info.productcode );
-    $('#sifra-dobavljaca-input').attr('value',info.suppliercode );
-    $('#tren-kolicina-input').attr('value',info.amount );
-    $('#nabavna-cena-input').attr('value',info.marketprice );
-    $('#manjak-kolicina-input').attr('value',info.minamount );
+    $('#naziv-input').val(info.name);
+    $('#sifra-artikla-input').val(info.productcode );
+    $('#sifra-dobavljaca-input').val(info.suppliercode );
+    $('#tren-kolicina-input').val(info.amount );
+    $('#nabavna-cena-input').val(info.marketprice );
+    $('#manjak-kolicina-input').val(info.minamount );
 }
 
 function checkIfMathcing(){
@@ -247,10 +247,11 @@ async function sacuvajArtikal(){
     // $.post(host+"/apiSetProduct", noviArtikal) //AJAX
 }
 async function obirsiArtikal(){
-    let id = $("#id")
+    let id = $("#id").text()
     setSpinner()
     closeModal()
     await postData("apiDeleteProduct", {idproduct:id})
+    await refresh()
     resetSpinner()
 }
 

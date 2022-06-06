@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'film_kafe',
         'USER': 'root',
-        'PASSWORD': 'pass.123',
+        'PASSWORD': 'MaLiNa062244094',
         'HOST': '127.0.0.1',
         'PORT': '3306',
 
@@ -140,3 +140,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'filmkafe.Users'
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)

@@ -43,3 +43,41 @@ function resetSpinner(){
     let spinnerWrapper = document.querySelector('.spinner-wrapper');
     spinnerWrapper.style.display = 'none';
 }
+function validateEmail(input) {
+
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (input.match(validRegex)) {
+
+    //alert("Valid email address!");
+
+    return true;
+
+  } else {
+
+    //alert("Invalid email address!");
+
+    return false;
+
+  }
+
+}
+function validatePhone(phone){
+    if(phone.match(/[^a-zA-Z]/g) && phone.length>8){
+        return true
+    }return false
+}
+function passwordValidation(password)
+        {
+            // checking for a specific password pattern
+			if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g)
+                 && password.length >= 9)
+            {
+                return true;
+            }
+			else
+            {
+                return false;
+            }
+
+		}

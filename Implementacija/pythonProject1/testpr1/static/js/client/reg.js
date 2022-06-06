@@ -58,8 +58,24 @@ async function registruj(){
   json.password =  $("#pass").val();
   json.phone = numPhone;
   //var data = JSON.stringify(json);
-  await postData("apiCreateUser",json);
+  let answer=await postData("apiCreateUser",json);
+  console.log(answer)
+  if(answer=="Success")await loguj()
+  else console.log("failure")
 }
+  async function loguj() {
+
+    let json = new Object();
+    json.email = $("#mail").val();
+    json.password = $("#pass").val();
+    let link = await postData("apiLogIn",json);
+
+    console.log(link);
+
+    window.location.replace(link);
+    console.log("posle");
+  }
+
 
 $(document).ready(function(){
 

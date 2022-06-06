@@ -134,7 +134,7 @@ function getTableData(){
                     data.push({
                         idSmene: i+1,
                         konobarId: id,
-                        date : new Date(startDate.getTime() + 86400000*(j+1))
+                        date : new Date(startDate.getTime() + 86400000*(j))
                     })
             }
         }
@@ -145,7 +145,7 @@ function getTableData(){
 function fillTable(raspored){
     for(info of raspored){
         let i = info.idSmene-1
-        let j = datediff(startDate,info.date)-1
+        let j = datediff(startDate,info.date)
         
        // if(j>=datediff(endDate,startDate))continue
         console.log("loc i: "+i+" j : "+j)
@@ -165,18 +165,20 @@ const weekday = ["Nedelja","Ponedeljak","Utorak","Sreda","Cetvrtak","Petak","Sub
 function getKonobarsForDay(date, rdBrSmene){
     let ret = "Konobari slobodni za ovaj dan su:\n"
     let noKonobars = true;
-    console.log(date)
+    $("#konobari-list").empty()
+    //console.log(date)
     for(let preferenca of preference){
 
         if(preferenca.date.getTime()==date.getTime() && preferenca.shift==rdBrSmene){
 
             let konobar= findKonobarById(preferenca.konobarId)
-            ret+= konobar.ime+" "+konobar.prezime+"\n"
+            let info= konobar.ime+" "+konobar.prezime+"\n"
             noKonobars=false;
+            $("#konobari-list").append('<li>'+info+'</li>')
         }
     }
-    if(noKonobars)return "Nema konobara slobodnih za ovaj dan"
-    return ret
+    if(noKonobars)ret= "Nema konobara slobodnih za ovaj dan"
+    $("#infoMsg").text(ret)
 }
 function initEmptyTable(){
     tableInfo=[]
@@ -198,9 +200,11 @@ function initEmptyTable(){
             // span.text(getKonobarsForDay(date,i+1))
             td.hover(()=>{
                 td.css("background-color", "#cc0099");
-                changeInfoMsg(getKonobarsForDay(thisDay,i+1))
+                getKonobarsForDay(thisDay,i+1)
             },()=>{
                 td.css("background-color", "#ffffff");
+                $("#infoMsg").text("Predjite preko polja da vidite koji konobari su slobodni taj dan")
+                $("#konobari-list").empty()
             })
             //td.append(span)
             infoRows[i].append(td)
@@ -217,10 +221,7 @@ function initEmptyTable(){
     $("#table").empty()
     $("#table").append(thead).append(tbody)
 }
-function changeInfoMsg(msg){
 
-    $("#infoMsg").text(msg)
-}
 async function showTable(){
     startDate = $("#date-start").val()
     endDate = $("#date-end").val()
@@ -244,7 +245,7 @@ async function showTable(){
         $("#card-konobari").show()
         $("#save-btn").show()
         $("#table").show()
-        $(".infoMsg").first().css('display', 'flex')
+        $(".infoMsg").show()
     }
 }
 
@@ -289,6 +290,11 @@ function sendNoviRaspored(){
     raspored = convertRasporedBack(raspored)
     let sdate = new Date(startDate).toISOString()
     let edate = new Date(endDate).toISOString()
+    console.log(raspored)
+    for(let elem of raspored){
+        elem.day = new Date(new Date(elem.day).getTime()+2*3600000)
+    }
+    console.log(raspored)
     let info = {
         startDate: sdate,
         endDate: edate,
@@ -346,8 +352,9 @@ async function refresh(){
     smene = await $.get("apiShift")// AJAX
     konobari = await $.get("apiWaiter") //AJAX
     preference = await $.get("apiPreference")
-    console.log(preference)
+    console.log(prethodniRaspored)
     prethodniRaspored = convertRaspored(prethodniRaspored)
+    console.log(prethodniRaspored)
     smene = convertSmene(smene)
     konobari = convertKonobari(konobari)
     preference = covertPrefrence(preference)
@@ -360,14 +367,18 @@ $(document).ready(async function (){
     //Dohvati Konobare
     //Dohvati smene
     popuniSidebar("admin")
-    await refresh()
-    noviRaspored=structuredClone(prethodniRaspored);
     $("#save-btn").on('click',sendNoviRaspored)
     $("#table").hide()
     $("#save-btn").hide()
     $("#card-konobari").hide()
+    $(".infoMsg").hide()
+    await refresh()
+    noviRaspored=structuredClone(prethodniRaspored);
+
     $("#date-start").change(async ()=>{await showTable()})
     $("#date-end").change(async ()=>{await showTable()})
+    $("#date-start").attr('min',new Date().toISOString().split("T")[0])
+    $("#date-end").attr('min',new Date().toISOString().split("T")[0])
     initializeDrag()
     initKonobari()
 

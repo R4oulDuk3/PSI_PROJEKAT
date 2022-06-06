@@ -25,7 +25,7 @@ var artikli=[
 function popuni(body,data){
     body.empty()
     for(let artikal of data){
-        let tr = $('<tr><td>'+artikal.name+'</td><td><input id="create-modal-cena-input_'+artikal.idproduct+'" type="number" value="0"></td></tr>')
+        let tr = $('<tr><td>'+artikal.name+'</td><td><input id="create-modal-cena-input_'+artikal.idproduct+'" type="number" value="0" min="0" oninput="this.value = Math.abs(this.value)"></td></tr>')
         body.append(tr)
     }
 }

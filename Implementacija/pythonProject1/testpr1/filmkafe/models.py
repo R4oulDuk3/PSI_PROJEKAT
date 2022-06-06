@@ -38,7 +38,7 @@ class CouponProducts(models.Model):
 class CustomerExpenditure(models.Model):
     customer = models.ForeignKey('Users', models.DO_NOTHING, db_column='Customer')  # Field name made lowercase.
     amount = models.DecimalField(db_column='Amount', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    unit = models.CharField(db_column='Unit', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    userInfo = models.CharField(db_column='userInfo', max_length=45, blank=True, null=True)  # Field name made lowercase.
     day = models.DateTimeField(db_column='Day')  # Field name made lowercase.
 
     class Meta:
@@ -173,7 +173,7 @@ class Setup(models.Model):
 
 class ReservedTables(models.Model):
     reservation = models.OneToOneField(EventReservations, models.DO_NOTHING, db_column='Reservation')  # Field name made lowercase.
-    reservedtables = models.ForeignKey('Table', models.CASCADE, db_column='ReservedTables')  # Field name made lowercase.
+    reservedtables = models.ForeignKey('Table', models.DO_NOTHING, db_column='ReservedTables')  # Field name made lowercase.
 
     class Meta:
         managed = True
@@ -204,10 +204,20 @@ class Sale(models.Model):
         managed = True
         db_table = 'sale'
 
+class ProductSold(models.Model):
+    idProductSold = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    product = models.ForeignKey(Product, models.CASCADE, db_column='productId')  # Field name made lowercase.
+    name =  models.CharField(db_column='Name', max_length=50, default="")
+    day = models.DateTimeField(db_column='day')  # Field name made lowercase. Field renamed because it was a Python reserved word.
+    amount = models.PositiveIntegerField()  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        db_table = 'productSold'
 
 class Schedule(models.Model):
     waiter = models.ForeignKey('Users', models.CASCADE, db_column='Weighter')  # Field name made lowercase.
-    shift = models.ForeignKey('Shift', models.CASCADE, db_column='shift')
+    shift = models.ForeignKey('Shift', models.DO_NOTHING, db_column='shift')
     day = models.DateTimeField(db_column='Day')  # Field name made lowercase.
     idschedule = models.AutoField(db_column='idSchedule', primary_key=True)  # Field name made lowercase.
     started = models.DateTimeField(db_column='Started', blank=True, null=True)  # Field name made lowercase.
@@ -216,6 +226,7 @@ class Schedule(models.Model):
     class Meta:
         managed = True
         db_table = 'schedule'
+
 
 
 class Shift(models.Model):
@@ -227,6 +238,8 @@ class Shift(models.Model):
     class Meta:
         managed = True
         db_table = 'shift'
+
+
 
 
 class Table(models.Model):
@@ -273,4 +286,23 @@ class UsersCoupons(models.Model):
         db_table = 'users_coupons'
 
 
+class WaiterWorkHours(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    waiter = models.ForeignKey(Users, models.DO_NOTHING, db_column='WaiterId')
+    waiterInfo = models.CharField(db_column='waiterInfo', max_length=45)  # Field name made lowercase.
+    day = models.DateTimeField(db_column='day')  # Field name made lowercase.
+    hours = models.FloatField()  # Field name made lowercase.
 
+    class Meta:
+        managed = True
+        db_table = 'WaiterWorkHours'
+
+
+class WaiterPermit(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    waiter = models.ForeignKey(Users, models.DO_NOTHING, db_column='WaiterId') # Field name made lowercase.
+    day = models.DateTimeField(db_column='day')  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        db_table = 'WaiterPermit'

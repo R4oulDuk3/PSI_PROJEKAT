@@ -37,77 +37,12 @@ const labels = [
     data: data,
     options: {}
   };
-  // const myChart = new Chart(
-  //   document.getElementById('myChart'),
-  //   config
-  // );
 
-  // const myChart2 = new Chart(
-  //   document.getElementById('myChart2'),
-  //   config2
-  // );
+  var prodatiArtikli = []
+  var customerExp = []
+var waiterHours =[]
+  function kreirajChart(name,labelsC,dataC,num){
 
-  // const myChart3 = new Chart(
-  //   document.getElementById('myChart3'),
-  //   config3
-  // );
-
-  // const myChart4 = new Chart(
-  //   document.getElementById('myChart4'),
-  //   config4
-  // );
-
-  var prodatiArtikli = [
-    {
-      id:"1",
-      kolicina:4,
-      nazivArtikla:"Amstel",
-    },
-    {
-      id:"1",
-      kolicina:9,
-      nazivArtikla:"Amstel",
-    },
-    {
-      id:"1",
-      kolicina:7,
-      nazivArtikla:"Amstel",
-    },
-    {
-      id:"2",
-      kolicina:10,
-      nazivArtikla:"Lasko",
-    },
-    {
-      id:"2",
-      kolicina:15,
-      nazivArtikla:"Lasko",
-    }
-  ]
-
-  var customerExp = [
-    {
-      customer :1,
-      userName:"ZarlaDebilana",
-      amount :2500
-    },
-    {customer :2,
-      userName:"CoaBandera",
-      amount :2500
-    },
-    {customer :3,
-      userName:"KaleDzedaj",
-      amount :2500
-    },
-    {customer :1,
-      userName:"ZarlaDebilana",
-      amount :2500
-    }
-  ]
-  function kreirajChart(labelsC,dataC,num){
-    // let card = $('<div class="card"></div>')
-    // let chartDiv = $('<div class="chart-canvas"></div>')
-    // let chart = $('<canvas id="myChart"></canvas>')
     $("#card-"+num).show()
     let chart = $('#myChart'+num)
     const config = {
@@ -115,7 +50,7 @@ const labels = [
       data: {
         labels: labelsC,
         datasets: [{
-          label: 'Kolicina potrosene robe u datom periodu',
+          label: name,
           backgroundColor: '#B547C1',
           borderColor: '#B547C1',
           data: dataC,
@@ -124,50 +59,100 @@ const labels = [
       options: {}
     };
     let myChart = new Chart(chart,config)
-    // card.append(chartDiv)
-    // chartDiv.append(chart[0])
-    // return card
-
   }
-
-  function popuni(grid){
-    artikliPotrosnja ={
+function kreirajArtikalChart(){
+      let  artikliPotrosnja ={
 
     }
     for(artikal of prodatiArtikli){
-      if(artikal.nazivArtikla in artikliPotrosnja){
-        artikliPotrosnja[artikal.nazivArtikla]+=artikal.kolicina
+      if(artikal.name in artikliPotrosnja){
+        artikliPotrosnja[artikal.name]+=parseInt(artikal.amount)
       }else{
-        artikliPotrosnja[artikal.nazivArtikla]=artikal.kolicina
+        artikliPotrosnja[artikal.name]=parseInt(artikal.amount)
       }
     }
     let labels= []
     let data =[]
+
     Object.entries(artikliPotrosnja).forEach(([key, value]) => {
       console.log(key, value);
       labels.push(key)
       data.push(value)
    });
-   kreirajChart(labels,data,1)
-   korisniciPotrosnja = {}
-   for(ce of customerExp){
-    if(ce.userName in korisniciPotrosnja){
-      korisniciPotrosnja[ce.userName]+=ce.amount
+    console.log(labels)
+    console.log(data)
+   kreirajChart("Kolicina potrosene robe",labels,data,1)
+}
+function kreirajWaiterHoursChart(){
+      let konobariSati ={
+
+    }
+    for(let info of waiterHours){
+      if((info.waiterInfo + " "+info.waiter)  in konobariSati){
+        konobariSati[(info.waiterInfo + " "+info.waiter)]+=parseFloat(info.hours)
+      }else{
+        konobariSati[(info.waiterInfo + " "+info.waiter)]=parseFloat(info.hours)
+      }
+    }
+    let labels= []
+    let data =[]
+
+    Object.entries(konobariSati).forEach(([key, value]) => {
+      console.log(key, value);
+      labels.push(key)
+      data.push(value)
+   });
+    console.log(labels)
+    console.log(data)
+   kreirajChart("Radno vreme radnika",labels,data,3)
+}
+function kreirajPotrosnjaChart(){
+   let  korisniciPotrosnja = {}
+   for(let ce of customerExp){
+    if((ce.customer+" "+ce.userInfo) in korisniciPotrosnja){
+      korisniciPotrosnja[(ce.customer+" "+ce.userInfo)]+=parseInt(ce.amount)
     }else{
-      artikliPotrosnja[artikal.nazivArtikla]=ce.amount
+      korisniciPotrosnja[(ce.customer+" "+ce.userInfo)]=parseInt(ce.amount)
     }
   }
-  labels= []
-  data =[]
-  Object.entries(artikliPotrosnja).forEach(([key, value]) => {
+   console.log(korisniciPotrosnja)
+  let labels= []
+  let data =[]
+  Object.entries(korisniciPotrosnja).forEach(([key, value]) => {
     console.log(key, value);
     labels.push(key)
     data.push(value)
  });
- kreirajChart(labels,data,2)
+   console.log(labels)
+    console.log(data)
+ kreirajChart("Potrosnja korisnika",labels,data,2)
+}
+
+  function popuni(grid){
+      grid.empty()
+      grid.append('<div class="card" id="card-1">' +
+          '<div class="chart-canvas">' +
+          '<canvas id="myChart1"></canvas>' +
+          '</div>' +
+          '</div>')
+      grid.append('<div class="card" id="card-1">' +
+          '<div class="chart-canvas">' +
+          '<canvas id="myChart2"></canvas>' +
+          '</div>' +
+          '</div>')
+      grid.append('<div class="card" id="card-1">' +
+          '<div class="chart-canvas">' +
+          '<canvas id="myChart3"></canvas>' +
+          '</div>' +
+          '</div>')
+
+    kreirajArtikalChart()
+    kreirajPotrosnjaChart()
+      kreirajWaiterHoursChart()
   }
 
-  function showTable(){
+
+  async function showTable(){
     startDate = $("#date-start").val()
     endDate = $("#date-end").val()
     if(!startDate ||  !endDate){
@@ -175,11 +160,17 @@ const labels = [
     }else{
         startDate = new Date(startDate)
         endDate = new Date(endDate)
+        customerExp =await postData("apiGetCustomerExpeneture",{start:startDate.toISOString(),end:endDate.toISOString()})
+        console.log(customerExp)
+        prodatiArtikli = await postData("apiGetProductSold",{start:startDate.toISOString(),end:endDate.toISOString()})
+        console.log(prodatiArtikli)
+        waiterHours = await postData("apiGetWaiterWorkHours",{start:startDate.toISOString(),end:endDate.toISOString()})
+        console.log(waiterHours)
         grid = $("#grid")
         popuni(grid)
     }
   }
-  
+var flag = false
 
   $(document).ready(
     ()=>{
@@ -189,6 +180,14 @@ const labels = [
       }
       $("#date-start").on('input',showTable)
       $("#date-end").on('input',showTable)
+        $("#change-display").on('change',()=>{
+            if(flag){
+               $(".dashboard-cards").css( 'grid-template-columns', 'repeat(1, 1fr)')
+            }else{
+                $(".dashboard-cards").css( 'grid-template-columns', 'repeat(2, 1fr)')
+            }
+            flag=!flag
+        })
     }
   )
 

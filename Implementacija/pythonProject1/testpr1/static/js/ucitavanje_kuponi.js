@@ -68,7 +68,7 @@ function popuni(grid,data){
         let naslov = $('<h2 class="card-title"></h2>').text(kupon.name)
         let tekst = $('<p class="card-body">Opis: '+kupon.description +'</p>')
         delButton.on('click',()=>{
-            openDeleteModal(kupon.idcoupon)
+            openDeleteModal(kupon.idcupon)
         })
         buttonsDiv.append(delButton)
         content.append(buttonsDiv)
@@ -114,6 +114,7 @@ async function postDataWithSpinner(url,data){
 async function refresh(){
     let grid = $('.grid').first();
     kuponi = await $.get('apiCoupons') //AJAX
+    console.log(kuponi)
     popuni(grid,kuponi)
 }
 
@@ -138,8 +139,9 @@ async function kreiranjeKupona(){
     postDataWithSpinner("apiCreateCoupon",kupon)
 }
 async function brisanjeKupona(){
-    let id = $("id").val()
-    postDataWithSpinner("apiDeleteCoupon",{idcoupon:id})
+    let id = $("#id").text()
+    console.log("id "+id)
+    postDataWithSpinner("apiDeleteCoupon",{idcupon:id})
 
 }
 function openDeleteModal(placeholder){

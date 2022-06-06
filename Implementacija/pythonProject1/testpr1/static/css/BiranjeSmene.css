@@ -93,9 +93,8 @@ thead td{
     
 }
 
-tbody td:hover{
-    background: var(--main-color);
-    color: #f0f0f0;
+tbody td{
+    cursor:pointer;
 }
 
 td .sm-button{
@@ -154,9 +153,6 @@ tr:hover .sm-button{
 }
 #kat-toggle3:checked + .card-body{
     display: none;
-}
-tbody>tr>td:last-child{
-    text-align: end;
 }
 
 .container {
