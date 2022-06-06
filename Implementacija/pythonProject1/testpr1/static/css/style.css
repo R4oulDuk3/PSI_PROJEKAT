@@ -1,0 +1,161 @@
+
+.columnButtonR{
+	float: left; 
+    height: 115%; 
+    width: 40%;
+    background-color: lightblue;
+    border-radius: 8px;
+}
+
+.nameR{
+	float: left; 
+    height: 115%; 
+    width: 40%;
+    background-color: lightcyan;
+    border-radius: 8px;
+}
+
+.columnButtonL{
+	float: right; 
+    height: 115%; 
+    width: 40%;
+    background-color: lightblue;
+    border-radius: 8px;
+}
+
+.nameL{
+	float: right; 
+    height: 115%; 
+    width: 40%;
+    background-color: lightcyan;
+    border-radius: 8px;
+}
+
+.btn{
+	float: center; 
+    height: 115%; 
+    width: 20%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+input{
+    text-align: center;
+}
+
+
+
+.center{
+    float: center; height: 115%; 
+    width: 44%; 
+    text-align: center;
+    border-radius: 8px;
+}
+
+.columnButtonRT{
+	float: left; 
+    height: 115%; 
+    width: 48%;
+    background-color: lightblue;
+    border-radius: 8px;
+}
+
+.columnButtonLT{
+	float: right; 
+    height: 115%; 
+    width: 48%;
+    background-color: lightblue;
+    border-radius: 8px;
+}
+
+.name{
+    float: center; 
+    height: 115%;
+    width: 100px;
+    border: 2px solid black;
+    border-color: black;
+    font-size: 16; 
+    font-weight: bolder;
+    background-color: aliceblue;
+}
+
+.counter{
+    float: center; 
+    height: 80%; 
+    width: 20%; 
+    border: 2px solid black;
+    border-color: black;
+    font-size: 14; 
+    font-weight: bolder;
+    background-color: aliceblue;
+    color:black;
+}
+
+.R5{
+    Right: 5%;
+}
+
+
+.L5{
+    Left: 5%;
+}
+
+.R10{
+    Right: 10%;
+}
+
+
+.L10{
+    Left: 10%;
+}
+
+.L15{
+    Left: 15%;
+}
+
+
+.R15{
+    Right: 15%;
+}
+
+.L20{
+    Left: 20%;
+}
+
+
+.R20{
+    Right: 20%;
+}
+
+.row{
+    padding: 1%;
+}
+
+body{
+    background-image: url("asocijacije-dodatno/wp3522994.webp");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+label{
+    color: black;
+}
+
+p{
+    color: black;
+    font-size: 18;;
+}
+
+h1{
+    color: white;
+}
+
+.pad5{
+    padding: 4%;
+}
+
+.pad2{
+    padding: 2%;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/client/Client.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/events.css' %}">
+    <script src="{% static 'js/client/qrcode.min.js' %}"></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
+    <title>
+        Film Caffe - Dogadjaji
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+    <header class="header"> 
+
+        <a href="Client.html" class="logo"><img id="logo" src="" alt="Film Caffe logo"></a>
+
+        <nav class="navbar">
+            <a href="Client.html#pocetna">Pocetna</a>
+            <a href="Client.html#dogadjaji">Dogadjaji</a>
+            <a href="meni.html">Meni</a>
+            <a href="Client.html#kontakt">Kontakt</a>
+            <a href="dogadjaji.html" class="current_page">Prijava za dogadjaj</a>
+            <a href="kuponi.html">Moji Kuponi</a>
+            <a href="home.html">Odjavi me</a>
+        </nav>
+
+        <span><label id="logged-user"> Jhon Doe </label></span>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+    </header>
+
+    <!-- Kraj headera-->
+
+    <section class="evs bg">
+        
+        <div class="row" id="mojiDog">
+            <div class="form">
+                <div class="items">
+                    <h2>Moji dogadjaji</h2>
+                    
+                </div>
+            </div>
+            
+        </div>
+        <hr id="divisor">
+       
+        <div id="going">
+
+        </div>
+
+        <div class="row">
+            <div class="form">
+                <div class="items">
+                    <h2>Svi Dogadjaji</h2>
+                    
+                </div>
+            </div>
+            
+        </div>
+        <hr >
+
+        <div id="possible">
+
+
+        </div>
+           
+    </section>
+
+    <section class="rez bg">
+        <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">&times;</div>
+                <div class="popup-Container">    
+                    <form id="formaRez">
+                        <h3>Rezervacija</h3>
+                        <div class="inputBox" >
+                            <span class="fas fa-user-friends"></span>
+                            <input type="text" id= "brLjudi" placeholder="Broj ljudi">
+                        </div>
+                        <div class="inputBox">
+                            <span class="fas fa-phone"></span>
+                            <input type="text" id="telefon" placeholder="Broj telefona" >
+                        </div>
+                        <div>
+                            <div class="error" id="Error"></div>
+                            <input type="button" id="dugmeRez" value="Rezervisi mesta" class="btn" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="userQR">
+
+        <div class="hover_bkgr_friccQR">
+            <span class="helperQR"></span>
+            <div>
+                <div class="popupCloseButtonQR">&times;</div>
+                <div class="popup-ContainerQR">    
+                    <div class="popupCode" id="usrQRCodeimg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+
+
+<section class="footer">
+
+    <div class="share">
+        <a href="" class="fab fa-facebook-f"></a>
+        <a href="" class="fab fa-twitter"></a>
+        <a href="" class="fab fa-instagram"></a>
+    </div>
+
+    <div class="credit">
+        Powered by <span> Lagani<sup><i class="fa fa-trademark" aria-hidden="true" ></i></sup> </span> | SMOG all rights reserved
+    </div>
+
+</section>
+    <script type="module" src="{% static 'js/client/main_scriptLI.js' %}"></script>
+    <script type="module" src="{% static 'js/client/events.js' %}"></script>
+</body>
+</html>
