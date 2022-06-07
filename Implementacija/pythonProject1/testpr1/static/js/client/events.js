@@ -11,6 +11,7 @@ async function otkaziDog(event){
     let msg={"event":event};
     await postData("apiDeleteReserve",msg);
     alert("Dogadjaj "+event + " je otkazan");
+    window.location.replace("dogadjaji.html");
 }
 
 async function reservisi(){
@@ -24,12 +25,13 @@ async function reservisi(){
 }
 
 
-let flag1 = 1;
-let flag2= 1;
+let flag1;
+let flag2;
 
 function validate(id){
+    
     let errTrig = document.getElementById(id);
-    /*if (errTrig.id == "brLjudi") {
+    if (errTrig.id == "brLjudi") {
         
         if(isNaN(errTrig.value)){
             document.getElementById("Error").textContent="GRESKA: Los broj ljudi";
@@ -40,18 +42,26 @@ function validate(id){
             flag1=1;
         } 
     }else{
-        if(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/.test(errTrig.value)==false){
+        if(/\b\d{3}[-.]?\d{3}[-.]?\d{4,8}\b/.test(errTrig.value)===false){
             document.getElementById("Error").textContent="GRESKA: Nije validan broj telefona";
+            
             flag2=0;
         }
         else{
             document.getElementById("Error").textContent="";
-            flag2=1;
-        }*/
+            flag2=1;    
+        }
+    }
+    console.log(flag1+""+flag2);
     if(flag1 && flag2){
-        document.getElementById("dugmeRez").disabled = false;;
+        document.getElementById("dugmeRez").disabled = false;
+        document.getElementById("dugmeRez").classList.remove("btndis");
     }
+    else{
+        document.getElementById("dugmeRez").disabled = true;
+        document.getElementById("dugmeRez").classList.add("btndis");
     }
+}
 
 
 var myEvs = []

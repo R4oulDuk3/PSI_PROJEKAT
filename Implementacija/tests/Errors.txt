@@ -1,0 +1,19 @@
+1* Meni - Dodata kategorija nije zapamecna:
+Steps to reproduce:
+	1 Dodaj kategoriju
+	2 Klikni azuriraj
+	3 ...
+	4 Kategorija ne postoji. ( Profit )
+2* Meni - Izmena naziva stavke ne radi:
+Steps to reproduce:
+	1 Klikni na izmenu
+	2 Unesi novo ime
+	3 Klik na "sacuvaj"
+	4 ...
+	5 Ime nije promenjeno ( Profit )
+3* Dogadjai - Ne postoji uniformni nacin ispisivanja
+dogadjaji se svaki put ispisuju razlicitim redom
+Steps to reproduce:
+	1 Reloaduju stranicu
+	2 ...
+	3 Razlicit raspored ( Profit )
