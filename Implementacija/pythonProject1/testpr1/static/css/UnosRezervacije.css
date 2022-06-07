@@ -1,0 +1,293 @@
+.card-body table{
+    width: 100%;
+}
+.grid{
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+.card{
+    background: #fff;
+    border-radius: 15px;
+}
+input{
+    font-weight: bolder;
+    color: #222;
+    text-align: center;
+}
+.card-body{
+    padding: 1rem;
+}
+
+.card-header{
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+}
+.sm-button{
+    background: var(--main-color);
+    border-radius: 10px;
+    color: #fff;
+    font-size: .8rem;
+    padding: .5rem;
+    border: 1px solid var(--main-color);
+}
+table {
+    border-collapse: collapse;
+  }
+
+tr{
+    padding-bottom: 0.5rem;
+}
+
+thead tr{
+    border-bottom: 1px solid #f0f0f0;
+    background-color:#fff;
+}
+
+
+td{
+    padding: 0.5rem 1rem;
+    font-size: .9rem;
+    color: #222;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: large;
+    font-weight: 700;
+}
+thead td{
+    font-weight: 1000;
+    font-size: larger;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+.table-responsive{
+    width: 100%;
+    overflow: auto;
+
+}
+.button{
+    padding-top: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+tbody tr:hover{
+    background: var(--main-color);
+}
+tbody tr:hover td{
+    color: #fff;
+}
+td .sm-button{
+    background: #fff;
+    border-radius: 10px;
+    color: var(--main-color);
+    font-size: .8rem;
+    padding: .5rem;
+    border: 1px solid var(--main-color);
+    visibility: hidden;
+}
+tr:hover .sm-button{
+    visibility: visible;
+}
+.card-new{
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: #fff;
+}
+.add-new-button{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color:#B547C1;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    font-size: large;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width:225px;
+    height: 50px;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #CBC3E3;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #B547C1;}
+
+  .selected{background-color: #B547C1;}
+  .deselected{background-color: white;}
+.add-bar{
+
+    display:flex;
+    flex-grow: 4;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+.add-div{
+    width: 100%;
+}
+.deo1{
+    display: flex;
+    justify-content: space-between;
+    justify-items: stretch;
+    padding-bottom: 1rem;
+        font-weight: bolder;
+        color: #222;
+        text-align: center;
+        
+}
+.dropbtn{
+    width:225px;
+    height: 50px;
+}
+
+
+.deo2{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+
+}
+.deo3{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+.deo4{
+    display: flex;
+    justify-content: space-between;
+
+    padding-bottom: 1rem;
+}
+
+.sve{
+    display:flex;
+
+    padding: 12px 16px;
+    margin-top: 50px;
+    margin-bottom: 4rem;
+    width: 85%;
+    padding-bottom: 2rem;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+}
+.rightSide {
+    max-height: 300px;
+    overflow:auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  td,th {padding: .5em .5em;}
+
+  /* Shadow on the header row*/
+  /* thead tr   { box-shadow: 0 1px 10px #000000; } */
+  /* Background colors defined on table cells */
+  th         { background-color:lightgray; color: white;}
+
+
+/* Popup box BEGIN */
+.hover_bkgr_fricc{
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.hover_bkgr_fricc > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+}
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
+}
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.makeSureTable{
+    display:flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-items:stretch;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/main_content.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/modal-card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/add-bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/button-modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/spinner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/novi-raspored.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/responsive.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/drag.js' %}" defer></script>
+    <script src="{% static 'js/consts/consts.js' %}"></script>
+    <script src="{% static 'js/consts/sidebar.js' %}"></script>
+    <script src="{% static 'js/ucitaj_novi_raspored.js' %}"></script>
+    <title>Rasporedi</title>
+</head>
+<body>
+    <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+    <input type="checkbox" name="" id="nav-toggle">
+   
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+            
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle" id="menu-btn">
+                    <span class="las la-bars"></span>
+                </label>
+                Rasporedi
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Menadzer</small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div class="kategorija">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Datum pocetka</h2>
+                        <input type="date" id="date-start">
+                        <h2>Datum kraja</h2>
+                        <input type="date" id="date-end">
+                    </div>
+                    <div class="card-konobari" id="card-konobari">
+                        <div class="konobari" id="konobari">
+                            
+                            </div>
+                        <input type="text" placeholder="Search.." class="search-bar">
+                    </div>
+                    <input type="checkbox" name="" id="kat-toggle">
+                    <div class="card-body">
+                        <div id="info">
+                            <h1>Odaberite datume pocetka i kraja rasporeda</h1>
+                        </div>
+                        <div class="table-responsive" >
+                            <table id="table">
+                                <thead>
+                                    <tr>
+                                        <td>Smena</td>
+                                        <td>Ponedeljak</td>
+                                        <td>Utorak</td>
+                                        <td>Sreda</td>
+                                        <td>Cetvrtak</td>
+                                        <td>Petak</td>
+                                        <td>Subota</td>
+                                        <td>Nedelja</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                        <td class="container"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="buttons">
+                                <div class="button" id="save-btn">
+                                    <a href="#">Sacuvaj</a>
+                                </div>
+
+                            </div>
+                            <div class="infoMsg">
+                                <h3 id="infoMsg">
+                                    Predjite preko polja za prikaz slobodnih konobara
+                                </h3>
+                                <ul id="konobari-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+</body>
+</html>
