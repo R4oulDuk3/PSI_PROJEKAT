@@ -90,22 +90,63 @@ $(document).ready(async function (){
     for(let input of createStavkaInputs){
         $(input).on('input',()=>{checkIfFilled(createStavkaInputs,$("#kreiraj-stavku"))})
     }
-    checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
-    $("#naziv-kategorije-input").on('input',()=>{
-        checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
-        }
-    )
+    // checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
+    // $("#naziv-kategorije-input").on('input',()=>{
+    //     checkIfFilled(createKategorijaInputs,$("#dodaj-kategoriju"))
+    //     }
+    // )
     $('#del-button').on('click',obrisi)
     $('#kreiraj-stavku').on('click',createStavka)
     $('#dodaj-kategoriju').on('click',createKategorija)
     $('#azuriraj').on('click',azuriraj)
-
+    $("#create-modal-procenat-input").on('input',popustOnInput)
+    $("#dodaj-kategoriju").prop('disabled', true);
+    $("#naziv-kategorije-input").on('input',()=>{
+        checkIfEmptyOrExists($("#naziv-kategorije-input"),$("#dodaj-kategoriju"))
+        console.log("input")
+    })
+    $('#kat-change-modal-input').on('input',()=>{
+        checkIfEmptyOrExists($('#kat-change-modal-input'),$("#change-kat-name"))
+    })
+    $("#change-kat-name").prop('disabled', true);
+    $("#dodaj-kategoriju").prop('disabled', true);
 })
+function checkIfEmptyOrExists(input,button){
+    if(input.val()==""){
+            button.prop('disabled', true);
+            return;
+        }
+        let kategorija = findElementByKey(kategorije,"naziv",input.val())
+        if(kategorija==null){
+            button.prop('disabled', false);
+        }else{
+            button.prop('disabled', true);
+        }
+}
 
+
+function findElementByKey(arr,key,id){
+    for(let elem of arr){
+        if(elem[key]==id)return elem;
+    }
+    return null;
+}
 async function refresh(){
     let grid = $('.grid').first();
     kategorije = await $.get("apiMeni") //AJAX
+    console.log(kategorije)
+    kategorije.sort(function(a, b) {
+    return a.naziv >b.naziv;
+    });
+    for(let kategorija of kategorije){
+        kategorija.stavke.sort(
+            function(a, b) {
+                return a.meniproduct >b.meniproduct;
+            }
+        )
+    }
     popuni(grid,kategorije)
+
 }
 
 function popuni(grid,data){
@@ -122,7 +163,10 @@ function popuni(grid,data){
         hideButton = $('<button class="sm-button"> <span class="las la-sort-down"></span></button>')
         
         delButton.on('click',()=>{openDeleteModal(kategorija.naziv)})
-        changeButton.on('click',()=>{openKategorijaChangeModal(kategorija.naziv)})
+        changeButton.on('click',()=>{
+            kategorijaId = kategorija.naziv
+            openKategorijaChangeModal(kategorija.naziv)
+        })
         let txt='#kategorija-card-body-'+cnt
         hideButton.on('click',()=>{
             
@@ -199,7 +243,14 @@ function popuni(grid,data){
         grid.append(kat_div)
     })
 }
-
+function popustOnInput(){
+    let val =parseInt($("#create-modal-procenat-input").val())
+    if(val<0){
+        $("#create-modal-procenat-input").val(0)
+    }if(val>100){
+        $("#create-modal-procenat-input").val(100)
+    }
+}
 function openDeleteModal(placeholder){
     modalDeleteOpen=true
     ignoreDoc=true
@@ -284,7 +335,7 @@ function openKategorijaChangeModal(naziv){
     
     modalKategorijaChangeOpen=true
     ignoreDoc=true
-    $('kat-change-modal-input').attr('value',naziv)
+    $('#kat-change-modal-input').val(naziv)
     $('#kat-change-modal').css('display','inline-block')
 }
 
@@ -299,9 +350,9 @@ function fillCreateModal(info){
     }else{
         $('#create-modal-naslov').text("Izmena stavke")
     }
-    $("#create-modal-naziv-input").attr('value',info.meniproduct)
-    $("#create-modal-cena-input").attr('value',info.price)
-    $("#create-modal-procenat-input").attr('value',info.akcija)
+    $("#create-modal-naziv-input").val(info.meniproduct)
+    $("#create-modal-cena-input").val(info.price)
+    $("#create-modal-procenat-input").val(info.akcija)
 
     
 }

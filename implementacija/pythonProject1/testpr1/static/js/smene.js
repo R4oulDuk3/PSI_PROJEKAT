@@ -110,11 +110,16 @@ function dodajSmenu(){
     smene.push(novaSmena)
     console.log('dodata smena')
     createSmenaDiv(grid,novaSmena)
+    $('#sacuvaj-smene').prop('disabled',false)
+    $('.error-div').hide()
 }
 function ukloniSmenu(){
     smene.pop()
     let grid = $('#smene')
     popuni(grid,smene)
+    $('#sacuvaj-smene').prop('disabled',false)
+    if(smene.length==0)$('#sacuvaj-smene').prop('disabled',true)
+     $('.error-div').hide()
 }
 function findElemByKey(arr,key,id){
     for(let elem of arr){
@@ -135,9 +140,9 @@ function changeStartTime(rdBr,input){
     let smenaPrev = findElemByKey(smene,"rdBr",rdBr+1)
     if(smenaPrev!=null){
         smenaPrev.endTime = startTime
-
     }
-
+    $('#sacuvaj-smene').prop('disabled',false)
+     $('.error-div').hide()
 }
 
 function changeEndTime(rdBr,input){
@@ -145,7 +150,14 @@ function changeEndTime(rdBr,input){
     console.log(rdBr)
     let endTime = input.val()
     let smena = findElemByKey(smene,"rdBr",rdBr)
+    console.log(parseInt(smena.startTime)-parseInt(endTime))
+    console.log("ispred")
+    if(parseInt(smena.startTime)>parseInt(endTime)&&(parseInt(smena.startTime)-parseInt(endTime))<8){
+        console.log("usao")
+        endTime=smena.startTime
+    }
     smena.endTime = endTime
+    input.val(endTime)
     //let input_poc =$('#vreme-poc-'+rdBr)
     let input_poc_next =$('#vreme-poc-'+(rdBr+1))
     //let input_kraj =$('#vreme-kraj-'+rdBr)
@@ -156,12 +168,39 @@ function changeEndTime(rdBr,input){
 
     }
 
-
+    $('#sacuvaj-smene').prop('disabled',false)
+     $('.error-div').hide()
 }
 function sacuvajSmene(){
+    console.log(smene)
+    let hours=0
+    let error=false
+    let last_end = smene[0].startTime
+    for(let smena of smene){
+        console.log(last_end)
+        console.log(smena.startTime)
+        if(smena.startTime!=last_end)error=true
+        if(smena.startTime>smena.endTime){
+            hours += 24 - (parseInt(smena.startTime)-parseInt(smena.endTime))
+        }else{
+            hours+=(parseInt(smena.endTime)-parseInt(smena.startTime))
+        }
+        last_end=smena.endTime
+    console.log(hours)
+    }
+    if(hours>24){
+        $("#err-msg").text("Smene pokrivaju vise od 24 sata")
+        $('.error-div').show()
+        return
+    }else if(error){
+        $("#err-msg").text("Neispravan format smena")
+        $('.error-div').show()
+        return;
+    }
     let smenePost = convertSmeneBack(smene)
     console.log(smenePost)
     postDataWithSpinner("apiChangeShift",{smeneInfo: JSON.stringify(smenePost)})
+    $('#sacuvaj-smene').prop('disabled',true)
 }
 
 $(document).ready(
@@ -174,8 +213,11 @@ $(document).ready(
         $('#dodaj-smenu').on('click',dodajSmenu)
         $('#ukloni-smenu').on('click',ukloniSmenu)
         $('#sacuvaj-smene').on('click',sacuvajSmene)
+        $('#sacuvaj-smene').prop('disabled',true)
+        $('.error-div').hide()
     }
 )
+
 async function refresh(){
     smene = await $.get('apiShift')
     smene = convertSmene(smene)

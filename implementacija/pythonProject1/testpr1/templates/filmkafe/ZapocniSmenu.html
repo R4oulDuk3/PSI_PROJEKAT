@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{% static 'css/css-admin-skelet/add-bar.css' %}">
     <link rel="stylesheet" href="{% static 'css/css-admin-skelet/button-modal.css' %}">
     <link rel="stylesheet" href="{% static 'css/css-admin-skelet/spinner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-admin-skelet/responsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/ZapocniSmenu.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'js/consts/consts.js' %}"></script>
@@ -27,7 +28,10 @@
 
 </head>
 <body id="body">
-    
+<div class='spinner-wrapper'>
+                <div class="spinner"></div>
+            </div>
+    <input type="checkbox" name="" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
             <h1><span class=""></span> Film Caffe</h1>
@@ -40,7 +44,7 @@
     <div class="main-content">
         <header>
             <h1>
-                <label for="">
+                <label for="nav-toggle" id="menu-btn">
                     <span class="las la-bars"></span>
                 </label>
                     Pocni/Zavrsi smenu 
@@ -53,6 +57,7 @@
             </div>
         </header>
         <main id="main">
+
             <div class="main">
               <div class="cards-shift" id="smena1">
                 <div class="card-single">

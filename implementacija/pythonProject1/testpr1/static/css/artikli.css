@@ -18,6 +18,10 @@ padding-right: 1rem;
     background: #fff;
     padding-bottom: 1rem;
     border-radius: 2px;
+    transition: transform .5s;
+}
+.card-single:hover {
+  transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 .card-single h1{
     text-align: center;

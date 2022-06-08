@@ -13,6 +13,7 @@
     min-height: 100vh;
     align-items: center;
     margin-bottom: 0;
+
 }
 
 .evs .row{
@@ -102,6 +103,7 @@ hr{
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 500ms ease;
+    padding-top: 350px;
 }
 
 

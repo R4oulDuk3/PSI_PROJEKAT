@@ -65,9 +65,9 @@
             <div class="add-bar">
                 <h1>Dodaj sto</h1>
                 <input type="text" name="" id="naziv-nove-postavke" placeholder="Naziv postavke">
-                <div class="h-button" id="dodaj-postavku">
-                    <a href="#">Dodaj postavku</a>
-                </div>
+                <button class="button" id="dodaj-postavku">
+                    Dodaj postavku
+                </button>
             </div>
             <div class="stolovi">
                 <div class="grid">       
@@ -95,7 +95,12 @@
                                 <tbody>
                                     <tr>
                                         <td>Broj osoba</td>
-                                        <td><input type="number" min="1" max="15" value="1" id="broj-osoba-input"/></td>
+                                        <td><input type="number" min="1" max="15" value="1" id="broj-osoba-input" oninput="this.value = Math.abs(this.value)" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h3 id="errMsg">Postoji sto u postavci sa istim imenom</h3>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

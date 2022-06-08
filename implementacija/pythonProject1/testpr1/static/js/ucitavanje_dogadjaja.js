@@ -156,6 +156,7 @@ async function createZurka(){
     console.log(opis)
     console.log(datum)
     console.log(postavka)
+    setSpinner()
     let img_url = "default_event.png"
     if(image != undefined){
         img_url =await uploadImage(image)
@@ -172,7 +173,7 @@ async function createZurka(){
     console.log(postavka)
 
     closeModal()
-    setSpinner()
+
     await postData('apiCreateEvent',zurka)
     await refresh()
     resetSpinner()

@@ -12,12 +12,12 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow:  3px 3px 3px gray;
+    margin: 1.5rem
 }
 
 .chart-canvas {
     margin: 20px;
     position: relative;
-    min-height: 250px;
 }
 
 .chart-options {
@@ -46,17 +46,19 @@
     align-items: center;
 }
 .dashboard-cards {
-    margin-top: 3.5rem;
+    margin: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
 }
+
 .settings-bar{
-    background: white;
-    padding:1rem;
-    border-radius: 15px;
+
 }
 .date-bar{
+        background: white;
+    padding:1rem;
+    border-radius: 15px;
     display: flex;
     align-content: center;
     padding-bottom: 1rem;
@@ -67,6 +69,7 @@
 .date-input{
     display: flex;
     align-content: flex-start;
+    padding: 1rem;
 }
 .date-input>*{
     margin-right: 1rem;
@@ -84,29 +87,13 @@
 
 
 @media only screen and (max-width: 1200px){
-    .grid{
-        margin-top: 3.5rem;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2rem;
-    }
-
-}
-@media only screen and (max-width: 768px){
-    .grid{
-        margin-top: 3.5rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 2rem;
-    }
-
-}
-@media only screen and (max-width: 500px){
-    .grid{
-        margin-top: 3.5rem;
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 2rem;
+    .date-bar{
+        background: white;
+    padding:1rem;
+    border-radius: 15px;
+    display: block;
+    align-content: center;
+    padding-bottom: 1rem;
     }
 
 }

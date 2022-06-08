@@ -50,6 +50,7 @@ $(document).ready(function (){
     $('#modal-del-input').on('input',checkIfMathcing)
     $('#del-button-confirm').on('click',deleteKonobar)
     $("#kreiraj-konobara").on('click',kreiranjeKonobara)
+    $("#err-msg").hide()
     checkIfFilled(konobarInputs,$("#kreiraj-konobara"))
     for(let input of konobarInputs){
         $(input).on('input',()=>{
@@ -63,6 +64,7 @@ async function refresh(){
     popuni(grid,konobari)
 }
 function checkIfFilled(inputs,button){
+    $("#err-msg").hide()
     console.log("check")
     for(let input of inputs){
         console.log(input+" val "+ $(input).val())
@@ -144,6 +146,13 @@ async function postDataWithSpinner(url,data){
     refresh()
     resetSpinner()
 }
+function findElementByKey(arr,key,id){
+    for(let elem of arr){
+        if(elem[key]==id)return elem;
+    }
+    return null;
+}
+
 async function kreiranjeKonobara(){
     let ime = $('#ime-input').val()
     let prezime = $('#prezime-input').val()
@@ -154,6 +163,28 @@ async function kreiranjeKonobara(){
     let lozinka2 = $('#lozinka2-input').val()
     let image = $('#image_input').prop('files')[0]
     let img_url="default_konobar.png"
+    if(!validateEmail(mail)){
+        $("#err-msg").text("e-mail nije u ispravnom formatu")
+        $("#err-msg").show()
+        return;
+    }else if (findElementByKey(konobari,"email",mail)!=null) {
+        $("#err-msg").text("e-mail je zauzet")
+        $("#err-msg").show()
+        return;
+    }else if(!validatePhone(telefonA)){
+        $("#err-msg").text("Telefon ne sme da sadrzi slova i mora biti duzi od 8 karaktera")
+        $("#err-msg").show()
+        return
+    }
+    else if(!passwordValidation(lozinka)){
+        $("#err-msg").text("Sifra nije u ispravnom formatu")
+        $("#err-msg").show()
+        return;
+    }else if(lozinka!=lozinka2){
+        $("#err-msg").text("Sifre se ne poklapaju")
+        $("#err-msg").show()
+        return;
+    }
     setSpinner()
     if(image != undefined){
         img_url = await uploadImage(image)

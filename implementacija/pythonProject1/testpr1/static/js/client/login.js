@@ -9,7 +9,7 @@ $(document).ready(function(){
   async function loguj() {
     
     let json = new Object();
-    json.username = $("#mail").val();
+    json.email = $("#mail").val();
     json.password = $("#pass").val();
     let link = await postData("apiLogIn",json);
 

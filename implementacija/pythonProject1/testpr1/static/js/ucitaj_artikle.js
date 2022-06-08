@@ -153,12 +153,12 @@ function fillCreateModal(info){
         $('#naslov-modala').text("Izmena artikla")
     }
     $("#artikal-id-modal").text(info.idproduct);
-    $('#naziv-input').attr('value',info.name);
-    $('#sifra-artikla-input').attr('value',info.productcode );
-    $('#sifra-dobavljaca-input').attr('value',info.suppliercode );
-    $('#tren-kolicina-input').attr('value',info.amount );
-    $('#nabavna-cena-input').attr('value',info.marketprice );
-    $('#manjak-kolicina-input').attr('value',info.minamount );
+    $('#naziv-input').val(info.name);
+    $('#sifra-artikla-input').val(info.productcode );
+    $('#sifra-dobavljaca-input').val(info.suppliercode );
+    $('#tren-kolicina-input').val(info.amount );
+    $('#nabavna-cena-input').val(info.marketprice );
+    $('#manjak-kolicina-input').val(info.minamount );
 }
 
 function checkIfMathcing(){
@@ -247,10 +247,11 @@ async function sacuvajArtikal(){
     // $.post(host+"/apiSetProduct", noviArtikal) //AJAX
 }
 async function obirsiArtikal(){
-    let id = $("#id")
+    let id = $("#id").text()
     setSpinner()
     closeModal()
     await postData("apiDeleteProduct", {idproduct:id})
+    await refresh()
     resetSpinner()
 }
 
@@ -292,6 +293,7 @@ function createPorudzbenica(){
 function pordzbenicaPrice(){
     let price=0;
     for(let i =0; i < artikliUNedostatku.length;i++){
+
         console.log(parseInt(artikliUNedostatku[i].marketprice))
         console.log(parseInt(porudzbenica_inputs[i].val()))
         price+= parseInt(artikliUNedostatku[i].marketprice)*parseInt(porudzbenica_inputs[i].val())
@@ -305,7 +307,7 @@ function popuniModalPorudzbenice(podaci){
         let red= $('<tr></tr>')
         red.append($('<td>'+artikal.name+'</td>'))
         red.append($('<td>'+artikal.amount +'</td>'))
-        let input = $('<input type="number" min="0" value="0">')
+        let input = $('<input type="number" min="0" value="0" oninput="this.value = Math.abs(this.value)">')
         porudzbenica_inputs.push(input)
         input.on('input',()=>{
             $('#ukupna-cena-porudzbenice').text(pordzbenicaPrice())

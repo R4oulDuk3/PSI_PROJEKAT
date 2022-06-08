@@ -2,10 +2,10 @@
 :root{
     --main-color: #B547C1;
     --sidebar-width: 300px;
-    --main-width:80%;
+    --main-width:  calc(100% - 300px);
     
     --sidebar-width-reduced:70px;
-    --main-width-extended:95%;
+    --main-width-extended:calc(100% - 70px);
     --modal-duration: 1s;
     --modal-color: #428bca;
 }
@@ -18,6 +18,14 @@
     list-style-type: none;
     text-decoration: none;
     font-family: 'Poppins',sans-serif;
+}
+li{
+    font-size:12px
+}
+#err-msg{
+    color: darkred;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 

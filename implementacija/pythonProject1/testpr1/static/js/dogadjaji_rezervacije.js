@@ -329,6 +329,8 @@ async function refresh(){
     setups= await $.get('apiSetup')
     events= await $.get('apiFreeTables')
     console.log(events)
+    console.log(reservationReqests)
+    console.log(approvedRequests)
     popuni($("#grid"))
 }
 function closeModal(){
@@ -336,8 +338,9 @@ function closeModal(){
 }
 
 $(document).ready(
-    ()=>{
-        popuniSidebar("konobar")
+    async ()=>{
+        let role = await $.get("apiGetRole")
+        popuniSidebar(role)
 
         refresh()
          $('.popupCloseButton').click(function(){

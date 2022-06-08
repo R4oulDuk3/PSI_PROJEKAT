@@ -23,7 +23,7 @@ class CustomerExpenditureSerializer(serializers.ModelSerializer):
 class EventReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventReservations
-        #fields = '__all__'
+        # fields = '__all__'
         exclude = ('phone',)
 
 
@@ -37,7 +37,7 @@ class EventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
         fields = '__all__'
-        #exclude = ('setup',)
+        # exclude = ('setup',)
 
 
 class MeniSerializer(serializers.ModelSerializer):
@@ -63,6 +63,11 @@ class SetupSerializer(serializers.ModelSerializer):
         model = Setup
         fields = '__all__'
 
+
+class ProductSoldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductSold
+        exclude = ['idProductSold']
 
 
 class SetupTablesSerializer(serializers.ModelSerializer):
@@ -119,18 +124,32 @@ class TableCreateSerializer(serializers.ModelSerializer):
         model = Table
         exclude = ('idtable',)
 
+
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['idusers' ,'name', 'surname', 'email', 'phone', 'role', 'username', 'imagepath', 'password']
+        fields = ['idusers', 'name', 'surname', 'email', 'phone', 'role', 'username', 'imagepath', 'password']
+
 
 class EndUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['idusers' ,'name', 'surname', 'salary']
+        fields = ['idusers', 'name', 'surname', 'salary']
 
 
 class UsersCouponsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsersCoupons
         fields = '__all__'
+
+
+class WaiterWorkHoursSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WaiterWorkHours
+        exclude = ('id',)
+
+
+class WaiterPermitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WaiterPermit
+        exclude = ('id',)
