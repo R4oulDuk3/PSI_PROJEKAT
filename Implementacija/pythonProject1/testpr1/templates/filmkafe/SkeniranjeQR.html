@@ -75,7 +75,7 @@
                 <div id="new-expendature">
                     <div class="card">
                         <h3 class="text">Unos Troska</h3>
-                        <input type="number" name="" id="trosak" min="0" value="0" step="200">
+                        <input type="number" name="" id="trosak" min="0" value="0" step="200" oninput="this.value = Math.abs(this.value)">
                         <div class="buttons-div">
                             <button id="potvrdi" class="buttonqr">Potvrdi</button>
                             <button id="odbij" class="buttonqr">Odbij</button>

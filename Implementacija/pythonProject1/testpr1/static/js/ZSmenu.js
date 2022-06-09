@@ -145,7 +145,9 @@ function getDate(date,time){
         timeInfo[i]=parseInt(timeInfo[i])
     }
     console.log(timeInfo)
+    //console.log(date)
     date = new Date(date)
+    //console.log(date)
     if(timeInfo[0]<7){
         date = new Date(date.getTime() + 86400000)
     }
@@ -176,7 +178,8 @@ async function popuni(body){
         console.log(start)
         console.log(currTime)
         console.log(end)
-        if(start<currTime && currTime<end){
+        let currTimeLate = new Date(currTime.getTime() +86400000)
+        if((start<currTime && currTime<end) || (start<currTimeLate && currTimeLate<end)){
             console.log("ima smena")
             for(let schedule of schedules){
                 if(schedule.shift == smena.idshift){
@@ -283,8 +286,12 @@ $(document).ready(
         let body=$('#main')
         shifts = await $.get('apiShift')
         schedules= await $.get('apiMySchedule')
+        console.log(schedules)
         for(let schedule of schedules){
-            schedule.day= new Date(schedule.day)
+            // schedule.day= new Date(schedule.day)
+            // var userTimezoneOffset = schedule.day.getTimezoneOffset() * 60000;
+            // schedule.day = new Date(schedule.day.getTime()-userTimezoneOffset)
+            schedule.day = new Date(Date.parse(schedule.day))
         }
         console.log(shifts)
         console.log(schedules)

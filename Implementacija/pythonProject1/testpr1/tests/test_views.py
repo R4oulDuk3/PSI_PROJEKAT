@@ -1,7 +1,7 @@
 
 from django.test import TestCase,Client
 from django.urls import reverse
-from .models import *
+from testpr1.filmkafe.models import *
 import json
 class TestViewsZapocinjanjeSmene(TestCase):
 
@@ -10,18 +10,15 @@ class TestViewsZapocinjanjeSmene(TestCase):
         usr = Users.objects.create_user(username="cone@gmail.com",
                                         email="cone@gmail.com",
                                         password="cone",
-                                        role='Manager',
+                                        role='User',
                                         name='name',
                                         surname='surname',
                                         phone='phone',
                                         salary=0)
-        usr = Users.objects.all()
-        print(usr)
         client = Client()
-
-        res=client.login(username="cone@gmail.com",password='cone')
+        res=client.login(username="cone@cone.com",password='cone')
         print("RESSSSSS")
-        print("Res: "+str(res))
+        print("Res: "+res)
         response = client.get(reverse("apiShift"))
 
         self.assertEqual(response.status_code,200)

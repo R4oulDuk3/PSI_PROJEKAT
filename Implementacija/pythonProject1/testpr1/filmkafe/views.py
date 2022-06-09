@@ -689,6 +689,7 @@ def apiShift(request):
         smene = ShiftSerializer(sm, many=True)
         print(smene.data)
         return Response(smene.data)
+    return Response(status=403)
 
 
 @login_required
@@ -740,7 +741,7 @@ def apiSchedule(request):
 def apiMySchedule(request):
     if (request.user.role == 'Waiter' or request.user.role == 'Manager'):
         print(datetime.datetime.today())
-        date = datetime.datetime.today() - datetime.timedelta(days=1)
+        date = datetime.datetime.today() - datetime.timedelta(days=2)
         sm = Schedule.objects.filter(day__gte=date).filter(waiter=request.user.idusers)
         smene = ScheduleSerializer(sm, many=True)
         return Response(smene.data)

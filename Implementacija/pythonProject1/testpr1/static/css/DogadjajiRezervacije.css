@@ -10,12 +10,22 @@
 .event-body{
 
     border-radius: 10px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
-    flex-direction: row;
-    align-items: stretch;
-    width: 100%;
 }
+@media only screen and (max-width: 1200px){
+    .event-body{
+
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+}
+
+}
+
+
 .event{
     background-color:white;
     border-radius: 20px;
