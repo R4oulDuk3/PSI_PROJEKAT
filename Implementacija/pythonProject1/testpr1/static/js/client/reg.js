@@ -57,11 +57,12 @@ async function registruj(){
   json.email = $("#mail").val();
   json.password =  $("#pass").val();
   json.phone = numPhone;
-  //var data = JSON.stringify(json);
   let answer=await postData("apiCreateUser",json);
   console.log(answer)
   if(answer=="Success")await loguj()
-  else console.log("failure")
+  else {
+      $("#err").show();
+  }
 }
   async function loguj() {
 
@@ -69,11 +70,7 @@ async function registruj(){
     json.email = $("#mail").val();
     json.password = $("#pass").val();
     let link = await postData("apiLogIn",json);
-
-    console.log(link);
-
     window.location.replace(link);
-    console.log("posle");
   }
 
 
@@ -85,9 +82,9 @@ $(document).ready(function(){
   $("#pass").change(function(){validate()});
   $("#cmf").change(function(){validate()});
   $("#legal").change(function(){validate()});
+  $("#err").hide();
   $("#regbut").click(function(){
     registruj();
-    console.log("ovde")
   })
 
 })

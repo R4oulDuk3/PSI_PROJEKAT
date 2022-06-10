@@ -226,7 +226,8 @@ hr{
     
     display: none;
     align-items: center;
-    
+    justify-content: center;
+
     background-size: cover;
     background-position: center;
 }
@@ -275,6 +276,14 @@ hr{
 
 }
 
+.btndis{
+    opacity: 50%;
+    
+}
+.btndis:hover{
+    letter-spacing: normal;
+}
+
 .rez .popup-Container form .inputBox input{
     width: 100%;
     padding:2rem;
@@ -293,6 +302,11 @@ hr{
 
     .rez .row{
         margin-top: 3rem;
+    }
+    .card{
+        padding: 6rem 0rem;
+        padding-top: 150px;
+        max-width: 80%; 
     }
 
 }
@@ -313,6 +327,12 @@ hr{
     .rez .content p{
         font-size: 1.5rem;
     }
+    .card{
+        padding: 3rem 0rem;
+        padding-top: 120px;
+        max-width: 70%; 
+    }
+   
     
 }
 

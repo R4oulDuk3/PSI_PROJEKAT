@@ -67,7 +67,7 @@ async function popuniKups(json, iduser) {
       namCon.classList.add("kuponName");
       let ime = document.createElement("span");
       ime.classList.add("name");
-      ime.textContent = item.description;
+      ime.textContent = item.name;
       namCon.appendChild(ime);
   
       kartica.appendChild(img);

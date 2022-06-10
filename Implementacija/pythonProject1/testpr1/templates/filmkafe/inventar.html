@@ -69,6 +69,9 @@
                 <div id="modal-porudzbenice-btn" class="button">
                     <a href="#">Porudzbenice</a>
                 </div>
+                <div id="modal-nabavka-btn" class="button">
+                    <a href="#">Nabavka</a>
+                </div>
             </div>
             <div class="porudzbenice">
                 <div class="porudzbenice-meni">
@@ -89,12 +92,8 @@
                     
                 </div>
                     
-                </div>
-
             </div>
-            
-            
-            
+
             <!-- <script src="modal.js"></script> -->
             <!-- <script src="delete-modal.js"></script> -->
         </main>
@@ -141,7 +140,7 @@
                                     <td>Kolicina za koju se pojavljuje upozorenje o manjku</td>
                                     <td><input type="number" min="0" id="manjak-kolicina-input" oninput="this.value = Math.abs(this.value)"></td>
                                 </tr>
-                                <tr><td colspan="2"> <h3 id="manjak-kolicina-input"></h3></td></tr>
+
                             </tbody>
                         </table>
                         <div class="button-div">
@@ -175,6 +174,32 @@
                         </div>
                         <div class="button-div">
                             <button class="button" id="del-button-confirm">
+                                Potvrdi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <h3>Modal Footer</h3>
+              </div>
+            </div>
+        </div>
+        <div id="nabavka-modal" class="modal">
+            <div id="nabavka-modal-content" class="modal-content">
+              <div class="modal-header">
+                <span id = "nabavka-close" class="close">&times;</span>
+                <h2>Brisanje artikla</h2>
+              </div>
+                <div class="modal-body">
+                    <div class="modal-form-del">
+                        <div class="modal-del-title">
+                            <h1>Nabavka input</h1>
+                        </div>
+                        <div class="modal-del-info">
+                            <input type="file" id= "nabavka-del-input">
+                        </div>
+                        <div class="button-div">
+                            <button class="button" id="nabavka-button-confirm">
                                 Potvrdi
                             </button>
                         </div>

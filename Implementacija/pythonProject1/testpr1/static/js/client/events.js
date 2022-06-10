@@ -11,6 +11,7 @@ async function otkaziDog(event){
     let msg={"event":event};
     await postData("apiDeleteReserve",msg);
     alert("Dogadjaj "+event + " je otkazan");
+    window.location.replace("dogadjaji.html");
 }
 
 async function reservisi(){
@@ -24,12 +25,13 @@ async function reservisi(){
 }
 
 
-let flag1 = 1;
-let flag2= 1;
+let flag1;
+let flag2;
 
 function validate(id){
+    
     let errTrig = document.getElementById(id);
-    /*if (errTrig.id == "brLjudi") {
+    if (errTrig.id == "brLjudi") {
         
         if(isNaN(errTrig.value)){
             document.getElementById("Error").textContent="GRESKA: Los broj ljudi";
@@ -40,20 +42,29 @@ function validate(id){
             flag1=1;
         } 
     }else{
-        if(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/.test(errTrig.value)==false){
+        if(/\b\d{3}[-.]?\d{3}[-.]?\d{4,8}\b/.test(errTrig.value)===false){
             document.getElementById("Error").textContent="GRESKA: Nije validan broj telefona";
+            
             flag2=0;
         }
         else{
             document.getElementById("Error").textContent="";
-            flag2=1;
-        }*/
+            flag2=1;    
+        }
+    }
+    console.log(flag1+""+flag2);
     if(flag1 && flag2){
-        document.getElementById("dugmeRez").disabled = false;;
+        document.getElementById("dugmeRez").disabled = false;
+        document.getElementById("dugmeRez").classList.remove("btndis");
     }
+    else{
+        document.getElementById("dugmeRez").disabled = true;
+        document.getElementById("dugmeRez").classList.add("btndis");
     }
+}
 
 
+var myEvs = []
 $(document).ready(async function() {
 
     $('.popupCloseButton').click(function(){
@@ -73,10 +84,12 @@ $(document).ready(async function() {
         $("#formaRez").submit();
     });
 
-
+    await $.get("apiEventReservations", async function(json) {
+        await popuniRez(json);
+        
+     });
 
     await $.get("apiEvents",async function(json) {
-
         $('#divisor').hide();
         $('#going').hide();
         $('#mojiDog').hide();
@@ -84,11 +97,7 @@ $(document).ready(async function() {
     });
   
 
-    await $.get("apiEventReservations", async function(json) {
-       console.log(json)
-       await popuniRez(json);
-     
-    });
+   
 
 
 
@@ -98,7 +107,8 @@ $(document).ready(async function() {
         let container = document.createElement("div");
         container.classList.add("grid");     
         for(let item of json){
-
+            if(myEvs.includes(item.idevents))
+                continue;
             let kartica = document.createElement("div");
             kartica.classList.add("card");
             kartica.setAttribute("id","event"+item.idevents);
@@ -141,6 +151,7 @@ $(document).ready(async function() {
                 let kartica = document.createElement("div");
                 kartica.classList.add("card");
                 kartica.setAttribute("id","event"+item.idevents);
+                myEvs.push(item.idevents);
                 kartica.style.backgroundImage = "linear-gradient(rgba(50, 50, 50, 0.5),rgba(50,50,50,0.5)), url(" + await downloadImage(item.picture)+")";
                 kartica.style.backgroundSize = "cover";
                 let cont = document.createElement("div");

@@ -22,3 +22,4 @@ document.addEventListener("DOMContentLoaded", async event=>{
     img[i].style.backgroundImage="linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("+await downloadImage("background.jpg")+")";
   }
 })
+

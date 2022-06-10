@@ -53,10 +53,15 @@
     background:none;
 }
 
-.main .row form div label{
+.main .row form div{
     font-size: 1.5rem;
     color:#fff;
 }
+.main .row form #err{
+    font-size: large;
+    color:  red;
+}
+
 
 .dis{
     opacity: 50%;
@@ -70,6 +75,8 @@
 .val:hover{
     letter-spacing: .2rem;
 }
+
+
 /* media reduce*/
 @media (max-width:911px){
 

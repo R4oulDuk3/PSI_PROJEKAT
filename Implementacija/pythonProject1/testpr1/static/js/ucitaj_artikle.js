@@ -46,6 +46,7 @@ var artikli =[
 var modalCreateOpen = false
 var modalDeleteOpen= false
 var modalPorudzbeniceOpen= false
+var nabavkaModalOpen=false
 var ignoreDoc=false
 var artikalCreateInputs = ["#naziv-input","#tren-kolicina-input","#nabavna-cena-input","#manjak-kolicina-input"]
 $(document).ready(async function (){
@@ -79,8 +80,13 @@ $(document).ready(async function (){
         if(modalPorudzbeniceOpen && !$target.closest('#porudzbenice-modal-content').length) {
             console.log('closing')
           $('#porudzbenice-modal').css('display','none')
-            modalDeleteOpen=false;
-        }              
+            modalPorudzbeniceOpen=false;
+        }
+        if(nabavkaModalOpen && !$target.closest('#nabavka-modal-content').length) {
+            console.log('closing')
+          $('#nabavka-modal').css('display','none')
+            nabavkaModalOpen=false;
+        }
       });
     $("#close-del").on('click',closeModal)
     $("#close-create").on('click',closeModal)
@@ -88,6 +94,8 @@ $(document).ready(async function (){
     $("#close-porudzbenice").on('click',closeModal)
     $("#modal-porudzbenice-btn").on('click',openPorudzbeniceModal)
     $("#kreiraj-porudzbenicu").on('click',createPorudzbenica)
+    $("#modal-nabavka-btn").on('click',openNabavkaModal)
+    $("#nabavka-close").on('click',closeModal)
 
     checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
     for(let input of artikalCreateInputs){
@@ -136,6 +144,13 @@ function openPorudzbeniceModal(info){
     ignoreDoc=true
     $('#porudzbenice-modal').css('display','inline-block')
 }
+
+function openNabavkaModal(){
+    nabavkaModalOpen=true
+    ignoreDoc=true
+    $('#nabavka-modal').css('display','inline-block')
+}
+
 function fillCreateModal(info){
     console.log(info)
     if(info==null){
@@ -179,9 +194,11 @@ function closeModal(){
     modalCreateOpen=false
     modalDeleteOpen=false
     modalPorudzbeniceOpen=false
+    nabavkaModalOpen=false
     $('#delete-modal').css('display','none')
     $('#create-modal').css('display','none')
     $('#porudzbenice-modal').css('display','none')
+    $('#nabavka-modal').css('display','none')
 }
 
 
@@ -280,7 +297,24 @@ async function refresh(){
     popuni(grid2,artikli)
     popuniModalPorudzbenice(artikliUNedostatku)
 }
+function regexPorudzbenica(line){
+    return line.match(/^.+ \d+$/)
+}
+function nabavka(){
+    file =$('#file_input').prop('files')[0]
+    var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    // Entire file
+    console.log(this.result);
 
+    // By lines
+    var lines = this.result.split('\n');
+    for(var line = 0; line < lines.length; line++){
+      console.log(lines[line]);
+    }
+  };
+  reader.readAsText(file);
+}
 function createPorudzbenica(){
     let tekst=""
     for(let i =0; i < artikliUNedostatku.length;i++){

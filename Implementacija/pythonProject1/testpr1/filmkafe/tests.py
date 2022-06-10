@@ -33,7 +33,7 @@ class TestViews(TestCase):
         manager = Users.objects.create_user(username="co@gmail.com",
                                             email="co@gmail.com",
                                             password="cone",
-                                            role='Waiter',
+                                            role='Manager',
                                             name='name',
                                             surname='surname',
                                             phone='phone',
