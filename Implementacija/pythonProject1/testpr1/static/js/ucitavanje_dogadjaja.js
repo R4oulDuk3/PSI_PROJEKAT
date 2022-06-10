@@ -171,7 +171,7 @@ async function createZurka(){
         setup : postavka
     }
     console.log(postavka)
-
+    console.log(JSON.stringify(zurka))
     closeModal()
 
     await postData('apiCreateEvent',zurka)

@@ -93,13 +93,19 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>Broj poena</td>
+                                        <td> <input type="number" min="0" step="200" min="0" value="1000" id="broj-poena-input" oninput="this.value = Math.abs(this.value)"></td>
+                                    </tr>
+                                    <tr>
                                         <td>Slika</td>
                                         <td><input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg"></td>
                                     </tr>
+
                                     <tr>
                                         <td>Opis</td>
                                         <td><textarea name="" cols="50" rows="5" id="opis-input"></textarea></td>
-                                    </tr>                               
+                                    </tr>
+
                                 </tbody>
                             </table>
                             <div class="button-div">
