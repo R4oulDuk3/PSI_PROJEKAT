@@ -87,4 +87,5 @@ urlpatterns = [
     path('apiGetWaiterPermit', apiGetWaiterPermit, name="apiGetWaiterPermit"),
     path('apiStartSchedule', apiStartSchedule, name="apiStartSchedule"),
     path('apiGetWaiterWorkHours', apiGetWaiterWorkHours, name="apiGetWaiterWorkHours"),
+    path('apiProductPurchase', apiProductPurchase, name="apiProductPurchase"),
 ]

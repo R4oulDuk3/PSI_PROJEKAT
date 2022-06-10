@@ -48,7 +48,7 @@ var modalDeleteOpen= false
 var modalPorudzbeniceOpen= false
 var nabavkaModalOpen=false
 var ignoreDoc=false
-var artikalCreateInputs = ["#naziv-input","#tren-kolicina-input","#nabavna-cena-input","#manjak-kolicina-input"]
+var artikalCreateInputs = ["#naziv-input","#tren-kolicina-input","#nabavna-cena-input","#manjak-kolicina-input","#sifra-dobavljaca-input" ,"#sifra-artikla-input"]
 $(document).ready(async function (){
     popuniSidebar("admin")
     // artikliUNedostatku =  await $.get("apiDeficientProduct") //AJAX
@@ -99,11 +99,30 @@ $(document).ready(async function (){
 
     checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
     for(let input of artikalCreateInputs){
-        $(input).on('input',()=>{checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))})
+        $(input).on('input',()=>{
+            $("#sacuvaj-artikal").prop('disabled', false);
+            checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
+            checkIfProductExists()
+        })
     }
     $("#sacuvaj-artikal").on('click',sacuvajArtikal)
     $("#del-button-confirm").on('click',obirsiArtikal)
+    $("#nabavka-button-confirm").on('click',nabavka)
+    checkIfProductExists()
+
 })
+function checkIfProductExists(){
+    if(!izmena){
+                let artikal =findElementByKey(artikli,"name",$("#naziv-input").val())
+                if(artikal !=null){
+                    $("#sacuvaj-artikal").prop('disabled', true);
+                }
+                artikal = findElementByKey(artikliUNedostatku,"name",$("#naziv-input").val())
+                if(artikal !=null){
+                    $("#sacuvaj-artikal").prop('disabled', true);
+                }
+            }
+}
 function openDeleteModal(placeholder){
     
     modalDeleteOpen=true
@@ -131,6 +150,13 @@ function checkIfFilled(inputs,button){
     
     return true
 }
+function findElementByKey(arr,key,id){
+    for(let elem of arr){
+        if(elem[key]==id)return elem;
+    }
+    return null;
+}
+
 
 function openCreateModal(info){
     fillCreateModal(info)
@@ -148,12 +174,14 @@ function openPorudzbeniceModal(info){
 function openNabavkaModal(){
     nabavkaModalOpen=true
     ignoreDoc=true
+    $("#nabavka-error-msg").text("")
     $('#nabavka-modal').css('display','inline-block')
 }
-
+var izmena=false
 function fillCreateModal(info){
     console.log(info)
     if(info==null){
+        checkIfFilled(artikalCreateInputs,$("#sacuvaj-artikal"))
         $('#naslov-modala').text("Kreiranje artikla")
         info={
             idproduct :"",
@@ -166,6 +194,7 @@ function fillCreateModal(info){
         }
     }else{
         $('#naslov-modala').text("Izmena artikla")
+        izmena=true
     }
     $("#artikal-id-modal").text(info.idproduct);
     $('#naziv-input').val(info.name);
@@ -199,6 +228,7 @@ function closeModal(){
     $('#create-modal').css('display','none')
     $('#porudzbenice-modal').css('display','none')
     $('#nabavka-modal').css('display','none')
+    izmena=false
 }
 
 
@@ -298,22 +328,49 @@ async function refresh(){
     popuniModalPorudzbenice(artikliUNedostatku)
 }
 function regexPorudzbenica(line){
-    return line.match(/^.+ \d+$/)
+    return line.match(/^[A-Za-z]+ \d+$/)
 }
-function nabavka(){
-    file =$('#file_input').prop('files')[0]
-    var reader = new FileReader();
-  reader.onload = function(progressEvent){
-    // Entire file
-    console.log(this.result);
-
-    // By lines
-    var lines = this.result.split('\n');
-    for(var line = 0; line < lines.length; line++){
-      console.log(lines[line]);
+async function nabavka(){
+    $("#nabavka-error-msg").text("")
+    let file =$('#nabavka-input').prop('files')[0]
+    if(file==undefined){
+        $("#nabavka-error-msg").text("Mora se uneti .txt fajl")
     }
+    let cnt=0
+    var reader = new FileReader();
+    let nabavkaJSON =[]
+    reader.onload = async function(progressEvent){
+    // Entire file
+    var lines = this.result.split('\n');
+    for(let line of lines){
+        if(regexPorudzbenica(line)){
+            let args = line.split(" ")
+            if(parseInt(args[1])<=0){
+                $("#nabavka-error-msg").text("Fajl nije u ispravnom formatu")
+                return
+            }
+            nabavkaJSON.push({
+                name:args[0],
+                amount:parseInt(args[1])
+            })
+        }else{
+            cnt++
+        }
+        if(cnt==2){
+            $("#nabavka-error-msg").text("Fajl nije u ispravnom formatu")
+            return
+        }
+    }
+    let data = {purchase:JSON.stringify(nabavkaJSON)}
+    console.log(data)
+    setSpinner()
+        await postData("apiProductPurchase",data)
+        closeModal()
+        await refresh()
+        resetSpinner()
   };
   reader.readAsText(file);
+
 }
 function createPorudzbenica(){
     let tekst=""

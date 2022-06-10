@@ -21,8 +21,9 @@ from .serializers import MeniSerializer, ProductSerializer, CouponSerializer, Ev
     ProductSoldSerializer, WaiterWorkHoursSerializer, WaiterPermitSerializer
 from django.utils import timezone
 
+
 def hasPermit(user_id):
-    print("Date: "+str(datetime.datetime.today()))
+    print("Date: " + str(datetime.datetime.today()))
     return len(WaiterPermit.objects.filter(waiter=user_id).filter(day__gt=datetime.datetime.today())) > 0
 
 
@@ -123,7 +124,7 @@ def dogadjajiRezervacije(request):
         if request.user.role == 'Manager':
             temp = loader.get_template('filmkafe/DogadjajiRezervacije.html')
         elif request.user.role == 'Waiter':
-            if(hasPermit(request.user.idusers)):
+            if (hasPermit(request.user.idusers)):
                 temp = loader.get_template('filmkafe/DogadjajiRezervacije.html')
             else:
                 temp = loader.get_template('filmkafe/ZapocniSmenu.html')
@@ -213,6 +214,7 @@ def rasporedi(request):
     context = {'puf': puff}
     return HttpResponse(temp.render(context, request))
 
+
 def rasporedi_konobar(request):
     puff = ""
     if request.user.is_authenticated:
@@ -269,7 +271,7 @@ def skeniranjeQRKoda(request):
     puff = ""
     if request.user.is_authenticated:
         if request.user.role == 'Waiter':
-            if(hasPermit(request.user.idusers)):
+            if (hasPermit(request.user.idusers)):
                 temp = loader.get_template('filmkafe/SkeniranjeQR.html')
             else:
                 temp = loader.get_template('filmkafe/ZapocniSmenu.html')
@@ -464,6 +466,28 @@ def apiUpdateProduct(request):
             amt = amt[0]['amount']
             amt = int(amt) - int(each['potrosenaKolicina'])
             prd = Product.objects.filter(idproduct=int(each['idproduct'])).update(amount=amt)
+            print(prd)
+
+        return Response("Success")
+    return Response(status=403)
+
+
+@login_required
+@api_view(['POST'])
+def apiProductPurchase(request):
+    if (request.user.role == 'Waiter' or request.user.role == 'Manager'):
+        p = request.data.copy()
+        p = p['purchase']
+        p = json.loads(p)
+        for each in p:
+            print(each)
+
+            amt = Product.objects.filter(name=each['name']).values('amount')
+            if len(amt) == 0:
+                continue
+            amt = amt[0]['amount']
+            amt = int(amt) + int(each['amount'])
+            prd = Product.objects.filter(name=each['name']).update(amount=amt)
             print(prd)
 
         return Response("Success")
@@ -706,17 +730,15 @@ def apiShift(request):
     return Response(status=403)
 
 
-
 @login_required
 @api_view(['GET'])
 def apiCWShift(request):
     if (request.user.role == 'Waiter' or request.user.role == 'Manager'):
-        sm = Shift.objects.filter(waiter = request.user.idusers)
+        sm = Shift.objects.filter(waiter=request.user.idusers)
         smene = ShiftSerializer(sm, many=True)
         print(smene.data)
         return Response(smene.data)
     return Response(status=403)
-
 
 
 @login_required
@@ -748,6 +770,7 @@ def apiChangeShift(request):
         return Response('yes')
     return Response(status=403)
 
+
 @login_required
 @api_view(['GET'])
 def apiSchedule(request):
@@ -763,6 +786,7 @@ def apiSchedule(request):
         return Response(smene.data)
     return Response(status=403)
 
+
 @login_required
 @api_view(['GET'])
 def apiMySchedule(request):
@@ -773,6 +797,7 @@ def apiMySchedule(request):
         smene = ScheduleSerializer(sm, many=True)
         return Response(smene.data)
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -788,6 +813,7 @@ def apiChangeSchedule(request):
             print(new.errors)
         return Response("sadness")
     return Response(status=403)
+
 
 @login_required
 @api_view(['GET'])
@@ -809,6 +835,7 @@ def apiSetup(request):
         return Response(sets)
     return Response(status=403)
 
+
 @login_required
 @api_view(['GET'])
 def apiTables(request):
@@ -817,6 +844,7 @@ def apiTables(request):
         smene = TableSerializer(sp, many=True)
         return Response(smene.data)
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -847,6 +875,7 @@ def apiCreateTables(request):
         return Response("failed")
     return Response(status=403)
 
+
 @login_required
 @api_view(['POST'])
 def apiCreateSetup(request):
@@ -860,21 +889,32 @@ def apiCreateSetup(request):
         return Response("failed")
     return Response(status=403)
 
+
 @login_required
 @api_view(['POST'])
 def apiDeleteSetup(request):
     if (request.user.role == 'Manager'):
-        e = Setup.objects.filter(idsetup=request.data['idsetup']).delete()
-        return Response("success")
+        try:
+            e = Setup.objects.filter(idsetup=request.data['idsetup']).delete()
+            return Response("success")
+        except:
+            return Response("failure")
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
 def apiDeleteTables(request):
     if (request.user.role == 'Manager'):
+        setupTable = SetupTables.objects.filter(table=Table.objects.get(pk=request.data['idtable']))
+        print(setupTable)
+        events = Events.objects.filter(setup=setupTable[0].setup)
+        if len(events)>0:
+            return Response("failure")
         e = Table.objects.filter(idtable=request.data['idtable']).delete()
         return Response("Success")
     return Response(status=403)
+
 
 @login_required
 @api_view(['GET'])
@@ -885,6 +925,7 @@ def apiPreference(request):
         return Response(res.data)
     return Response(status=403)
 
+
 @api_view(['GET'])
 def apiMyPreference(request):
     if (request.user.role == 'Waiter' or request.user.role == 'Manager'):
@@ -892,6 +933,7 @@ def apiMyPreference(request):
         res = PreferenceSerializer(e, many=True)
         return Response(res.data)
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -914,6 +956,7 @@ def apiSetPreference(request):
                 print(ser.errors)
         return Response("")
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -944,6 +987,7 @@ def apiCustomerExpeneture(request):
         print(e.errors)
         return Response('res.data')
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -1058,6 +1102,7 @@ def apiStart(request):
         return Response("Success")
     return Response(status=403)
 
+
 @login_required
 @api_view(['POST'])
 def apiStartSchedule(request):
@@ -1070,6 +1115,7 @@ def apiStartSchedule(request):
         schedule.save()
         return Response("Success")
     return Response(status=403)
+
 
 @login_required
 @api_view(['POST'])
@@ -1086,9 +1132,6 @@ def apiEnd(request):
     return Response(status=403)
 
 
-
-
-
 @login_required
 @api_view(['POST'])
 def apiReserve(request):
@@ -1102,7 +1145,6 @@ def apiReserve(request):
             new.save()
         print(new.errors)
     return Response("Success")
-
 
 
 @login_required
@@ -1163,8 +1205,6 @@ def apiGetWaiterPermit(request):
     return Response(status=403)
 
 
-
-
 @login_required
 @api_view(['POST'])
 def apiDeleteReserve(request):
@@ -1221,6 +1261,7 @@ def apiBuyCupon(request):
             return Response(CouponSerializer(cpn).data)
         return Response({'idcupon': -1, 'description': "Nema dovoljno poena", 'name': 'Neuspeh'})
     return Response(status=403)
+
 
 '''d=res.data
     d['name'] = 'newName' 

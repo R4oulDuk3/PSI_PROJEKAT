@@ -220,22 +220,31 @@ function popuni(grid,data){
 async function postDataWithSpinner(url,data){
     closeModal()
     setSpinner()
-    await postData(url,data)
-    refresh()
+    ret =await postData(url,data)
+    await refresh()
     resetSpinner()
+    return ret
 }
 
-function deleteStolovi(){
+async function deleteStolovi(){
     if(checkIfMathcing()){
         let id =$('#id').text()
         if(deleteType=="postavka"){
             console.log("Delete postavka")
-            postDataWithSpinner("apiDeleteSetup",{idsetup:id}) //AJAX
+            res=await postDataWithSpinner("apiDeleteSetup",{idsetup:id}) //AJAX
         }else{
             console.log("Delete sto")
-            postDataWithSpinner("apiDeleteTable",{idtable:id}) //AJAX
+            res= await postDataWithSpinner("apiDeleteTable",{idtable:id}) //AJAX
         }
     }
+    if(res=="failure"){
+        $("#snackbar").text("Brisanje nije uspešno izvršeno. Data postavka je u upotrebi na jednom ili više događaja")
+    }else{
+        $("#snackbar").text("Uspeh")
+    }
+
+    showSnackbar()
+
 }
 async function createSto(){
 
@@ -260,7 +269,7 @@ async function createPostavka(){
     
 }
 function resetErrors(){
-    $('naziv-err').text("")
+    $('#naziv-err').text("")
 }
 
 function openDeleteModal(placeholder){
@@ -286,7 +295,7 @@ function openKategorijaChangeModal(naziv){
     
     modalKategorijaChangeOpen=true
     ignoreDoc=true
-    $('kat-change-modal-input').attr('value',naziv)
+    $('#kat-change-modal-input').attr('value',naziv)
     $('#kat-change-modal').css('display','inline-block')
 }
 
@@ -318,3 +327,4 @@ function closeModal(){
     $('#create-modal').css('display','none')
     $('#kat-change-modal').css('display','none')
 }
+
