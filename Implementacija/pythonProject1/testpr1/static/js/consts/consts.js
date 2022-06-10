@@ -91,3 +91,7 @@ function passwordValidation(password)
   // After 3 seconds, remove the show class from DIV
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
 }
+function showSnackbarWithMessage(msg){
+    $("#snackbar").text(msg)
+    showSnackbar()
+}

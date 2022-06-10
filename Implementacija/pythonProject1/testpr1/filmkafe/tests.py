@@ -5,8 +5,10 @@ from django.urls import reverse
 from .models import *
 from .serializers import *
 import json
+import  datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+from collections import OrderedDict
 class TestViews(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -57,6 +59,52 @@ class TestViews(TestCase):
         cls.clientUser.login(username="cone@gmail.com", password='cone')
         cls.clientWaiter.login(username="con@gmail.com", password='cone')
         cls.clientManager.login(username="co@gmail.com", password='cone')
+        meni = MeniInsertSerializer(data=[{
+            "idmeni": "1",
+            "meniproduct": "Albino",
+            "price": "350.0",
+            "amount": "0.5",
+            "unit": "l",
+            "subtype": "Pivo",
+            "akcija": "0"
+        }, {
+            "idmeni": "2",
+            "meniproduct": "Hoptopod",
+            "price": "350.0",
+            "amount": "0.5",
+            "unit": "l",
+            "subtype": "Pivo",
+            "akcija": "0"
+        }, {
+            "idmeni": "3",
+            "meniproduct": "Redbreast",
+            "price": "500.0",
+            "amount": "0.5",
+            "unit": "l",
+            "subtype": "Viski",
+            "akcija": "0"
+        }, {
+            "idmeni": "4",
+            "meniproduct": "Ardberg",
+            "price": "250.0",
+            "amount": "0.5",
+            "unit": "l",
+            "subtype": "Viski",
+            "akcija": "0"
+        }], many=True
+        )
+        # print("Shifts valid: " + str(shift.is_valid()))
+        if (meni.is_valid()):
+            meni.save()
+        product = ProductSerializer(data=[
+            {'idproduct': 1, 'name': 'Albino', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00',
+             'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'},
+
+            {'idproduct': 2, 'name': 'Hoptopod', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00',
+             'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '60.00'}
+        ], many=True)
+        if (product.is_valid()):
+            product.save()
         shift = ShiftSerializer(data=[{
             "idshift": "1",
             "name": "Smena 1",
@@ -206,6 +254,36 @@ class TestViews(TestCase):
         # print("Schedule valid: " + str(res.is_valid()))
         if (res.is_valid()):
             res.save()
+
+        ps = ProductSoldSerializer(data=[{
+            "product": "1",
+            "name": "Pivo",
+            "amount": "4",
+            "day": datetime.datetime.today()
+        }, {
+            "product": "2",
+            "name": "dzin",
+            "amount": "2",
+            "day": datetime.datetime.today()
+        }, {
+            "product": "3",
+            "name": "burbon",
+            "amount": "5",
+            "day": datetime.datetime.today()
+        }])
+        if (ps.is_valid()):
+            ps.save()
+
+        wo = WaiterWorkHoursSerializer(data=[{
+            "id": "1",
+            "waiter": "1",
+            "waiterInfo": "name surname",
+            "day": datetime.datetime.today(),
+            "hours": "5"
+        }])
+
+        if (wo.is_valid()):
+            wo.save()
 
     # svesmene: '[{"day":"2022-06-11T22:00:00.000Z","preferedshift"…11T22:00:00.000Z","preferedshift":3,"waiter":38}]'
     def test_apiSetPreference_POST_user(self):
@@ -406,7 +484,7 @@ class TestViews(TestCase):
     def test_apiSchedule_GET_Waiter(self):
         response = self.clientWaiter.get(reverse("apiSchedule"))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()), 3)
+        self.assertEqual(len(response.json()), 2)
 
     def test_apiShift_GET_User(self):
         response = self.clientUser.get(reverse("apiShift"))
@@ -431,4 +509,422 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         print(response.json())
         self.assertEqual(len(response.json()), 3)
+
+    def test_inventar_redirect_not_loged_in(self):
+        res = self.client.get('http://127.0.0.1:8000/filmkafe/inventar')
+    def test_api_meni(self):
+        res = self.clientUser.get(reverse("apiMeni"))
+        expected = [{'naziv': 'Pivo', 'stavke': [OrderedDict([('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)]), OrderedDict([('idmeni', 2), ('meniproduct', 'Hoptopod'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)])]}, {'naziv': 'Viski', 'stavke': [OrderedDict([('idmeni', 3), ('meniproduct', 'Redbreast'), ('price', '500.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)]), OrderedDict([('idmeni', 4), ('meniproduct', 'Ardberg'), ('price', '250.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)])]}]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, res.data)
+
+    def test_api_meni_add_user(self):
+        res = self.clientUser.post(reverse("apiMeniAdd"),{"kukuruz":"[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+
+        self.assertEqual(res.status_code, 403)
+        '''
+        self.assertEqual(tried, res.data)'''
+
+
+    def test_api_meni_add_user(self):
+        res = self.clientWaiter.post(reverse("apiMeniAdd"),{"kukuruz":"[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+
+        self.assertEqual(res.status_code, 403)
+
+    def test_api_meni_add_manager(self):
+            res = self.clientManager.post(reverse("apiMeniAdd"), {
+                "kukuruz": "[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+
+            got = Meni.objects.all()
+            got = MeniInsertSerializer(got, many = True)
+            expected = [OrderedDict([('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.00'), ('unit', 'l'), ('akcija', 0), ('subtype', 'Pivo')])]
+            self.assertEqual(res.status_code, 200)
+            self.assertEqual(got.data, expected)
+            '''
+            self.assertEqual(tried, res.data)'''
+    def test_api_product_user(self):
+        res = self.clientUser.get(reverse("apiProduct"))
+
+        self.assertEqual(res.status_code, 403)
+
+
+
+    def test_api_product_waiter(self):
+        res = self.clientWaiter.get(reverse("apiProduct"))
+
+        self.assertEqual(res.status_code, 200)
+
+
+    def test_api_product_manager(self):
+        res = self.clientManager.get(reverse("apiProduct"))
+        expected = [OrderedDict([('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '40.00')])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, expected)
+
+    def test_api_all_product_user(self):
+        res = self.clientUser.get(reverse("apiProductAll"))
+
+        self.assertEqual(res.status_code, 403)
+
+
+
+    def test_api_product_all_waiter(self):
+        res = self.clientWaiter.get(reverse("apiProductAll"))
+
+        self.assertEqual(res.status_code, 200)
+
+
+    def test_api_product_all_manager(self):
+        res = self.clientManager.get(reverse("apiProductAll"))
+        expected = [OrderedDict([('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '40.00')]), OrderedDict([('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '60.00')])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, expected)
+
+
+
+
+    def test_api_def_product_user(self):
+        res = self.clientUser.get(reverse("apiDeficientProduct"))
+
+        self.assertEqual(res.status_code, 403)
+
+
+
+    def test_api_def_product_waiter(self):
+        res = self.clientWaiter.get(reverse("apiDeficientProduct"))
+
+        self.assertEqual(res.status_code, 200)
+
+
+    def test_api_def_product_manager(self):
+        res = self.clientManager.get(reverse("apiDeficientProduct"))
+        expected = [OrderedDict([('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '60.00')])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, expected)
+
+    def test_api_product_delete_manager(self):
+        res = self.clientManager.post(reverse("apiDeleteProduct"),{"idproduct":"1"})
+        expected = 1
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(newln), expected)
+
+
+    def test_api_product_delete_user(self):
+        res = self.clientUser.post(reverse("apiDeleteProduct"),{"idproduct":"1"})
+        expected = 1
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_api_product_update_user(self):
+        res = self.clientUser.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        expected = 1
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 403)
+
+
+
+
+
+    def test_api_product_update_manager(self):
+        res = self.clientManager.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        expected = Product.objects.filter(idproduct=1).values('amount')[0]['amount']
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, 40.00)
+
+
+    def test_api_product_update_waiter(self):
+        res = self.clientWaiter.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        expected = Product.objects.filter(idproduct=1).values('amount')[0]['amount']
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, 40.00)
+
+
+
+    def test_api_product_set_manager(self):
+        res = self.clientManager.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+        expected = Product.objects.all()
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 3)
+
+
+
+    def test_api_product_set_waiter(self):
+        res = self.clientWaiter.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+        expected = Product.objects.all()
+        newln = Product.objects.all()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 3)
+
+
+    def test_api_product_set_user(self):
+        res = self.clientUser.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+
+        self.assertEqual(res.status_code, 403)
+
+
+
+    def test_api_cupon(self):
+        res = self.clientUser.get(reverse("apiCoupon"))
+        expected = [OrderedDict([('idcupon', 1), ('description', ''), ('name', 'Coup'), ('picture', '...'), ('points', 1000)])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, res.data)
+
+
+    def test_api_event(self):
+        res = self.clientUser.get(reverse("apiEvents"))
+        expected = [OrderedDict([('idevents', 1), ('description', 'aaaa'), ('start', '2022-06-09T21:56:51Z'), ('name', 'Zurka 1'), ('end', '2022-06-09T21:56:51Z'), ('picture', '162seo0jLUY82kSTZEDj9zwYerODCe'), ('setup', 1)])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, res.data)
+
+
+
+    def test_create_cupon_manager(self):
+        res = self.clientManager.post(reverse("apiCreateCoupon"), {"description": "bbbbb",
+            "name": "Coup2",
+            "picture": "...",
+            "points": 1001})
+        expected = Coupon.objects.all()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 2)
+
+
+    def test_create_cupon_user(self):
+        res = self.clientUser.post(reverse("apiCreateCoupon"), {"description": "",
+            "name": "Coup2",
+            "picture": "...",
+            "points": 1001})
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_create_cupon_waiter(self):
+        res = self.clientWaiter.post(reverse("apiCreateCoupon"), {"description": "",
+            "name": "Coup2",
+            "picture": "...",
+            "points": 1001})
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_delete_cupon_manager(self):
+        res = self.clientManager.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
+        expected = Coupon.objects.all()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 0)
+
+
+    def test_delete_cupon_user(self):
+        res = self.clientUser.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_delete_cupon_waiter(self):
+        res = self.clientWaiter.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
+        self.assertEqual(res.status_code, 403)
+
+
+
+    def test_create_event_manager(self):
+        res = self.clientManager.post(reverse("apiCreateEvent"), {
+             "name": "Zurka 2",
+             "end": "2022-09-09T21:56:51",
+             "description": "aaaa",
+             "start": "2022-09-11T21:56:51",
+             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+             "setup": "1"
+             })
+        expected = Events.objects.all()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 2)
+
+
+    def test_create_event_user(self):
+        res = self.clientUser.post(reverse("apiCreateEvent"), {"idevents": "1",
+             "name": "Zurka 1",
+             "end": "2022-06-09T21:56:51",
+             "description": "aaaa",
+             "start": "2022-06-09T21:56:51",
+             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+             "setup": "1"
+             })
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_create_event_waiter(self):
+        res = self.clientWaiter.post(reverse("apiCreateEvent"), {"idevents": "1",
+             "name": "Zurka 1",
+             "end": "2022-06-09T21:56:51",
+             "description": "aaaa",
+             "start": "2022-06-09T21:56:51",
+             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+             "setup": "1"
+             })
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_delete_event_manager(self):
+        res = self.clientManager.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
+        expected = Events.objects.all()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 0)
+
+
+    def test_delete_event_user(self):
+        res = self.clientUser.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
+        self.assertEqual(res.status_code, 403)
+
+
+    def test_delete_event_waiter(self):
+        res = self.clientWaiter.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
+        self.assertEqual(res.status_code, 403)
+
+    def test_apiSetup_GET_user(self):
+        response = self.clientUser.get(reverse("apiSetup"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiSetup_GET_manager(self):
+        response = self.clientManager.get(reverse("apiSetup"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_apiTables_GET_user(self):
+        response = self.clientUser.get(reverse("apiTables"))
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiTables_GET_manager(self):
+        response = self.clientManager.get(reverse("apiTables"))
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_apiCreateTables_POST_user(self):
+        response = self.clientUser.post(reverse("apiCreateTables"), {
+            'name': 'Separe 5', 'noofseats': '5', 'idsetup': '1'})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiCreateTables_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiCreateTables"), {
+            'name': 'Separe 5', 'noofseats': '5', 'idsetup': '1'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Table.objects.all()), 5)
+
+    def test_apiDeleteTables_POST_user(self):
+        response = self.clientUser.post(reverse("apiDeleteTables"), {
+            'idtable': '3'})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiDeleteTables_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiDeleteTables"), {
+            'idtable': '3'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Table.objects.all()), 4) #
+
+    def test_apiDeleteSetup_POST_user(self):
+        response = self.clientUser.post(reverse("apiDeleteSetup"), {
+            'idsetup': '2'})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiDeleteSetup_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiDeleteSetup"), {
+            'idsetup': '2'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Setup.objects.all()), 1)
+
+    def test_apiCreateSetup_POST_user(self):
+        response = self.clientUser.post(reverse("apiCreateSetup"), {
+            "idsetup": "3", "name": "Postavka3"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiCreateSetup_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiCreateSetup"), {
+            "idsetup": "3", "name": "Postavka3"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Setup.objects.all()), 2)
+
+    def test_apiWaiters_GET_user(self):
+        response = self.clientUser.get(reverse("apiWaiters"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiWaiters_GET_manager(self):
+        response = self.clientManager.get(reverse("apiWaiters"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 2)
+
+    def test_apiCreateWaiter_POST_user(self):
+        response = self.clientUser.post(reverse("apiCreateWaiters"), {
+            "email": "pear@mail.rs", "password": "Pass123", "phone": "02311132"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiCreateWaiter_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiCreateWaiters"), {
+            "email": "pear@mail.rs", "password": "Pass123", "telefon": "02311132"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Users.objects.all()), 4)
+
+    def test_apiDeleteWaiter_POST_user(self):
+        response = self.clientUser.post(reverse("apiDeleteWaiters"), {
+            "idusers": "4"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiDeleteWaiter_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiDeleteWaiters"), {
+            "idusers": "4"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Users.objects.all()), 3)
+
+    def test_apiChangeSchedule_POST_user(self):
+        response = self.clientUser.post(reverse("apiChangeSchedule"), {
+            "startDate": datetime.datetime.today(), "endDate": "2022-06-13T22:00:00.000Z", "raspored": "[]"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiChangeSchedule_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiChangeSchedule"), {
+            "startDate": datetime.datetime.today(), "endDate": "2022-06-13T22:00:00.000Z", "raspored": "[]"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_apiChangeShift_POST_user(self):
+        response = self.clientUser.post(reverse("apiChangeShift"), {
+            "smeneInfo": "[{\"idshift\":\"1\",\"name\":\"shift 1\",\"start\":\"22:00\",\"end\":\"22:00\"}]"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiChangeShift_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiChangeShift"), {
+            "smeneInfo": "[{\"idshift\":\"1\",\"name\":\"shift 1\",\"start\":\"22:00\",\"end\":\"22:00\"}]"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_apiGetProductSold_POST_user(self):
+        response = self.clientUser.post(reverse("apiGetProductSold"), {
+            "start": datetime.datetime.today(), "end": "2022-06-13T22:00:00.000Z"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiGetProductSold_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiGetProductSold"), {
+            "start": datetime.datetime.today(), "end": "2022-06-13T22:00:00.000Z"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_apiGetWaiterWorkHours_POST_user(self):
+        response = self.clientUser.post(reverse("apiGetWaiterWorkHours"), {
+            "start": datetime.datetime.today(), "end": "2022-06-13T22:00:00.000Z"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiGetWaiterWorkHours_POST_Manager(self):
+        response = self.clientManager.post(reverse("apiGetWaiterWorkHours"), {
+            "start": datetime.datetime.today(), "end": "2022-06-13T22:00:00.000Z"})
+        self.assertEqual(response.status_code, 200)
+
+
+
+
 

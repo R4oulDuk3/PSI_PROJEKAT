@@ -238,12 +238,12 @@ async function deleteStolovi(){
         }
     }
     if(res=="failure"){
-        $("#snackbar").text("Brisanje nije uspešno izvršeno. Data postavka je u upotrebi na jednom ili više događaja")
+        showSnackbarWithMessage("Brisanje nije uspešno izvršeno. Data postavka je u upotrebi na jednom ili više događaja")
     }else{
-        $("#snackbar").text("Uspeh")
+        showSnackbarWithMessage("Uspešno brisanje")
     }
 
-    showSnackbar()
+
 
 }
 async function createSto(){
