@@ -57,7 +57,7 @@ urlpatterns = [
     path('apiCreateManager', apiCreateManager, name="apiCreateManager"),
     path('apiDeleteWaiters', apiDeleteWaiters, name="apiDeleteWaiters"),
     path('apiSchedule', apiSchedule, name="apiSchedule"),
-    path('apiChangeSchedule', apiChangeSchedule, name="apiSchedule"),
+    path('apiChangeSchedule', apiChangeSchedule, name="apiChangeSchedule"),
     path('apiShift', apiShift, name="apiShift"),
     path('apiChangeShift', apiChangeShift, name="apiChangeShift"),
     path('apiPreference', apiPreference, name="apiPreference"),
@@ -87,5 +87,4 @@ urlpatterns = [
     path('apiGetWaiterPermit', apiGetWaiterPermit, name="apiGetWaiterPermit"),
     path('apiStartSchedule', apiStartSchedule, name="apiStartSchedule"),
     path('apiGetWaiterWorkHours', apiGetWaiterWorkHours, name="apiGetWaiterWorkHours"),
-
 ]

@@ -7,7 +7,7 @@ from .serializers import *
 import json
 
 
-class TestViewsZapocinjanjeSmene(TestCase):
+class TestViews(TestCase):
     @classmethod
     def setUpTestData(cls):
         usr = Users.objects.create_user(username="cone@gmail.com",
@@ -103,6 +103,30 @@ class TestViewsZapocinjanjeSmene(TestCase):
         # print("table " + str(table.is_valid()))
         if (table.is_valid()):
             table.save()
+        res = SetupTablesSerializer(
+            data=[{
+                "table": 1,
+                "setup": 1
+            },
+                {
+                    "table": 2,
+                    "setup": 1
+                },
+                {
+                    "table": 3,
+                    "setup": 1
+                },
+                {
+                    "table": 4,
+                    "setup": 1
+                },
+
+            ],
+            many=True
+        )
+        print("SetupTable valid: " + str(res.is_valid()))
+        if (res.is_valid()):
+            res.save()
 
         events = EventsSerializer(data=[
             {"idevents": "1",
@@ -179,7 +203,7 @@ class TestViewsZapocinjanjeSmene(TestCase):
                 }
             ], many=True
         )
-        print("Schedule valid: " + str(res.is_valid()))
+        # print("Schedule valid: " + str(res.is_valid()))
         if (res.is_valid()):
             res.save()
 
@@ -330,8 +354,8 @@ class TestViewsZapocinjanjeSmene(TestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_apiPostWaiterPermit_POST_Waiter(self):
-        date =datetime.datetime.today()
-        response = self.clientWaiter.post(reverse("apiPostWaiterPermit"), {'day':date})
+        date = datetime.datetime.today()
+        response = self.clientWaiter.post(reverse("apiPostWaiterPermit"), {'day': date})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(WaiterPermit.objects.all()), 1)
         self.assertEqual(WaiterPermit.objects.all()[0].day.replace(tzinfo=None), date)
@@ -342,12 +366,69 @@ class TestViewsZapocinjanjeSmene(TestCase):
 
     def test_apiStartSchedule_POST_Waiter(self):
         date = datetime.datetime.today()
-        self.assertEqual(Schedule.objects.get(pk=1).started,None)
+        self.assertEqual(Schedule.objects.get(pk=1).started, None)
         response = self.clientWaiter.post(reverse("apiStartSchedule"), {
-            "idschedule":1,
-            "started":date,
-            "ended":date
+            "idschedule": 1,
+            "started": date,
+            "ended": date
         })
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(Schedule.objects.get(pk=1).started, None)
+
+    def test_apiReservations_GET(self):
+        response = self.clientWaiter.get(reverse("apiReservations"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 3)
+
+    def test_apiTables_GET_User(self):
+        response = self.clientUser.get(reverse("apiTables"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiTables_GET_Waiter(self):
+        response = self.clientWaiter.get(reverse("apiTables"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 4)
+
+    def test_apiSetup_GET_User(self):
+        response = self.clientUser.get(reverse("apiSetup"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiSetup_GET_Waiter(self):
+        response = self.clientWaiter.get(reverse("apiSetup"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(len(response.json()[0]['tables']), 4)
+
+    def test_apiSchedule_GET_User(self):
+        response = self.clientUser.get(reverse("apiSchedule"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiSchedule_GET_Waiter(self):
+        response = self.clientWaiter.get(reverse("apiSchedule"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 3)
+
+    def test_apiShift_GET_User(self):
+        response = self.clientUser.get(reverse("apiShift"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiShift_GET_Waiter(self):
+        response = self.clientWaiter.get(reverse("apiShift"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 3)
+
+    def test_apiMyPreference_GET_User(self):
+        response = self.clientUser.get(reverse("apiPreference"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_apiPreference_GET_Waiter(self):
+        response = self.clientWaiter.post(reverse("apiSetPreference"), {
+            'svesmene': "[{\"day\":\"2022-06-11T22:00:00.000Z\",\"preferedshift\":1,\"waiter\":2}]"})
+        response = self.clientManager.post(reverse("apiSetPreference"), {
+            'svesmene': "[{\"day\":\"2022-06-11T22:00:00.000Z\",\"preferedshift\":1,\"waiter\":3},{\"day\":\"2022-06-11T22:00:00.000Z\",\"preferedshift\":2,\"waiter\":3}]"})
+
+        response = self.clientWaiter.get(reverse("apiPreference"))
+        self.assertEqual(response.status_code, 200)
+        print(response.json())
+        self.assertEqual(len(response.json()), 3)
 
