@@ -753,7 +753,7 @@ def apiChangeShift(request):
 def apiSchedule(request):
     if (request.user.role == 'Waiter' or request.user.role == 'Manager'):
         # print(datetime.datetime.today())
-        date = datetime.datetime.today() - datetime.timedelta(days=1)
+        date = datetime.datetime.today() - datetime.timedelta(days=2)
         print("HELLO")
         print(str(date))
         print("HELLO")
