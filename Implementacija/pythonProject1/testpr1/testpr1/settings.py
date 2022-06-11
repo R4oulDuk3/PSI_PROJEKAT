@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'testpr1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'film_kafe',
+        'NAME': 'filmkafe_2',
         'USER': 'root',
         'PASSWORD': 'MaLiNa062244094',
         'HOST': '127.0.0.1',

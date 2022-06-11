@@ -114,6 +114,7 @@ async function finalnoSlanje(){
     }
     console.log(preferences_send)
     let jsmene = {svesmene:JSON.stringify(preferences_send)}
+    console.log(jsmene)
     setSpinner()
     await postData("apiSetPreference",jsmene)
     resetSpinner()

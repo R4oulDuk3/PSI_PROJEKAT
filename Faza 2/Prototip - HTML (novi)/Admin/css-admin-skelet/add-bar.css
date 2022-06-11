@@ -1,0 +1,10 @@
+.add-bar{
+    display: flex;
+    background: white;
+    padding:1rem;
+    border-radius: 15px;
+}
+.add-bar >*{
+    padding-right: 1rem;
+    padding-left: 1rem;
+}

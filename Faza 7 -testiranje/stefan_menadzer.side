@@ -1,0 +1,1658 @@
+{
+  "id": "be9016be-6813-4f86-989f-845e97e78620",
+  "version": "2.0",
+  "name": "Film_Kafe",
+  "url": "http://127.0.0.1:8000/filmkafe/inventar",
+  "tests": [{
+    "id": "16c7bd51-873e-4f05-87fe-015c0506b6ad",
+    "name": "Stolovi-Dodavanje_postavke",
+    "commands": [{
+      "id": "ed12c26d-371c-4f9c-9a33-393bde73c900",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/inventar",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e99ca36d-739b-4ebf-8ae2-0b256d9e44b6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Stolovi",
+      "targets": [
+        ["linkText=Stolovi", "linkText"],
+        ["css=li:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(@href, 'stolovi')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Stolovi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "34c94d75-b942-4d47-be49-acf845f21ab8",
+      "comment": "",
+      "command": "click",
+      "target": "id=naziv-nove-postavke",
+      "targets": [
+        ["id=naziv-nove-postavke", "id"],
+        ["css=#naziv-nove-postavke", "css:finder"],
+        ["xpath=//input[@id='naziv-nove-postavke']", "xpath:attributes"],
+        ["xpath=//main/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e6b79df7-c868-4d3f-8b15-545b4c264c6f",
+      "comment": "",
+      "command": "type",
+      "target": "id=naziv-nove-postavke",
+      "targets": [
+        ["id=naziv-nove-postavke", "id"],
+        ["css=#naziv-nove-postavke", "css:finder"],
+        ["xpath=//input[@id='naziv-nove-postavke']", "xpath:attributes"],
+        ["xpath=//main/div/input", "xpath:position"]
+      ],
+      "value": "Postavka 4"
+    }, {
+      "id": "93684071-f0ab-4b07-a00f-2748719b2f53",
+      "comment": "",
+      "command": "click",
+      "target": "id=dodaj-postavku",
+      "targets": [
+        ["id=dodaj-postavku", "id"],
+        ["css=#dodaj-postavku", "css:finder"],
+        ["xpath=//button[@id='dodaj-postavku']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj postavku')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "398a0efa-ef6e-4869-98b3-f3657039042f",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=dodaj-postavku",
+      "targets": [
+        ["id=dodaj-postavku", "id"],
+        ["css=#dodaj-postavku", "css:finder"],
+        ["xpath=//button[@id='dodaj-postavku']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj postavku')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "680d7b44-f287-40f1-be3b-e3d3a2756d0a",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=dodaj-postavku",
+      "targets": [
+        ["id=dodaj-postavku", "id"],
+        ["css=#dodaj-postavku", "css:finder"],
+        ["xpath=//button[@id='dodaj-postavku']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj postavku')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "04a7cd25-65c5-4d1b-ab01-a7f1c7aca63e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.postavka:nth-child(3) .card-body",
+      "targets": [
+        ["css=.postavka:nth-child(3) .card-body", "css:finder"],
+        ["xpath=//div[3]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6e78c2c-a067-49b1-9efd-f72918f1b252",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.postavka:nth-child(3) h2",
+      "targets": [
+        ["css=.postavka:nth-child(3) h2", "css:finder"],
+        ["xpath=//div[3]/div/div/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Postavka 4')]", "xpath:innerText"]
+      ],
+      "value": "Postavka 4"
+    }]
+  }, {
+    "id": "c68818cd-4d01-41fb-b426-8310ebc7c388",
+    "name": "Stolovi-Dodavanje_stola",
+    "commands": [{
+      "id": "32ca9ed9-2341-4f3b-8161-5086a59315cc",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/inventar",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c1054acd-b958-4c3e-8c9a-82a296cf63bc",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Stolovi",
+      "targets": [
+        ["linkText=Stolovi", "linkText"],
+        ["css=li:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(@href, 'stolovi')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Stolovi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c10a898d-472e-49b1-bf01-f3d82619fe20",
+      "comment": "",
+      "command": "click",
+      "target": "css=.postavka:nth-child(2) a",
+      "targets": [
+        ["css=.postavka:nth-child(2) a", "css:finder"],
+        ["xpath=(//a[contains(text(),'Dodaj sto')])[2]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '#')])[3]", "xpath:href"],
+        ["xpath=//div[2]/div/div[2]/div[2]/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef4e5399-819b-42c9-8825-dffd70a28192",
+      "comment": "",
+      "command": "click",
+      "target": "id=sto-naziv-input",
+      "targets": [
+        ["id=sto-naziv-input", "id"],
+        ["css=#sto-naziv-input", "css:finder"],
+        ["xpath=//input[@id='sto-naziv-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ccc94539-79b0-42c3-a5e7-583f8c14d0be",
+      "comment": "",
+      "command": "type",
+      "target": "id=sto-naziv-input",
+      "targets": [
+        ["id=sto-naziv-input", "id"],
+        ["css=#sto-naziv-input", "css:finder"],
+        ["xpath=//input[@id='sto-naziv-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "Sto 5"
+    }, {
+      "id": "af53a773-5cde-4062-8774-0c32c7a262d2",
+      "comment": "",
+      "command": "click",
+      "target": "id=broj-osoba-input",
+      "targets": [
+        ["id=broj-osoba-input", "id"],
+        ["css=#broj-osoba-input", "css:finder"],
+        ["xpath=//input[@id='broj-osoba-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "00e3f237-f746-45d5-a32a-96a2a4f05c2f",
+      "comment": "",
+      "command": "type",
+      "target": "id=broj-osoba-input",
+      "targets": [
+        ["id=broj-osoba-input", "id"],
+        ["css=#broj-osoba-input", "css:finder"],
+        ["xpath=//input[@id='broj-osoba-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[2]/input", "xpath:position"]
+      ],
+      "value": "5"
+    }, {
+      "id": "6cefe3df-b10f-4b3b-976e-03b5eea0f955",
+      "comment": "",
+      "command": "click",
+      "target": "id=kreiraj-sto",
+      "targets": [
+        ["id=kreiraj-sto", "id"],
+        ["css=#kreiraj-sto", "css:finder"],
+        ["xpath=//button[@id='kreiraj-sto']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c770c00-3ae1-4408-a030-899d7ee72c61",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.postavka:nth-child(2) tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=.postavka:nth-child(2) tr:nth-child(3) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div[2]/div/table/tbody/tr[3]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Sto 5')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d167ed86-689a-4c98-8d45-4279d015cc14",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.postavka:nth-child(2) tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=.postavka:nth-child(2) tr:nth-child(3) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div[2]/div/table/tbody/tr[3]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Sto 5')]", "xpath:innerText"]
+      ],
+      "value": "Sto 5"
+    }]
+  }, {
+    "id": "c84f6fe2-580e-41ef-8ef9-0620078e21dc",
+    "name": "Stolovi-BrisanjeStola",
+    "commands": [{
+      "id": "614b71e0-88f9-459a-9f61-aaa4ed06d697",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/stolovi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a1a4420-229d-4954-838d-a07140aed81a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.postavka:nth-child(2) tr:nth-child(3) .sm-button:nth-child(1)",
+      "targets": [
+        ["css=.postavka:nth-child(2) tr:nth-child(3) .sm-button:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div[2]/div/table/tbody/tr[3]/td[3]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "42e41905-d878-4aec-bd38-acb6b7e3feed",
+      "comment": "",
+      "command": "click",
+      "target": "css=.postavka:nth-child(2) tr:nth-child(3) .las:nth-child(1)",
+      "targets": [
+        ["css=.postavka:nth-child(2) tr:nth-child(3) .las:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/div/div[2]/div/table/tbody/tr[3]/td[3]/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "705d7fd9-eb0a-462e-8879-20349a35da64",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc226d4c-dae0-4dc6-a151-baeef7b7a392",
+      "comment": "",
+      "command": "type",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "44"
+    }, {
+      "id": "c1265a9f-4e36-4708-adb7-578f4aa0ac66",
+      "comment": "",
+      "command": "click",
+      "target": "id=del-button-confirm",
+      "targets": [
+        ["id=del-button-confirm", "id"],
+        ["css=#del-button-confirm", "css:finder"],
+        ["xpath=//button[@id='del-button-confirm']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb738245-711a-4efb-956b-0cd641fca562",
+      "comment": "",
+      "command": "click",
+      "target": "css=.grid",
+      "targets": [
+        ["css=.grid", "css:finder"],
+        ["xpath=//main/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3e7d71b-55d4-449f-a2dd-551803790ed6",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.postavka:nth-child(2) tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=.postavka:nth-child(2) .card-body", "css:finder"],
+        ["xpath=//div/div[2]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "84c0bcca-3a30-4145-8c31-032f57dbe776",
+    "name": "Stolovi-BrisanjePostavke",
+    "commands": [{
+      "id": "46c76a2b-2af3-4aa5-85e3-4d7f9d8006b5",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/stolovi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "48d1469e-5aa9-49b1-9ed4-1b93710ff6c5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.postavka:nth-child(3) .las",
+      "targets": [
+        ["css=.postavka:nth-child(3) .las", "css:finder"],
+        ["xpath=//div[3]/div/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "08ae8b6c-600d-4781-bebe-3d793646d00c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.postavka:nth-child(3) .las",
+      "targets": [
+        ["css=.postavka:nth-child(3) .las", "css:finder"],
+        ["xpath=//div[3]/div/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "210fffee-55c0-4667-bba1-8a8c5e300d77",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7bfa5cb-b29d-4ad5-bb65-e2d11480fdf6",
+      "comment": "",
+      "command": "type",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "19"
+    }, {
+      "id": "aa5e2b14-a843-494b-b09f-a804008788b5",
+      "comment": "",
+      "command": "click",
+      "target": "id=del-button-confirm",
+      "targets": [
+        ["id=del-button-confirm", "id"],
+        ["css=#del-button-confirm", "css:finder"],
+        ["xpath=//button[@id='del-button-confirm']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "216cc4ac-3449-4b51-bb9f-b312a7fb6ebd",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.postavka:nth-child(3) .card-body",
+      "targets": [
+        ["css=.grid", "css:finder"],
+        ["xpath=//main/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f7739aae-3e13-459c-8013-6b100438d3f3",
+    "name": "Meni-DodajKategoriju",
+    "commands": [{
+      "id": "d591e33c-5295-4a33-815c-e283369341b2",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/meni",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "99a9e840-ad0a-40b1-9ebf-40ade4616ac1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1054x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7409d912-aafa-4957-b9f7-58d9ae8eb0cd",
+      "comment": "",
+      "command": "click",
+      "target": "id=naziv-kategorije-input",
+      "targets": [
+        ["id=naziv-kategorije-input", "id"],
+        ["css=#naziv-kategorije-input", "css:finder"],
+        ["xpath=//input[@id='naziv-kategorije-input']", "xpath:attributes"],
+        ["xpath=//main/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa4cc8b0-31fa-4770-835f-9f87343e47f6",
+      "comment": "",
+      "command": "type",
+      "target": "id=naziv-kategorije-input",
+      "targets": [
+        ["id=naziv-kategorije-input", "id"],
+        ["css=#naziv-kategorije-input", "css:finder"],
+        ["xpath=//input[@id='naziv-kategorije-input']", "xpath:attributes"],
+        ["xpath=//main/div/input", "xpath:position"]
+      ],
+      "value": "Kokteli"
+    }, {
+      "id": "b25f7fcb-0795-4794-8cae-102ea3ce72aa",
+      "comment": "",
+      "command": "click",
+      "target": "id=dodaj-kategoriju",
+      "targets": [
+        ["id=dodaj-kategoriju", "id"],
+        ["css=#dodaj-kategoriju", "css:finder"],
+        ["xpath=//button[@id='dodaj-kategoriju']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj kategoriju')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af9478cb-2b47-4075-ae74-c6c7d6ec847b",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=dodaj-kategoriju",
+      "targets": [
+        ["id=dodaj-kategoriju", "id"],
+        ["css=#dodaj-kategoriju", "css:finder"],
+        ["xpath=//button[@id='dodaj-kategoriju']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj kategoriju')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e7b1b548-7299-4a56-8353-379813fee745",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=dodaj-kategoriju",
+      "targets": [
+        ["id=dodaj-kategoriju", "id"],
+        ["css=#dodaj-kategoriju", "css:finder"],
+        ["xpath=//button[@id='dodaj-kategoriju']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Dodaj kategoriju')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "70cb14d0-464e-4f53-9adb-b5ba50ed0eb6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.kategorija:nth-child(5) .card-header",
+      "targets": [
+        ["css=.kategorija:nth-child(5) .card-header", "css:finder"],
+        ["xpath=//div[5]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a7d0935-d455-4a18-80fc-2993990bf6a2",
+      "comment": "",
+      "command": "click",
+      "target": "id=azuriraj",
+      "targets": [
+        ["id=azuriraj", "id"],
+        ["css=#azuriraj", "css:finder"],
+        ["xpath=//button[@id='azuriraj']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Azuriraj Stranicu')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3a9051b-6568-4c30-896a-1bb88563f504",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.kategorija:nth-child(5) .card-header",
+      "targets": [
+        ["css=main", "css:finder"],
+        ["xpath=//main", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5efe9158-d56b-4909-ad1a-11564eb4aaeb",
+    "name": "Meni-ObrisiKategoiju",
+    "commands": [{
+      "id": "67bda381-e319-4456-8c88-e8f7bfbe86dc",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/meni",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2aa06495-39d3-4118-98e3-12c6d3a79eb7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1065x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "18a54636-dc11-49a5-80d7-d941b9e078be",
+      "comment": "",
+      "command": "click",
+      "target": "css=.kategorija:nth-child(5) .card-header .la-times",
+      "targets": [
+        ["css=.kategorija:nth-child(5) .card-header .la-times", "css:finder"],
+        ["xpath=//div[5]/div/div/div/button[2]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3986f061-ac2b-44ac-8617-dbcf8dd587fd",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0cc64976-84bb-436f-b6b1-4f527d24a904",
+      "comment": "",
+      "command": "type",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Koktel"
+    }, {
+      "id": "51687ea2-8869-463f-bbb0-954e759ede5d",
+      "comment": "",
+      "command": "click",
+      "target": "id=del-button",
+      "targets": [
+        ["id=del-button", "id"],
+        ["css=#del-button", "css:finder"],
+        ["xpath=//button[@id='del-button']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a6e59da-78cb-41d1-84fd-173a1bdd9b8a",
+      "comment": "",
+      "command": "click",
+      "target": "id=azuriraj",
+      "targets": [
+        ["id=azuriraj", "id"],
+        ["css=#azuriraj", "css:finder"],
+        ["xpath=//button[@id='azuriraj']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Azuriraj Stranicu')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "81b446e9-0406-428c-ab4c-c0142346c0fa",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.kategorija:nth-child(5) .card-header",
+      "targets": [
+        ["css=main", "css:finder"],
+        ["xpath=//main", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5e6f6dd8-ba52-42ad-9e15-a90367ea242a",
+    "name": "Meni-DodajArikal",
+    "commands": [{
+      "id": "f688e95a-c536-4c45-930e-e8aa2303acd7",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/meni",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f0c835f2-6bb1-49b7-9a9b-f88d9a0689ba",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1057x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b0b5bba0-bfbb-4248-96af-b1b79684400a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Dodaj stavku",
+      "targets": [
+        ["linkText=Dodaj stavku", "linkText"],
+        ["css=#kategorija-card-body-0 a", "css:finder"],
+        ["xpath=//a[contains(text(),'Dodaj stavku')]", "xpath:link"],
+        ["xpath=//div[@id='kategorija-card-body-0']/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Dodaj stavku')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7971c799-8565-4f36-b937-cf1ae9726afd",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-modal-naziv-input",
+      "targets": [
+        ["id=create-modal-naziv-input", "id"],
+        ["css=#create-modal-naziv-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-naziv-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "28fbd0d9-8355-4b9e-9dbb-bc401fcadf79",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-modal-naziv-input",
+      "targets": [
+        ["id=create-modal-naziv-input", "id"],
+        ["css=#create-modal-naziv-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-naziv-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "Bor t Ry"
+    }, {
+      "id": "46e3889b-dc85-4400-9f85-ad34bfc558b6",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-modal-cena-input",
+      "targets": [
+        ["id=create-modal-cena-input", "id"],
+        ["css=#create-modal-cena-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b5a884c-2d35-45d8-8291-47f87f56cbd0",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-modal-cena-input",
+      "targets": [
+        ["id=create-modal-cena-input", "id"],
+        ["css=#create-modal-cena-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[2]/input", "xpath:position"]
+      ],
+      "value": "231"
+    }, {
+      "id": "f4143ddc-c50b-4420-8d50-b10df27222a1",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-modal-procenat-input",
+      "targets": [
+        ["id=create-modal-procenat-input", "id"],
+        ["css=#create-modal-procenat-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-procenat-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9ead531-ff75-4411-a099-3c992f24faf1",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-modal-procenat-input",
+      "targets": [
+        ["id=create-modal-procenat-input", "id"],
+        ["css=#create-modal-procenat-input", "css:finder"],
+        ["xpath=//input[@id='create-modal-procenat-input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "e534de94-1a9c-4e02-993b-1e626f35aec4",
+      "comment": "",
+      "command": "waitForElementEditable",
+      "target": "id=kreiraj-stavku",
+      "targets": [
+        ["id=kreiraj-stavku", "id"],
+        ["css=#kreiraj-stavku", "css:finder"],
+        ["xpath=//button[@id='kreiraj-stavku']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sacuvaj')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "fd5318d3-1f8d-47b0-8333-0813c34ec2da",
+      "comment": "",
+      "command": "click",
+      "target": "id=kreiraj-stavku",
+      "targets": [
+        ["id=kreiraj-stavku", "id"],
+        ["css=#kreiraj-stavku", "css:finder"],
+        ["xpath=//button[@id='kreiraj-stavku']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div[2]/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sacuvaj')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d58a3c1e-e519-42f0-9749-1cbbd90585f1",
+      "comment": "",
+      "command": "click",
+      "target": "id=azuriraj",
+      "targets": [
+        ["id=azuriraj", "id"],
+        ["css=#azuriraj", "css:finder"],
+        ["xpath=//button[@id='azuriraj']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Azuriraj Stranicu')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "40c1fad6-18dd-4dd1-81a2-b35d2cc93089",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(3) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='kategorija-card-body-0']/div/table/tbody/tr[3]/td", "xpath:idRelative"],
+        ["xpath=//tr[3]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bor t Ry')]", "xpath:innerText"]
+      ],
+      "value": "Bor t Ry"
+    }]
+  }, {
+    "id": "90dd3970-eb78-4cbd-8079-b99fc7fe772f",
+    "name": "Meni-ObrisiArtikal",
+    "commands": [{
+      "id": "f02dd21f-2558-45cb-8a31-c3e4821b6765",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/meni",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "385bae96-78e1-467f-9630-6909ee89391c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1061x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55084652-75f2-48bd-b3ff-189e3eeefeac",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(3) .la-times",
+      "targets": [
+        ["css=tr:nth-child(3) .la-times", "css:finder"],
+        ["xpath=//div[@id='kategorija-card-body-0']/div/table/tbody/tr[3]/td[4]/div/button[2]/span", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[4]/div/button[2]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab138fe1-3e40-4841-8634-097785e59edb",
+      "comment": "",
+      "command": "click",
+      "target": "id=azuriraj",
+      "targets": [
+        ["id=azuriraj", "id"],
+        ["css=#azuriraj", "css:finder"],
+        ["xpath=//button[@id='azuriraj']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Azuriraj Stranicu')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e09c7e4-b9c9-4427-93a4-d2d79c19889e",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=#kategorija-card-body-0 > .buttons", "css:finder"],
+        ["xpath=//div[@id='kategorija-card-body-0']/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "89d2a619-7c51-4851-831f-343b9df61918",
+    "name": "Event-Kreiranje Eventa",
+    "commands": [{
+      "id": "247e3550-8751-4f91-90da-6049100aa1a2",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/dogadjaji",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43ba83cc-c1d4-46a6-898e-86d18427b5c0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "98f59580-571b-4ae9-bc45-38dbd3b9e888",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-create-btn",
+      "targets": [
+        ["id=modal-create-btn", "id"],
+        ["css=#modal-create-btn", "css:finder"],
+        ["xpath=//button[@id='modal-create-btn']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Kreiraj Dogadjaj')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f4b4723-10c6-4cf5-a011-3f73735ceed9",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-naslov",
+      "targets": [
+        ["id=input-naslov", "id"],
+        ["css=#input-naslov", "css:finder"],
+        ["xpath=//input[@id='input-naslov']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5af13111-64b8-4bd7-babb-4502f600c684",
+      "comment": "",
+      "command": "type",
+      "target": "id=input-naslov",
+      "targets": [
+        ["id=input-naslov", "id"],
+        ["css=#input-naslov", "css:finder"],
+        ["xpath=//input[@id='input-naslov']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/thead/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "Festa"
+    }, {
+      "id": "ef03dd9f-7259-4964-8cef-8ba91ffc1da9",
+      "comment": "",
+      "command": "click",
+      "target": "id=image_input",
+      "targets": [
+        ["id=image_input", "id"],
+        ["css=#image_input", "css:finder"],
+        ["xpath=//input[@id='image_input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/thead/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be5d19c9-c84a-48a1-a133-8bc020440474",
+      "comment": "",
+      "command": "type",
+      "target": "id=image_input",
+      "targets": [
+        ["id=image_input", "id"],
+        ["css=#image_input", "css:finder"],
+        ["xpath=//input[@id='image_input']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/thead/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "D:\\Downloads\\Ghoul_TradingCard.jpg"
+    }, {
+      "id": "0f5547a1-9ffa-41b7-8b4c-335e7542e9c3",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-opis",
+      "targets": [
+        ["id=input-opis", "id"],
+        ["css=#input-opis", "css:finder"],
+        ["xpath=//textarea[@id='input-opis']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr/td[2]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c39d8ee-1ce3-4bd6-9715-abf2b725e18a",
+      "comment": "",
+      "command": "type",
+      "target": "id=input-opis",
+      "targets": [
+        ["id=input-opis", "id"],
+        ["css=#input-opis", "css:finder"],
+        ["xpath=//textarea[@id='input-opis']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr/td[2]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Zez"
+    }, {
+      "id": "1f905bcd-35c2-4aaa-b3b5-68ce84a079af",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2778d0a-4db8-4960-a3ec-5dd5a860a9ee",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f173c247-9578-443f-9653-5000389046e5",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf9702f3-8260-402e-852c-587c91816af2",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0bb7d638-fa1b-412c-97c5-00977e72e8b8",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e0f91b7-916a-494b-b741-7161d6ab1b3c",
+      "comment": "",
+      "command": "type",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "2202-02-01T13:02:23"
+    }, {
+      "id": "1416efe5-fdbd-46bd-8f41-2df55668850c",
+      "comment": "",
+      "command": "type",
+      "target": "id=input-datum",
+      "targets": [
+        ["id=input-datum", "id"],
+        ["css=#input-datum", "css:finder"],
+        ["xpath=//input[@id='input-datum']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tbody/tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "2202-02-01T13:22:23"
+    }, {
+      "id": "02e32a2c-ab7a-4025-a836-958f86728164",
+      "comment": "",
+      "command": "click",
+      "target": "id=postavke",
+      "targets": [
+        ["id=postavke", "id"],
+        ["name=postavke", "name"],
+        ["css=#postavke", "css:finder"],
+        ["xpath=//select[@id='postavke']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/table/tbody/tr[4]/td[2]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eaacd546-db06-4261-846c-e10ab3ca1490",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-zurka",
+      "targets": [
+        ["id=create-zurka", "id"],
+        ["css=#create-zurka", "css:finder"],
+        ["xpath=//button[@id='create-zurka']", "xpath:attributes"],
+        ["xpath=//div[@id='create-modal-content']/div/div/button", "xpath:idRelative"],
+        ["xpath=//div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sacuvaj')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9b6246c-5a91-4ea3-a1d9-ee7c874b1cbb",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=modal-create-btn",
+      "targets": [
+        ["id=modal-create-btn", "id"],
+        ["css=#modal-create-btn", "css:finder"],
+        ["xpath=//button[@id='modal-create-btn']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Kreiraj Dogadjaj')]", "xpath:innerText"]
+      ],
+      "value": "20000"
+    }, {
+      "id": "13f788fa-e991-454c-9a11-1488af7cefca",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.card:nth-child(4)",
+      "targets": [
+        ["css=.card:nth-child(4)", "css:finder"],
+        ["xpath=//div[4]", "xpath:position"]
+      ],
+      "value": "200000"
+    }, {
+      "id": "68e9e2e2-5543-4cde-a92a-8d5229ef451f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.card:nth-child(4) .card-title",
+      "targets": [
+        ["css=.card:nth-child(4) .card-title", "css:finder"],
+        ["xpath=//div[4]/div/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Festa')]", "xpath:innerText"]
+      ],
+      "value": "Festa"
+    }]
+  }, {
+    "id": "bc80e22a-1e1a-4d04-a8e7-10b14a8b4cbd",
+    "name": "Event-BrisanjeEventa",
+    "commands": [{
+      "id": "b68ce0e0-d1aa-4528-bdd4-59ce7df54036",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/dogadjaji",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f8fc79d6-db7d-4c27-8776-787016f10d26",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3695ed61-fc8a-4a58-9411-cdffb9c513b6",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,110.4000015258789)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9ea3986a-12f5-4e8b-a200-53661fc0d98d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Obrisi dogadjaj",
+      "targets": [
+        ["linkText=Obrisi dogadjaj", "linkText"],
+        ["css=.card:nth-child(4) .button-card", "css:finder"],
+        ["xpath=(//a[contains(text(),'Obrisi dogadjaj')])[4]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '#')])[5]", "xpath:href"],
+        ["xpath=//div[4]/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a8f2269-2968-4973-9112-853356c2d1b7",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2fdca03e-f299-40f5-9111-f2c0a40bf921",
+      "comment": "",
+      "command": "type",
+      "target": "id=modal-del-input",
+      "targets": [
+        ["id=modal-del-input", "id"],
+        ["css=#modal-del-input", "css:finder"],
+        ["xpath=//input[@id='modal-del-input']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "34"
+    }, {
+      "id": "f4c31477-c199-4f15-b557-2f45c05cc3e6",
+      "comment": "",
+      "command": "click",
+      "target": "id=del-button-confirm",
+      "targets": [
+        ["id=del-button-confirm", "id"],
+        ["css=#del-button-confirm", "css:finder"],
+        ["xpath=//button[@id='del-button-confirm']", "xpath:attributes"],
+        ["xpath=//div[@id='delete-modal-content']/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "64e9ec31-cc84-4240-8476-d999d4fee233",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.card:nth-child(4) .card-title",
+      "targets": [
+        ["css=.grid", "css:finder"],
+        ["xpath=//main/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bced93b5-c676-4917-b772-97335f0b57a9",
+    "name": "Izvestaj-Prikaz",
+    "commands": [{
+      "id": "f59fe900-d807-4dc5-9411-2d018eddeae4",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/izvestaj",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f56517f-143a-4ee3-9039-ac6a5fc618b4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d635fb70-7c27-4f0c-911c-1d1eb7790840",
+      "comment": "",
+      "command": "click",
+      "target": "id=date-start",
+      "targets": [
+        ["id=date-start", "id"],
+        ["css=#date-start", "css:finder"],
+        ["xpath=//input[@id='date-start']", "xpath:attributes"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c437e0d-220b-4264-b58a-9586727ad0cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=date-start",
+      "targets": [
+        ["id=date-start", "id"],
+        ["css=#date-start", "css:finder"],
+        ["xpath=//input[@id='date-start']", "xpath:attributes"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "0002-02-22"
+    }, {
+      "id": "5b0e53ee-b645-4a32-bdca-3351e8ac4ddc",
+      "comment": "",
+      "command": "type",
+      "target": "id=date-start",
+      "targets": [
+        ["id=date-start", "id"],
+        ["css=#date-start", "css:finder"],
+        ["xpath=//input[@id='date-start']", "xpath:attributes"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "0020-02-22"
+    }, {
+      "id": "3d963cad-8442-4c65-be6a-1a6e4999a3c5",
+      "comment": "",
+      "command": "type",
+      "target": "id=date-start",
+      "targets": [
+        ["id=date-start", "id"],
+        ["css=#date-start", "css:finder"],
+        ["xpath=//input[@id='date-start']", "xpath:attributes"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "0202-02-22"
+    }, {
+      "id": "a56b0adc-d128-4da9-accd-52c5ebca799e",
+      "comment": "",
+      "command": "type",
+      "target": "id=date-start",
+      "targets": [
+        ["id=date-start", "id"],
+        ["css=#date-start", "css:finder"],
+        ["xpath=//input[@id='date-start']", "xpath:attributes"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "2022-02-22"
+    }, {
+      "id": "c8dd1d62-fa7e-4a78-860e-0e9dad0501d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.date-input:nth-child(1)",
+      "targets": [
+        ["css=.date-input:nth-child(1)", "css:finder"],
+        ["xpath=//main/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "725be871-ba35-4236-9048-c83dfb3461dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=date-end",
+      "targets": [
+        ["id=date-end", "id"],
+        ["css=#date-end", "css:finder"],
+        ["xpath=//input[@id='date-end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5e478ee-bd4c-4487-9f3a-f66ef5690527",
+      "comment": "",
+      "command": "type",
+      "target": "id=date-end",
+      "targets": [
+        ["id=date-end", "id"],
+        ["css=#date-end", "css:finder"],
+        ["xpath=//input[@id='date-end']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "2022-03-22"
+    }, {
+      "id": "31a23d6b-086f-44c0-a6cb-eac7564baa19",
+      "comment": "",
+      "command": "click",
+      "target": "css=.date-input:nth-child(2)",
+      "targets": [
+        ["css=.date-input:nth-child(2)", "css:finder"],
+        ["xpath=//main/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf3a9575-24a0-41f4-a46c-b78389aec1e4",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=myChart1",
+      "targets": [
+        ["id=myChart1", "id"],
+        ["css=#myChart1", "css:finder"],
+        ["xpath=//canvas[@id='myChart1']", "xpath:attributes"],
+        ["xpath=//div[@id='card-1']/div/canvas", "xpath:idRelative"],
+        ["xpath=//canvas", "xpath:position"]
+      ],
+      "value": "10000"
+    }, {
+      "id": "34f91ac1-0fed-4450-bee4-2b434726545c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=myChart1",
+      "targets": [
+        ["id=myChart1", "id"],
+        ["css=#myChart1", "css:finder"],
+        ["xpath=//canvas[@id='myChart1']", "xpath:attributes"],
+        ["xpath=//div[@id='card-1']/div/canvas", "xpath:idRelative"],
+        ["xpath=//canvas", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a923c1f1-02b3-4409-90aa-28ac4f422d2d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=myChart2",
+      "targets": [
+        ["id=myChart2", "id"],
+        ["css=#myChart2", "css:finder"],
+        ["xpath=//canvas[@id='myChart2']", "xpath:attributes"],
+        ["xpath=(//div[@id='card-1']/div/canvas)[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/canvas", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "658be6ed-934d-4cb6-bac7-4a88f06e1b56",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=myChart4",
+      "targets": [
+        ["id=myChart4", "id"],
+        ["css=#myChart4", "css:finder"],
+        ["xpath=//canvas[@id='myChart4']", "xpath:attributes"],
+        ["xpath=(//div[@id='card-1']/div/canvas)[4]", "xpath:idRelative"],
+        ["xpath=//div[4]/div/canvas", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0d81789-e84c-48df-92df-5879e1f64131",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=myChart3",
+      "targets": [
+        ["id=myChart3", "id"],
+        ["css=#myChart3", "css:finder"],
+        ["xpath=//canvas[@id='myChart3']", "xpath:attributes"],
+        ["xpath=(//div[@id='card-1']/div/canvas)[3]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/canvas", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40129b37-cea7-4561-9e2f-dbb080bdfa1e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "6ed0bdb4-d5fa-4b5b-8540-323da9c164ad",
+    "name": "Login",
+    "commands": [{
+      "id": "094b6be7-233d-4e70-8b1c-f7220a0d7ab7",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/home.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b3af61a5-a0ae-4b48-8ab3-e42c74932595",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f2523f1f-c554-4316-a8ba-39839dcf340d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=a:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'login.html')]", "xpath:href"],
+        ["xpath=//a[5]", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "77ad8da4-92d8-488c-9c73-575491b8329a",
+      "comment": "",
+      "command": "click",
+      "target": "id=mail",
+      "targets": [
+        ["id=mail", "id"],
+        ["css=#mail", "css:finder"],
+        ["xpath=//input[@id='mail']", "xpath:attributes"],
+        ["xpath=//form[@id='logForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3f07bb80-fd67-4066-af50-54730cbdfe87",
+      "comment": "",
+      "command": "type",
+      "target": "id=mail",
+      "targets": [
+        ["id=mail", "id"],
+        ["css=#mail", "css:finder"],
+        ["xpath=//input[@id='mail']", "xpath:attributes"],
+        ["xpath=//form[@id='logForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "manager@mail.rs"
+    }, {
+      "id": "9bd0b458-46e1-4301-a537-487fa8a5009d",
+      "comment": "",
+      "command": "click",
+      "target": "id=pass",
+      "targets": [
+        ["id=pass", "id"],
+        ["css=#pass", "css:finder"],
+        ["xpath=//input[@id='pass']", "xpath:attributes"],
+        ["xpath=//form[@id='logForm']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7937f28d-e556-46f8-944b-4dc8ecaeb6dd",
+      "comment": "",
+      "command": "type",
+      "target": "id=pass",
+      "targets": [
+        ["id=pass", "id"],
+        ["css=#pass", "css:finder"],
+        ["xpath=//input[@id='pass']", "xpath:attributes"],
+        ["xpath=//form[@id='logForm']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "managerpass.123"
+    }, {
+      "id": "f023406a-4204-4a84-9c02-653bb2d453d4",
+      "comment": "",
+      "command": "click",
+      "target": "id=btn",
+      "targets": [
+        ["id=btn", "id"],
+        ["css=#btn", "css:finder"],
+        ["xpath=//input[@id='btn']", "xpath:attributes"],
+        ["xpath=//form[@id='logForm']/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3a13ba7-fac9-4b72-b698-83b71294455f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Gavrilo Vojteski')]", "xpath:innerText"]
+      ],
+      "value": "Gavrilo Vojteski"
+    }, {
+      "id": "5a81e19c-ae0b-4fa9-82b5-a308d7272f8c",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "71ec26eb-bc5a-41d6-8404-61504892c7d1",
+    "name": "Logout",
+    "commands": [{
+      "id": "128daf03-f60f-4a17-adf6-47a6d968f070",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/inventar",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "22767042-3c41-4771-b569-4e559a8d5ac4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x848",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0d687855-4467-4633-bb43-efa81b682e8a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.la-sign-out-alt",
+      "targets": [
+        ["css=.la-sign-out-alt", "css:finder"],
+        ["xpath=//li[10]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ef881ba-8e42-4af1-a9e8-a5ca9237118b",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=h4",
+      "targets": [],
+      "value": "Gavrilo Vojteski"
+    }, {
+      "id": "aa68831d-8fba-4a65-b2e3-e2bb66d09c0f",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "4e4d760b-953a-421a-a79a-17de22deb56c",
+    "name": "MenuHide",
+    "commands": [{
+      "id": "6ba1499a-e83d-471f-919d-04b096d6ec73",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/inventar",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a06932e-1645-4dbf-9771-b36f77a7ebd4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "05d63e09-8b57-4ba3-938c-2167e3946fdc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-brand > h1",
+      "targets": [
+        ["css=.sidebar-brand > h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,' FilmCaffe')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "622b4d3d-4f1a-4af7-8305-670107c58e4e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.sidebar-brand > h1",
+      "targets": [
+        ["css=.sidebar-brand > h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,' FilmCaffe')]", "xpath:innerText"]
+      ],
+      "value": "FilmCaffe"
+    }, {
+      "id": "c838039a-5d26-45a5-88d9-9ed3e733b341",
+      "comment": "",
+      "command": "click",
+      "target": "css=.la-bars",
+      "targets": [
+        ["css=.la-bars", "css:finder"],
+        ["xpath=//label[@id='menu-btn']/span", "xpath:idRelative"],
+        ["xpath=//label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d291bb1-ac01-4d7c-8de9-5d6040e2fc3e",
+      "comment": "",
+      "command": "assertNotText",
+      "target": "css=.sidebar-brand",
+      "targets": [],
+      "value": "FilmCaffe"
+    }, {
+      "id": "18c672d3-f005-4fad-a215-6efa0c69dbf7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.la-bars",
+      "targets": [
+        ["css=.la-bars", "css:finder"],
+        ["xpath=//label[@id='menu-btn']/span", "xpath:idRelative"],
+        ["xpath=//label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34bc57af-0e62-436b-86dd-880eea0d3c9a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.sidebar-brand > h1",
+      "targets": [
+        ["css=.sidebar-brand > h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,' FilmCaffe')]", "xpath:innerText"]
+      ],
+      "value": "FilmCaffe"
+    }, {
+      "id": "bb0dc70b-461c-40f6-97c6-94ec164e1104",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "03319078-35d2-42db-91fd-82bb746fba6d",
+    "name": "Stolovi",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["16c7bd51-873e-4f05-87fe-015c0506b6ad", "c68818cd-4d01-41fb-b426-8310ebc7c388", "c84f6fe2-580e-41ef-8ef9-0620078e21dc", "84c0bcca-3a30-4145-8c31-032f57dbe776"]
+  }, {
+    "id": "b252b89c-22a4-4028-8c3f-6218aff19122",
+    "name": "Meni",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["5e6f6dd8-ba52-42ad-9e15-a90367ea242a", "f7739aae-3e13-459c-8013-6b100438d3f3", "90dd3970-eb78-4cbd-8079-b99fc7fe772f", "5efe9158-d56b-4909-ad1a-11564eb4aaeb"]
+  }, {
+    "id": "1481af61-d9e0-4b12-ab2f-d68e1f2b12de",
+    "name": "Events",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["bc80e22a-1e1a-4d04-a8e7-10b14a8b4cbd", "89d2a619-7c51-4851-831f-343b9df61918"]
+  }, {
+    "id": "40ef3252-7221-40f4-9547-0f89b6ec18ed",
+    "name": "Izvestaj",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["bced93b5-c676-4917-b772-97335f0b57a9"]
+  }, {
+    "id": "d7a1bf23-0688-4d93-b3e5-4750659d9ca7",
+    "name": "OpsteFunkcije",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["6ed0bdb4-d5fa-4b5b-8540-323da9c164ad", "71ec26eb-bc5a-41d6-8404-61504892c7d1", "4e4d760b-953a-421a-a79a-17de22deb56c"]
+  }],
+  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/filmkafe/inventar", "http://127.0.0.1:8000/filmkafe/stolovi", "http://127.0.0.1:8000/filmkafe/meni", "http://127.0.0.1:8000/filmkafe/dogadjaji", "http://127.0.0.1:8000/filmkafe/izvestaj", "http://127.0.0.1:8000/filmkafe/home.html"],
+  "plugins": []
+}

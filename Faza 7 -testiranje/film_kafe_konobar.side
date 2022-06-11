@@ -1,0 +1,256 @@
+{
+  "id": "31abcb16-0013-4828-8459-2ac234978125",
+  "version": "2.0",
+  "name": "film_kafe_konobar",
+  "url": "http://127.0.0.1:8000/filmkafe/biranjeSmene",
+  "tests": [{
+    "id": "dbc64fbd-a4e1-45de-9496-c3ca5cf4830f",
+    "name": "zapocniSmenu-imaSmenu-VremeMuJeSmene",
+    "commands": [{
+      "id": "9460c889-b491-4bed-94d5-2231256655f0",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e4e36950-3873-4665-bf23-d2035d2cbe59",
+      "comment": "",
+      "command": "open",
+      "target": "/filmkafe/ZapocniSmenu.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c383b0ac-c2d1-4a55-8a5e-04ba5b8609ed",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "699x1039",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b88fb187-af20-4c1b-a44a-b66f2bcf224a",
+      "comment": "",
+      "command": "click",
+      "target": "css=b",
+      "targets": [
+        ["css=b", "css:finder"],
+        ["xpath=//button[@id='zapocni-smenu']/b", "xpath:idRelative"],
+        ["xpath=//b", "xpath:position"],
+        ["xpath=//b[contains(.,'Zapocni smenu')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e90ed84b-0eb2-4ed7-8c31-7b23b616b136",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3:nth-child(1)",
+      "targets": [
+        ["css=h3:nth-child(1)", "css:finder"],
+        ["xpath=//main[@id='main']/div/div[2]/h3", "xpath:idRelative"],
+        ["xpath=//div[2]/h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Smena je zapoceta')]", "xpath:innerText"]
+      ],
+      "value": "Smena je zapoceta"
+    }]
+  }, {
+    "id": "a82d1e7e-2ba8-4c2e-8129-4ef44153fe76",
+    "name": "popis-unos",
+    "commands": [{
+      "id": "3510e5ed-0690-481e-bf7b-26e57c0ac503",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/popis.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d4879bfa-afc9-4538-9d79-9f0d6a3f6dca",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "699x1039",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "138ec5a8-964c-4ed4-b30c-d0b95424fda2",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-modal-cena-input_9",
+      "targets": [
+        ["id=create-modal-cena-input_9", "id"],
+        ["css=#create-modal-cena-input_9", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input_9']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "5"
+    }, {
+      "id": "ba898ccc-f719-484b-a70e-fd4a8dda8c38",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-modal-cena-input_9",
+      "targets": [
+        ["id=create-modal-cena-input_9", "id"],
+        ["css=#create-modal-cena-input_9", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input_9']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a707bb71-1c0b-4298-92dc-1cfa4808f9fc",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-modal-cena-input_16",
+      "targets": [
+        ["id=create-modal-cena-input_16", "id"],
+        ["css=#create-modal-cena-input_16", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input_16']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "563267f2-f53d-44ef-9ce5-d5aaecb21ade",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-modal-cena-input_16",
+      "targets": [
+        ["id=create-modal-cena-input_16", "id"],
+        ["css=#create-modal-cena-input_16", "css:finder"],
+        ["xpath=//input[@id='create-modal-cena-input_16']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be1489c6-7830-4e34-9f4a-40f468bd5833",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Sacuvaj",
+      "targets": [
+        ["linkText=Sacuvaj", "linkText"],
+        ["css=.trigger_popup_fricc", "css:finder"],
+        ["xpath=//a[contains(text(),'Sacuvaj')]", "xpath:link"],
+        ["xpath=//div[@id='sacuvaj-btn']/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sacuvaj')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aa9a7fdc-1ceb-4c70-a204-1e1076beace0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Potvrdi",
+      "targets": [
+        ["linkText=Potvrdi", "linkText"],
+        ["css=#potvrdi-btn > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Potvrdi')]", "xpath:link"],
+        ["xpath=//div[@id='potvrdi-btn']/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[3]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fca72e11-1a4f-4b85-92e7-766da6ca7481",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Uspesno ste potvrdili popis!",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "cb4cd435-ecce-4c44-84cb-af475672b85c",
+    "name": "biranje-smene",
+    "commands": [{
+      "id": "32c65ddf-a9eb-4ebf-b5ba-baea8f587dda",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/filmkafe/biranjeSmene",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "496ee48b-9f12-421f-af64-6ad877749920",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "699x1039",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "58807510-40c3-4ce4-9103-c7829ac20fb6",
+      "comment": "",
+      "command": "click",
+      "target": "id=td40",
+      "targets": [
+        ["id=td40", "id"],
+        ["css=#td40", "css:finder"],
+        ["xpath=//td[@id='td40']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr/td[4]", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17c60960-c236-4739-a5f3-83daba18a097",
+      "comment": "",
+      "command": "click",
+      "target": "id=td41",
+      "targets": [
+        ["id=td41", "id"],
+        ["css=#td41", "css:finder"],
+        ["xpath=//td[@id='td41']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr[2]/td[4]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "712beddc-9e54-4cd0-8031-55a4da35fec6",
+      "comment": "",
+      "command": "click",
+      "target": "id=td42",
+      "targets": [
+        ["id=td42", "id"],
+        ["css=#td42", "css:finder"],
+        ["xpath=//td[@id='td42']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr[3]/td[4]", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e7c8bb9-3bff-4f26-a611-c563e180c228",
+      "comment": "",
+      "command": "click",
+      "target": "id=sacuvaj",
+      "targets": [
+        ["id=sacuvaj", "id"],
+        ["css=#sacuvaj", "css:finder"],
+        ["xpath=//button[@id='sacuvaj']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sacuvaj smene')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bdb4eeb2-eed0-4141-baab-50d7d24ed2f2",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=td40",
+      "targets": [
+        ["id=td40", "id"],
+        ["css=#td40", "css:finder"],
+        ["xpath=//td[@id='td40']", "xpath:attributes"],
+        ["xpath=//tbody[@id='body']/tr/td[4]", "xpath:idRelative"],
+        ["xpath=//tbody/tr/td[4]", "xpath:position"]
+      ],
+      "value": "1"
+    }]
+  }],
+  "suites": [{
+    "id": "ef33d7fc-ee7f-45b2-af1a-24ab18214aa1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/filmkafe/DogadjajRezervacije.html", "http://127.0.0.1:8000/filmkafe/popis.html", "http://127.0.0.1:8000/filmkafe/biranjeSmene"],
+  "plugins": []
+}

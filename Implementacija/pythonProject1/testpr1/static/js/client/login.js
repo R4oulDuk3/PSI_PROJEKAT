@@ -13,8 +13,5 @@ $(document).ready(function(){
     json.password = $("#pass").val();
     let link = await postData("apiLogIn",json);
 
-    console.log(link);
-
     window.location.replace(link);
-    console.log("posle");
   }

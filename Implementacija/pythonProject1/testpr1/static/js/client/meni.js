@@ -18,11 +18,11 @@ $(document).ready(async function() {
             for(let i of item.stavke){
                 let cena = document.createElement("div");
                 cena.classList.add("price");
-                if(i.akcija == "0%"){
+                if(i.akcija == "0"){
                     cena.textContent = i.price + " rsd" ;
                 }
                 else{
-                    cena.textContent = Math.floor(i.price - (i.price * parseInt(i.akcija) / 100)) + " rsd "
+                    i.akcija == "100" ? cena.textContent = " Besplatno " : cena.textContent = Math.floor(i.price - (i.price * parseInt(i.akcija) / 100)) + " rsd ";
                     let akc = document.createElement("span");
                     akc.textContent = i.price + " rsd";
                     cena.appendChild(akc);

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
+    <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/general.css">
+    <link rel="stylesheet" href="../css-admin-skelet/header.css">
+    <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
+    <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/spinner.css">
+    <link rel="stylesheet" href="izvestaji.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../consts/consts.js"></script>
+    <script src="../consts/sidebar.js"></script>
+    <script type="text/javascript" src="izvestaji.js"></script>  
+    
+    <title>Izvestaj</title>
+</head>
+<body>
+    <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+    <input type="checkbox" name="" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle" id="menu-btn">
+                    <span class="las la-bars"></span>
+                </label>
+                Izvestaji
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Menadzer</small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div class="settings-bar">
+                <div class="date-bar">
+                    <div class="date-input">
+                        <h1>Od</h1>
+                        <input type="date" name="" id="date-start">
+                    </div>
+                    <div class="date-input">
+                        <h1>Do</h1>
+                        <input type="date" name="" id="date-end">
+                    </div>
+                </div>
+                <!-- <div class="checkbox-bar">
+                    <div class="checkbox-input">
+                        <input type="checkbox" name="" id="">Pregled radnih sati
+                    </div>
+                    <div class="checkbox-input">
+                        <input type="checkbox" name="" id="">Pregled popularnosti artikala
+                    </div>
+                    <div class="checkbox-input">
+                        <input type="checkbox" name="" id="">Pregled potrosnje musterija
+                    </div>
+                </div> -->
+            </div>
+            <div class="kuponi">
+                <div class="dashboard-cards" id="grid">
+                    <div class="card" id="card-1">
+                        <div class="chart-canvas">
+                            <canvas id="myChart1"></canvas>
+                        </div>
+                    </div>
+                    <div class="card" id="card-2">
+                        <div class="chart-canvas">
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                    </div>
+                    <!-- <div class="card" id="card-1">
+                        <div class="chart-canvas">
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                    </div>
+                    <div class="card" id="card-1">
+                        <div class="chart-canvas">
+                            <canvas id="myChart3"></canvas>
+                        </div>
+                    </div>
+                    <div class="card" id="card-1">
+                        <div class="chart-canvas">
+                            <canvas id="myChart4"></canvas>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+</body>
+</html>

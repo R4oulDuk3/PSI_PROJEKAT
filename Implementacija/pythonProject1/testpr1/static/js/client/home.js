@@ -16,7 +16,6 @@ function copyText(id) {
 
 
         for(let item of json){
-            console.log(i)
           let cvor = document.createElement("div");
           cvor.classList.add("swiper-slide");
           cvor.classList.add("card");
@@ -51,8 +50,7 @@ function copyText(id) {
     $("#mailAdr").click(function(){ copyText("mailAdr");});
     $("#mailAdr").mouseout(function(){ outFunc("mailAdr");});
   
-    let json = await $.get('apiEvents');
-    console.log(json)
+    let json = await $.get('apiEvents');  
     await popuniEvents(json);
 
     var swiper = new Swiper(".mySwiper", {

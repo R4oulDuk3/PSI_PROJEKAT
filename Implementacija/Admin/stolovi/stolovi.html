@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">   
+    <link rel="stylesheet" href="../css-admin-skelet/sidebar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/general.css">
+    <link rel="stylesheet" href="../css-admin-skelet/header.css">
+    <link rel="stylesheet" href="../css-admin-skelet/main_content.css">
+    <link rel="stylesheet" href="../css-admin-skelet/add-bar.css">
+    <link rel="stylesheet" href="../css-admin-skelet/modal-card.css">
+    <link rel="stylesheet" href="stolovi.css">
+    <link rel="stylesheet" href="../css-admin-skelet/button-modal.css">
+    <link rel="stylesheet" href="../css-admin-skelet/responsive.css">
+    <link rel="stylesheet" href="../css-admin-skelet/spinner.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../consts/consts.js"></script>
+    <script src="../consts/sidebar.js"></script>
+    <script src="ucitavanje_stolovi.js"></script>
+    <title>Stolovi</title>
+</head>
+<body>
+    <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+    <input type="checkbox" name="" id="nav-toggle" >
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1><span class=""></span> FilmCaffe</h1>
+        </div>
+        <div class="sidebar-menu">
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="nav-toggle" id="menu-btn">
+                    <span class="las la-bars"></span>
+                </label>
+                Stolovi
+            </h1>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" name="" id="">
+            </div>
+            <div class="header-right">
+                <div class="user-wrapper">
+                    <div>
+                        <h4>Jhon Doe</h4>
+                        <small>Menadzer</small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div class="add-bar">
+                <h1>Dodaj sto</h1>
+                <input type="text" name="" id="naziv-nove-postavke" placeholder="Naziv postavke">
+                <div class="h-button" id="dodaj-postavku">
+                    <a href="#">Dodaj postavku</a>
+                </div>
+            </div>
+            <div class="stolovi">
+                <div class="grid">       
+                </div>
+            </div>
+            <div id="create-modal" class="modal">
+                <div id="create-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Kreiranje stolova</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-form-create">
+                        <div class="input-div">
+                            <table class="input-table">
+                                <thead>
+                                    <tr>
+                                        <td>Naziv stola</td>
+                                        <td><input type="text" id="sto-naziv-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"> <h3 id="naziv-err"></h3></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Broj osoba</td>
+                                        <td><input type="number" min="1" max="15" value="1" id="broj-osoba-input"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="button-div">
+                                <button class="button margin" id="kreiraj-sto">
+                                    Dodaj
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+            
+            <div id="delete-modal" class="modal">
+                <div id="delete-modal-content" class="modal-content">
+                  <div class="modal-header">
+                    <span class="close close-del">&times;</span>
+                    <h2>Brisanje artikla</h2>
+                  </div>
+                    <div class="modal-body">
+                        <div class="modal-form-del">
+                            <div class="modal-del-title">
+                                <h1>Da li ste sigurni da zelite da obrisete ovu postavku/sto?</h1>
+                            </div>
+                            <div  class="modal-del-info">
+                                <h2>Upisite id postavke/stola da bi potvrdili akciju brisanja</h2>
+                                <h2 id="id"></h2>
+                                <input id="modal-del-input" type="text" placeholder="">
+                            </div>
+                            <div class="button-div">
+                                <button class="button" id="del-button-confirm">
+                                    Potvrdi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+</body>
+</html>

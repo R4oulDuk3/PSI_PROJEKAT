@@ -1,0 +1,61 @@
+naziv			konobar		menadzer	klijent
+apiMeni					x		x
+apiMeniAdd 				x
+apiProduct				x
+apiDeleteProduct			x
+apiUpdateProduct			x
+apiUpdateProduct			x
+apiProductAll				x
+apiSetProduct				x
+apiCopupon				x		x
+apiCreateCoupon				x
+apiEvents				x		x
+apiDeleteEvent				x
+apiCreateEvent				x
+apiReservation		x				x
+apiEventForUser						x
+apiCreateUser						x
+apiLogIn						x
+apiOutUser		x		x		x
+apiTables		x		x		
+apiSetup		x		x
+apiCreateTables				x
+apiDeleteTables				x
+apiDeleteSetup				x
+apiCreateSetup				x
+apiWaiters				x
+apiCreateWaiter				x
+apiDeleteWaiters			x
+apiSchedule		x		x
+apiChangeSchedule			x
+apiShift		x		x
+apiChangeShift				x
+apiPreference		x		x
+apiSetPreference	x		
+apiCustomerExpenditure	x		
+apiReservationsNA	x		
+apiReservationsA	x
+apiFreeTables		x
+apiStart		x
+apiEnd			x
+apiCheckLogInUser	x		x		x
+apiEventReservations					x
+apiReserve						x
+apiDeleteReserve					x
+apiApproveReservation	x
+apiDenyReservation	x
+apiBuyCupon		x
+apiDeleteCoupon				x
+apiGetRole		x		x
+apiMyPreference		x
+apiGetId		x
+apiGetCustomerExpeneture x		
+apiGetProductSold			x
+apiMySchedule		x
+apiPostWaiterWorkHours	x
+apiPostWaiterPermit	x
+apiGetWaiterPermit	x
+apiStartSchedule	x
+apiGetWaiterWorkHours			x
+
+

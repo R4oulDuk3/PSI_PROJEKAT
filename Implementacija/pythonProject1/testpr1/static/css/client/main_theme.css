@@ -352,6 +352,7 @@ section{
 .footer{
     background: var(--black);
     text-align: center;
+    
 }
 
 .footer .share{

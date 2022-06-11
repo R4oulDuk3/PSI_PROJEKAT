@@ -1,0 +1,167 @@
+.porudzbenice-meni{
+    
+    display: flex;
+    align-items: center;
+}
+.porudzbenice-meni span{
+padding-right: 1rem;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+    padding: 2rem;
+    
+}
+.card-single{
+    background: #fff;
+    padding-bottom: 1rem;
+    border-radius: 2px;
+}
+.card-single h1{
+    text-align: center;
+    font-size: 50px;
+}
+.card-single table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding-bottom: 1rem;
+}
+.card-single table td{
+    font-weight: 1000;
+    font-size: smaller;
+}
+.card-single table td:nth-child(even){
+    text-align: right;
+}
+.card-single table td:nth-child(odd){
+    text-align: left;
+}
+.nav-button{
+    cursor: pointer;
+}
+
+
+.button{
+    align-items: center;
+    margin: 1rem;
+}
+.button a{
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 0.5em 1.25em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+}
+
+
+.card-single:hover{
+    background: var(--main-color);
+    color: #fff;
+}
+.card-single div span:hover {
+    color: #fff
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.card-single:hover .sm-button{
+    background: #fff;
+    color: var(--main-color);
+}
+.card-single:hover .sm-button>*{
+    color: var(--main-color);
+}
+
+.sm-button{
+    background: var(--main-color);
+    cursor: pointer;
+    color: #fff;
+    padding: 0.5rem;
+    border: 1px solid var(--main-color);
+}
+.sm-button>*{
+
+    color: #fff;
+    font-size: 0.8rem;
+    
+}
+.buttons button:first-child{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.buttons button:last-child{
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.naslov{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.card-btn{
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.button-m {
+    background: var(--main-color);
+    padding: 1em 2em;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  
+  .card-single:hover .button-m {
+    background: #fff
+  }
+  .card-single .button-m >*{
+    font-weight: 800;
+  }
+  .card-single:hover .button-m >*{
+    color: var(--main-color);
+  }
+  #tabela-artikala td{
+    
+    padding: 0.5rem 1rem;
+    
+    color: #222;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: large;
+    font-weight: 700;
+
+}
+#tabela-artikala thead td{
+    font-size: x-large;
+}
+#tabela-artikala thead tr{
+    border-bottom: 1px solid black;
+}
+
+
+
+
+ #potvrda-porudzbenica{
+     display: flex;
+     align-content: center;
+     justify-content: center;
+     border-top: 1px solid #f0f0f0;
+ }
+
+
