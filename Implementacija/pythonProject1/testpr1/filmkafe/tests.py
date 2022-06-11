@@ -1,5 +1,6 @@
 import datetime
 
+from django.db import transaction
 from django.test import TestCase, Client
 from django.urls import reverse
 from pytz import UTC
@@ -7,10 +8,12 @@ from pytz import UTC
 from .models import *
 from .serializers import *
 import json
-import  datetime
+import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from collections import OrderedDict
+
+
 class TestViews(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -514,53 +517,66 @@ class TestViews(TestCase):
 
     def test_inventar_redirect_not_loged_in(self):
         res = self.client.get('http://127.0.0.1:8000/filmkafe/inventar')
+
     def test_api_meni(self):
         res = self.clientUser.get(reverse("apiMeni"))
-        expected = [{'naziv': 'Pivo', 'stavke': [OrderedDict([('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)]), OrderedDict([('idmeni', 2), ('meniproduct', 'Hoptopod'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)])]}, {'naziv': 'Viski', 'stavke': [OrderedDict([('idmeni', 3), ('meniproduct', 'Redbreast'), ('price', '500.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)]), OrderedDict([('idmeni', 4), ('meniproduct', 'Ardberg'), ('price', '250.00'), ('amount', '0.50'), ('unit', 'l'), ('akcija', 0)])]}]
+        expected = [{'naziv': 'Pivo', 'stavke': [OrderedDict(
+            [('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'),
+             ('akcija', 0)]), OrderedDict(
+            [('idmeni', 2), ('meniproduct', 'Hoptopod'), ('price', '350.00'), ('amount', '0.50'), ('unit', 'l'),
+             ('akcija', 0)])]}, {'naziv': 'Viski', 'stavke': [OrderedDict(
+            [('idmeni', 3), ('meniproduct', 'Redbreast'), ('price', '500.00'), ('amount', '0.50'), ('unit', 'l'),
+             ('akcija', 0)]), OrderedDict(
+            [('idmeni', 4), ('meniproduct', 'Ardberg'), ('price', '250.00'), ('amount', '0.50'), ('unit', 'l'),
+             ('akcija', 0)])]}]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(expected, res.data)
 
     def test_api_meni_add_user(self):
-        res = self.clientUser.post(reverse("apiMeniAdd"),{"kukuruz":"[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+        res = self.clientUser.post(reverse("apiMeniAdd"), {
+            "kukuruz": "[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
 
         self.assertEqual(res.status_code, 403)
         '''
         self.assertEqual(tried, res.data)'''
 
-
     def test_api_meni_add_user(self):
-        res = self.clientWaiter.post(reverse("apiMeniAdd"),{"kukuruz":"[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+        res = self.clientWaiter.post(reverse("apiMeniAdd"), {
+            "kukuruz": "[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
 
         self.assertEqual(res.status_code, 403)
 
     def test_api_meni_add_manager(self):
-            res = self.clientManager.post(reverse("apiMeniAdd"), {
-                "kukuruz": "[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
+        res = self.clientManager.post(reverse("apiMeniAdd"), {
+            "kukuruz": "[{\"naziv\":\"Pivo\", \"stavke\":[{\"idmeni\": \"1\",\"meniproduct\": \"Albino\",\"price\": \"350.0\",\"amount\": \"0\",\"unit\": \"l\",\"subtype\": \"Pivo\",\"akcija\": \"0\"}]}]"})
 
-            got = Meni.objects.all()
-            got = MeniInsertSerializer(got, many = True)
-            expected = [OrderedDict([('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.00'), ('unit', 'l'), ('akcija', 0), ('subtype', 'Pivo')])]
-            self.assertEqual(res.status_code, 200)
-            self.assertEqual(got.data, expected)
-            '''
+        got = Meni.objects.all()
+        got = MeniInsertSerializer(got, many=True)
+        expected = [OrderedDict(
+            [('idmeni', 1), ('meniproduct', 'Albino'), ('price', '350.00'), ('amount', '0.00'), ('unit', 'l'),
+             ('akcija', 0), ('subtype', 'Pivo')])]
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(got.data, expected)
+        '''
             self.assertEqual(tried, res.data)'''
+
     def test_api_product_user(self):
         res = self.clientUser.get(reverse("apiProduct"))
 
         self.assertEqual(res.status_code, 403)
-
-
 
     def test_api_product_waiter(self):
         res = self.clientWaiter.get(reverse("apiProduct"))
 
         self.assertEqual(res.status_code, 200)
 
-
     def test_api_product_manager(self):
         res = self.clientManager.get(reverse("apiProduct"))
-        expected = [OrderedDict([('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '40.00')])]
+        expected = [OrderedDict(
+            [('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'),
+             ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'),
+             ('suppliercode', 973186), ('minamount', '40.00')])]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.data, expected)
@@ -570,153 +586,148 @@ class TestViews(TestCase):
 
         self.assertEqual(res.status_code, 403)
 
-
-
     def test_api_product_all_waiter(self):
         res = self.clientWaiter.get(reverse("apiProductAll"))
 
         self.assertEqual(res.status_code, 200)
 
-
     def test_api_product_all_manager(self):
         res = self.clientManager.get(reverse("apiProductAll"))
-        expected = [OrderedDict([('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '40.00')]), OrderedDict([('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '60.00')])]
+        expected = [OrderedDict(
+            [('idproduct', 1), ('name', 'Albino'), ('description', 'this is a product'), ('type', 'Pivo'),
+             ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'),
+             ('suppliercode', 973186), ('minamount', '40.00')]), OrderedDict(
+            [('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'),
+             ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'),
+             ('suppliercode', 973186), ('minamount', '60.00')])]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.data, expected)
-
-
-
 
     def test_api_def_product_user(self):
         res = self.clientUser.get(reverse("apiDeficientProduct"))
 
         self.assertEqual(res.status_code, 403)
 
-
-
     def test_api_def_product_waiter(self):
         res = self.clientWaiter.get(reverse("apiDeficientProduct"))
 
         self.assertEqual(res.status_code, 200)
 
-
     def test_api_def_product_manager(self):
         res = self.clientManager.get(reverse("apiDeficientProduct"))
-        expected = [OrderedDict([('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'), ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'), ('suppliercode', 973186), ('minamount', '60.00')])]
+        expected = [OrderedDict(
+            [('idproduct', 2), ('name', 'Hoptopod'), ('description', 'this is a product'), ('type', 'Pivo'),
+             ('amount', '50.00'), ('unit', 'l'), ('productcode', 98202), ('marketprice', '234.00'),
+             ('suppliercode', 973186), ('minamount', '60.00')])]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.data, expected)
 
     def test_api_product_delete_manager(self):
-        res = self.clientManager.post(reverse("apiDeleteProduct"),{"idproduct":"1"})
+        res = self.clientManager.post(reverse("apiDeleteProduct"), {"idproduct": "1"})
         expected = 1
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(newln), expected)
 
-
     def test_api_product_delete_user(self):
-        res = self.clientUser.post(reverse("apiDeleteProduct"),{"idproduct":"1"})
+        res = self.clientUser.post(reverse("apiDeleteProduct"), {"idproduct": "1"})
         expected = 1
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 403)
-
 
     def test_api_product_update_user(self):
-        res = self.clientUser.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        res = self.clientUser.post(reverse("apiUpdateProduct"), {
+            "popis": "[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
         expected = 1
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 403)
 
-
-
-
-
     def test_api_product_update_manager(self):
-        res = self.clientManager.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        res = self.clientManager.post(reverse("apiUpdateProduct"), {
+            "popis": "[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
         expected = Product.objects.filter(idproduct=1).values('amount')[0]['amount']
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(expected, 40.00)
-
 
     def test_api_product_update_waiter(self):
-        res = self.clientWaiter.post(reverse("apiUpdateProduct"),{"popis":"[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
+        res = self.clientWaiter.post(reverse("apiUpdateProduct"), {
+            "popis": "[{\"idproduct\":\"1\", \"potrosenaKolicina\":\"10\", \"name\":\"Albino\"}]"})
         expected = Product.objects.filter(idproduct=1).values('amount')[0]['amount']
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(expected, 40.00)
 
-
-
     def test_api_product_set_manager(self):
-        res = self.clientManager.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+        res = self.clientManager.post(reverse("apiSetProduct"),
+                                      {'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product',
+                                       'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202,
+                                       'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
         expected = Product.objects.all()
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 3)
-
-
 
     def test_api_product_set_waiter(self):
-        res = self.clientWaiter.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+        res = self.clientWaiter.post(reverse("apiSetProduct"),
+                                     {'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product',
+                                      'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202,
+                                      'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
         expected = Product.objects.all()
         newln = Product.objects.all()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 3)
 
-
     def test_api_product_set_user(self):
-        res = self.clientUser.post(reverse("apiSetProduct"),{'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product', 'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202, 'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
+        res = self.clientUser.post(reverse("apiSetProduct"),
+                                   {'idproduct': 3, 'name': 'Plutonium', 'description': 'this is a product',
+                                    'type': 'Pivo', 'amount': '50.00', 'unit': 'l', 'productcode': 98202,
+                                    'marketprice': '234.00', 'suppliercode': 973186, 'minamount': '40.00'})
 
         self.assertEqual(res.status_code, 403)
-
-
 
     def test_api_cupon(self):
         res = self.clientUser.get(reverse("apiCoupon"))
-        expected = [OrderedDict([('idcupon', 1), ('description', ''), ('name', 'Coup'), ('picture', '...'), ('points', 1000)])]
+        expected = [
+            OrderedDict([('idcupon', 1), ('description', ''), ('name', 'Coup'), ('picture', '...'), ('points', 1000)])]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(expected, res.data)
-
 
     def test_api_event(self):
         res = self.clientUser.get(reverse("apiEvents"))
-        expected = [OrderedDict([('idevents', 1), ('description', 'aaaa'), ('start', '2022-06-09T21:56:51Z'), ('name', 'Zurka 1'), ('end', '2022-06-09T21:56:51Z'), ('picture', '162seo0jLUY82kSTZEDj9zwYerODCe'), ('setup', 1)])]
+        expected = [OrderedDict(
+            [('idevents', 1), ('description', 'aaaa'), ('start', '2022-06-09T21:56:51Z'), ('name', 'Zurka 1'),
+             ('end', '2022-06-09T21:56:51Z'), ('picture', '162seo0jLUY82kSTZEDj9zwYerODCe'), ('setup', 1)])]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(expected, res.data)
 
-
-
     def test_create_cupon_manager(self):
         res = self.clientManager.post(reverse("apiCreateCoupon"), {"description": "bbbbb",
-            "name": "Coup2",
-            "picture": "...",
-            "points": 1001})
+                                                                   "name": "Coup2",
+                                                                   "picture": "...",
+                                                                   "points": 1001})
         expected = Coupon.objects.all()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 2)
 
-
     def test_create_cupon_user(self):
         res = self.clientUser.post(reverse("apiCreateCoupon"), {"description": "",
-            "name": "Coup2",
-            "picture": "...",
-            "points": 1001})
+                                                                "name": "Coup2",
+                                                                "picture": "...",
+                                                                "points": 1001})
         self.assertEqual(res.status_code, 403)
-
 
     def test_create_cupon_waiter(self):
         res = self.clientWaiter.post(reverse("apiCreateCoupon"), {"description": "",
-            "name": "Coup2",
-            "picture": "...",
-            "points": 1001})
+                                                                  "name": "Coup2",
+                                                                  "picture": "...",
+                                                                  "points": 1001})
         self.assertEqual(res.status_code, 403)
-
 
     def test_delete_cupon_manager(self):
         res = self.clientManager.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
@@ -725,56 +736,49 @@ class TestViews(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 0)
 
-
     def test_delete_cupon_user(self):
         res = self.clientUser.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
         self.assertEqual(res.status_code, 403)
-
 
     def test_delete_cupon_waiter(self):
         res = self.clientWaiter.post(reverse("apiDeleteCoupon"), {"idcupon": "1"})
         self.assertEqual(res.status_code, 403)
 
-
-
     def test_create_event_manager(self):
         res = self.clientManager.post(reverse("apiCreateEvent"), {
-             "name": "Zurka 2",
-             "end": "2022-09-09T21:56:51",
-             "description": "aaaa",
-             "start": "2022-09-11T21:56:51",
-             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
-             "setup": "1"
-             })
+            "name": "Zurka 2",
+            "end": "2022-09-09T21:56:51",
+            "description": "aaaa",
+            "start": "2022-09-11T21:56:51",
+            "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+            "setup": "1"
+        })
         expected = Events.objects.all()
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 2)
 
-
     def test_create_event_user(self):
         res = self.clientUser.post(reverse("apiCreateEvent"), {"idevents": "1",
-             "name": "Zurka 1",
-             "end": "2022-06-09T21:56:51",
-             "description": "aaaa",
-             "start": "2022-06-09T21:56:51",
-             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
-             "setup": "1"
-             })
+                                                               "name": "Zurka 1",
+                                                               "end": "2022-06-09T21:56:51",
+                                                               "description": "aaaa",
+                                                               "start": "2022-06-09T21:56:51",
+                                                               "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+                                                               "setup": "1"
+                                                               })
         self.assertEqual(res.status_code, 403)
-
 
     def test_create_event_waiter(self):
         res = self.clientWaiter.post(reverse("apiCreateEvent"), {"idevents": "1",
-             "name": "Zurka 1",
-             "end": "2022-06-09T21:56:51",
-             "description": "aaaa",
-             "start": "2022-06-09T21:56:51",
-             "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
-             "setup": "1"
-             })
+                                                                 "name": "Zurka 1",
+                                                                 "end": "2022-06-09T21:56:51",
+                                                                 "description": "aaaa",
+                                                                 "start": "2022-06-09T21:56:51",
+                                                                 "picture": "162seo0jLUY82kSTZEDj9zwYerODCe",
+                                                                 "setup": "1"
+                                                                 })
         self.assertEqual(res.status_code, 403)
-
 
     def test_delete_event_manager(self):
         res = self.clientManager.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
@@ -783,11 +787,9 @@ class TestViews(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 0)
 
-
     def test_delete_event_user(self):
         res = self.clientUser.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
         self.assertEqual(res.status_code, 403)
-
 
     def test_delete_event_waiter(self):
         res = self.clientWaiter.post(reverse("apiDeleteEvent"), {"idEvent": "1"})
@@ -831,7 +833,7 @@ class TestViews(TestCase):
         response = self.clientManager.post(reverse("apiDeleteTables"), {
             'idtable': '3'})
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(Table.objects.all()), 4) #
+        self.assertEqual(len(Table.objects.all()), 4)  #
 
     def test_apiDeleteSetup_POST_user(self):
         response = self.clientUser.post(reverse("apiDeleteSetup"), {
@@ -950,7 +952,56 @@ class TestViews(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(expected), 0)
 
+    def test_api_event_for_user(self):
+        res = self.clientUser.get(reverse("apiEventsForUser"))
+        expected = [OrderedDict(
+            [('idevents', 1), ('description', 'aaaa'), ('start', '2022-06-09T21:56:51Z'), ('name', 'Zurka 1'),
+             ('end', '2022-06-09T21:56:51Z'), ('picture', '162seo0jLUY82kSTZEDj9zwYerODCe'), ('setup', 1)])]
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(expected, res.data)
 
+    def test_apiCreateUser_notExists(self):
+        res = Client().post(reverse("apiCreateUser"),
+                            {
+                                'email': "test@test.com",
+                                'password': "123",
+                                'name': 'Lmao',
+                                'surname': 'Rofl',
+                                'phone': '123456'
+                            })
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(Users.objects.all()), 5)
 
+    def test_apiCreateUser_exists(self):
+        res = Client().post(reverse("apiCreateUser"),
+                            {
+                                'email': "co@gmail.com",
+                                'password': "123",
+                                'name': 'Lmao',
+                                'surname': 'Rofl',
+                                'phone': '123456'
+                            })
+        self.assertEqual(res.status_code, 200)
+
+        try:
+            # Duplicates should be prevented.
+            with transaction.atomic():
+                self.assertEqual(len(Users.objects.all()), 4)
+            self.fail('Duplicate question allowed.')
+        except:
+            pass
+
+    def test_apiLogIn(self):
+        res = Client().post(reverse("apiLogIn"), {'username': "cone@gmail.com",'email': "cone@gmail.com",'password':"cone"})
+        self.assertEqual(res.status_code,200)
+        self.assertEqual(res.json(),"home.html")
+        res = Client().post(reverse("apiLogIn"),
+                                   {'username': "con@gmail.com", 'email': "con@gmail.com", 'password': "cone"})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json(), "ZapocniSmenu.html")
+        res = Client().post(reverse("apiLogIn"),
+                                   {'username': "co@gmail.com", 'email': "co@gmail.com", 'password': "cone"})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json(), "inventar")
 
 
