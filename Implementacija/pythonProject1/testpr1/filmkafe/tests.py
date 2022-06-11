@@ -2,6 +2,8 @@ import datetime
 
 from django.test import TestCase, Client
 from django.urls import reverse
+from pytz import UTC
+
 from .models import *
 from .serializers import *
 import json
@@ -923,6 +925,30 @@ class TestViews(TestCase):
         response = self.clientManager.post(reverse("apiGetWaiterWorkHours"), {
             "start": datetime.datetime.today(), "end": "2022-06-13T22:00:00.000Z"})
         self.assertEqual(response.status_code, 200)
+
+    def test_api_event_reservation(self):
+        res = self.clientUser.get(reverse("apiEventReservations"))
+        expected = [OrderedDict(
+            [('id', 1), ('approved', 0), ('noofseats', 8), ('event', 1), ('user', 1), ('idevents', 1),
+             ('start', datetime.datetime(2022, 6, 9, 21, 56, 51, tzinfo=UTC)),
+             ('end', datetime.datetime(2022, 6, 9, 21, 56, 51, tzinfo=UTC)), ('description', 'aaaa'),
+             ('picture', '162seo0jLUY82kSTZEDj9zwYerODCe'), ('name', 'Zurka 1')])]
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, expected)
+
+    def test_api_reserve(self):
+        res = self.clientUser.post(reverse("apiDeleteReserve"), {"event": "1"})
+        res = self.clientUser.post(reverse("apiReserve"), {"id": "1"})
+        expected = EventReservations.objects.filter(user=1)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 1)
+
+    def test_api_delete_reserve(self):
+        res = self.clientUser.post(reverse("apiDeleteReserve"), {"event": "1"})
+        expected = EventReservations.objects.filter(user=1)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(expected), 0)
 
 
 
